@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import "./index.css"
+
 import {useLocation, useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {loginModel} from "../../Redux/reducers/loginReducer";

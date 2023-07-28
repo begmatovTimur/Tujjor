@@ -23,8 +23,12 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String username;
+<<<<<<< HEAD:backend/src/main/java/com/example/backend/Entity/Users.java
+    @Column(nullable = false)
+=======
     @Column(unique = true, nullable = false)
     private String phone;
+>>>>>>> a8db018eb4ec15326f44f01303fecd838d590b6b:backend/src/main/java/com/example/backend/Entity/User.java
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
