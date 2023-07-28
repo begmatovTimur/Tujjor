@@ -1,0 +1,20 @@
+.hidden {
+  visibility: hidden;
+}
+.universal_table {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.pagination {
+  overflow-x: scroll;
+  display: flex;
+  flex-wrap: wrap;
+}
+.mytable {
+  height: 400px !important;
+  border: 2px solid black;
+  padding: 10px;
+  overflow: scroll !important;
+}
