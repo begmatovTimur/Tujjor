@@ -29,9 +29,7 @@ public class Users implements UserDetails {
             nullable = false
     )
     private String username;
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     List<Role> roles = new ArrayList<>();
