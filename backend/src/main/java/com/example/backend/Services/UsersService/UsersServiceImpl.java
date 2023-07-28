@@ -2,7 +2,7 @@ package com.example.backend.Services.UsersService;
 
 import com.example.backend.DTO.UserDTO;
 import com.example.backend.Entity.Role;
-import com.example.backend.Entity.Users;
+import com.example.backend.Entity.User;
 import com.example.backend.Repository.RoleRepository;
 import com.example.backend.Repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,22 +20,22 @@ public class UsersServiceImpl implements UsersService {
     private final UsersRepository repository;
     private final RoleRepository roleRepository;
     @Override
-    public HttpEntity<?> addUser(UserDTO dto) {
+    public HttpEntity<?> addUser(UserDTO userData) {
 
         List<Role> roles = new ArrayList<>();
 
         roles.add(addUserRoleIfAbsent());
 
 
-        Users reqUser = new Users(
-                null,
-                dto.getUsername(),
-                dto.getPassword(),
-                roles,
-                null,
-                null
+        User newUser = new User(
+               null,
+                userData.getUsername(),
+                userData.getPhone(),
+                userData.getPassword(),
+                roles
+
         );
-        Users savedUser = repository.save(reqUser);
+        User savedUser = repository.save(newUser);
         return ResponseEntity.ok(savedUser);
     }
 
@@ -45,7 +45,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public HttpEntity<?>    getStudentByTitle(String title) {
+    public HttpEntity<?> getStudentByTitle(String title) {
         return ResponseEntity.ok(repository.findAllByUsernameContainingIgnoreCase(title));
     }
 

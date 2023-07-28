@@ -2,7 +2,7 @@ package com.example.backend.Services.AuthService;
 
 import com.example.backend.DTO.UserDTO;
 import com.example.backend.Entity.Role;
-import com.example.backend.Entity.Users;
+import com.example.backend.Entity.User;
 import com.example.backend.Payload.LoginReq;
 import com.example.backend.Repository.RoleRepository;
 import com.example.backend.Repository.UsersRepository;
@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
 
     @SneakyThrows
     @Override
-    public HttpEntity<?> register(LoginReq dto) {
+    public HttpEntity<?> register(UserDTO userData) {
         List<Role> roles = new ArrayList<>();
         Role roleUser = roleRepo.findByRoleName("ROLE_USER");
         if (roleUser == null) {
@@ -50,21 +50,24 @@ public class AuthServiceImpl implements AuthService {
         } else {
             roles.add(roleUser);
         }
-        Users user = new Users(
+        User user = new User(
                 null,
-                dto.getUsername(),
-                passwordEncoder.encode(dto.getPassword()),
-                roles,
-                null,
-                null
+                userData.getUsername(),
+                userData.getPhone(),
+                passwordEncoder.encode(userData.getPassword()),
+                roles
         );
         usersRepository.save(user);
-
-
+<<<<<<< HEAD
         UserDetails userDetails = userDetailsService.loadUserByUsername(dto.getUsername());
+=======
+
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userData.getUsername());
+>>>>>>> 5fcfbcd65d30386142e2aa3df1fc2adc7a2f4af0
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 userDetails,
-                dto.getPassword(),
+                userData.getPassword(),
                 userDetails.getAuthorities()
         );
 
@@ -81,14 +84,18 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public HttpEntity<?> login(UserDTO dto) {
+    public HttpEntity<?> login(LoginReq dto) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));
         } catch (BadCredentialsException e) {
             return ResponseEntity.ok("BAD_CREDENTIALS");
         }
-        ;
+<<<<<<< HEAD
         Users users = usersRepository.findByUsername(dto.getUsername()).orElseThrow(() -> new RuntimeException("Cannot find User With Id:" + dto.getUsername()));
+=======
+        ;
+        User users = usersRepository.findByUsername(dto.getUsername()).orElseThrow(() -> new RuntimeException("Cannot find User With Id:" + dto.getUsername()));
+>>>>>>> 5fcfbcd65d30386142e2aa3df1fc2adc7a2f4af0
         List<Role> roles = roleRepo.findAll();
         String access_token = jwtService.generateJWTToken(users);
         String refresh_token = jwtService.generateJWTRefreshoken(users);
@@ -102,15 +109,15 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public HttpEntity<?> refreshToken(String refreshToken) {
         String id = jwtService.extractUserFromJwt(refreshToken);
-        Users users = usersRepository.findById(UUID.fromString(id)).orElseThrow();
-        String access_token = jwtService.generateJWTToken(users);
+        User user = usersRepository.findById(UUID.fromString(id)).orElseThrow();
+        String access_token = jwtService.generateJWTToken(user);
         return ResponseEntity.ok(access_token);
     }
 
     @Override
     public HttpEntity<?> decode(String token) {
         boolean isExpired = jwtService.validateToken(token);
-        Users user = null;
+        User user = null;
         if (isExpired) {
             String userId = jwtService.extractUserFromJwt(token);
             user = usersRepository.findById(UUID.fromString(userId)).orElseThrow(() -> new RuntimeException("Cannot find User With Id:" + userId));

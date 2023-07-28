@@ -1,13 +1,13 @@
 package com.example.backend.Services.JwtService;
 
-import com.example.backend.Entity.Users;
+import com.example.backend.Entity.User;
 
 import java.security.Key;
 
 public interface JwtService {
-    String generateJWTToken(Users users);
+    String generateJWTToken(User users);
 
-    String generateJWTRefreshoken(Users users);
+    String generateJWTRefreshoken(User users);
 
     Key getSigningKey();
 
