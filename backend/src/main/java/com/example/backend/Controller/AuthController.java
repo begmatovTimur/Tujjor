@@ -17,13 +17,13 @@ public class AuthController {
     private final JwtService jwtService;
 
     @PostMapping("/login")
-    public HttpEntity<?> login(@RequestBody UserDTO dto) {
-        return service.login(dto);
+    public HttpEntity<?> login(@RequestBody LoginReq loginReq) {
+        return service.login(loginReq);
     }
 
     @PostMapping("/register")
-    public HttpEntity<?> register(@RequestBody LoginReq dto) {
-        return service.register(dto);
+    public HttpEntity<?> register(@RequestBody UserDTO userData) {
+        return service.register(userData);
     }
 
     @PostMapping("/refresh")
