@@ -20,18 +20,26 @@ public class JwtServiceImpl implements JwtService {
     public String generateJWTToken(Users users) {
         UUID id = users.getId();
         Map<String, Object> claims = new HashMap<>();
-
         Date hourFromCurrentTime = new Date(System.currentTimeMillis() + 60 * 60 * 1000);
-
-        String jwt = Jwts.builder().setClaims(claims).setExpiration(hourFromCurrentTime).setIssuedAt(new Date()).setSubject(id.toString()).signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
+        String jwt = Jwts.builder()
+                .setClaims(claims)
+                .setExpiration(hourFromCurrentTime)
+                .setIssuedAt(new Date()).setSubject(id.toString())
+                .signWith(getSigningKey(),
+                        SignatureAlgorithm.HS256)
+                .compact();
         return jwt;
     }
 
     @Override
     public String generateJWTRefreshoken(Users users) {
         UUID id = users.getId();
-
-        String jwt = Jwts.builder().setExpiration(new Date(System.currentTimeMillis() + 10000 * 60 * 60 * 24 * 7)).setIssuedAt(new Date()).setSubject(id.toString()).signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
+        String jwt = Jwts.builder().
+                setExpiration(new Date(System.currentTimeMillis() + 10000 * 60 * 60 * 24 * 7))
+                .setIssuedAt(new Date()).setSubject(id.toString())
+                .signWith(getSigningKey(),
+                        SignatureAlgorithm.HS256)
+                .compact();
         return jwt;
     }
 
@@ -57,6 +65,5 @@ public class JwtServiceImpl implements JwtService {
             System.err.println("Expired JWT Token token-> " + token);
             return false;
         }
-
     }
 }

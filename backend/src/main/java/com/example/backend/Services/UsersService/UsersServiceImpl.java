@@ -45,7 +45,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public HttpEntity<?>    getStudentByTitle(String title) {
+    public HttpEntity<?> getStudentByTitle(String title) {
         return ResponseEntity.ok(repository.findAllByUsernameContainingIgnoreCase(title));
     }
 

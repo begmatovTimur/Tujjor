@@ -43,7 +43,6 @@ public class    SecurityConfig  {
                 .and()
                 .addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);
         // Add more security configurations as needed
-
         return http.build();
     }
 

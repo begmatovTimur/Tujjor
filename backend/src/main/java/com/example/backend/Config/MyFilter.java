@@ -25,14 +25,13 @@ public class MyFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader("token");
-        System.out.println(request.getRequestURL()+" "+request.getMethod());
+        System.out.println(request.getRequestURL() + " " + request.getMethod());
         if (token == null || !jwtsService.validateToken(token)) {
             filterChain.doFilter(request, response);
             return;
         }
-
         String s = jwtsService.extractUserFromJwt(token);
-        UserDetails userDetails = userRepo.findById(UUID.fromString(s)).orElseThrow(()->new RuntimeException("Cannot Find User With Id:"+s));
+        UserDetails userDetails = userRepo.findById(UUID.fromString(s)).orElseThrow(() -> new RuntimeException("Cannot Find User With Id:" + s));
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
