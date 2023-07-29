@@ -41,6 +41,7 @@ public class AuthServiceImpl implements AuthService {
         UUID roleId = UUID.randomUUID();
         List<Role> roles = new ArrayList<>();
         Role roleUser = roleRepo.findByRoleName("ROLE_USER");
+
         checkIfExistRole(roleId, roles, roleUser);
         UUID userId = UUID.randomUUID();
         User user = new User(
