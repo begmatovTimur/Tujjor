@@ -42,7 +42,7 @@ const Table = ({
             className="form-select"
             defaultValue={"10"}
             onChange={(e) => {
-              handlePageChange(0)
+              handlePageChange(0) 
               chageSizeOfPage({
                 api: paginationApi,
                 size: parseInt(e.target.value),
@@ -127,7 +127,7 @@ const Table = ({
             ""
           )}
           {Array.from(
-            { length: dataProps.length / sizeOfPage },
+            { length: Math.ceil(dataProps.length / sizeOfPage) },
             (_, index) => index + 1
           ).map((item, index) => (
             <button
