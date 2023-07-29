@@ -58,9 +58,13 @@ public class AuthServiceImpl implements AuthService {
                 roles
         );
         usersRepository.save(user);
+<<<<<<< HEAD
+        UserDetails userDetails = userDetailsService.loadUserByUsername(dto.getUsername());
+=======
 
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(userData.getUsername());
+>>>>>>> 5fcfbcd65d30386142e2aa3df1fc2adc7a2f4af0
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 userData.getPassword(),
@@ -86,8 +90,12 @@ public class AuthServiceImpl implements AuthService {
         } catch (BadCredentialsException e) {
             return ResponseEntity.ok("BAD_CREDENTIALS");
         }
+<<<<<<< HEAD
+        Users users = usersRepository.findByUsername(dto.getUsername()).orElseThrow(() -> new RuntimeException("Cannot find User With Id:" + dto.getUsername()));
+=======
         ;
         User users = usersRepository.findByUsername(dto.getUsername()).orElseThrow(() -> new RuntimeException("Cannot find User With Id:" + dto.getUsername()));
+>>>>>>> 5fcfbcd65d30386142e2aa3df1fc2adc7a2f4af0
         List<Role> roles = roleRepo.findAll();
         String access_token = jwtService.generateJWTToken(users);
         String refresh_token = jwtService.generateJWTRefreshoken(users);
