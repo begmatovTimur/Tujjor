@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface UsersRepository extends JpaRepository<User, UUID> {
-    Optional<User> findByUsername(String username);
+    Optional<User> findByPhone(String phone);
     @Query(value = """
             select u.created_at, u.updated_at, u.id,  username from users u
             inner join users_roles ur on u.id = ur.users_id
