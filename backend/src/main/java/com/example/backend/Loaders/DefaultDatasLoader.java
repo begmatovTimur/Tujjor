@@ -37,7 +37,7 @@ public class DefaultDatasLoader implements CommandLineRunner {
         String tujjor = "tujjor";
         if (
                 roleRepository.findByRoleName(roleSuperViser) == null
-                && usersRepository.findByUsername(superViserName).isEmpty()
+                && usersRepository.findByPhone(superViserName).isEmpty()
                 && companyRepository.findByCompanyName(tujjor)==null
         ){
             Role savedRole = roleRepository.save(
