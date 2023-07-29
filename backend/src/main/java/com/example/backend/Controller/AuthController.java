@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.UUID;
+
+    @RestController
 @RequiredArgsConstructor
 @CrossOrigin
 @RequestMapping("/api/auth")
@@ -26,12 +28,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public HttpEntity<?> refreshUser(@RequestParam String refreshToken) {
+    public HttpEntity<?> refreshToken(@RequestParam String refreshToken) {
         return service.refreshToken(refreshToken);
-    }
-
-    @GetMapping("/decode")
-    public HttpEntity<?> decode(@RequestHeader("token") String token) {
-        return service.decode(token);
     }
 }
