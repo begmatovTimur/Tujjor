@@ -11,5 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginReq {
     private String username;
     private String password;
+    private String phone;
     private Boolean rememberMe;
 }

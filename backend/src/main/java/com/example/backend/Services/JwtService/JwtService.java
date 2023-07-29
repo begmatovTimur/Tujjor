@@ -7,7 +7,7 @@ import java.security.Key;
 public interface JwtService {
     String generateJWTToken(User users);
 
-    String generateJWTRefreshoken(User users);
+    String generateJWTRefreshToken(User users);
 
     Key getSigningKey();
 

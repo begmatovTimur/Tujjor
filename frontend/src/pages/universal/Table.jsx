@@ -127,7 +127,7 @@ const Table = ({
             ""
           )}
           {Array.from(
-            { length: dataProps.length / sizeOfPage },
+            { length: Math.ceil(dataProps.length / sizeOfPage) },
             (_, index) => index + 1
           ).map((item, index) => (
             <button

@@ -17,6 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
+
     private final UsersRepository repository;
     private final RoleRepository roleRepository;
     @Override
@@ -62,5 +63,11 @@ public class UsersServiceImpl implements UsersService {
         }
 
         return roleRepository.findByRoleName("ROLE_USER");
+    }
+
+
+    @Override
+    public HttpEntity<?> getMe(User user) {
+        return ResponseEntity.ok(user);
     }
 }
