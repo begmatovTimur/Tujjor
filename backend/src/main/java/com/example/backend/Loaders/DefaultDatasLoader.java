@@ -3,6 +3,7 @@ package com.example.backend.Loaders;
 import com.example.backend.Entity.Company;
 import com.example.backend.Entity.Role;
 import com.example.backend.Entity.User;
+import com.example.backend.Enums.RoleEnum;
 import com.example.backend.Repository.CompanyRepository;
 import com.example.backend.Repository.RoleRepository;
 import com.example.backend.Repository.UsersRepository;
@@ -32,17 +33,17 @@ public class DefaultDatasLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        String roleSuperViser = "ROLE_SUPER_VISER";
-        String superViserName = "Timur";
-        String tujjor = "tujjor";
+//        String roleSuperViser = "ROLE_SUPER_VISER";
+        String superVisorName = "+998973002027";
+        String companyName = "tujjor";
         if (
-                roleRepository.findByRoleName(roleSuperViser) == null
-                && usersRepository.findByPhone(superViserName).isEmpty()
-                && companyRepository.findByCompanyName(tujjor)==null
+                roleRepository.findByRoleName(RoleEnum.ROLE_SUPER_VISOR.name()) == null
+                && usersRepository.findByPhone(superVisorName).isEmpty()
+                && companyRepository.findByCompanyName(companyName)==null
         ){
             Role savedRole = roleRepository.save(
                     Role.builder()
-                            .roleName(roleSuperViser)
+                            .roleName(RoleEnum.ROLE_SUPER_VISOR.name())
                             .build()
             );
             List<Role> roles = new ArrayList<>();
