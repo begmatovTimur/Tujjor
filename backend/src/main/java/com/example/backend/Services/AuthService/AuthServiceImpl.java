@@ -92,6 +92,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public HttpEntity<?> login(LoginReq dto) {
         try {
+            ResponseEntity<String> body = ifInputValueExist(dto);
+            if (body != null) return body;
             String phone = ValidatePhone(dto);
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
             User users = userRepository.findByPhone(phone).orElseThrow(() -> new NoSuchElementException("User not found for phone number: " + phone));
@@ -106,9 +108,15 @@ public class AuthServiceImpl implements AuthService {
             map.put("roles", roles);
             return ResponseEntity.ok(map);
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Login yoki Parol Xato!");
+            return ResponseEntity.status(401).body("Login yoki Parol Xato!");
         }
+    }
+
+    private static ResponseEntity<String> ifInputValueExist(LoginReq dto) {
+        if(dto.getPhone().equals("") || dto.getPassword().equals("")){
+            return ResponseEntity.status(404).body("ma'lumotni birinchi to'ldiring");
+        }
+        return null;
     }
 
     private static String ValidatePhone(LoginReq dto) {
