@@ -1,0 +1,21 @@
+#loginForm{
+    width: 37%;
+    margin: 80px auto;
+    padding: 70px 20px 20px;
+    border: 1px solid;
+    border-radius: 12px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
+}
+#logoForLogin{
+    border-radius: 50%;
+    width: 8%;
+    margin-bottom: -170px;
+}
+#informationCompany{
+    width: 100%;
+    background-color: rgba(101, 185, 101, 0.08);
+    text-align: left;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}

@@ -1,6 +1,8 @@
 package com.example.backend.Controller;
 
 import com.example.backend.DTO.UserDTO;
+import com.example.backend.Entity.User;
+import com.example.backend.Services.UsersService.CurrentUser;
 import com.example.backend.Services.UsersService.UsersService;
 import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +33,8 @@ public class UsersController {
         return service.getStudentByTitle(username);
     }
 
-
+    @GetMapping("/me")
+    public HttpEntity<?> getMe(@CurrentUser User user){
+        return service.getMe(user);
+    }
 }

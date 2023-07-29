@@ -3,6 +3,7 @@ package com.example.backend.Services.AuthService;
 import com.example.backend.DTO.UserDTO;
 import com.example.backend.Entity.Role;
 import com.example.backend.Entity.User;
+import com.example.backend.Enums.RoleEnum;
 import com.example.backend.Payload.LoginReq;
 import com.example.backend.Repository.RoleRepository;
 import com.example.backend.Repository.UsersRepository;
@@ -27,7 +28,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    private final UsersRepository usersRepository;
+    private final UsersRepository userRepository;
     private final RoleRepository roleRepo;
     private final JwtServiceImpl jwtService;
     private final UserDetailsService userDetailsService;
@@ -38,33 +39,39 @@ public class AuthServiceImpl implements AuthService {
     @SneakyThrows
     @Override
     public HttpEntity<?> register(UserDTO userData) {
+        UUID roleId = UUID.randomUUID();
         List<Role> roles = new ArrayList<>();
-        Role roleUser = roleRepo.findByRoleName("ROLE_USER");
+        Role roleUser = roleRepo.findByRoleName(RoleEnum.ROLE_USER.name());
+
+        checkIfExistRole(roleId, roles, roleUser);
+        UUID userId = UUID.randomUUID();
+        User user = new User(
+                userId,
+                userData.getUsername(),
+                userData.getPhone(),
+                passwordEncoder.encode(userData.getPassword()),
+                roles
+        );
+        userRepository.save(user);
+        String token = authenticate(userData);
+        return ResponseEntity.ok(token);
+    }
+
+    private void checkIfExistRole(UUID roleId, List<Role> roles, Role roleUser) {
         if (roleUser == null) {
             roles.add(roleRepo.save(new Role(
-                    null,
-                    "ROLE_USER",
+                    roleId,
+                    RoleEnum.ROLE_SUPER_VISOR.name(),
                     null,
                     null
             )));
         } else {
             roles.add(roleUser);
         }
-        User user = new User(
-                null,
-                userData.getUsername(),
-                userData.getPhone(),
-                passwordEncoder.encode(userData.getPassword()),
-                roles
-        );
-        usersRepository.save(user);
-<<<<<<< HEAD
-        UserDetails userDetails = userDetailsService.loadUserByUsername(dto.getUsername());
-=======
+    }
 
-
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userData.getUsername());
->>>>>>> 5fcfbcd65d30386142e2aa3df1fc2adc7a2f4af0
+    private String authenticate(UserDTO userData) throws Exception {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userData.getPhone());
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 userData.getPassword(),
@@ -72,7 +79,6 @@ public class AuthServiceImpl implements AuthService {
         );
 
         authenticationConfiguration.getAuthenticationManager().authenticate(authenticationToken);
-
         String token = Jwts
                 .builder()
                 .setIssuer(userDetails.getUsername())
@@ -80,48 +86,51 @@ public class AuthServiceImpl implements AuthService {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(jwtService.getSigningKey())
                 .compact();
-        return ResponseEntity.ok(token);
+        return token;
     }
 
     @Override
     public HttpEntity<?> login(LoginReq dto) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));
-        } catch (BadCredentialsException e) {
-            return ResponseEntity.ok("BAD_CREDENTIALS");
+            ResponseEntity<String> body = ifInputValueExist(dto);
+            if (body != null) return body;
+            String phone = ValidatePhone(dto);
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
+            User users = userRepository.findByPhone(phone).orElseThrow(() -> new NoSuchElementException("User not found for phone number: " + phone));
+            List<Role> roles = roleRepo.findAll();
+            String access_token = jwtService.generateJWTToken(users);
+            String refresh_token = jwtService.generateJWTRefreshToken(users);
+            Map<String, Object> map = new HashMap<>();
+            map.put("access_token", access_token);
+            if (dto.getRememberMe()) {
+                map.put("refresh_token", refresh_token);
+            }else {
+                map.put("refresh_token", "");
+            }
+            map.put("roles", roles);
+            return ResponseEntity.ok(map);
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body("Login yoki Parol Xato!");
         }
-<<<<<<< HEAD
-        Users users = usersRepository.findByUsername(dto.getUsername()).orElseThrow(() -> new RuntimeException("Cannot find User With Id:" + dto.getUsername()));
-=======
-        ;
-        User users = usersRepository.findByUsername(dto.getUsername()).orElseThrow(() -> new RuntimeException("Cannot find User With Id:" + dto.getUsername()));
->>>>>>> 5fcfbcd65d30386142e2aa3df1fc2adc7a2f4af0
-        List<Role> roles = roleRepo.findAll();
-        String access_token = jwtService.generateJWTToken(users);
-        String refresh_token = jwtService.generateJWTRefreshoken(users);
-        Map<String, Object> map = new HashMap<>();
-        map.put("access_token", access_token);
-        map.put("refresh_token", refresh_token);
-        map.put("roles", roles);
-        return ResponseEntity.ok(map);
+    }
+
+    private static ResponseEntity<String> ifInputValueExist(LoginReq dto) {
+        if(dto.getPhone().equals("") || dto.getPassword().equals("")){
+            return ResponseEntity.status(404).body("ma'lumotni birinchi to'ldiring");
+        }
+        return null;
+    }
+
+    private static String ValidatePhone(LoginReq dto) {
+        String phone = dto.getPhone().startsWith("+") ? dto.getPhone() : "+" + dto.getPhone();
+        return phone;
     }
 
     @Override
     public HttpEntity<?> refreshToken(String refreshToken) {
         String id = jwtService.extractUserFromJwt(refreshToken);
-        User user = usersRepository.findById(UUID.fromString(id)).orElseThrow();
+        User user = userRepository.findById(UUID.fromString(id)).orElseThrow();
         String access_token = jwtService.generateJWTToken(user);
         return ResponseEntity.ok(access_token);
-    }
-
-    @Override
-    public HttpEntity<?> decode(String token) {
-        boolean isExpired = jwtService.validateToken(token);
-        User user = null;
-        if (isExpired) {
-            String userId = jwtService.extractUserFromJwt(token);
-            user = usersRepository.findById(UUID.fromString(userId)).orElseThrow(() -> new RuntimeException("Cannot find User With Id:" + userId));
-        }
-        return ResponseEntity.ok(user);
     }
 }

@@ -5,6 +5,7 @@ import com.example.backend.Repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -34,13 +35,13 @@ public class    SecurityConfig  {
         http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeRequests()
-                .requestMatchers("/api/rooms", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode","/api/bot").permitAll()
-                .requestMatchers("/api/**").authenticated() // Paths starting from /api require authentication
-                .anyRequest().permitAll() // Permit all other paths (before /api)
-                .and()
-                .addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);
-        // Add more security configurations as needed
+                .authorizeHttpRequests(
+                    auth->auth
+                            .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                            .requestMatchers("/api/rooms", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode","/api/bot").permitAll()
+                            .anyRequest()
+                            .authenticated()
+                ).addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -48,7 +49,7 @@ public class    SecurityConfig  {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
-            User users = usersRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username + "bu user topilmadi"));
+            User users = usersRepository.findByPhone(username).orElseThrow();
             return users;
         };
     }

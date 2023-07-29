@@ -35,11 +35,11 @@ const Table = ({
   return (
     <div className="universal_table">
       {changeSizeMode && columns.length ? (
-        <label className="w-50">
+        <label className="w-25">
           <span>Items in per page:</span>
 
           <select
-            className="form-select w-25"
+            className="form-select"
             defaultValue={"10"}
             onChange={(e) => {
               handlePageChange(0)

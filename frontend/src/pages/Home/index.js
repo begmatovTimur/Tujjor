@@ -5,10 +5,10 @@ function Index(props) {
     const navigate = useNavigate();
 
     return (
-        <div className={"container my-4"}>
+        <div className={""}>
+            <h3>Click to login...</h3>
             <hr/>
-            <button onClick={()=>navigate('./login')}>Login</button>
-            <button className='btn btn-success' onClick={()=>navigate("/table")}>Universal Table</button>
+            <button className={'btn btn-outline-primary'} onClick={()=>navigate('./login')}>Login</button>
         </div>
     );
 }
