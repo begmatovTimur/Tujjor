@@ -3,6 +3,7 @@ package com.example.backend.Services.AuthService;
 import com.example.backend.DTO.UserDTO;
 import com.example.backend.Entity.Role;
 import com.example.backend.Entity.User;
+import com.example.backend.Enums.RoleEnum;
 import com.example.backend.Payload.LoginReq;
 import com.example.backend.Repository.RoleRepository;
 import com.example.backend.Repository.UsersRepository;
@@ -40,7 +41,7 @@ public class AuthServiceImpl implements AuthService {
     public HttpEntity<?> register(UserDTO userData) {
         UUID roleId = UUID.randomUUID();
         List<Role> roles = new ArrayList<>();
-        Role roleUser = roleRepo.findByRoleName("ROLE_USER");
+        Role roleUser = roleRepo.findByRoleName(RoleEnum.ROLE_USER.name());
 
         checkIfExistRole(roleId, roles, roleUser);
         UUID userId = UUID.randomUUID();
@@ -60,7 +61,7 @@ public class AuthServiceImpl implements AuthService {
         if (roleUser == null) {
             roles.add(roleRepo.save(new Role(
                     roleId,
-                    "ROLE_USER",
+                    RoleEnum.ROLE_SUPER_VISOR.name(),
                     null,
                     null
             )));
