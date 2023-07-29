@@ -42,6 +42,7 @@ const Table = ({
             className="form-select w-25"
             defaultValue={"10"}
             onChange={(e) => {
+              handlePageChange(0)
               chageSizeOfPage({
                 api: paginationApi,
                 size: parseInt(e.target.value),
