@@ -47,9 +47,9 @@ function App() {
             <Table
               columnsProps={columns}
               dataProps={data}
-              paginationApi={"https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"}
-              pagination={true}
-              changeSizeMode={true}
+              paginationApi={"https://jsonplaceholder.typicode.com/comments?_page={page }&_limit={limit}"}
+              pagination={true} 
+              changeSizeMode={true} 
             />
           }
         />
@@ -58,4 +58,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
