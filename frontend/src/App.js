@@ -1,7 +1,6 @@
-import './App.css';
 import Login from "./pages/Login/Login";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import {useEffect} from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
