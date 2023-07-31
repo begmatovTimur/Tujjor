@@ -5,7 +5,7 @@ export default function (url, method, data) {
     return axios({
         url: "http://localhost:8080" + url,
         method: method,
-        data: data,
+        data,
         headers: {
             "token": item
         }
