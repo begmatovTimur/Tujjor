@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
 import Table from "./pages/universal/Table";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
   const [data, setData] = useState([]);
@@ -105,12 +106,15 @@ function App() {
   useEffect(() => {
     hasPermissions();
   }, []);
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/admin" element={<Admin />}>
+          <Route path="/admin/settings" element={<Settings />} />
+        </Route>
         <Route
           path="/table"
           element={

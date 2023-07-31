@@ -23,6 +23,8 @@ const Table = ({
   useEffect(() => {
     claimData({ columns: columnsProps, data: dataProps });
     if(pagination===true && !paginationApi) alert("Pagination API is  required!");
+  }, [dataProps]);
+  useEffect(()=>{
     if (paginationApi) {
       chageSizeOfPage({
         api: paginationApi,
@@ -30,7 +32,7 @@ const Table = ({
         page: currentPage,
       });
     }
-  }, [dataProps]);
+  },[paginationApi])
 
   return (
     <div className="universal_table">
@@ -162,7 +164,7 @@ const Table = ({
                   api: paginationApi,
                   size: sizeOfPage,
                   page: currentPage + 1,
-                });
+                  });
               }}
             >
               Next

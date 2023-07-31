@@ -1,0 +1,18 @@
+.settings_button {
+  width: 200px;
+  border: none;
+  height: 40px;
+  background: rgb(10, 169, 237);
+  color: white;
+  opacity: 50%;
+}
+.active_button {
+  background: rgb(1, 98, 255) !important;
+  opacity: 1;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
