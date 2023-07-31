@@ -22,7 +22,7 @@ const Settings = ({ data, getData, activeButtonIndex, setCurrentIndex }) => {
               (activeButtonIndex === index ? " active_button" : " ")
             }
             onClick={() => {
-              navigate(item.path);
+              navigate("/admin/settings"+item.path);
               localStorage.setItem("selectedSettingsButton", index);
               setCurrentIndex(index);
             }}

@@ -16,3 +16,15 @@
     flex-direction: column;
     gap: 5px;
 }
+.settings {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 50px;
+}
+.right {
+  padding: 20px;
+  display: flex;
+  width: 80%;
+  border-radius: 18px;
+}
