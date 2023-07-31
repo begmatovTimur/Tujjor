@@ -95,7 +95,7 @@ const Table = ({
               {data.map((item) => (
                 <tr key={item.id}>
                   {columns.map((col) => (
-                    <td className={col.show ? "active" : "hidden"} key={col.id}>
+                    <td className={col.show ? "" : "hidden"} key={col.id}>
                       {item[col.key]}
                     </td>
                   ))}

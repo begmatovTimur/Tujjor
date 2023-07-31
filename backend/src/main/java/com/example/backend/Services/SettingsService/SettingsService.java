@@ -1,2 +1,7 @@
-package com.example.backend.Services.SettingsService;public interface SettingsService {
-}
+package com.example.backend.Services.SettingsService;
+
+import org.springframework.http.HttpEntity;
+
+public interface SettingsService {
+    HttpEntity<?> getAllSettings();
+};
