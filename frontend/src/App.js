@@ -7,6 +7,7 @@ import Admin from "./pages/Admin/Admin";
 import axios from "axios";
 import Table from "./pages/universal/Table";
 import Settings from "./pages/Settings/Settings";
+import Test from "./Test";
 
 function App() {
   const [data, setData] = useState([]);
@@ -113,7 +114,9 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/admin" element={<Admin />}>
-          <Route path="/admin/settings" element={<Settings />} />
+          <Route path="/admin/settings" element={<Settings />} >
+            <Route path="/admin/settings/company-profile" element={<Test />}/>
+          </Route>
         </Route>
         <Route
           path="/table"
