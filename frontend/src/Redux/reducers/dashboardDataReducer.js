@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     dashboardData: {},
+    showUserSettingsModal: false,
     error: null
 }
 
@@ -16,6 +17,15 @@ const dashboardDataSlice = createSlice({
             state.error = action.payload
         },
         getDashboardData: (state, action) => {
+        },
+        setShowUserSettingsModalSuccess: (state, action) => {
+            state.showUserSettingsModal = !state.showUserSettingsModal
+        },
+        setShowUserSettingsModalFailure: (state, action) => {
+            state.error = action.payload
+        },
+        setShowUserSettingsModal: (state, action) => {
+            state.showUserSettingsModal = !state.showUserSettingsModal
         }
     }
 })

@@ -72,6 +72,26 @@ const settingsIcon =  <svg xmlns="http://www.w3.org/2000/svg" width="50" height=
         d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
 </svg>
 
+const keyIcon = <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     className="bi bi-key-fill" viewBox="0 0 16 16">
+    <path
+        d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg>
+
+const moneyIcon = <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                       className="bi bi-cash" viewBox="0 0 16 16">
+    <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+    <path
+        d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+</svg>
+
+const exitIcon = <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                      className="bi bi-escape" viewBox="0 0 16 16">
+    <path d="M8.538 1.02a.5.5 0 1 0-.076.998 6 6 0 1 1-6.445 6.444.5.5 0 0 0-.997.076A7 7 0 1 0 8.538 1.02Z"/>
+    <path
+        d="M7.096 7.828a.5.5 0 0 0 .707-.707L2.707 2.025h2.768a.5.5 0 1 0 0-1H1.5a.5.5 0 0 0-.5.5V5.5a.5.5 0 0 0 1 0V2.732l5.096 5.096Z"/>
+</svg>
+
 export const icons = {
     onlineHelpIcon,
     calendarIcon,
@@ -84,5 +104,8 @@ export const icons = {
     clientsIcon,
     androidIcon,
     reportsIcon,
-    settingsIcon
+    settingsIcon,
+    keyIcon,
+    moneyIcon,
+    exitIcon
 }
