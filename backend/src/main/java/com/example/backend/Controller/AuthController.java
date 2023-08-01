@@ -19,7 +19,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public HttpEntity<?> login(@RequestBody LoginReq loginReq) {
-        return service.login(loginReq);
+            return service.login(loginReq);
     }
 
     @PostMapping("/register")

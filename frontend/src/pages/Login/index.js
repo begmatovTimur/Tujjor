@@ -40,7 +40,7 @@ function Index(props) {
     //
     // <MDBBtn onClick={()=>props.loginUser()} className="mb-0 px-5" size='lg'>Login</MDBBtn>
     <div>
-      {/* <div id="modalchaLogIn">
+       <div id="modalchaLogIn">
         <div className="form">
           <h1 style={{ fontFamily: "cursive", marginBottom: "15px" }}>
             Tizimga kirish
@@ -92,7 +92,7 @@ function Index(props) {
           </FormControl>
 
           <Button
-            onClick={loginhere}
+            // onClick={loginhere}
             style={{
               backgroundColor: "#1c4b78",
               marginTop: 20,
@@ -105,7 +105,7 @@ function Index(props) {
             Kirish
           </Button>
         </div>
-      </div> */}
+      </div>
       <ToastContainer />
     </div>
   );
