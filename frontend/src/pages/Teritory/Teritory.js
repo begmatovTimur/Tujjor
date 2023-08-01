@@ -58,7 +58,7 @@ function Teritory(props) {
                                 lang: 'en_US',
                                 coordorder: 'latlong',
                                 load: 'package.full'
-                            }}>
+                             }}>
                                 <Map width={400} height={300} defaultState={{
                                     center: [39.7756, 64.4253],
                                     zoom: 10,
