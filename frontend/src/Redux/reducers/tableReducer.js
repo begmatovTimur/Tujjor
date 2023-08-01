@@ -6,14 +6,24 @@ const tableReducer = createSlice({
     columns: [],
     sizeOfPage: 10,
     copyOfColumns: [],
+    currentDraggingColumn: 0,
     data: [],
     currentPage: 0,
+    columnOrderModalVisibility: false,
+    modalColumns:[]
   },
   name: "table",
   reducers: {
     claimData: (state, action) => {
       state.columns = action.payload.columns;
       state.data = action.payload.data;
+      state.modalColumns = action.payload.columns;
+    },
+    setColumnModalVisibility: (state, action) => {
+      state.columnOrderModalVisibility = action.payload;
+    },
+    setCurrentDragingColumn: (state, action) => {
+      state.currentDraggingColumn = action.payload;
     },
     filterVisibility: (state, stateAction) => {
       const { action } = stateAction.payload;
@@ -44,6 +54,7 @@ const tableReducer = createSlice({
           }
         });
       }
+      state.modalColumns = state.columns;
     },
     chageSizeOfPage: (state, action) => {},
     changeData: (state, action) => {
@@ -61,6 +72,25 @@ const tableReducer = createSlice({
         state.currentPage = action.payload.current;
       }
     },
+    dropColumn: (state, action) => {
+      const { currentDraggingColumn } = state;
+      const draggedElementIndex = currentDraggingColumn;
+      const droppedElementIndex = action.payload;
+
+      [state.modalColumns[draggedElementIndex], state.modalColumns[droppedElementIndex]] =
+        [
+          state.modalColumns[droppedElementIndex],
+          state.modalColumns[draggedElementIndex],
+        ];
+
+      state.currentDraggingColumn = -1;
+    },
+    setModalColumns:(state,action)=>{
+      state.modalColumns = action.payload;
+    },
+    saveColumnOrder:(state,action)=>{
+      state.columns = state.modalColumns;
+    }
   },
 });
 

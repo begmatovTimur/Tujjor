@@ -1,14 +1,17 @@
+
 import "./App.css";
 import Login from "./pages/Login/Login";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import { useEffect, useState } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
-import Table from "./pages/universal/Table";
+import Table from "./pages/universal/Table/Table";
+import Filter from "./pages/universal/Filter/Filter";
 import Settings from "./pages/Settings/Settings";
-import Test from "./Test";
-import Teritory from "./pages/Teritory/Teritory";
+import Test from "./pages/Settings/ChildComponents/Company";
+import Company from "./pages/Settings/ChildComponents/Company";
+import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
 
 function App() {
   const [data, setData] = useState([]);
@@ -107,6 +110,7 @@ function App() {
               }
             });
       } else {
+        alert("sd")
         navigate("/404");
       }
     }
@@ -117,32 +121,49 @@ function App() {
   }, []);
 
   return (
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/admin" element={<Admin/>}>
-            <Route path="/admin/settings" element={<Settings />} >
-              <Route path="/admin/settings/company-profile" element={<Test />}/>
-            </Route>
-            <Route path="/admin/teritory" element={<Teritory/>}></Route>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/admin" element={<Admin />}>
+          <Route path="/admin/settings" element={<Settings />} >
+            <Route path="/admin/settings/company-profile" element={<Company />}/>
+            <Route path="/admin/settings/customer-category" element={<CustomerCategory />}/>
+            <Route path="/admin/teritory" element={<Teritory/>} />
           </Route>
-          <Route
-              path="/table"
-              element={
-                <Table
-                    pagination={true}
-                    changeSizeMode={true}
-                    dataProps={data}
-                    columnsProps={columns}
-                    paginationApi={
-                      "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
-                    }
-                />
+        </Route>
+        <Route
+          path="/table"
+          element={
+            <Table
+              pagination={true}
+              changeSizeMode={true}
+              dataProps={data}
+              columnOrderMode={true}
+              changeSizeModeOptions={[10,20,30,40,50]}
+              columnsProps={columns}
+              paginationApi={
+                "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
               }
-          />
-        </Routes>
-      </div>
+            />
+          }
+        />
+        <Route
+            path="/filter"
+            element={
+              <Filter
+                  pagination={true}
+                  changeSizeMode={true}
+                  dataProps={data}
+                  columnsProps={columns}
+                  paginationApi={
+                    "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
+                  }
+              />
+            }
+        />
+      </Routes>
+    </div>
   );
 }
 

@@ -1,10 +1,13 @@
 import {all,fork} from "redux-saga/effects"
-import tableSaga from "./tableSaga"
-import settingsSaga from "./settingsSaga"
+import {dashboardDataSaga} from "./dashboardDataSaga";
+import tableSaga from "./tableSaga";
+import settingsSaga from "./settingsSaga";
+
 
 export function* rootSaga(){
     yield all([
         fork(tableSaga),
-        fork(settingsSaga)
+        fork(settingsSaga),
+        fork(dashboardDataSaga)
     ])
 };
