@@ -9,6 +9,7 @@ import axios from "axios";
 import Table from "./pages/universal/Table/Table";
 import Filter from "./pages/universal/Filter/Filter";
 import Settings from "./pages/Settings/Settings";
+import Teritory from "./pages/Teritory/Teritory";
 import Test from "./pages/Settings/ChildComponents/Company";
 import Company from "./pages/Settings/ChildComponents/Company";
 import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
@@ -129,7 +130,7 @@ function App() {
           <Route path="/admin/settings" element={<Settings />} >
             <Route path="/admin/settings/company-profile" element={<Company />}/>
             <Route path="/admin/settings/customer-category" element={<CustomerCategory />}/>
-            <Route path="/admin/teritory" element={<Teritory/>} />
+            <Route path="/admin/settings/territory" element={<Teritory/>} />
           </Route>
         </Route>
         <Route
