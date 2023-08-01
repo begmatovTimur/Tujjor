@@ -9,8 +9,7 @@ import axios from "axios";
 import Table from "./pages/universal/Table/Table";
 import Filter from "./pages/universal/Filter/Filter";
 import Settings from "./pages/Settings/Settings";
-import Teritory from "./pages/Teritory/Teritory";
-import Test from "./pages/Settings/ChildComponents/Company";
+import Teritory from './pages/Teritory/Teritory';
 import Company from "./pages/Settings/ChildComponents/Company";
 import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
 
