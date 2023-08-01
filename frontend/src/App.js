@@ -9,10 +9,9 @@ import axios from "axios";
 import Table from "./pages/universal/Table/Table";
 import Filter from "./pages/universal/Filter/Filter";
 import Settings from "./pages/Settings/Settings";
-import Test from "./pages/Settings/ChildComponents/Company";
+import Teritory from './pages/Teritory/Teritory';
 import Company from "./pages/Settings/ChildComponents/Company";
 import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
-import Territory from "./pages/Settings/ChildComponents/Territory";
 
 function App() {
   const [data, setData] = useState([]);
@@ -52,7 +51,10 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const permissions = [
-      { url: "/admin", roles: ["ROLE_SUPER_VISOR"] }
+    { url: "/admin", roles: ["ROLE_SUPER_VISOR"] },
+    { url: "/admin/settings", roles: ["ROLE_SUPER_VISOR"] },
+    { url: "/admin/settings/company-profile", roles: ["ROLE_SUPER_VISOR"] },
+    { url: "/admin/teritory", roles: ["ROLE_SUPER_VISOR"] }
   ];
 
   function hasPermissions() {
@@ -71,40 +73,42 @@ function App() {
             token: localStorage.getItem("access_token"),
           },
         })
-          .then((res) => {
-            let s = false;
-            permissions.map((item) => {
-              if (item.url === location.pathname) {
-                res.data.authorities.map((i1) => {
-                  if (item.roles.includes(i1.roleName)) {
-                    s = true;
-                  }
+            .then((res) => {
+              let s = false;
+              permissions.map((item) => {
+                if (item.url === location.pathname) {
+                  res.data.authorities.map((i1) => {
+                    if (item.roles.includes(i1.roleName)) {
+                      s = true;
+                    }
+                  });
+                }
+              });
+              if (!s) {
+                navigate("/404");
+              }
+            })
+            .catch((err) => {
+              if (localStorage.getItem("no_token") === "sorry") {
+                navigate("/login");
+                for (let i = 0; i < 1; i++) {
+                  window.location.reload();
+                }
+              }
+              if (err.response.status === 403) {
+                axios({
+                  url:
+                      "http://localhost:8080/api/auth/refresh?refreshToken=" +
+                      localStorage.getItem("refresh_token"),
+                  method: "POST",
+                }).then((res) => {
+                  localStorage.setItem("access_token", res.data);
+                  window.location.reload();
+                }).catch((err)=>{
+                  navigate('/login')
                 });
               }
             });
-            if (!s) {
-              navigate("/404");
-            }
-          })
-          .catch((err) => {
-            if (localStorage.getItem("no_token") === "sorry") {
-              navigate("/login");
-              for (let i = 0; i < 1; i++) {
-                window.location.reload();
-              }
-            }
-            if (err.response.status === 403) {
-              axios({
-                url:
-                  "http://localhost:8080/api/auth/refresh?refreshToken=" +
-                  localStorage.getItem("refresh_token"),
-                method: "POST",
-              }).then((res) => {
-                localStorage.setItem("access_token", res.data);
-                window.location.reload();
-              });
-            }
-          });
       } else {
         alert("sd")
         navigate("/404");
@@ -125,7 +129,7 @@ function App() {
           <Route path="/admin/settings" element={<Settings />} >
             <Route path="/admin/settings/company-profile" element={<Company />}/>
             <Route path="/admin/settings/customer-category" element={<CustomerCategory />}/>
-            <Route path="/admin/settings/territory" element={<Territory />}/>
+            <Route path="/admin/settings/territory" element={<Teritory/>} />
           </Route>
         </Route>
         <Route

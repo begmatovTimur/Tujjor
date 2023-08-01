@@ -2,6 +2,7 @@ import Select from "react-select";
 import { connect } from "react-redux";
 import { tableActions } from "../../../Redux/reducers/tableReducer";
 import { useEffect } from "react";
+import Pagination from "@mui/material/Pagination";
 import "./Table.css";
 const Table = ({
   columnsProps,
@@ -11,21 +12,19 @@ const Table = ({
   pagination,
   changeSizeMode,
   setColumnModalVisibility,
-  changePage,
   claimData,
   filterVisibility,
   paginationApi,
   handlePageChange,
-  chageSizeOfPage,
+  changePaginationTo,
   sizeOfPage,
-  changeCurrentPage,
   data,
+  additionalColumns,
   changeSizeModeOptions,
   columnOrderMode,
   currentPage,
   saveColumnOrder,
   setCurrentDragingColumn,
-  currentDraggingColumn,
   dropColumn,
   modalColumns,
   setModalColumns,
@@ -34,20 +33,19 @@ const Table = ({
     claimData({ columns: columnsProps, data: dataProps });
     if (pagination === true && !paginationApi)
       alert("Pagination API is  required!");
-      if(paginationApi) {
-        chageSizeOfPage({
-          api: paginationApi,
-          size: 10,
-          page: currentPage,
-        });
-      }
+    if (paginationApi) {
+      changePaginationTo({
+        api: paginationApi,
+        size: 10,
+        page: currentPage,
+      });
+    }
   }, [dataProps]);
- 
-
 
   return (
     <div className="universal_table">
       {/* 👇 Pagination Per Page Changing Select 👇  */}
+
       {changeSizeMode && columns.length ? (
         <label className="w-25">
           <span>Items in per page:</span>
@@ -57,7 +55,7 @@ const Table = ({
             defaultValue={"10"}
             onChange={(e) => {
               handlePageChange(0);
-              chageSizeOfPage({
+              changePaginationTo({
                 api: paginationApi,
                 size: parseInt(e.target.value),
                 page: 0,
@@ -149,7 +147,10 @@ const Table = ({
                     }}
                     key={item.id}
                     onDragOverCapture={(e) => e.preventDefault()}
-                    className={"w-100 d-flex bg-secondary text-white p-2"+(item.show?"":" hidden")}
+                    className={
+                      "w-100 d-flex bg-secondary text-white p-2" +
+                      (item.show ? "" : " hidden")
+                    }
                   >
                     {item.title}
                   </div>
@@ -192,6 +193,7 @@ const Table = ({
                     {item.title}
                   </th>
                 ))}
+                {additionalColumns ? <th>More</th> : ""}
               </tr>
             </thead>
             <tbody>
@@ -202,6 +204,7 @@ const Table = ({
                       {item[col.key]}
                     </td>
                   ))}
+                  {additionalColumns ? <td>{additionalColumns}</td> : ""}
                 </tr>
               ))}
             </tbody>
@@ -211,76 +214,22 @@ const Table = ({
 
       {/* 👇 Pagination 👇  */}
 
-      {columns.length && pagination ? (
-        <div className="d-flex gap-2 pagination justify-content-end">
-          {dataProps.length > 1 ? (
-            <button
-              className="btn btn-danger"
-              onClick={() => {
-                changePage({
-                  current: currentPage - 1,
-                  size: dataProps.length / sizeOfPage,
-                });
-                chageSizeOfPage({
-                  api: paginationApi,
-                  size: sizeOfPage,
-                  page: currentPage,
-                });
-              }}
-            >
-              Prev
-            </button>
-          ) : (
-            ""
-          )}
-          {Array.from(
-            { length: Math.ceil(dataProps.length / sizeOfPage) },
-            (_, index) => index + 1
-          ).map((item, index) => (
-            <button
-              className="btn btn-primary"
-              disabled={currentPage === index}
-              key={index}
-              onClick={() => {
-                changePage({
-                  current: index,
-                  size: dataProps.length / sizeOfPage,
-                });
-                chageSizeOfPage({
-                  api: paginationApi,
-                  size: sizeOfPage,
-                  page: index,
-                });
-              }}
-            >
-              {index + 1}
-            </button>
-          ))}
-          {dataProps.length > 1 ? (
-            <button
-              className="btn btn-success"
-              onClick={() => {
-                if (dataProps.length / sizeOfPage === currentPage + 1) return;
-                changePage({
-                  current: currentPage + 1,
-                  size: dataProps.length / sizeOfPage,
-                });
-                chageSizeOfPage({
-                  api: paginationApi,
-                  size: sizeOfPage,
-                  page: currentPage + 1,
-                });
-              }}
-            >
-              Next
-            </button>
-          ) : (
-            ""
-          )}
-        </div>
-      ) : (
-        ""
-      )}
+      <div className="d-flex justify-content-end pe-5">
+        <Pagination
+          onChange={(e, page) => {
+            handlePageChange(page);
+            changePaginationTo({
+              api: paginationApi,
+              size: sizeOfPage,
+              page,
+            });
+          }}
+          page={currentPage}
+          count={Math.ceil(dataProps.length / sizeOfPage)}
+          variant="outlined"
+          shape="rounded"
+        />
+      </div>
     </div>
   );
 };

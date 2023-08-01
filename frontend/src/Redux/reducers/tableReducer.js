@@ -8,7 +8,7 @@ const tableReducer = createSlice({
     copyOfColumns: [],
     currentDraggingColumn: 0,
     data: [],
-    currentPage: 0,
+    currentPage: 1,
     columnOrderModalVisibility: false,
     modalColumns:[],
     formInputs:{
@@ -35,27 +35,36 @@ const tableReducer = createSlice({
     },
     filterVisibility: (state, stateAction) => {
       const { action } = stateAction.payload;
+
       if (state.columns.length === 0) state.columns = state.copyOfColumns;
-      if (action.action === "clear") {
-        state.columns.map((item) => {
-          item.show = true;
-        });
-      } else if (action.action === "select-option") {
-        let i = 0;
-        state.columns.map((item) => {
-          if (item.show === false) i++;
-          if (action.option.value === item.id) {
-            item.show = false;
+
+      switch (action.action) {
+        case "clear":
+          state.columns.map((item) => {
+            item.show = true;
+          });
+          break;
+        case "select-option":
+          let i = 0;
+          for (i; i < state.columns.length; i++) {
+
+            let item = state.columns[i];
+
+            if (item.show === false) i++;
+            if (action.option.value === item.id) {
+              item.show = false;
+            }
           }
-        });
-        if (i === state.columns.length - 1) {
-          state.copyOfColumns = state.columns;
-          state.columns = [];
-        }
-      } else if (
-        action.action === "remove-value" ||
-        action.action === "pop-value"
-      ) {
+
+          if (i === state.columns.length - 1) {
+            state.copyOfColumns = state.columns;
+            state.columns = [];
+          }
+
+          break;
+      }
+
+      if (action.action === "remove-value" || action.action === "pop-value") {
         state.columns.map((item) => {
           if (item.id === action.removedValue.value) {
             item.show = true;
@@ -64,7 +73,7 @@ const tableReducer = createSlice({
       }
       state.modalColumns = state.columns;
     },
-    chageSizeOfPage: (state, action) => {},
+    changePaginationTo: (state, action) => {},
     changeData: (state, action) => {
       state.data = action.payload.data;
       state.sizeOfPage = action.payload.size;
@@ -73,30 +82,25 @@ const tableReducer = createSlice({
       state.currentPage = action.payload;
     },
     changePage: (state, action) => {
-      if (
-        action.payload.current !== -1 &&
-        action.payload.current != action.payload.size
-      ) {
-        state.currentPage = action.payload.current;
-      }
+      state.currentPage = action.payload.current;
     },
     dropColumn: (state, action) => {
       const { currentDraggingColumn } = state;
       const draggedElementIndex = currentDraggingColumn;
       const droppedElementIndex = action.payload;
 
-      [state.modalColumns[draggedElementIndex], state.modalColumns[droppedElementIndex]] =
-        [
-          state.modalColumns[droppedElementIndex],
-          state.modalColumns[draggedElementIndex],
-        ];
-
-      state.currentDraggingColumn = -1;
+      [
+        state.modalColumns[draggedElementIndex],
+        state.modalColumns[droppedElementIndex],
+      ] = [
+        state.modalColumns[droppedElementIndex],
+        state.modalColumns[draggedElementIndex],
+      ];
     },
-    setModalColumns:(state,action)=>{
+    setModalColumns: (state, action) => {
       state.modalColumns = action.payload;
     },
-    saveColumnOrder:(state,action)=>{
+    saveColumnOrder: (state, action) => {
       state.columns = state.modalColumns;
     },
     changeInputForms:(state,action)=>{

@@ -4,19 +4,16 @@ import com.example.backend.DTO.DashboardDataDTO;
 import com.example.backend.Entity.User;
 import com.example.backend.Repository.UsersRepository;
 import com.example.backend.Services.UsersService.UsersService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
 @Service
+@RequiredArgsConstructor
 public class DashboardDataServiceImpl implements DashboardDataService {
-    private final UsersRepository userRepository;
+    private final UsersRepository usersRepository;
     private final UsersService usersService;
-
-    public DashboardDataServiceImpl(UsersRepository userRepository, UsersService usersService) {
-        this.userRepository = userRepository;
-        this.usersService = usersService;
-    }
 
     @Override
     public DashboardDataDTO getDashboardData(User user) {

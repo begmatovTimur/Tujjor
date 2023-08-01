@@ -6,6 +6,7 @@ import {GET_DASHBOARD_DATA, SET_SHOW_USER_MODAL} from "../constants/dashboardDat
 function* watchGetDashboardData() {
     try {
         const {data} = yield ApiCall("/api/dashboard-data", "GET")
+        console.log(data)
         yield put(dashboardDataModel.getDashboardDataSuccess(data))
     } catch (e) {
         yield put(dashboardDataModel.getDashboardDataFailure(e.data()))
@@ -21,6 +22,7 @@ function* watchSetShowUserModalData(action){
 }
 
 export function* dashboardDataSaga() {
+    alert("sd")
     yield takeEvery(GET_DASHBOARD_DATA, watchGetDashboardData)
     yield takeEvery(SET_SHOW_USER_MODAL, watchSetShowUserModalData)
 }

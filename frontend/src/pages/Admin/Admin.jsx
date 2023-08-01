@@ -8,32 +8,32 @@ import Filter from "../universal/Filter/Filter";
 import Table from "../universal/Table/Table";
 
 function Admin(props) {
-    const {dashboardData} = props.dashboardDataReducer;
-    const navigate = useNavigate();
-    const userBoxRef = useRef(null);
-    const [userBox, setUserBox] = useState(false);
+  const { dashboardData } = props.dashboardDataReducer;
+  const navigate = useNavigate();
+  const userBoxRef = useRef(null);
+  const [userBox, setUserBox] = useState(false);
 
-    useEffect(() => {
-        props.getDashboardData()
-    }, [])
 
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (userBoxRef.current && !userBoxRef.current.contains(event.target)) {
-                setUserBox(false);
-                // alert(userBox + " down")
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
+  useEffect(() => {
+    props.getDashboardData();
+  }, []);
 
-    const handleUserDropDown = () =>{
-        setUserBox((prevState)=>!prevState)
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (userBoxRef.current && !userBoxRef.current.contains(event.target)) {
+        setUserBox(false);
+        // alert(userBox + " down")
+      }
     }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
+  const handleUserDropDown = () => {
+    setUserBox((prevState) => !prevState);
+  };
 
     return (
         <div className={"bg-dark "} style={{height: 80, width: "auto"}}>
@@ -144,7 +144,10 @@ function Admin(props) {
                 <Outlet/>
             </div>
         </div>
-    );
+        <Outlet />
+      </div>
+    </div>
+  );
 }
 
-export default connect((state) => (state), dashboardDataModel)(Admin);
+export default connect((state) => state, dashboardDataModel)(Admin);
