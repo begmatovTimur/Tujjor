@@ -19,7 +19,7 @@ import java.util.UUID;
 public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
 
     @Query(value = "select id,region,name from territory t where t.active = :status and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')) like lower(concat('%',:search,'%'))",nativeQuery = true)
-    List<TerritoryProjection> findTerritoryByActiveAndRegionName(String search,Boolean status);
+    List<TerritoryProjection> findTerritoryByActiveAndRegionName(String search, Boolean status);
 
     @Query(value = "select id,region,name from territory t where lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')) like lower(concat('%',:search,'%'))",nativeQuery = true)
     List<TerritoryProjection> findTerritoryByRegionAndName(String search);

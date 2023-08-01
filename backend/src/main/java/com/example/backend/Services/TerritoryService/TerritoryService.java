@@ -14,4 +14,5 @@ public interface TerritoryService {
 
     Territory updateTerritory(UUID id, TerritoryDTO territory);
 
+    HttpEntity<?> getFilteredTerritory(String search, String status);
 }

@@ -4,6 +4,7 @@ import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Repository.TerritoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,8 +30,12 @@ public class TerritoryServiceImpl implements TerritoryService{
     public Territory updateTerritory(UUID id, TerritoryDTO territory) {
         Territory territoryData = generateNewTerritory(territory);
         territoryData.setId(id);
-        territoryRepository.save(territoryData);
         return territoryRepository.save(territoryData);
+    }
+
+    @Override
+    public HttpEntity<?> getFilteredTerritory(String search, String status) {
+        return null;
     }
 
     private Territory generateNewTerritory(TerritoryDTO territory) {
