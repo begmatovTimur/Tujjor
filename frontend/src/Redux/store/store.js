@@ -5,6 +5,7 @@ import loginReducer from "../reducers/loginReducer";
 import dashboardDataReducer from "../reducers/dashboardDataReducer";
 import tableReducer from '../reducers/tableReducer';
 import settingsReducer from '../reducers/settingsReducer';
+import teritoryReducer from "../reducers/teritoryReducer";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,7 +14,8 @@ const store =  configureStore({
         loginReducer,
         dashboardDataReducer,
         table:tableReducer,
-        settings:settingsReducer
+        settings:settingsReducer,
+        teritory:teritoryReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(sagaMiddleware),
