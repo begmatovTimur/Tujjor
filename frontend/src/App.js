@@ -6,7 +6,8 @@ import Home from "./pages/Home/Home";
 import { useEffect, useState } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
-import Table from "./pages/universal/Table";
+import Table from "./pages/universal/Table/Table";
+import Filter from "./pages/universal/Filter/Filter";
 import Settings from "./pages/Settings/Settings";
 import Test from "./pages/Settings/ChildComponents/Company";
 import Company from "./pages/Settings/ChildComponents/Company";
@@ -134,12 +135,28 @@ function App() {
               pagination={true}
               changeSizeMode={true}
               dataProps={data}
+              columnOrderMode={true}
+              changeSizeModeOptions={[10,20,30,40,50]}
               columnsProps={columns}
               paginationApi={
                 "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
               }
             />
           }
+        />
+        <Route
+            path="/filter"
+            element={
+              <Filter
+                  pagination={true}
+                  changeSizeMode={true}
+                  dataProps={data}
+                  columnsProps={columns}
+                  paginationApi={
+                    "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
+                  }
+              />
+            }
         />
       </Routes>
     </div>
