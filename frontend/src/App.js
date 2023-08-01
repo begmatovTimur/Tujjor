@@ -125,6 +125,8 @@ function App() {
               pagination={true}
               changeSizeMode={true}
               dataProps={data}
+              columnOrderMode={true}
+              changeSizeModeOptions={[10,20,30,40,50]}
               columnsProps={columns}
               paginationApi={
                 "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
