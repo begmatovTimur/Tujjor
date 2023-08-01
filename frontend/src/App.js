@@ -5,7 +5,8 @@ import Home from "./pages/Home";
 import { useEffect, useState } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
-import Table from "./pages/universal/Table";
+import Table from "./pages/universal/Table/Table";
+import Filter from "./pages/universal/Filter/Filter";
 
 function App() {
   const [data, setData] = useState([]);
@@ -117,13 +118,27 @@ function App() {
             <Table
               pagination={true}
               changeSizeMode={true}
-              dataProps={data}
+              dataProps={data}  
               columnsProps={columns}
               paginationApi={
                 "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
               }
             />
           }
+        />
+        <Route
+            path="/filter"
+            element={
+              <Filter
+                  pagination={true}
+                  changeSizeMode={true}
+                  dataProps={data}
+                  columnsProps={columns}
+                  paginationApi={
+                    "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
+                  }
+              />
+            }
         />
       </Routes>
     </div>
