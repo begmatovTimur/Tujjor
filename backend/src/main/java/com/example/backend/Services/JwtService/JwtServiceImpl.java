@@ -36,7 +36,7 @@ public class JwtServiceImpl implements JwtService {
     public String generateJWTRefreshToken(User users) {
         UUID id = users.getId();
         String jwt = Jwts.builder().
-                setExpiration(new Date(System.currentTimeMillis() + 10000 * 60 * 60 * 24 * 7))
+                setExpiration(new Date(System.currentTimeMillis() + 10000 * 60 * 60 * 24))
                 .setIssuedAt(new Date())
                 .setSubject(id.toString())
                 .signWith(getSigningKey())

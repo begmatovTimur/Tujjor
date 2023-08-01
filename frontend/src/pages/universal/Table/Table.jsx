@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { connect } from "react-redux";
-import { tableActions } from "../../Redux/reducers/tableReducer";
+import { tableActions } from "../../../Redux/reducers/tableReducer";
 import { useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
 import "./Table.css";

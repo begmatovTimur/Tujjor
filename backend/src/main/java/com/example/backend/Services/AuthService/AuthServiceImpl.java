@@ -95,6 +95,7 @@ public class AuthServiceImpl implements AuthService {
             ResponseEntity<String> body = ifInputValueExist(dto);
             if (body != null) return body;
             String phone = ValidatePhone(dto);
+            System.out.println(dto +"a");
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
             User users = userRepository.findByPhone(phone).orElseThrow(() -> new NoSuchElementException("User not found for phone number: " + phone));
             List<Role> roles = roleRepo.findAll();
@@ -128,6 +129,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public HttpEntity<?> refreshToken(String refreshToken) {
+
         String id = jwtService.extractUserFromJwt(refreshToken);
         User user = userRepository.findById(UUID.fromString(id)).orElseThrow();
         String access_token = jwtService.generateJWTToken(user);

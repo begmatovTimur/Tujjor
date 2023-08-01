@@ -1,13 +1,17 @@
+
 import "./App.css";
 import Login from "./pages/Login/Login";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import { useEffect, useState } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
-import Table from "./pages/universal/Table";
+import Table from "./pages/universal/Table/Table";
+import Filter from "./pages/universal/Filter/Filter";
 import Settings from "./pages/Settings/Settings";
-import Test from "./Test";
+import Teritory from './pages/Teritory/Teritory';
+import Company from "./pages/Settings/ChildComponents/Company";
+import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
 
 function App() {
   const [data, setData] = useState([]);
@@ -38,15 +42,20 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/comments")
-      .then(({ data }) => {
-        setData(data);
-      });
+        .get("https://jsonplaceholder.typicode.com/comments")
+        .then(({ data }) => {
+          setData(data);
+        });
   }, []);
 
   const location = useLocation();
   const navigate = useNavigate();
-  const permissions = [{ url: "/admin", roles: ["ROLE_SUPER_VISOR"] }];
+  const permissions = [
+    { url: "/admin", roles: ["ROLE_SUPER_VISOR"] },
+    { url: "/admin/settings", roles: ["ROLE_SUPER_VISOR"] },
+    { url: "/admin/settings/company-profile", roles: ["ROLE_SUPER_VISOR"] },
+    { url: "/admin/teritory", roles: ["ROLE_SUPER_VISOR"] }
+  ];
 
   function hasPermissions() {
     let count = 0;
@@ -64,41 +73,44 @@ function App() {
             token: localStorage.getItem("access_token"),
           },
         })
-          .then((res) => {
-            let s = false;
-            permissions.map((item) => {
-              if (item.url === location.pathname) {
-                res.data.authorities.map((i1) => {
-                  if (item.roles.includes(i1.roleName)) {
-                    s = true;
-                  }
+            .then((res) => {
+              let s = false;
+              permissions.map((item) => {
+                if (item.url === location.pathname) {
+                  res.data.authorities.map((i1) => {
+                    if (item.roles.includes(i1.roleName)) {
+                      s = true;
+                    }
+                  });
+                }
+              });
+              if (!s) {
+                navigate("/404");
+              }
+            })
+            .catch((err) => {
+              if (localStorage.getItem("no_token") === "sorry") {
+                navigate("/login");
+                for (let i = 0; i < 1; i++) {
+                  window.location.reload();
+                }
+              }
+              if (err.response.status === 403) {
+                axios({
+                  url:
+                      "http://localhost:8080/api/auth/refresh?refreshToken=" +
+                      localStorage.getItem("refresh_token"),
+                  method: "POST",
+                }).then((res) => {
+                  localStorage.setItem("access_token", res.data);
+                  window.location.reload();
+                }).catch((err)=>{
+                  navigate('/login')
                 });
               }
             });
-            if (!s) {
-              navigate("/404");
-            }
-          })
-          .catch((err) => {
-            if (localStorage.getItem("no_token") === "sorry") {
-              navigate("/login");
-              for (let i = 0; i < 1; i++) {
-                window.location.reload();
-              }
-            }
-            if (err.response.status === 403) {
-              axios({
-                url:
-                  "http://localhost:8080/api/auth/refresh?refreshToken=" +
-                  localStorage.getItem("refresh_token"),
-                method: "POST",
-              }).then((res) => {
-                localStorage.setItem("access_token", res.data);
-                window.location.reload();
-              });
-            }
-          });
       } else {
+        alert("sd")
         navigate("/404");
       }
     }
@@ -115,7 +127,9 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/settings" element={<Settings />} >
-            <Route path="/admin/settings/company-profile" element={<Test />}/>
+            <Route path="/admin/settings/company-profile" element={<Company />}/>
+            <Route path="/admin/settings/customer-category" element={<CustomerCategory />}/>
+            <Route path="/admin/settings/territory" element={<Teritory/>} />
           </Route>
         </Route>
         <Route
@@ -133,6 +147,20 @@ function App() {
               }
             />
           }
+        />
+        <Route
+            path="/filter"
+            element={
+              <Filter
+                  pagination={true}
+                  changeSizeMode={true}
+                  dataProps={data}
+                  columnsProps={columns}
+                  paginationApi={
+                    "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
+                  }
+              />
+            }
         />
       </Routes>
     </div>

@@ -10,10 +10,15 @@ const Settings = ({ data, getData, activeButtonIndex, setCurrentIndex }) => {
   useEffect(() => {
     getData();
   }, []);
+  useEffect(()=>{
+      if(localStorage.getItem("selectedSettingsButton") && data.length) {
+          navigate("/admin/settings"+data[localStorage.getItem("selectedSettingsButton")].path);
+      };
+  },[data])
   console.log();
   return (
     <div className="settings">
-      <div className="left">
+      <div className="left mt-4">
         {data.map((item, index) => (
           <button
             key={item.id}
