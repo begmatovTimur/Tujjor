@@ -8,7 +8,7 @@ import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 
 const style = {
     position: 'absolute',
-    top: '45%',
+    top: '47%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: "65%",
@@ -58,7 +58,7 @@ function Teritory(props) {
                                 lang: 'en_US',
                                 coordorder: 'latlong',
                                 load: 'package.full'
-                            }}>
+                             }}>
                                 <Map width={400} height={300} defaultState={{
                                     center: [39.7756, 64.4253],
                                     zoom: 10,
