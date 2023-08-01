@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 
-function Index(props) {
+function Home(props) {
     const navigate = useNavigate();
 
     return (
@@ -13,4 +13,4 @@ function Index(props) {
     );
 }
 
-export default Index;
+export default Home;

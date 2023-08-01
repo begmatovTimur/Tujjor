@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SettingsController {
     private final SettingsService service;
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping
     public HttpEntity<?> getAllSettings() {
     return service.getAllSettings();

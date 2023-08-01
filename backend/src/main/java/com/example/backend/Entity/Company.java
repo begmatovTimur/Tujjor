@@ -17,11 +17,12 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String region;
     private String companyName;
     @OneToOne
-    private User superViser;
+    private User superVisor;
     private String supportPhone;
     private String email;
-    private String address;
+    private String region;
+    @OneToOne
+    private Address address;
 }
