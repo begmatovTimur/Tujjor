@@ -54,7 +54,8 @@ const teritoryReducer = createSlice({
                     longitute: state.longitute,
                     latitute: state.latitute,
                 }
-                console.log(obj)
+
+
 
                 state.longitute = 0
                 state.latitute = 0
