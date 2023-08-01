@@ -43,10 +43,10 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/comments")
-      .then(({ data }) => {
-        setData(data);
-      });
+        .get("https://jsonplaceholder.typicode.com/comments")
+        .then(({ data }) => {
+          setData(data);
+        });
   }, []);
 
   const location = useLocation();

@@ -4,6 +4,8 @@ import {dashboardDataModel} from "../../Redux/reducers/dashboardDataReducer"
 import Logo from "../../images/logo.png"
 import {icons} from "../../Config/icons";
 import {Outlet, useNavigate} from "react-router-dom";
+import Filter from "../universal/Filter/Filter";
+import Table from "../universal/Table/Table";
 
 function Admin(props) {
     const {dashboardData} = props.dashboardDataReducer;
@@ -76,6 +78,7 @@ function Admin(props) {
                             {icons.userIcon}
                             {icons.downTriangleIcon}
                         </button>
+
                         {
                              userBox ? <div style={{
                                 position: "absolute",
@@ -96,13 +99,13 @@ function Admin(props) {
 
                             </div> : ""
                         }
-
                     </div>
 
 
                 </div>
             </div>
             <div className={"d-flex"}>
+
                 <div style={{width: 150, backgroundColor: "rgb(125, 125, 125)"}} className={"pt-3"}>
                     <button className="btn text-white" style={{width: 150, height: 94}}>
                         {icons.rocketIcon}
@@ -134,6 +137,10 @@ function Admin(props) {
                         <p className="text text-center text-white m-0">Settings</p>
                     </button>
                 </div>
+                <Filter
+                filter ={['active','city','tin','weekDays','customerCategories']}
+                search = {'quickSearch'}
+                ></Filter>
                 <Outlet/>
             </div>
         </div>
