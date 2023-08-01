@@ -1,14 +1,10 @@
 import React, {useState} from 'react';
 import Select from "react-select";
 import Table from "../Table/Table";
+import {connect, useDispatch} from "react-redux";
+import tableReducer, {tableActions} from "../../../Redux/reducers/tableReducer";
 
 function Filter(props) {
-
-    // const options = [
-    //     { value: 'chocolate', label: 'Chocolate' },
-    //     { value: 'strawberry', label: 'Strawberry' },
-    //     { value: 'vanilla', label: 'Vanilla' }
-    // ]
 
     const [options] = useState([
         { value: '10', label: 'Option 1️⃣' },
@@ -23,6 +19,7 @@ function Filter(props) {
         { value: '3', label: 'Wen' },
 
     ]);
+    const formInputsProps = props.table.formInputs
 
     const customStyles = {
         control: (provided) => ({
@@ -33,7 +30,7 @@ function Filter(props) {
         }),
     };
     const [selectedValues, setSelectedValues] = useState([]);
-
+    const dispatch = useDispatch()
     const handleSelectChange = (selectedOptions) => {
         setSelectedValues(selectedOptions);
     };
@@ -57,13 +54,21 @@ function Filter(props) {
         setSelectedValues([]);
     };
 
+    function handleChangeActive(obj) {
+         const {name,value} = obj
+        props.changeInputForms({...formInputsProps, [name]: value})
+    }
+
+
     const active=(
         <div className="my-2" style={{ width: 300 }}>
             <Select
                 options={options}
                 style={{width: 70}}
                 styles={customStyles}
+                onChange={(e)=>handleChangeActive({name: "active",value: e})}
                 placeholder="Active.."
+                isClearable={true}
             />
         </div>)
     const city=(
@@ -72,6 +77,7 @@ function Filter(props) {
                 options={options}
                 isMulti
                 styles={customStyles}
+                onChange={(e)=>handleChangeActive({name: "city",value: e})}
                 placeholder="City.."
             />
         </div>)
@@ -82,6 +88,7 @@ function Filter(props) {
                 styles={customStyles}
                 isMulti
                 placeholder="day week.."
+                onChange={(e)=>handleChangeActive({name: "weekDays",value: e})}
             />
         </div>
     )
@@ -89,11 +96,10 @@ function Filter(props) {
         <div className="my-2" style={{ width: 300 }}>
             <Select
                 options={options}
-                value={selectedValues}
-                onChange={handleSelectChange}
                 styles={customStyles}
                 placeholder="Tin.."
-                components={{ ClearIndicator }}
+                onChange={(e)=>handleChangeActive({name: "tin",value: e})}
+                isClearable={true}
             />
         </div>)
     const customerCategories=(
@@ -102,47 +108,49 @@ function Filter(props) {
                 options={optionsDay}
                 styles={customStyles}
                 isMulti
+                onChange={(e)=>handleChangeActive({name: "customerCategories",value: e})}
                 placeholder="Costumer Categories.."
             />
         </div>)
 
     const quickSearch=(
-        <label className='' style={{height:30}}><span style={{backgroundColor:'aqua', width:60, height:30}}>Quick search:</span>
+        <label className='' style={{height:30}}><span style={{width:60, height:30}}>Quick search:</span>
             <input type='search' style={{width:180, height:30 }} className='my-1' placeholder=''/>
         </label>
     )
 
-
-
-
+    const formInputs = {
+        active,
+        city,
+        weekDays,
+        tin,
+        customerCategories,
+        quickSearch
+    }
+    // console.log(formInputs.active.props.children.props)
     return (
         <div>
-
             <div className='row'>
-                {/*active*/}
-                {active}
-                {/* city multi select */}
-                {city}
-                {/*  Day   */}
-                {weekDays}
-                {/*  tin  */}
-                {tin}
-                {/*  customer Categories  */}
-                {customerCategories}
-
-                {/*  button  */}
-                <button style={{width: '90px'}} className='my-2 h-50 btn btn-primary'>Filter</button>
-                {/* quick search   */}
-                {quickSearch}
+                <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-between",width:"1380px"}}>
+                {
+                    props.filter.map((item,index)=>{
+                        return (
+                            <div key={index}>
+                                {
+                                    formInputs[item]
+                                }
+                            </div>
+                        )
+                    })
+                }
+                    <button className={"btn btn-primary"} style={{display: "inline-block",height:40}} >Filter</button>
+                    {
+                        formInputs[props.search]
+                    }
             </div>
-            {/*<h1>Salom</h1>*/}
-            {/*<Select*/}
-            {/*    isMulti*/}
-            {/*    options={options}*/}
-            {/*    closeMenuOnSelect={false}*/}
-            {/*></Select>*/}
+            </div>
         </div>
     );
 }
 
-export default Filter;
+export default connect(state=>state,tableActions)(Filter);
