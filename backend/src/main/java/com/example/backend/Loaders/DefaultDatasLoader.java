@@ -2,11 +2,14 @@ package com.example.backend.Loaders;
 
 import com.example.backend.Entity.Company;
 import com.example.backend.Entity.Role;
+import com.example.backend.Entity.Settings;
 import com.example.backend.Entity.User;
 import com.example.backend.Enums.RoleEnum;
 import com.example.backend.Repository.CompanyRepository;
 import com.example.backend.Repository.RoleRepository;
+import com.example.backend.Repository.SettingsRepository;
 import com.example.backend.Repository.UsersRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,19 +19,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class DefaultDatasLoader implements CommandLineRunner {
     private final CompanyRepository companyRepository;
     private final UsersRepository usersRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SettingsRepository settingsRepository;
 
-    @Autowired
-    public DefaultDatasLoader(CompanyRepository companyRepository, UsersRepository usersRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
-        this.companyRepository = companyRepository;
-        this.usersRepository = usersRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+
 
 
     @Override
@@ -48,8 +47,7 @@ public class DefaultDatasLoader implements CommandLineRunner {
             );
             List<Role> roles = new ArrayList<>();
             roles.add(savedRole);
-            System.out.println(roles);
-            User superViser = usersRepository.save(
+            User superVisor = usersRepository.save(
                   new User(
                          null,
                           "Timur",
@@ -62,12 +60,27 @@ public class DefaultDatasLoader implements CommandLineRunner {
                     Company.builder()
                             .region("Bukhara")
                             .companyName("Tujjor")
-                            .superViser(superViser)
+                            .superViser(superVisor)
                             .supportPhone("+998912075995")
                             .email("email@gmail.com")
                             .address("Bukhara City, Shift Academy")
                             .build()
             );
+
+
+        }
+
+
+        if(settingsRepository.findAll().size()==0) { // settings adding..
+
+            List<Settings> settings = new ArrayList<>();
+
+            settings.add(new Settings(null,"Company Profile","/company-profile"));
+            settings.add(new Settings(null,"Customer Category","/customer-category"));
+            settings.add(new Settings(null,"Territory","/territory"));
+
+
+            settingsRepository.saveAll(settings);
         }
     }
 

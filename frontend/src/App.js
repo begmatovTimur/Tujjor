@@ -1,12 +1,18 @@
+
 import "./App.css";
 import Login from "./pages/Login/Login";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import { useEffect, useState } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
 import Table from "./pages/universal/Table/Table";
 import Filter from "./pages/universal/Filter/Filter";
+import Settings from "./pages/Settings/Settings";
+import Test from "./pages/Settings/ChildComponents/Company";
+import Company from "./pages/Settings/ChildComponents/Company";
+import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
+import Territory from "./pages/Settings/ChildComponents/Territory";
 
 function App() {
   const [data, setData] = useState([]);
@@ -45,7 +51,9 @@ function App() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const permissions = [{ url: "/admin", roles: ["ROLE_SUPER_VISOR"] }];
+  const permissions = [
+      { url: "/admin", roles: ["ROLE_SUPER_VISOR"] }
+  ];
 
   function hasPermissions() {
     let count = 0;
@@ -98,6 +106,7 @@ function App() {
             }
           });
       } else {
+        alert("sd")
         navigate("/404");
       }
     }
@@ -106,19 +115,28 @@ function App() {
   useEffect(() => {
     hasPermissions();
   }, []);
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/admin" element={<Admin />}>
+          <Route path="/admin/settings" element={<Settings />} >
+            <Route path="/admin/settings/company-profile" element={<Company />}/>
+            <Route path="/admin/settings/customer-category" element={<CustomerCategory />}/>
+            <Route path="/admin/settings/territory" element={<Territory />}/>
+          </Route>
+        </Route>
         <Route
           path="/table"
           element={
             <Table
               pagination={true}
               changeSizeMode={true}
-              dataProps={data}  
+              dataProps={data}
+              columnOrderMode={true}
+              changeSizeModeOptions={[10,20,30,40,50]}
               columnsProps={columns}
               paginationApi={
                 "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
