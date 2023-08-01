@@ -34,7 +34,7 @@ public class UsersController {
     }
 
     @GetMapping("/me")
-//    @PreAuthorize("IsAuthorized()")
+    @PreAuthorize("isAuthenticated()")
     public HttpEntity<?> getMe(@CurrentUser User user){
         return service.getMe(user);
     }

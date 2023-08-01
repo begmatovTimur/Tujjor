@@ -21,7 +21,7 @@ public class JwtServiceImpl implements JwtService {
         UUID id = user.getId();
         Map<String, Object> claims = new HashMap<>();
         claims.put("phone",user.getPhone());
-        Date hourFromCurrentTime = new Date(System.currentTimeMillis() + 60 * 60 * 1000*7);
+        Date hourFromCurrentTime = new Date(System.currentTimeMillis() + 60 * 60 * 1000 * 24);
         String jwt = Jwts.builder()
                 .addClaims(claims)
                 .setExpiration(hourFromCurrentTime)

@@ -105,6 +105,8 @@ public class AuthServiceImpl implements AuthService {
             map.put("access_token", access_token);
             if (dto.getRememberMe()) {
                 map.put("refresh_token", refresh_token);
+            }else {
+                map.put("refresh_token", "");
             }
             map.put("roles", roles);
             return ResponseEntity.ok(map);
