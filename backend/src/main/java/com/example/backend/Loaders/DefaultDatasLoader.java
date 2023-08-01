@@ -56,8 +56,8 @@ public class DefaultDatasLoader implements CommandLineRunner {
                   new User(
                          null,
                           "Timur",
-                          "1",
-                          passwordEncoder.encode("1"),
+                          superVisorName,
+                          passwordEncoder.encode("root123"),
                           roles
                   )
             );

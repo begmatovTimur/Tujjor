@@ -13,6 +13,7 @@ function Admin(props) {
 
     useEffect(() => {
         props.getDashboardData()
+        console.log(props.getDashboardData())
     }, [])
 
     useEffect(() => {

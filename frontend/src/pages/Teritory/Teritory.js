@@ -8,7 +8,7 @@ import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 
 const style = {
     position: 'absolute',
-    top: '45%',
+    top: '47%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: "65%",
