@@ -160,9 +160,6 @@ function Filter(props) {
                             <button onClick={()=>props.getFilteredData(props.paginationApi)} className={"btn btn-primary"} style={{display: "inline-block",height:40}} >Filter</button>
                             :""
                     }
-                    <button onClick={()=>props.getFilteredData(props.paginationApi)} className={"btn btn-primary"} style={{display: "inline-block",height:40}} >Filter</button>
-
-
             </div>
             </div>
         </div>

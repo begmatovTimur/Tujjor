@@ -152,13 +152,7 @@ function App() {
             path="/filter"
             element={
               <Filter
-                  pagination={true}
-                  changeSizeMode={true}
-                  dataProps={data}
-                  columnsProps={columns}
-                  paginationApi={
-                    "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
-                  }
+                  filter = {['quickSearch']}
               />
             }
         />
