@@ -2,6 +2,7 @@ import axios from "axios";
 
 export default function (url, method, data,searchParam) {
     let item = localStorage.getItem("access_token");
+    console.log(item);
     return axios({
         url: "http://localhost:8080" + url,
         method: method,
