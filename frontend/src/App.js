@@ -111,7 +111,6 @@ function App() {
             }
           });
       } else {
-        alert("sd");
         navigate("/404");
       }
     }

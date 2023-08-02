@@ -10,6 +10,5 @@ export function* rootSaga(){
         fork(tableSaga),
         fork(settingsSaga),
         fork(dashboardDataSaga),
-        fork(teritorySaga)
     ])
 };
