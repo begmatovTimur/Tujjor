@@ -12,7 +12,6 @@
   flex-wrap: wrap;
 }
 .mytable {
-  height: 400px !important;
   border: 2px solid black;
   padding: 10px;
   overflow: scroll !important;

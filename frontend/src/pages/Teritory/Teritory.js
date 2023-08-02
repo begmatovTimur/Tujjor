@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import {YMaps, Map, Placemark, ZoomControl} from 'react-yandex-maps';
+import {connect, useSelector} from "react-redux";
+import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import { YMaps, Map, Placemark, ZoomControl } from "react-yandex-maps";
-import { connect } from "react-redux";
-import { teritoryAction } from "../../Redux/reducers/teritoryReducer";
+import axios from "axios";
 import apiCall from '../../Config/apiCall';
 import "./Teritory.css";
-import axios from "axios";
+
 const style = {
     position: 'absolute',
     top: '47%',
@@ -18,8 +20,9 @@ const style = {
     border: 'none',
     boxShadow: 24,
     borderRadius: "10px",
-    overflow:"auto"
+    overflow: "auto"
 };
+
 
 function Teritory(props) {
   const [data, setData] = useState([]);

@@ -71,27 +71,26 @@ function App() {
           headers: {
             token: localStorage.getItem("access_token"),
           },
-        })
-          .then((res) => {
-            let s = false;
-            permissions.map((item) => {
-              if (item.url === location.pathname) {
-                res.data.authorities.map((i1) => {
-                  if (item.roles.includes(i1.roleName)) {
-                    s = true;
-                  }
-                });
+        }).then((res) => {
+              let s = false;
+              permissions.map((item) => {
+                if (item.url === location.pathname) {
+                  res.data.authorities.map((i1) => {
+                    if (item.roles.includes(i1.roleName)) {
+                      s = true;
+                    }
+                  });
+                }
+              });
+              if (!s) {
+                navigate("/404");
               }
-            });
-            if (!s) {
-              navigate("/404");
-            }
-          })
-          .catch((err) => {
-            if (localStorage.getItem("no_token") === "sorry") {
-              navigate("/login");
-              for (let i = 0; i < 1; i++) {
-                window.location.reload();
+            }).catch((err) => {
+              if (localStorage.getItem("no_token") === "sorry") {
+                navigate("/login");
+                for (let i = 0; i < 1; i++) {
+                  window.location.reload();
+                }
               }
             }
             if (err.response.status === 403) {

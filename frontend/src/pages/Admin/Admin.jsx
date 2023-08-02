@@ -17,19 +17,28 @@ function Admin(props) {
         props.getDashboardData();
     }, []);
 
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (userBoxRef.current && !userBoxRef.current.contains(event.target)) {
-                setUserBox(false);
-                // alert(userBox + " down")
-            }
-        }
 
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
+  function nextPermission() {
+    if (localStorage.getItem("no_token") === null || localStorage.getItem("accesss_token") === null){
+      navigate("/404")
+      window.location.reload()
+    }
+  }
+
+  useEffect(() => {
+    props.getDashboardData();
+    nextPermission()
+    function handleClickOutside(event) {
+      if (userBoxRef.current && !userBoxRef.current.contains(event.target)) {
+        setUserBox(false);
+        // alert(userBox + " down")
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
     const handleUserDropDown = () => {
         setUserBox((prevState) => !prevState);
