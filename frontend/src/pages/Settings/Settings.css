@@ -1,5 +1,5 @@
 .settings_button {
-  width: 200px;
+  width: 250px;
   border: none;
   height: 40px;
   background: rgb(10, 169, 237);
@@ -18,13 +18,28 @@
 }
 .settings {
   width: 100%;
+  padding:10px;
+  background: #f2f2f2;
+}
+.settings .content {
   display: flex;
-  justify-content: space-between;
-  padding: 0 50px;
+  height: 99%;
+  width: 99%;
+  border-radius: 18px;
+  padding: 10px;
+  background: #fff;
 }
 .right {
-  padding: 20px;
   display: flex;
   width: 80%;
-  border-radius: 18px;
+  padding: 20px;
+  border-radius: 8px;
+}
+.btn_panel {
+  width: 250px;
+  height: 80px;
+  border:none;
+  background: orange;
+  color: #fff;
+  font-size: 20px;
 }
