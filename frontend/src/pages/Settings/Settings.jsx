@@ -10,34 +10,40 @@ const Settings = ({ data, getData, activeButtonIndex, setCurrentIndex }) => {
   useEffect(() => {
     getData();
   }, []);
-  useEffect(()=>{
-      if(localStorage.getItem("selectedSettingsButton") && data.length) {
-          navigate("/admin/settings"+data[localStorage.getItem("selectedSettingsButton")].path);
-      };
-  },[data])
+  useEffect(() => {
+    if (localStorage.getItem("selectedSettingsButton") && data.length) {
+      navigate(
+        "/admin/settings" +
+          data[localStorage.getItem("selectedSettingsButton")].path
+      );
+    }
+  }, [data]);
   console.log();
   return (
     <div className="settings">
-      <div className="left mt-4">
-        {data.map((item, index) => (
-          <button
-            key={item.id}
-            className={
-              "settings_button" +
-              (activeButtonIndex === index ? " active_button" : " ")
-            }
-            onClick={() => {
-              navigate("/admin/settings"+item.path);
-              localStorage.setItem("selectedSettingsButton", index);
-              setCurrentIndex(index);
-            }}
-          >
-            {index + 1}. {item.name}
-          </button>
-        ))}
-      </div>
-      <div className="right">
-        <Outlet />
+      <div className="content">
+        <div className="left  pt-5">
+          <button className="btn_panel">Settings Panel</button>
+          {data.map((item, index) => (
+            <button
+              key={item.id}
+              className={
+                "settings_button" +
+                (activeButtonIndex === index ? " active_button" : " ")
+              }
+              onClick={() => {
+                navigate("/admin/settings" + item.path);
+                localStorage.setItem("selectedSettingsButton", index);
+                setCurrentIndex(index);
+              }}
+            >
+              {index + 1}. {item.name}
+            </button>
+          ))}
+        </div>
+        <div className="right">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

@@ -6,9 +6,9 @@ const tableReducer = createSlice({
     columns: [],
     sizeOfPage: 10,
     copyOfColumns: [],
-    currentDraggingColumn: 0,
     data: [],
     currentPage: 1,
+    currentDraggingColumn: 0,
     columnOrderModalVisibility: false,
     modalColumns:[],
     formInputs:{
@@ -72,6 +72,9 @@ const tableReducer = createSlice({
         });
       }
       state.modalColumns = state.columns;
+    },
+    getExcelFile:(state,action)=>{
+      
     },
     changePaginationTo: (state, action) => {},
     changeData: (state, action) => {
