@@ -13,7 +13,6 @@ function Admin(props) {
   const userBoxRef = useRef(null);
   const [userBox, setUserBox] = useState(false);
 
-
   useEffect(() => {
     props.getDashboardData();
   }, []);
@@ -47,14 +46,14 @@ function Admin(props) {
                 <div>
                     <div className="d-flex align-items-center justify-content-between ls-5">
                         <button className={"btn text-white mx-3"}>Supervisor</button>
-                        <btn className={"btn text-white mx-3"}>Sales</btn>
-                        <select className={"form-select bg-dark text-white border-0"} style={{width: "auto"}}>
-                            <option value="DEFAULT" selected={true} style={{fontSize: "20px"}}>Cash Register</option>
+                        <button className={"btn text-white mx-3"}>Sales</button>
+                        <select defaultValue={""} className={"form-select bg-dark text-white border-0"} style={{width: "auto"}}>
+                            <option value="" disabled style={{fontSize: "20px"}}>Cash Register</option>
                         </select>
 
-                        <select className={"form-select mx-3 d-flex bg-dark text-white align-items-center border-0"}
+                        <select defaultValue={""} className={"form-select mx-3 d-flex bg-dark text-white align-items-center border-0"}
                                 style={{width: "auto"}}>
-                            <option value="DEFAULT" selected={true}>
+                            <option value="" disabled={true}>
                                 Gps
                             </option>
                         </select>
@@ -137,15 +136,8 @@ function Admin(props) {
                         <p className="text text-center text-white m-0">Settings</p>
                     </button>
                 </div>
-                <Filter
-                filter ={['active','city','tin','weekDays','customerCategories']}
-                search = {'quickSearch'}
-                ></Filter>
                 <Outlet/>
             </div>
-        </div>
-        <Outlet />
-      </div>
     </div>
   );
 }

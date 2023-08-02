@@ -7,16 +7,34 @@ import tableReducer, {tableActions} from "../../../Redux/reducers/tableReducer";
 function Filter(props) {
 
     const [options] = useState([
-        { value: '10', label: 'Option 1️⃣' },
-        { value: '20', label: 'Option 2️⃣' },
-        { value: '30', label: 'Option 1️3' },
-        { value: '40', label: 'Option 2️⃣4' },
-
+        { value: '10', label: 'Option' },
+        { value: '20', label: 'Option' },
+        { value: '30', label: 'Option' },
+        { value: '40', label: 'Option' },
+    ]);
+    const [optionsActive] = useState([
+        { value: '', label: 'All' },
+        { value: 'true', label: 'Active' },
+        { value: 'false', label: 'Inactive' },
+    ]);
+    const [optionsWeeks] = useState([
+        { value: '1', label: 'All weeks' },
+        { value: '2', label: 'Every weeks' },
+        { value: '3', label: 'Odd weeks' },
+    ]);
+    const [optionsTin] = useState([
+        { value: '1', label: 'TIN' },
+        { value: '2', label: 'With TIN' },
+        { value: '3', label: 'Without TIN' },
     ]);
     const [optionsDay] = useState([
-        { value: '1', label: 'Mon' },
-        { value: '2', label: 'Tue' },
-        { value: '3', label: 'Wen' },
+        { value: '1', label: 'Monday' },
+        { value: '2', label: 'Tuesday' },
+        { value: '3', label: 'Wednesday' },
+        { value: '4', label: 'Thursday' },
+        { value: '5', label: 'Friday' },
+        { value: '6', label: 'Saturday' },
+        { value: '6', label: 'Sunday' },
 
     ]);
     const formInputsProps = props.table.formInputs
@@ -29,65 +47,41 @@ function Filter(props) {
             border: '1px solid #d1d1d1',
         }),
     };
-    const [selectedValues, setSelectedValues] = useState([]);
-    const dispatch = useDispatch()
-    const handleSelectChange = (selectedOptions) => {
-        setSelectedValues(selectedOptions);
-    };
-    const ClearIndicator = (props) => {
-        return (
-            <div>
-                <button
-                    className="btn-clear"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleClearSelection();
-                    }}
-                >
-                    X
-                </button>
-            </div>
-        );
-    };
-
-    const handleClearSelection = () => {
-        setSelectedValues([]);
-    };
 
     function handleChangeActive(obj) {
-         const {name,value} = obj
+        const {name,value} = obj
         props.changeInputForms({...formInputsProps, [name]: value})
+        props.getActiveData(props.paginationApi)
     }
 
 
     const active=(
         <div className="my-2" style={{ width: 300 }}>
             <Select
-                options={options}
+                options={optionsActive}
                 style={{width: 70}}
                 styles={customStyles}
                 onChange={(e)=>handleChangeActive({name: "active",value: e})}
-                placeholder="Active.."
+                placeholder="Active"
                 isClearable={true}
             />
         </div>)
     const city=(
         <div className="my-2" style={{ width: 450 }}>
             <Select
-                options={options}
                 isMulti
                 styles={customStyles}
                 onChange={(e)=>handleChangeActive({name: "city",value: e})}
-                placeholder="City.."
+                placeholder="City"
             />
         </div>)
     const weekDays=(
         <div className="my-2" style={{ width: 350 }}>
             <Select
-                options={optionsDay}
+                options={optionsWeeks}
                 styles={customStyles}
                 isMulti
-                placeholder="day week.."
+                placeholder="All weeks"
                 onChange={(e)=>handleChangeActive({name: "weekDays",value: e})}
             />
         </div>
@@ -95,9 +89,9 @@ function Filter(props) {
     const tin=(
         <div className="my-2" style={{ width: 300 }}>
             <Select
-                options={options}
+                options={optionsTin}
                 styles={customStyles}
-                placeholder="Tin.."
+                placeholder="TIN"
                 onChange={(e)=>handleChangeActive({name: "tin",value: e})}
                 isClearable={true}
             />
@@ -105,17 +99,31 @@ function Filter(props) {
     const customerCategories=(
         <div className="my-2" style={{ width: 400 }}>
             <Select
-                options={optionsDay}
                 styles={customStyles}
                 isMulti
                 onChange={(e)=>handleChangeActive({name: "customerCategories",value: e})}
-                placeholder="Costumer Categories.."
+                placeholder="Costumer Categories"
+            />
+        </div>)
+    const day=(
+        <div className="my-2" style={{ width: 400 }}>
+            <Select
+                options={optionsDay}
+                styles={customStyles}
+                isMulti
+                onChange={(e)=>handleChangeActive({name: "day",value: e})}
+                placeholder="Day"
             />
         </div>)
 
+    function handleChangeSearch(val) {
+        props.changeQuickSearch(val)
+        props.getQuickSearchData(props.paginationApi)
+    }
+
     const quickSearch=(
         <label className='' style={{height:30}}><span style={{width:60, height:30}}>Quick search:</span>
-            <input type='search' style={{width:180, height:30 }} className='my-1' placeholder=''/>
+            <input onChange={(e)=>handleChangeSearch(e.target.value)} type='search' style={{width:180, height:30 }} className='my-1' placeholder=''/>
         </label>
     )
 
@@ -125,15 +133,16 @@ function Filter(props) {
         weekDays,
         tin,
         customerCategories,
-        quickSearch
+        quickSearch,
+        day
     }
     // console.log(formInputs.active.props.children.props)
-    return (
+        return (
         <div>
             <div className='row'>
                 <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-between",width:"1380px"}}>
                 {
-                    props.filter.map((item,index)=>{
+                   props.filter? props.filter.map((item,index)=>{
                         return (
                             <div key={index}>
                                 {
@@ -141,12 +150,19 @@ function Filter(props) {
                                 }
                             </div>
                         )
-                    })
+                    }):""
                 }
-                    <button className={"btn btn-primary"} style={{display: "inline-block",height:40}} >Filter</button>
                     {
                         formInputs[props.search]
                     }
+                    {
+                        formInputsProps.city === ""&&formInputsProps.city.length===0&&formInputsProps.tin===""&&formInputsProps.quickSearch===""&& formInputsProps.customerCategories.length===0  && formInputsProps.active?
+                            <button onClick={()=>props.getFilteredData(props.paginationApi)} className={"btn btn-primary"} style={{display: "inline-block",height:40}} >Filter</button>
+                            :""
+                    }
+                    <button onClick={()=>props.getFilteredData(props.paginationApi)} className={"btn btn-primary"} style={{display: "inline-block",height:40}} >Filter</button>
+
+
             </div>
             </div>
         </div>
