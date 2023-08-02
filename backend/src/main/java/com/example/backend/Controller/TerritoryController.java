@@ -14,13 +14,14 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/territory")
+@RequestMapping("/api/territory")
 public class TerritoryController {
     private final TerritoryService territoryService;
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping
     public HttpEntity<?> getTerritories(){
+        System.out.println("keldi");
         return ResponseEntity.ok(territoryService.getTerritories());
     }
 
@@ -31,7 +32,7 @@ public class TerritoryController {
     }
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public HttpEntity<?> updateTerritory(@PathVariable UUID id, @RequestBody TerritoryDTO territoryDTO){
         return ResponseEntity.ok(territoryService.updateTerritory(id, territoryDTO));
     }
