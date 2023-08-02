@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TerritoryDTO {
     private String region;
-    private String title;
+    private String name;
     private String code;
     private Boolean active;
     private double longitude;

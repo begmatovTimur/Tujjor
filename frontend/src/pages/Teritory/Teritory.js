@@ -49,7 +49,11 @@ function Teritory(props) {
   ];
 
   useEffect(() => {
-    apiCall("/api/territory","GET").then(({data})=>{
+      let obj1 = {
+          quickSearch: "",
+          active: ""
+      }
+    apiCall("/api/territory","GET",null,JSON.stringify(obj1)).then(({data})=>{
       setData(data)
     })
   }, []);

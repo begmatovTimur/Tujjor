@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Configuration
 @EnableWebSecurity
@@ -38,7 +39,7 @@ public class    SecurityConfig  {
                 .authorizeHttpRequests(
                     auth->auth
                             .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                            .requestMatchers("/api/rooms", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode","/api/bot","/api/territory","/api/customerCategory").permitAll()
+                                .requestMatchers("/api/rooms", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode","/api/bot","/api/territory/**","/api/territory","/api/customerCategory").permitAll()
                             .anyRequest()
                             .authenticated()
                 ).addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);

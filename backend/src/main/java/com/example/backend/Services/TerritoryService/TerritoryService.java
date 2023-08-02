@@ -5,14 +5,14 @@ import com.example.backend.Entity.Territory;
 
 import java.util.List;
 import java.util.UUID;
+
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpEntity;
 
 public interface TerritoryService {
-    List<Territory> getTerritories();
-
     Territory addTerritory(TerritoryDTO territory);
 
     Territory updateTerritory(UUID id, TerritoryDTO territory);
 
-    HttpEntity<?> getFilteredTerritory(String search, String status);
+    HttpEntity<?> getFilteredTerritory(HttpServletRequest request);
 }

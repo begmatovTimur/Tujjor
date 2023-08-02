@@ -19,7 +19,7 @@ public class Territory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String region;
-    private String title;
+    private String name;
     private String code;
     private Boolean active;
     private double longitude;
