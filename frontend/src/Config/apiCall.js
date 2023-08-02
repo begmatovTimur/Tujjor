@@ -3,7 +3,7 @@ import axios from "axios";
 export default function (url, method, data) {
     let item = localStorage.getItem("access_token");
     return axios({
-        url: "http://localhost:8080" + url,
+        url: "http://localhost:8080/api" + url,
         method: method,
         data,
         headers: {

@@ -2,7 +2,7 @@ import {all,fork} from "redux-saga/effects"
 import {dashboardDataSaga} from "./dashboardDataSaga";
 import tableSaga from "./tableSaga";
 import settingsSaga from "./settingsSaga";
-import teritorySaga from "./teritorySaga";
+import {territorySaga} from "./teritorySaga";
 
 
 export function* rootSaga(){
@@ -10,6 +10,6 @@ export function* rootSaga(){
         fork(tableSaga),
         fork(settingsSaga),
         fork(dashboardDataSaga),
-        fork(teritorySaga)
-    ])
+        fork(territorySaga),
+        ])
 };

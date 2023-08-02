@@ -185,7 +185,7 @@ const Table = ({
 
       <div className="container">
         <div className="table-container">
-          <table className="table mytable">
+          <table style={{border:"1px solid"}} className="table mytable">
             <thead>
               <tr>
                 {columns.map((item) => (
@@ -201,7 +201,7 @@ const Table = ({
                 <tr key={item.id}>
                   {columns.map((col) => (
                     <td className={col.show ? "" : "hidden"} key={col.id}>
-                      {item[col.key]}
+                      {item[col.key].toString()}
                     </td>
                   ))}
                   {additionalColumns ? <td>{additionalColumns}</td> : ""}

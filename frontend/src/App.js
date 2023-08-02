@@ -72,8 +72,7 @@ function App() {
           headers: {
             token: localStorage.getItem("access_token"),
           },
-        })
-            .then((res) => {
+        }).then((res) => {
               let s = false;
               permissions.map((item) => {
                 if (item.url === location.pathname) {
@@ -87,8 +86,7 @@ function App() {
               if (!s) {
                 navigate("/404");
               }
-            })
-            .catch((err) => {
+            }).catch((err) => {
               if (localStorage.getItem("no_token") === "sorry") {
                 navigate("/login");
                 for (let i = 0; i < 1; i++) {
@@ -110,7 +108,6 @@ function App() {
               }
             });
       } else {
-        alert("sd")
         navigate("/404");
       }
     }

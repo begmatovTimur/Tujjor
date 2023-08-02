@@ -12,11 +12,18 @@ function Admin(props) {
   const [userBox, setUserBox] = useState(false);
 
 
-  useEffect(() => {
-    props.getDashboardData();
-  }, []);
+  function nextPermission() {
+    if (localStorage.getItem("no_token") === null ||
+        localStorage.getItem("accesss_token") === null ||
+        localStorage.getItem("refresh_token") === null) {
+      navigate("/404")
+      window.location.reload()
+    }
+  }
 
   useEffect(() => {
+    props.getDashboardData();
+    nextPermission()
     function handleClickOutside(event) {
       if (userBoxRef.current && !userBoxRef.current.contains(event.target)) {
         setUserBox(false);

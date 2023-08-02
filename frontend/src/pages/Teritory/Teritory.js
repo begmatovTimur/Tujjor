@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import {YMaps, Map, Placemark, ZoomControl} from 'react-yandex-maps';
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
+import Table from "../universal/Table/Table";
 
 const style = {
     position: 'absolute',
@@ -16,41 +17,133 @@ const style = {
     border: 'none',
     boxShadow: 24,
     borderRadius: "10px",
-    overflow:"auto"
+    overflow: "auto"
 };
+
 
 function Teritory(props) {
     const {teritory} = props
-    function handleMapClick(event){
+
+    useEffect(() => {
+        props.getTeritory();
+    }, [])
+    console.log("Arr in JS👇: ")
+    console.log(teritory.teritories)
+
+    function handleMapClick(event) {
         const coords = event.get('coords');
         const latitude = coords[0];
         const longitude = coords[1];
         props.handleTemplate([longitude, latitude])
-        props.handleMapState({ center: [latitude, longitude], zoom: 10 })
+        props.handleMapState({center: [latitude, longitude], zoom: 10})
     }
 
+    const columns = [
+        {
+            id: 1,
+            title: "Title",
+            key: "title",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 2,
+            title: "Region",
+            key: "region",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 3,
+            title: "Code",
+            key: "code",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 4,
+            title: "Active",
+            key: "active",
+            type: "boolean",
+            show: true,
+        },
+        {
+            id: 5,
+            title: "Longitute",
+            key: "longitude",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 6,
+            title: "Latitute",
+            key: "latitude",
+            type: "text",
+            show: true,
+        },
+    ]
     return (
-        <div>
-            <Button onClick={()=>props.handleOpen()}>Open modal</Button>
+        <div style={{width: "100%"}}>
+            <Button onClick={() => props.handleOpen()}>Open modal</Button>
+
+            <Table
+                pagination={false}
+                changeSizeMode={true}
+                dataProps={teritory.teritories}
+                columnOrderMode={true}
+                changeSizeModeOptions={[10, 20, 30, 40, 50]}
+                columnsProps={columns}
+            />
+
+
             <Modal
                 open={teritory.openModal}
-                onClose={()=>props.handleOpen()}
+                onClose={() => props.handleOpen()}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description">
 
                 <Box sx={style}>
-                    <div style={{width:"100%", height:"50px", padding:"10px 0px 0px 45px", fontSize:"18px", color:"white", background:"rgba(64, 125, 178, 0.9)", borderTopLeftRadius:"10px", borderTopRightRadius:"10px"}}>
+                    <div style={{
+                        width: "100%",
+                        height: "50px",
+                        padding: "10px 0px 0px 45px",
+                        fontSize: "18px",
+                        color: "white",
+                        background: "rgba(64, 125, 178, 0.9)",
+                        borderTopLeftRadius: "10px",
+                        borderTopRightRadius: "10px"
+                    }}>
                         Add Teritory
                     </div>
                     <div className={'d-flex gap-3 p-5'}>
                         <div className={'w-50 d-flex flex-column gap-4'}>
                             <form className={'d-flex flex-column gap-3'}>
-                                <label className={'d-flex gap-5'}>Title* <input required={true} value={teritory.title} onChange={(e)=>props.handleTitle(e.target.value)} className={'form-control'} type="text"/></label>
-                                <label className={'d-flex gap-5'}>Region <input required={true} value={teritory.region} onChange={(e)=>props.handleRegion(e.target.value)} className={'form-control'} type="text"/></label>
-                                <label className={'d-flex gap-5'}>Code <input required={true} value={teritory.code} onChange={(e)=>props.handleCode(e.target.value)} className={'form-control'} type="text"/></label>
-                                <label className={'d-flex gap-5'}>active <input required={true} value={teritory.active} onChange={(e)=>props.handleActive(e.target.checked)} className={'form-check-input'} type="checkbox"/></label>
+                                <label className={'d-flex gap-5'}>Title* <input required={true} value={teritory.title}
+                                                                                onChange={(e) => props.handleTitle(e.target.value)}
+                                                                                className={'form-control'} type="text"/></label>
+                                <label className={'d-flex gap-5'}>Region <input required={true} value={teritory.region}
+                                                                                onChange={(e) => props.handleRegion(e.target.value)}
+                                                                                className={'form-control'} type="text"/></label>
+                                <label className={'d-flex gap-5'}>Code <input required={true} value={teritory.code}
+                                                                              onChange={(e) => props.handleCode(e.target.value)}
+                                                                              className={'form-control'}
+                                                                              type="text"/></label>
+                                <label className={'d-flex gap-5'}>active <input required={true} value={teritory.active}
+                                                                                onChange={(e) => props.handleActive(e.target.checked)}
+                                                                                className={'form-check-input'}
+                                                                                type="checkbox"/></label>
                             </form>
-                            <button onClick={()=>props.saveTeritory()} style={{width:"22%", height:"40px", borderRadius:"7px", background:"rgba(64, 125, 178, 0.9)", border:"none", color:"white", display:"block",margin:"60% auto -30px"}}>Add</button>
+                            <button onClick={() => props.saveTeritory()} style={{
+                                width: "22%",
+                                height: "40px",
+                                borderRadius: "7px",
+                                background: "rgba(64, 125, 178, 0.9)",
+                                border: "none",
+                                color: "white",
+                                display: "block",
+                                margin: "60% auto -30px"
+                            }}>Add
+                            </button>
                         </div>
                         <div className={'w-50'}>
                             <YMaps query={{
@@ -58,16 +151,15 @@ function Teritory(props) {
                                 lang: 'en_US',
                                 coordorder: 'latlong',
                                 load: 'package.full'
-                             }}>
+                            }}>
                                 <Map width={400} height={300} defaultState={{
                                     center: [39.7756, 64.4253],
                                     zoom: 10,
                                 }} onClick={handleMapClick} modules={['templateLayoutFactory']}>
-                                    <ZoomControl options={{ float: 'right' }} />
-                                    {teritory.template && (
+                                    <ZoomControl options={{float: 'right'}}/>
+                                    {teritory.template && teritory.longitute !== "" && teritory.latitude !== "" && (
                                         <Placemark
                                             geometry={teritory.mapState.center}
-                                            options={{ balloonContentLayout: teritory.template }}
                                             modules={['geoObject.addon.balloon']}
                                         />
                                     )}
@@ -81,7 +173,7 @@ function Teritory(props) {
                                     <input disabled={true} type="text" value={teritory.latitute}/>
                                 </label>
                             </div>
-                            <button className={'btn btn-danger'} onClick={()=>props.clearAllTeritory()}>Clear</button>
+                            <button className={'btn btn-danger'} onClick={() => props.clearAllTeritory()}>Clear</button>
                         </div>
                     </div>
                 </Box>
@@ -90,4 +182,4 @@ function Teritory(props) {
     );
 }
 
-export default connect((state)=>(state),teritoryAction)(Teritory);
+export default connect((state) => (state), teritoryAction)(Teritory);
