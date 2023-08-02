@@ -67,4 +67,9 @@ public class TerritoryServiceImpl implements TerritoryService{
                 .latitude(territory.getLatitude())
                 .build();
     }
+
+    @Override
+    public HttpEntity<?> getTerritories() {
+        return ResponseEntity.ok(territoryRepository.findAll());
+    }
 }

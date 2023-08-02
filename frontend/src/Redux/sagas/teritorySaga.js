@@ -4,7 +4,7 @@ import {teritoryAction} from  "../reducers/teritoryReducer"
 
 function* addTeritory(action){
     const currentState = yield select((state) => state.teritory);
-    if (action.payload.title === "" || action.payload.region === "" || action.payload.code === "" || action.payload.longitude === 0 || action.payload.latitude === 0){
+    if (action.payload.name === "" || action.payload.region === "" || action.payload.code === "" || action.payload.longitude === 0 || action.payload.latitude === 0){
         alert("Iltimos malumotlarni yo'liq kiriting!!!")
     }else {
         const res = yield apiCall("/territory", "POST", action.payload)
