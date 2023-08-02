@@ -67,7 +67,7 @@ const teritoryReducer = createSlice({
         },
         saveTeritory:(state, action)=>{
             action.payload = {
-                title: state.title,
+                name: state.title,
                 region: state.region,
                 code: state.code,
                 active: state.active,

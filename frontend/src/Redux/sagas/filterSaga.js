@@ -56,7 +56,6 @@ function* watchGetActiveData(action){
         null,
         JSON.stringify(obj)
     )
-    console.log(res)
     // yield put(tableActions.changeData(res.data))
 }
 

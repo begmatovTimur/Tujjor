@@ -218,7 +218,7 @@ const Table = ({
                 <tr key={item.id}>
                   {columns.map((col) => (
                     <td className={col.show ? "" : "hidden"} key={col.id}>
-                      {item[col.key].toString()}
+                      {item[col.key]}
                     </td>
                   ))}
                   {additionalColumns ? <td>{additionalColumns}</td> : ""}
