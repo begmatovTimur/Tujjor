@@ -22,7 +22,6 @@ function* watchSetShowUserModalData(action){
 }
 
 export function* dashboardDataSaga() {
-    alert("sd")
     yield takeEvery(GET_DASHBOARD_DATA, watchGetDashboardData)
     yield takeEvery(SET_SHOW_USER_MODAL, watchSetShowUserModalData)
 }
