@@ -119,7 +119,10 @@ const tableReducer = createSlice({
         },
         getFilteredData: (state, action) => {
 
-        }
+        },
+        getExcelFile:(state,action)=>{
+
+        },
     },
 });
 

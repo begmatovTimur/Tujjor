@@ -21,7 +21,7 @@ import java.util.UUID;
 public class TerritoryController {
     private final TerritoryService territoryService;
 
-//    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping()
     public HttpEntity<?> getFilteredTerritory(HttpServletRequest  request) {
         return territoryService.getFilteredTerritory(request);
