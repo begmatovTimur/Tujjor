@@ -22,9 +22,15 @@ public class TerritoryController {
     private final TerritoryService territoryService;
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    @GetMapping()
+    @GetMapping("/search")
     public HttpEntity<?> getFilteredTerritory(HttpServletRequest  request) {
         return territoryService.getFilteredTerritory(request);
+    }
+
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    @GetMapping()
+    public HttpEntity<?> getFilteredTerritory() {
+        return territoryService.getTerritories();
     }
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
