@@ -2,12 +2,15 @@ package com.example.backend.Controller;
 
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Services.TerritoryService.TerritoryService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -18,10 +21,10 @@ import java.util.UUID;
 public class TerritoryController {
     private final TerritoryService territoryService;
 
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    @GetMapping
-    public HttpEntity<?> getTerritories(){
-        return ResponseEntity.ok(territoryService.getTerritories());
+//    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    @GetMapping()
+    public HttpEntity<?> getFilteredTerritory(HttpServletRequest  request) {
+        return territoryService.getFilteredTerritory(request);
     }
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")

@@ -10,7 +10,6 @@ const settingsReducer = createSlice({
         getData:(state,action)=>{},
         exchangeData:(state,action)=>{
             state.data = action.payload.data;
-            
         },
         setCurrentIndex:(state,action)=>{
             state.activeButtonIndex = action.payload;

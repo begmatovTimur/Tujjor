@@ -155,18 +155,12 @@ function App() {
           }
         />
         <Route
-          path="/filter"
-          element={
-            <Filter
-              pagination={true}
-              changeSizeMode={true}
-              dataProps={data}
-              columnsProps={columns}
-              paginationApi={
-                "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
-              }
-            />
-          }
+            path="/filter"
+            element={
+              <Filter
+                  filter = {['quickSearch']}
+              />
+            }
         />
       </Routes>
     </div>

@@ -1,119 +1,127 @@
-import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import {createSlice} from "@reduxjs/toolkit";
 
 const tableReducer = createSlice({
-  initialState: {
-    columns: [],
-    sizeOfPage: 10,
-    copyOfColumns: [],
-    data: [],
-    currentPage: 1,
-    currentDraggingColumn: 0,
-    columnOrderModalVisibility: false,
-    modalColumns:[],
-    formInputs:{
-      active : "",
-      city: [],
-      weekDays: [],
-      tin: "",
-      customerCategories:[],
-      quickSearch:""
-    }
-  },
-  name: "table",
-  reducers: {
-    claimData: (state, action) => {
-      state.columns = action.payload.columns;
-      state.data = action.payload.data;
-      state.modalColumns = action.payload.columns;
+    name: "table",
+    initialState: {
+        columns: [],
+        sizeOfPage: 10,
+        copyOfColumns: [],
+        currentDraggingColumn: 0,
+        data: [],
+        currentPage: 1,
+        columnOrderModalVisibility: false,
+        modalColumns: [],
+        formInputs: {
+            active: "",
+            city: [],
+            weekDays: [],
+            tin: "",
+            customerCategories: [],
+            quickSearch: ""
+        }
     },
-    setColumnModalVisibility: (state, action) => {
-      state.columnOrderModalVisibility = action.payload;
-    },
-    setCurrentDragingColumn: (state, action) => {
-      state.currentDraggingColumn = action.payload;
-    },
-    filterVisibility: (state, stateAction) => {
-      const { action } = stateAction.payload;
+    reducers: {
+        claimData: (state, action) => {
+            state.columns = action.payload.columns;
+            state.data = action.payload.data;
+            state.modalColumns = action.payload.columns;
+        },
+        setColumnModalVisibility: (state, action) => {
+            state.columnOrderModalVisibility = action.payload;
+        },
+        setCurrentDragingColumn: (state, action) => {
+            state.currentDraggingColumn = action.payload;
+        },
+        filterVisibility: (state, stateAction) => {
+            const {action} = stateAction.payload;
 
-      if (state.columns.length === 0) state.columns = state.copyOfColumns;
+            if (state.columns.length === 0) state.columns = state.copyOfColumns;
 
-      switch (action.action) {
-        case "clear":
-          state.columns.map((item) => {
-            item.show = true;
-          });
-          break;
-        case "select-option":
-          let i = 0;
-          for (i; i < state.columns.length; i++) {
+            switch (action.action) {
+                case "clear":
+                    state.columns.map((item) => {
+                        item.show = true;
+                    });
+                    break;
+                case "select-option":
+                    let i = 0;
+                    for (i; i < state.columns.length; i++) {
 
-            let item = state.columns[i];
+                        let item = state.columns[i];
 
-            if (item.show === false) i++;
-            if (action.option.value === item.id) {
-              item.show = false;
+                        if (item.show === false) i++;
+                        if (action.option.value === item.id) {
+                            item.show = false;
+                        }
+                    }
+
+                    if (i === state.columns.length - 1) {
+                        state.copyOfColumns = state.columns;
+                        state.columns = [];
+                    }
+                    break;
             }
-          }
 
-          if (i === state.columns.length - 1) {
-            state.copyOfColumns = state.columns;
-            state.columns = [];
-          }
+            if (action.action === "remove-value" || action.action === "pop-value") {
+                state.columns.map((item) => {
+                    if (item.id === action.removedValue.value) {
+                        item.show = true;
+                    }
+                });
+            }
+            state.modalColumns = state.columns;
+        },
+        changePaginationTo: (state, action) => {
+        },
+        changeData: (state, action) => {
+            state.data = action.payload.data;
+            state.sizeOfPage = action.payload.size;
+        },
+        changeSateOfData: (state, action) => {
+            state.data = action.payload;
+        },
+        handlePageChange: (state, action) => {
+            state.currentPage = action.payload;
+        },
+        changePage: (state, action) => {
+            state.currentPage = action.payload.current;
+        },
+        dropColumn: (state, action) => {
+            const {currentDraggingColumn} = state;
+            const draggedElementIndex = currentDraggingColumn;
+            const droppedElementIndex = action.payload;
 
-          break;
-      }
+            [
+                state.modalColumns[draggedElementIndex],
+                state.modalColumns[droppedElementIndex],
+            ] = [
+                state.modalColumns[droppedElementIndex],
+                state.modalColumns[draggedElementIndex],
+            ];
+        },
+        setModalColumns: (state, action) => {
+            state.modalColumns = action.payload;
+        },
+        saveColumnOrder: (state, action) => {
+            state.columns = state.modalColumns;
+        },
+        changeQuickSearch: (state, action) => {
+            state.formInputs.quickSearch = action.payload;
+        },
+        getQuickSearchData:(state, action)=>{
 
-      if (action.action === "remove-value" || action.action === "pop-value") {
-        state.columns.map((item) => {
-          if (item.id === action.removedValue.value) {
-            item.show = true;
-          }
-        });
-      }
-      state.modalColumns = state.columns;
-    },
-    getExcelFile:(state,action)=>{
-      
-    },
-    changePaginationTo: (state, action) => {},
-    changeData: (state, action) => {
-      state.data = action.payload.data;
-      state.sizeOfPage = action.payload.size;
-    },
-    handlePageChange: (state, action) => {
-      state.currentPage = action.payload;
-    },
-    changePage: (state, action) => {
-      state.currentPage = action.payload.current;
-    },
-    dropColumn: (state, action) => {
-      const { currentDraggingColumn } = state;
-      const draggedElementIndex = currentDraggingColumn;
-      const droppedElementIndex = action.payload;
+        },
+        getActiveData:(state, action)=>{
 
-      [
-        state.modalColumns[draggedElementIndex],
-        state.modalColumns[droppedElementIndex],
-      ] = [
-        state.modalColumns[droppedElementIndex],
-        state.modalColumns[draggedElementIndex],
-      ];
-    },
-    setModalColumns: (state, action) => {
-      state.modalColumns = action.payload;
-    },
-    saveColumnOrder: (state, action) => {
-      state.columns = state.modalColumns;
-    },
-    changeInputForms:(state,action)=>{
-      state.formInputs = action.payload
-    },
-    getFilteredData:(state, action)=>{
+        },
+        changeInputForms: (state, action) => {
+            state.formInputs = action.payload
+        },
+        getFilteredData: (state, action) => {
 
-    }
-  },
+        }
+    },
 });
 
-export const tableActions = { ...tableReducer.actions };
+export const tableActions = {...tableReducer.actions};
 export default tableReducer.reducer;

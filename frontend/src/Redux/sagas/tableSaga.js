@@ -18,8 +18,6 @@ function* changeSizeOfPage(action) {
 }
 function downloadExcelFile(action) {
 }
-
-
 function* tableSaga() {
   yield takeEvery(tableActions.changePaginationTo.type, changeSizeOfPage);
   yield takeEvery(tableActions.getExcelFile.type,downloadExcelFile);
