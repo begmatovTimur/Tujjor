@@ -1,4 +1,3 @@
-
 import "./App.css";
 import Login from "./pages/Login/Login";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
@@ -9,7 +8,7 @@ import axios from "axios";
 import Table from "./pages/universal/Table/Table";
 import Filter from "./pages/universal/Filter/Filter";
 import Settings from "./pages/Settings/Settings";
-import Teritory from './pages/Teritory/Teritory';
+import Teritory from "./pages/Teritory/Teritory";
 import Company from "./pages/Settings/ChildComponents/Company";
 import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
 
@@ -42,10 +41,10 @@ function App() {
 
   useEffect(() => {
     axios
-        .get("https://jsonplaceholder.typicode.com/comments")
-        .then(({ data }) => {
-          setData(data);
-        });
+      .get("https://jsonplaceholder.typicode.com/comments")
+      .then(({ data }) => {
+        setData(data);
+      });
   }, []);
 
   const location = useLocation();
@@ -54,7 +53,7 @@ function App() {
     { url: "/admin", roles: ["ROLE_SUPER_VISOR"] },
     { url: "/admin/settings", roles: ["ROLE_SUPER_VISOR"] },
     { url: "/admin/settings/company-profile", roles: ["ROLE_SUPER_VISOR"] },
-    { url: "/admin/teritory", roles: ["ROLE_SUPER_VISOR"] }
+    { url: "/admin/teritory", roles: ["ROLE_SUPER_VISOR"] },
   ];
 
   function hasPermissions() {
@@ -93,20 +92,23 @@ function App() {
                   window.location.reload();
                 }
               }
-              if (err.response.status === 403) {
-                axios({
-                  url:
-                      "http://localhost:8080/api/auth/refresh?refreshToken=" +
-                      localStorage.getItem("refresh_token"),
-                  method: "POST",
-                }).then((res) => {
+            }
+            if (err.response.status === 403) {
+              axios({
+                url:
+                  "http://localhost:8080/api/auth/refresh?refreshToken=" +
+                  localStorage.getItem("refresh_token"),
+                method: "POST",
+              })
+                .then((res) => {
                   localStorage.setItem("access_token", res.data);
                   window.location.reload();
-                }).catch((err)=>{
-                  navigate('/login')
+                })
+                .catch((err) => {
+                  navigate("/login");
                 });
-              }
-            });
+            }
+          });
       } else {
         navigate("/404");
       }
@@ -123,10 +125,16 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/admin" element={<Admin />}>
-          <Route path="/admin/settings" element={<Settings />} >
-            <Route path="/admin/settings/company-profile" element={<Company />}/>
-            <Route path="/admin/settings/customer-category" element={<CustomerCategory />}/>
-            <Route path="/admin/settings/territory" element={<Teritory/>} />
+          <Route path="/admin/settings" element={<Settings />}>
+            <Route
+              path="/admin/settings/company-profile"
+              element={<Company />}
+            />
+            <Route
+              path="/admin/settings/customer-category"
+              element={<CustomerCategory />}
+            />
+            <Route path="/admin/settings/territory" element={<Teritory />} />
           </Route>
         </Route>
         <Route
@@ -137,7 +145,7 @@ function App() {
               changeSizeMode={true}
               dataProps={data}
               columnOrderMode={true}
-              changeSizeModeOptions={[10,20,30,40,50]}
+              changeSizeModeOptions={[10, 20, 30, 40, 50]}
               columnsProps={columns}
               paginationApi={
                 "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
@@ -149,13 +157,7 @@ function App() {
             path="/filter"
             element={
               <Filter
-                  pagination={true}
-                  changeSizeMode={true}
-                  dataProps={data}
-                  columnsProps={columns}
-                  paginationApi={
-                    "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
-                  }
+                  filter = {['quickSearch']}
               />
             }
         />

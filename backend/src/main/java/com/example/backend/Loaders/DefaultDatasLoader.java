@@ -38,13 +38,15 @@ public class DefaultDatasLoader implements CommandLineRunner {
     @Override
     public void run(String... args) {
 //        String roleSuperViser = "ROLE_SUPER_VISER";
-        String superVisorName = "+998973002027";
+        String superVisorName = "+2";
         String companyName = "tujjor";
         if (
                 roleRepository.findByRoleName(RoleEnum.ROLE_SUPER_VISOR.name()) == null
                 && usersRepository.findByPhone(superVisorName).isEmpty()
                 && companyRepository.findByCompanyName(companyName)==null
         ){
+
+            System.out.println(usersRepository.findByPhone(superVisorName).isEmpty());;
             Role savedRole = roleRepository.save(
                     Role.builder()
                             .roleName(RoleEnum.ROLE_SUPER_VISOR.name())
@@ -57,7 +59,7 @@ public class DefaultDatasLoader implements CommandLineRunner {
                          null,
                           "Timur",
                           superVisorName,
-                          passwordEncoder.encode("root123"),
+                          passwordEncoder.encode("2"),
                           roles
                   )
             );

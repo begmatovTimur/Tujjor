@@ -1,15 +1,18 @@
 import axios from "axios";
 
-export default function (url, method, data) {
+export default function (url, method, data,searchParam) {
     let item = localStorage.getItem("access_token");
+    console.log(item);
     return axios({
         url: "http://localhost:8080/api" + url,
         method: method,
         data,
         headers: {
-            "token": item
-        }
+            "token": item,
+            "searchParam": searchParam
+        },
     }).catch((err)=>{
+        if(err.response)
         if (err.response.status === 403){
             axios({
                 url: "http://localhost:8080/api/users/refresh?refreshToken="+localStorage.getItem("refresh_token"),
