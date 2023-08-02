@@ -32,6 +32,9 @@ const Table = ({
   setModalColumns,
 }) => {
   const location = useLocation();
+
+  console.log(dataProps);
+
   useEffect(() => {
     claimData({ columns: columnsProps, data: dataProps });
     if (pagination === true && !paginationApi)
