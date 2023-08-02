@@ -10,7 +10,15 @@ const tableReducer = createSlice({
     currentPage: 1,
     currentDraggingColumn: 0,
     columnOrderModalVisibility: false,
-    modalColumns: [],
+    modalColumns:[],
+    formInputs:{
+      active : "",
+      city: [],
+      weekDays: [],
+      tin: "",
+      customerCategories:[],
+      quickSearch:""
+    }
   },
   name: "table",
   reducers: {
@@ -98,6 +106,12 @@ const tableReducer = createSlice({
     saveColumnOrder: (state, action) => {
       state.columns = state.modalColumns;
     },
+    changeInputForms:(state,action)=>{
+      state.formInputs = action.payload
+    },
+    getFilteredData:(state, action)=>{
+
+    }
   },
 });
 

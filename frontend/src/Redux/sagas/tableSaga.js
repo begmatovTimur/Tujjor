@@ -2,6 +2,8 @@ import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 import { tableActions } from "../reducers/tableReducer"; // Make sure to import tableActions from the correct path
 import apiCall from '../../Config/apiCall';
+import { tableActions } from "../reducers/tableReducer";
+import apiCall from "../../Config/apiCall"; // Make sure to import tableActions from the correct path
 function* changeSizeOfPage(action) {
   const LIMIT = action.payload.size;
   const SIZE_OF_PAGE = action.payload.page;
@@ -17,6 +19,12 @@ function* changeSizeOfPage(action) {
   });
 }
 function downloadExcelFile(action) {
+}
+
+function* watchGetFilteredData(action){
+    apiCall({
+      url:""
+    })
 }
 
 function* tableSaga() {

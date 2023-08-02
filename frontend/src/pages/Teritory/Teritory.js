@@ -9,16 +9,16 @@ import apiCall from '../../Config/apiCall';
 import "./Teritory.css";
 import axios from "axios";
 const style = {
-  position: "absolute",
-  top: "45%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "65%",
-  bgcolor: "background.paper",
-  border: "none",
-  boxShadow: 24,
-  borderRadius: "10px",
-  overflow: "auto",
+    position: 'absolute',
+    top: '47%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "65%",
+    bgcolor: 'background.paper',
+    border: 'none',
+    boxShadow: 24,
+    borderRadius: "10px",
+    overflow:"auto"
 };
 
 function Teritory(props) {
