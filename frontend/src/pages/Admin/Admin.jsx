@@ -13,9 +13,7 @@ function Admin(props) {
 
 
   function nextPermission() {
-    if (localStorage.getItem("no_token") === null ||
-        localStorage.getItem("accesss_token") === null ||
-        localStorage.getItem("refresh_token") === null) {
+    if (localStorage.getItem("no_token") === null || localStorage.getItem("accesss_token") === null){
       navigate("/404")
       window.location.reload()
     }
