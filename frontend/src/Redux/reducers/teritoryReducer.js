@@ -11,11 +11,22 @@ const teritoryReducer = createSlice({
         code: "",
         active: false,
         region: "",
+        teritories: [],
+        error: ""
     },
     name: "teritory",
     reducers: {
         handleOpen:(state, action)=>{
             state.openModal = !state.openModal
+        },
+        getTeritory:(state, action)=>{
+
+        },
+        getteritoriesSuccess:(state, action)=>{
+            state.teritories = action.payload.res;
+        },
+        yourActionFailureTeritories:(state, action)=>{
+            state.error = action.payload
         },
         handleTemplate:(state, action)=>{
             state.template = action.payload
@@ -42,29 +53,26 @@ const teritoryReducer = createSlice({
             state.latitute = 0;
             state.mapState = { center: [[0], [1]], zoom: 10 }
         },
+        changeModal:(state, action)=>{
+            state.openModal = action.payload
+        },
+        resetAllTeritoryData:(state, action)=>{
+            state.longitute = 0
+            state.latitute = 0
+            state.title = ""
+            state.code = ""
+            state.region = ""
+            state.active = false
+            state.mapState = { center: [[0], [1]], zoom: 10 }
+        },
         saveTeritory:(state, action)=>{
-            if (state.title === "" || state.region === "" || state.code === "" || state.longitute === 0 || state.latitute === 0){
-                alert("Iltimos malumotlarni yo'liq kiriting!!!")
-            }else {
-                let obj = {
-                    title: state.title,
-                    region: state.region,
-                    code: state.code,
-                    active: state.active,
-                    longitute: state.longitute,
-                    latitute: state.latitute,
-                }
-
-
-
-                state.longitute = 0
-                state.latitute = 0
-                state.title = ""
-                state.code = ""
-                state.region = ""
-                state.active = false
-                state.openModal = false
-                state.mapState = { center: [[0], [1]], zoom: 10 }
+            action.payload = {
+                name: state.title,
+                region: state.region,
+                code: state.code,
+                active: state.active,
+                longitude: state.longitute,
+                latitude: state.latitute,
             }
         }
     },

@@ -154,14 +154,7 @@ function App() {
             />
           }
         />
-        <Route
-            path="/filter"
-            element={
-              <Filter
-                  filter = {['quickSearch']}
-              />
-            }
-        />
+        <Route path="/filter" element={<Filter filter={["quickSearch"]} />} />
       </Routes>
     </div>
   );

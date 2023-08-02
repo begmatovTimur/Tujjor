@@ -1,62 +1,62 @@
-import React, { useState, useEffect } from "react";
-import Table from "../universal/Table/Table";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { YMaps, Map, Placemark, ZoomControl } from "react-yandex-maps";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { teritoryAction } from "../../Redux/reducers/teritoryReducer";
-import apiCall from '../../Config/apiCall';
-import "./Teritory.css";
+import Table from "../universal/Table/Table";
 import axios from "axios";
+import apiCall from "../../Config/apiCall";
+import "./Teritory.css";
+
 const style = {
-    position: 'absolute',
-    top: '47%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: "65%",
-    bgcolor: 'background.paper',
-    border: 'none',
-    boxShadow: 24,
-    borderRadius: "10px",
-    overflow:"auto"
+  position: "absolute",
+  top: "47%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "65%",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  borderRadius: "10px",
+  overflow: "auto",
 };
 
 function Teritory(props) {
   const [data, setData] = useState([]);
 
   let columns = [
+
     {
       id: 1,
-      title: "Name",
-      key: "name",
+      title: "Region",
+      key: "region",
       type: "text",
       show: true,
     },
     {
       id: 2,
-      title: "Email",
-      key: "email",
-      type: "text",
-      show: true,
-    },
-    {
-      id: 3,
-      title: "Body",
-      key: "body",
+      title: "Name",
+      key: "name",
       type: "text",
       show: true,
     },
   ];
 
   useEffect(() => {
-      let obj1 = {
-          quickSearch: "",
-          active: ""
+    let obj1 = {
+      quickSearch: "",
+      active: "",
+    };
+    apiCall("/territory", "GET", null, JSON.stringify(obj1)).then(
+      ({ data }) => {
+        setData(data);
       }
-    apiCall("/api/territory","GET",null,JSON.stringify(obj1)).then(({data})=>{
-      setData(data)
-    })
+    );
   }, []);
+
+  console.log(data);
 
   const { teritory } = props;
   function handleMapClick(event) {
@@ -217,15 +217,12 @@ function Teritory(props) {
         </Box>
       </Modal>
       <Table
-        pagination={true}
+        pagination={false}
         changeSizeMode={true}
         dataProps={data}
         columnOrderMode={true}
         changeSizeModeOptions={[10, 20, 30, 40, 50]}
         columnsProps={columns}
-        paginationApi={
-          "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
-        }
       />
     </div>
   );
