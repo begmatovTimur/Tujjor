@@ -11,11 +11,8 @@ import Teritory from "./pages/Teritory/Teritory";
 import Company from "./pages/Settings/ChildComponents/Company";
 import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
 import UniversalModal from "./pages/universal/Modal/UniverModal";
-
-function App() {
 import NotFound from "./pages/404/NotFound";
 import { ToastContainer } from "react-toastify";
-
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -110,7 +107,7 @@ function App() {
           </Route>
         </Route>
         <Route path="/filter" element={<Filter filter={["quickSearch"]} />} />
-        <Route path="/404" element={<NotFound />}/>
+        <Route path="/404" element={<NotFound />} />
       </Routes>
     </div>
   );
