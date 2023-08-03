@@ -9,17 +9,19 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class TerritoryServiceImpl implements TerritoryService{
+public class TerritoryServiceImpl implements TerritoryService {
     private final TerritoryRepository territoryRepository;
 
 
@@ -40,13 +42,13 @@ public class TerritoryServiceImpl implements TerritoryService{
         try {
             JsonNode jsonNode = WrapFromStringToObject(request);
             List<TerritoryProjection> territories;
-            if(!jsonNode.get("active").asText().equals("")){
-                territories = territoryRepository.findTerritoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(),jsonNode.get("active").asBoolean());
-            }else {
+            if (!jsonNode.get("active").asText().equals("")) {
+                territories = territoryRepository.findTerritoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(), jsonNode.get("active").asBoolean());
+            } else {
                 territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText());
             }
-                return ResponseEntity.ok(territories);
-        }catch (Exception e){
+            return ResponseEntity.ok(territories);
+        } catch (Exception e) {
             return ResponseEntity.status(404).body("An error has occurred");
         }
     }
@@ -71,5 +73,18 @@ public class TerritoryServiceImpl implements TerritoryService{
     @Override
     public HttpEntity<?> getTerritories() {
         return ResponseEntity.ok(territoryRepository.findAll());
+    }
+
+    @Override
+    public HttpEntity<?> pagination(Integer page, Integer limit) {
+        PageRequest pageable = PageRequest.of(page, limit);
+        List<Territory> allTerritories = territoryRepository.findAll(pageable).getContent();
+
+        // Manually set the total count to 1 if there's only one element in the database
+        if (allTerritories.isEmpty() && territoryRepository.count() == 1) {
+            return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
+        }
+
+        return ResponseEntity.ok(new PageImpl<>(allTerritories, pageable, allTerritories.size()));
     }
 }

@@ -3,8 +3,8 @@ import {createSlice} from "@reduxjs/toolkit";
 const tableReducer = createSlice({
     name: "table",
     initialState: {
-        columns: [],
-        sizeOfPage: 10,
+        columns:[],
+        sizeOfPage: 0,
         copyOfColumns: [],
         currentDraggingColumn: 0,
         data: [],
@@ -35,6 +35,8 @@ const tableReducer = createSlice({
         filterVisibility: (state, stateAction) => {
             const {action} = stateAction.payload;
 
+            
+
             if (state.columns.length === 0) state.columns = state.copyOfColumns;
 
             switch (action.action) {
@@ -45,16 +47,14 @@ const tableReducer = createSlice({
                     break;
                 case "select-option":
                     let i = 0;
-                    for (i; i < state.columns.length; i++) {
-
-                        let item = state.columns[i];
-
+                    for (let j = 0; j < state.columns.length; j++) {
+                        let item = state.columns[j];
                         if (item.show === false) i++;
                         if (action.option.value === item.id) {
                             item.show = false;
                         }
                     }
-
+                    console.log(i,state.columns.length-1)
                     if (i === state.columns.length - 1) {
                         state.copyOfColumns = state.columns;
                         state.columns = [];

@@ -1,0 +1,11 @@
+.button_hover:hover {
+    border: 1px solid #fff !important;
+    opacity: 0.5 !important;
+}
+.active_button_admin {
+    border: 1px solid #fff !important;
+}
+.active_button_admin:hover {
+    border: 1px solid #fff !important;
+    opacity: 1 !important;
+}

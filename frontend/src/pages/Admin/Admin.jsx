@@ -3,11 +3,10 @@ import {connect} from "react-redux";
 import {dashboardDataModel} from "../../Redux/reducers/dashboardDataReducer";
 import Logo from "../../images/logo.png";
 import {icons} from "../../Config/icons";
-import {Outlet, useNavigate} from "react-router-dom";
-import Filter from "../universal/Filter/Filter";
-import Table from "../universal/Table/Table";
-
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import './Admin.css'
 function Admin(props) {
+    const location = useLocation();
     const {dashboardData} = props.dashboardDataReducer;
     const navigate = useNavigate();
     const userBoxRef = useRef(null);
@@ -143,33 +142,33 @@ function Admin(props) {
                     style={{ width: 150, backgroundColor: "rgb(125, 125, 125)" }}
                     className={"pt-3"}
                 >
-                    <button className="btn text-white" style={{ width: 150, height: 94 }}>
+                    <button className="btn text-white button_hover" style={{ width: 150, height: 94 }}>
                         {icons.rocketIcon}
                         <p className="text text-center text-white">Plans</p>
                     </button>
-                    <button className="btn text-white" style={{ width: 150, height: 94 }}>
+                    <button className="btn text-white button_hover" style={{ width: 150, height: 94 }}>
                         {icons.cartIcon}
                         <p className="text text-center text-white">Applications</p>
                     </button>
-                    <button className="btn text-white" style={{ width: 150, height: 94 }}>
+                    <button className="btn text-white button_hover" style={{ width: 150, height: 94 }}>
                         {icons.stockIcon}
                         <p className="text text-center text-white">Stock</p>
                     </button>
-                    <button className="btn text-white" style={{ width: 150, height: 94 }}>
+                    <button className="btn text-white button_hover" style={{ width: 150, height: 94 }}>
                         {icons.clientsIcon}
                         <p className="text text-center text-white">Clients</p>
                     </button>
-                    <button className="btn text-white" style={{ width: 150, height: 94 }}>
+                    <button className="btn text-white button_hover" style={{ width: 150, height: 94 }}>
                         {icons.androidIcon}
                         <p className="text text-center text-white">Agents</p>
                     </button>
-                    <button className="btn text-white" style={{ width: 150, height: 94 }}>
+                    <button className="btn text-white button_hover" style={{ width: 150, height: 94 }}>
                         {icons.reportsIcon}
                         <p className="text text-center text-white">Reports</p>
                     </button>
                     <button
                         onClick={() => navigate("/admin/settings")}
-                        className="btn text-white"
+                        className={"btn text-white button_hover"+(location.pathname.includes("/admin/settings")?" active_button_admin":"")}
                         style={{ width: 150, height: 94 }}
                     >
                         {icons.settingsIcon}

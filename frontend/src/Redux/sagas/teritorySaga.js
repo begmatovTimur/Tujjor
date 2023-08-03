@@ -18,7 +18,7 @@ function* getTeritory(action){
         const res = yield apiCall("/territory", "GET", null)
         yield put(teritoryAction.getteritoriesSuccess({res: res.data}))
     } catch (err) {
-        yield put(teritoryAction.yourActionFailureTeritories(err.message()));
+        yield put(teritoryAction.yourActionFailureTeritories(err.message));
     }
 }
 export function* territorySaga() {

@@ -39,13 +39,6 @@ function App() {
     },
   ];
 
-  useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/comments")
-      .then(({ data }) => {
-        setData(data);
-      });
-  }, []);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -138,23 +131,6 @@ function App() {
             <Route path="/admin/settings/territory" element={<Teritory />} />
           </Route>
         </Route>
-        <Route
-          path="/table"
-          element={
-            <Table
-              pagination={true}
-              changeSizeMode={true}
-              dataProps={data}
-              columnOrderMode={true}
-              changeSizeModeOptions={[10, 20, 30, 40, 50]}
-              columnsProps={columns}
-              paginationApi={
-                "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
-              }
-            />
-          }
-        />
-        <Route path="/filter" element={<Filter filter={["quickSearch"]} />} />
       </Routes>
     </div>
   );
