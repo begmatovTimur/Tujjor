@@ -6,12 +6,16 @@ function* changeSizeOfPage(action) {
   const LIMIT = action.payload.size;
   const SIZE_OF_PAGE = action.payload.page;
   let api = action.payload.api;
-  api = api.replace("{page}", SIZE_OF_PAGE).replace("{limit}", LIMIT);
-  const { data } = yield axios.get(api);
+  api = api.replace("{page}", SIZE_OF_PAGE-1).replace("{limit}", LIMIT);
+  const { data } = yield axios.get(api,{
+    headers:{
+      token:localStorage.getItem("access_token")
+    }
+  });
   yield put({
     type: "table/changeData",
     payload: {
-      data,
+      data:data.content,
       size: LIMIT
     },
   });

@@ -1,7 +1,7 @@
 import Select from "react-select";
 import { connect } from "react-redux";
 import { tableActions } from "../../../Redux/reducers/tableReducer";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
 import { useLocation } from "react-router-dom";
 import "./Table.css";
@@ -32,6 +32,7 @@ const Table = ({
   setModalColumns,
 }) => {
   const location = useLocation();
+
   useEffect(() => {
     claimData({ columns: columnsProps, data: dataProps });
     if (pagination === true && !paginationApi)
@@ -39,13 +40,11 @@ const Table = ({
     if (paginationApi) {
       changePaginationTo({
         api: paginationApi,
-        size: 10,
+        size: sizeOfPage === 0 ? changeSizeModeOptions[0] : sizeOfPage,
         page: currentPage,
       });
     }
   }, [dataProps]);
-
-
 
   return (
     <div className="universal_table">
@@ -61,11 +60,11 @@ const Table = ({
                 className="form-select"
                 defaultValue={"10"}
                 onChange={(e) => {
-                  handlePageChange(0);
+                  handlePageChange(1);
                   changePaginationTo({
                     api: paginationApi,
                     size: parseInt(e.target.value),
-                    page: 0,
+                    page: 1,
                   });
                 }}
               >
@@ -86,7 +85,7 @@ const Table = ({
               style={{ width: "100px" }}
               className="column_order"
               download
-              onClick={()=>getExcelFile(data)}
+              onClick={() => getExcelFile(data)}
             >
               Excel
             </button>
@@ -123,8 +122,6 @@ const Table = ({
             )}
           </div>
         </div>
-
-  
 
         {/* Bootstrap Modal */}
 
@@ -202,33 +199,32 @@ const Table = ({
 
       {/* 👇 Table Data 👇  */}
 
-          <table className="table mytable">
-            <thead>
-              <tr>
-                {columns.map((item) => (
-                  <th key={item.id} className={item.show ? "active" : "hidden"}>
-                    {item.title}
-                  </th>
-                ))}
-                {additionalColumns ? <th>More</th> : ""}
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item) => (
-                <tr key={item.id}>
-                  {columns.map((col) => (
-                    <td className={col.show ? "" : "hidden"} key={col.id}>
-                      {item[col.key]}
-                    </td>
-                  ))}
-                  {additionalColumns ? <td>{additionalColumns}</td> : ""}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <table className="table mytable">
+        <thead>
+          <tr>
+            {columns.map((item) => (
+              <th key={item.id}>{item.show ? item.title : ""}</th>
+            ))}
+            {additionalColumns ? <th>More</th> : ""}
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item) => (
+            <tr key={item.id}>
+              {columns.map((col) =>
+                col.type === "jsx" ? (
+                  <td>{col.data(item)}</td>
+                ) : (
+                  <td key={col.id}>{col.show ? item[col.key] : ""}</td>
+                )
+              )}
+              {additionalColumns ? <td>{additionalColumns}</td> : ""}
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       {/* 👇 Pagination 👇  */}
-
       <div className="d-flex justify-content-end pe-5">
         <Pagination
           onChange={(e, page) => {

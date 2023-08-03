@@ -17,4 +17,6 @@ public interface TerritoryService {
     HttpEntity<?> getFilteredTerritory(HttpServletRequest request);
 
     HttpEntity<?> getTerritories();
+
+    HttpEntity<?> pagination(Integer page, Integer limit);
 }
