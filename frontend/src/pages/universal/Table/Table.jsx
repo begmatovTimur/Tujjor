@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
 import { useLocation } from "react-router-dom";
 import "./Table.css";
+
 const Table = ({
   columnsProps,
   dataProps,

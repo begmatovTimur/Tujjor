@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect} from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { YMaps, Map, Placemark, ZoomControl } from "react-yandex-maps";
-import { connect, useSelector } from "react-redux";
-import { teritoryAction } from "../../Redux/reducers/teritoryReducer";
+import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
+import {connect} from "react-redux";
+import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
-import axios from "axios";
-import apiCall from "../../Config/apiCall";
 import "./Teritory.css";
 
 const style = {
@@ -16,7 +14,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "65%",
-  bgColor: "background.paper",
+  backgroundColor:"white",
   border: "none",
   boxShadow: 24,
   borderRadius: "10px",
@@ -24,50 +22,11 @@ const style = {
 };
 
 function Teritory(props) {
-  // const [data, setData] = useState([]);
-  //
-  // let columns = [
-  //   {
-  //     id: 1,
-  //     title: "Region",
-  //     key: "region",
-  //     type: "text",
-  //     show: true,
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Name",
-  //     key: "name",
-  //     type: "text",
-  //     show: true,
-  //   },
-  // ];
-  //
-  // useEffect(() => {
-  //   apiCall("/territory", "GET", ).then(
-  //     ({ data }) => {
-  //       setData(data);
-  //     }
-  //   );
-  // }, []);
-  //
-  //
-  // const { teritory } = props;
-  // function handleMapClick(event) {
-  //   const coords = event.get("coords");
-  //   const latitude = coords[0];
-  //   const longitude = coords[1];
-  //   props.handleTemplate([longitude, latitude]);
-  //   props.handleMapState({ center: [latitude, longitude], zoom: 10 });
-  // }
-
     const {teritory} = props
 
     useEffect(() => {
         props.getTeritory();
     }, [])
-    console.log("Arr in JS👇: ")
-    console.log(teritory.teritories)
 
     function handleMapClick(event) {
         const coords = event.get('coords');

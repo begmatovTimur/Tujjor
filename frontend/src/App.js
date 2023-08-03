@@ -5,48 +5,14 @@ import Home from "./pages/Home/Home";
 import { useEffect, useState } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
-import Table from "./pages/universal/Table/Table";
 import Filter from "./pages/universal/Filter/Filter";
 import Settings from "./pages/Settings/Settings";
 import Teritory from "./pages/Teritory/Teritory";
 import Company from "./pages/Settings/ChildComponents/Company";
 import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
+import UniversalModal from "./pages/universal/Modal/UniverModal";
 
 function App() {
-  const [data, setData] = useState([]);
-
-  let columns = [
-    {
-      id: 1,
-      title: "Name",
-      key: "name",
-      type: "text",
-      show: true,
-    },
-    {
-      id: 2,
-      title: "Email",
-      key: "email",
-      type: "text",
-      show: true,
-    },
-    {
-      id: 3,
-      title: "Body",
-      key: "body",
-      type: "text",
-      show: true,
-    },
-  ];
-
-  useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/comments")
-      .then(({ data }) => {
-        setData(data);
-      });
-  }, []);
-
   const location = useLocation();
   const navigate = useNavigate();
   const permissions = [
@@ -138,22 +104,6 @@ function App() {
             <Route path="/admin/settings/territory" element={<Teritory />} />
           </Route>
         </Route>
-        <Route
-          path="/table"
-          element={
-            <Table
-              pagination={true}
-              changeSizeMode={true}
-              dataProps={data}
-              columnOrderMode={true}
-              changeSizeModeOptions={[10, 20, 30, 40, 50]}
-              columnsProps={columns}
-              paginationApi={
-                "https://jsonplaceholder.typicode.com/comments?_page={page}&_limit={limit}"
-              }
-            />
-          }
-        />
         <Route path="/filter" element={<Filter filter={["quickSearch"]} />} />
       </Routes>
     </div>
