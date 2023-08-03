@@ -10,7 +10,7 @@ import PhoneInput from "react-phone-input-2";
 import axios from "axios";
 import gif from "../../images/loading.gif";
 import "react-phone-input-2/lib/style.css";
-import { ErrorNotify, SuccessNotify } from "../../tools/Alerts";
+import {ErrorNotify, SuccessNotify, WarningNotify} from "../../tools/Alerts";
 
 function Login(props) {
   const { loginReducer } = props;
@@ -20,7 +20,11 @@ function Login(props) {
     props.setLoading(true);
     if (!props.loginReducer.loading) {
       setTimeout(() => {
-        if (loginReducer.phone === "" || loginReducer.password === "") return;
+        if (loginReducer.phone === "" || loginReducer.password === ""){
+            WarningNotify("Enter the details completely")
+            props.setLoading(false);
+            return;
+        }
         axios({
           url: "http://localhost:8080/api/auth/login",
           method: "POST",

@@ -5,13 +5,21 @@ import { ErrorNotify } from "../../tools/Alerts";
 
 function* addTeritory(action){
     const currentState = yield select((state) => state.teritory);
+    console.log(currentState.itemForTeritoryEdite)
     if (action.payload.name === "" || action.payload.region === "" || action.payload.code === "" || action.payload.longitude === 0 || action.payload.latitude === 0){
         ErrorNotify("Please fill all fields!")
     }else {
-        const res = yield apiCall("/territory", "POST", action.payload)
-        yield call(getTeritory)
-        yield put(teritoryAction.changeModal(false))
-        yield put(teritoryAction.resetAllTeritoryData())
+        if (currentState.itemForTeritoryEdite !== ""){
+            const res = yield apiCall(`/territory/${currentState.itemForTeritoryEdite.id}`, "PUT", action.payload)
+            yield call(getTeritory)
+            yield put(teritoryAction.changeModal(false))
+            yield put(teritoryAction.resetAllTeritoryData())
+        }else {
+            const res = yield apiCall("/territory", "POST", action.payload)
+            yield call(getTeritory)
+            yield put(teritoryAction.changeModal(false))
+            yield put(teritoryAction.resetAllTeritoryData())
+        }
     }
 }
 function* getTeritory(action){

@@ -74,7 +74,6 @@ function Teritory(props) {
             {value: 'false', label: 'Inactive'},
         ]
     )
-
     return (
         <div style={{width: "100%"}}>
             <div className="d-flex flex-column align-items-start">

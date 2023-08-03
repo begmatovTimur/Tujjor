@@ -1,9 +1,11 @@
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 export default function (url, method, data,searchParam) {
+    const navigate = useNavigate();
     let item = localStorage.getItem("access_token");
     return axios({
-        url: "http://localhost:8080/api/" + url,
+        url: "http://localhost:8080/api" + url,
         method: method,
         data,
         headers: {
@@ -26,6 +28,9 @@ export default function (url, method, data,searchParam) {
                         "key": item
                     }
                 })
+            }).catch((err)=>{
+                window.location.reload()
+                navigate("/login")
             })
         }
     })

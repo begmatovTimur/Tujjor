@@ -25,7 +25,6 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@PermitAll
 @RequestMapping("/api/territory")
 public class TerritoryController {
     private final TerritoryService territoryService;
