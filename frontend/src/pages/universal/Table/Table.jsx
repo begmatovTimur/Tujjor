@@ -88,12 +88,8 @@ const Table = ({
               download
               onClick={() => {
                 axios
-                  .post(
+                  .get(
                     "http://localhost:8080/api/territory/excel",
-                    {
-                      headers: columns,
-                      data,
-                    },
                     {
                       headers: {
                         token: localStorage.getItem("access_token"),

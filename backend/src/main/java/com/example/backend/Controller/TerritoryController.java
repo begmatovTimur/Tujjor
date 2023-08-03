@@ -43,10 +43,10 @@ public class TerritoryController {
         return territoryService.pagination(page,limit);
     };
 
-    @PostMapping("/excel")
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    public ResponseEntity<Resource> excel(@RequestBody ExcelDTO dto, HttpServletResponse response) throws IOException {
-        return territoryService.getExcelFile(dto.getData());
+    @GetMapping("/excel")
+//    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    public ResponseEntity<Resource> excel() throws IOException {
+        return territoryService.getExcelFile();
     };
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")

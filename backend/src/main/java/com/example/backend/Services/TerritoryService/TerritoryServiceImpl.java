@@ -108,7 +108,7 @@ public class TerritoryServiceImpl implements TerritoryService {
     }
 
     @Override
-    public ResponseEntity<Resource> getExcelFile(List<TerritoryDTO> dtos) throws IOException {
+    public ResponseEntity<Resource> getExcelFile() throws IOException {
         List<Territory> territoryFilter = territoryRepository.findAll();
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Company info");
