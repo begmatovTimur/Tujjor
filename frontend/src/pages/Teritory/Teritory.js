@@ -65,7 +65,7 @@ function Teritory(props) {
       key: "button",
       type: "jsx",
       show: true,
-      data:<button className="btn btn-warning">Edit</button>
+      data:(item)=><button className="btn btn-warning" onClick={()=>props.editeTeritory(item)}>Edit</button>
     }
   ];
 
@@ -90,7 +90,7 @@ function Teritory(props) {
 
       <Modal
         open={teritory.openModal}
-        onClose={() => props.handleOpen()}
+        onClose={() => props.handleClose()}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -146,7 +146,7 @@ function Teritory(props) {
                   active{" "}
                   <input
                     required={true}
-                    value={teritory.active}
+                    checked={teritory.active}
                     onChange={(e) => props.handleActive(e.target.checked)}
                     className={"form-check-input"}
                     type="checkbox"

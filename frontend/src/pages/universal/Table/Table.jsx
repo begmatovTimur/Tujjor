@@ -238,7 +238,7 @@ const Table = ({
             <tr key={item.id}>
               {columns.map((col) =>
                 col.type === "jsx" ? (
-                  <td>{col.data}</td>
+                  <td>{col.data?col.data(item):""}</td>
                 ) : (
                   <td key={col.id}>{col.show ? item[col.key] : ""}</td>
                 )
