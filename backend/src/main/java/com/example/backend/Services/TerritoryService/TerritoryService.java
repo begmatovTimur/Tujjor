@@ -24,6 +24,6 @@ public interface TerritoryService {
 
     HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request);
 
-    ResponseEntity<Resource> getExcelFile(List<TerritoryDTO> territories) throws IOException;
+    ResponseEntity<Resource> getExcelFile() throws IOException;
 
 }

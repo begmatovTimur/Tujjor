@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import {YMaps, Map, Placemark, ZoomControl} from "react-yandex-maps";
-import {connect, useSelector} from "react-redux";
-import Filter from "../universal/Filter/Filter";
+import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
+import {connect} from "react-redux";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
 import "./Teritory.css";
+import EditButton from "../universal/Table/EditButton";
 
 const style = {
   position: "absolute",
@@ -22,7 +23,8 @@ const style = {
 };
 
 function Teritory(props) {
-    const {teritory} = props
+
+  const {teritory} = props
 
     useEffect(() => {
         props.getTeritory();
@@ -64,188 +66,169 @@ function Teritory(props) {
       key: "button",
       type: "jsx",
       show: true,
-      data:(item)=><button onClick={()=>console.log(item)} className="btn btn-warning">Edit</button>
+      data:(item)=><button className="btn btn-warning" onClick={()=>{
+        props.editeTeritory(item);
+      }}>Edit</button>
     }
+  ];
 
-  ]
-    const [optionsActive] = useState([
-            {value: '', label: 'All'},
-            {value: 'true', label: 'Active'},
-            {value: 'false', label: 'Inactive'},
-        ]
-    )
-    return (
-        <div style={{width: "100%"}}>
-            <div className="d-flex flex-column align-items-start">
-                <div className="title">Territory</div>
-                <div className="btn btn-success ms-4" onClick={() => props.handleOpen()}>
-                    Add Territory +
-                </div>
-            </div>
-            <div>
-                <Filter
-                    search={[{
-                        name: "active",
-                        multi: false,
-                        options: optionsActive,
-                        defaultValue: {value: "", label: "All"},
-                        placeholder: "Active"
-                    }
-                    ]}
-                    paginationApi="/territory/pagination"/>
-
-            </div>
-            <Table
-                pagination={true}
-                changeSizeMode={true}
-                paginationApi={"http://localhost:8080/api/territory/pagination?page={page}&limit={limit}"}
-                dataProps={teritory.teritories}
-                columnOrderMode={true}
-                changeSizeModeOptions={[1, 2, 3, 4, 5]}
-                columnsProps={columns}
-            />
-
-            <Modal
-                open={teritory.openModal}
-                onClose={() => props.handleOpen()}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <div
-                        style={{
-                            width: "100%",
-                            height: "50px",
-                            padding: "10px 0px 0px 45px",
-                            fontSize: "18px",
-                            color: "white",
-                            background: "rgba(64, 125, 178, 0.9)",
-                            borderTopLeftRadius: "10px",
-                            borderTopRightRadius: "10px",
-                        }}
-                    >
-                        Add Teritory
-                    </div>
-                    <div className={"d-flex gap-3 p-5 bg-white"}>
-                        <div className={"w-50 d-flex flex-column gap-4"}>
-                            <form className={"d-flex flex-column gap-3"}>
-                                <label className={"d-flex gap-5"}>
-                                    Title*{" "}
-                                    <input
-                                        required={true}
-                                        value={teritory.title}
-                                        onChange={(e) => props.handleTitle(e.target.value)}
-                                        className={"form-control"}
-                                        type="text"
-                                    />
-                                </label>
-                                <label className={"d-flex gap-5"}>
-                                    Region{" "}
-                                    <input
-                                        required={true}
-                                        value={teritory.region}
-                                        onChange={(e) => props.handleRegion(e.target.value)}
-                                        className={"form-control"}
-                                        type="text"
-                                    />
-                                </label>
-                                <label className={"d-flex gap-5"}>
-                                    Code{" "}
-                                    <input
-                                        required={true}
-                                        value={teritory.code}
-                                        onChange={(e) => props.handleCode(e.target.value)}
-                                        className={"form-control"}
-                                        type="text"
-                                    />
-                                </label>
-                                <label className={"d-flex gap-5"}>
-                                    active{" "}
-                                    <input
-                                        required={true}
-                                        value={teritory.active}
-                                        onChange={(e) => props.handleActive(e.target.checked)}
-                                        className={"form-check-input"}
-                                        type="checkbox"
-                                    />
-                                </label>
-                            </form>
-                            <button
-                                onClick={() => props.saveTeritory()}
-                                style={{
-                                    width: "22%",
-                                    height: "40px",
-                                    borderRadius: "7px",
-                                    background: "rgba(64, 125, 178, 0.9)",
-                                    border: "none",
-                                    color: "white",
-                                    display: "block",
-                                    margin: "60% auto -30px",
-                                }}
-                            >
-                                Add
-                            </button>
-                        </div>
-                        <div className={"w-50"}>
-                            <YMaps
-                                query={{
-                                    apikey: "e24090ad-351e-4321-8071-40c04c55f144\n",
-                                    lang: "en_US",
-                                    coordorder: "latlong",
-                                    load: "package.full",
-                                }}
-                            >
-                                <Map
-                                    width={400}
-                                    height={300}
-                                    defaultState={{
-                                        center: [39.7756, 64.4253],
-                                        zoom: 10,
-                                    }}
-                                    onClick={handleMapClick}
-                                    modules={["templateLayoutFactory"]}
-                                >
-                                    <ZoomControl options={{float: "right"}}/>
-                                    {teritory.template &&
-                                        teritory.longitute !== "" &&
-                                        teritory.latitude !== "" && (
-                                            <Placemark
-                                                geometry={teritory.mapState.center}
-                                                modules={["geoObject.addon.balloon"]}
-                                            />
-                                        )}
-                                </Map>
-                            </YMaps>
-                            <div className={"d-flex my-3 g-4"}>
-                                <label>
-                                    Long:
-                                    <input
-                                        disabled={true}
-                                        type="text"
-                                        value={teritory.longitute}
-                                    />
-                                </label>
-                                <label>
-                                    Lat:
-                                    <input
-                                        disabled={true}
-                                        type="text"
-                                        value={teritory.latitute}
-                                    />
-                                </label>
-                            </div>
-                            <button
-                                className={"btn btn-danger"}
-                                onClick={() => props.clearAllTeritory()}
-                            >
-                                Clear
-                            </button>
-                        </div>
-                    </div>
-                </Box>
-            </Modal>
+  return (
+    <div style={{ width: "100%" }}>
+      <div className="d-flex flex-column align-items-start">
+        <div className="title">Territory</div>
+        <div className="btn btn-success ms-4" onClick={() => props.handleOpen()}>
+          Add Territory +
         </div>
-    );
+      </div>
+
+      <Table
+        pagination={true}
+        changeSizeMode={true}
+        paginationApi={"http://localhost:8080/api/territory/pagination?page={page}&limit={limit}"}
+        dataProps={teritory.teritories}
+        columnOrderMode={true}
+        changeSizeModeOptions={[1,2,3,4,5]}
+        columnsProps={columns}
+      />
+      <Modal
+        open={teritory.openModal}
+        onClose={() => props.handleClose()}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+        <Box sx={style}>
+          <div
+            style={{
+              width: "100%",
+              height: "50px",
+              padding: "10px 0px 0px 45px",
+              fontSize: "18px",
+              color: "white",
+              background: "rgba(64, 125, 178, 0.9)",
+              borderTopLeftRadius: "10px",
+              borderTopRightRadius: "10px",
+            }}
+          >
+            Add Teritory
+          </div>
+          <div className={"d-flex gap-3 p-5 bg-white"}>
+            <div className={"w-50 d-flex flex-column gap-4"}>
+              <form className={"d-flex flex-column gap-3"}>
+                <label className={"d-flex gap-5"}>
+                  Title*{" "}
+                  <input
+                    required={true}
+                    value={teritory.title}
+                    onChange={(e) => props.handleTitle(e.target.value)}
+                    className={"form-control"}
+                    type="text"
+                  />
+                </label>
+                <label className={"d-flex gap-5"}>
+                  Region{" "}
+                  <input
+                    required={true}
+                    value={teritory.region}
+                    onChange={(e) => props.handleRegion(e.target.value)}
+                    className={"form-control"}
+                    type="text"
+                  />
+                </label>
+                <label className={"d-flex gap-5"}>
+                  Code{" "}
+                  <input
+                    required={true}
+                    value={teritory.code}
+                    onChange={(e) => props.handleCode(e.target.value)}
+                    className={"form-control"}
+                    type="text"
+                  />
+                </label>
+                <label className={"d-flex gap-5"}>
+                  active{" "}
+                  <input
+                    required={true}
+                    checked={teritory.active}
+                    onChange={(e) => props.handleActive(e.target.checked)}
+                    className={"form-check-input"}
+                    type="checkbox"
+                  />
+                </label>
+              </form>
+              <button
+                onClick={() => props.saveTeritory()}
+                style={{
+                  width: "22%",
+                  height: "40px",
+                  borderRadius: "7px",
+                  background: "rgba(64, 125, 178, 0.9)",
+                  border: "none",
+                  color: "white",
+                  display: "block",
+                  margin: "60% auto -30px",
+                }}
+              >
+                Add
+              </button>
+            </div>
+            <div className={"w-50"}>
+              <YMaps
+                query={{
+                  apikey: "e24090ad-351e-4321-8071-40c04c55f144\n",
+                  lang: "en_US",
+                  coordorder: "latlong",
+                  load: "package.full",
+                }}
+              >
+                <Map
+                  width={400}
+                  height={300}
+                  defaultState={{
+                    center: [39.7756, 64.4253],
+                    zoom: 10,
+                  }}
+                  onClick={handleMapClick}
+                  modules={["templateLayoutFactory"]}
+                >
+                  <ZoomControl options={{ float: "right" }} />
+                  {teritory.template &&
+                    teritory.longitute !== "" &&
+                    teritory.latitude !== "" && (
+                      <Placemark
+                        geometry={teritory.mapState.center}
+                        modules={["geoObject.addon.balloon"]}
+                      />
+                    )}
+                </Map>
+              </YMaps>
+              <div className={"d-flex my-3 g-4"}>
+                <label>
+                  Long:
+                  <input disabled={true}
+                    type="text"
+                    value={teritory.longitute}
+                  />
+                </label>
+                <label>
+                  Lat:
+                  <input
+                    disabled={true}
+                    type="text"
+                    value={teritory.latitute}
+                  />
+                </label>
+              </div>
+              <button
+                className={"btn btn-danger"}
+                onClick={() => props.clearAllTeritory()}
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </Box>
+      </Modal>
+    </div>
+  );
 }
 
 export default connect((state) => state, teritoryAction)(Teritory);

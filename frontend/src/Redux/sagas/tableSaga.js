@@ -73,12 +73,15 @@ function* changeSizeOfPage(action) {
   });
 }
 function* downloadExcelFile(action) {
-  const res = apiCall("/territory/excel","GET",action.payload);
+  axios
+  .get("http://localhost:8080/api/territory/excel", { responseType: 'blob' })
+  .then((res) => {
+    const file = new Blob([res.data], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    saveAs(file, "territory.xlsx");
+  });
   
-  // const file = new Blob([res.data], {
-  //   type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  // });
-  // saveAs(file, "territory.xlsx");
 }
 
 function* watchGetActiveData(action){

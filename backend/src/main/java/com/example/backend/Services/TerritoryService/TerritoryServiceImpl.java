@@ -154,10 +154,10 @@ public class TerritoryServiceImpl implements TerritoryService {
             return ResponseEntity.status(404).body("An error has occurred");
         }
     }
-  
+
     @Override
-    public ResponseEntity<Resource> getExcelFile(List<TerritoryDTO> territories) throws IOException {
-        List<Territory> territoryFilter = territoryRepository.findAll() ;
+    public ResponseEntity<Resource> getExcelFile() throws IOException {
+        List<Territory> territoryFilter = territoryRepository.findAll();
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Company info");
         Row row = sheet.createRow(0);
@@ -176,7 +176,7 @@ public class TerritoryServiceImpl implements TerritoryService {
             dataRow.createCell(1).setCellValue(territory.getRegion());
             dataRow.createCell(2).setCellValue(territory.getName());
             dataRow.createCell(3).setCellValue(territory.getCode());
-            dataRow.createCell(4).setCellValue(territory.getActive());
+            dataRow.createCell(4).setCellValue(territory.getActive().toString());
             dataRow.createCell(5).setCellValue(territory.getLongitude());
             dataRow.createCell(6).setCellValue(territory.getLatitude());
         }

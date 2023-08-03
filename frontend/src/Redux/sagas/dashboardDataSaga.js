@@ -20,9 +20,6 @@ function* watchSetShowUserModalData(action){
     }
 }
 
-function* watchGetDashboardDataab() {
-    console.log("apisdaids..")
-}
 
  function* dashboardDataSaga() {
     yield takeEvery(GET_DASHBOARD_DATA, watchGetDashboardData)

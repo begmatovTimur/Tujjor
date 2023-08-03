@@ -10,21 +10,21 @@ import PhoneInput from "react-phone-input-2";
 import axios from "axios";
 import gif from "../../images/loading.gif";
 import "react-phone-input-2/lib/style.css";
-import {ErrorNotify, SuccessNotify, WarningNotify} from "../../tools/Alerts";
+import { ErrorNotify, SuccessNotify, WarningNotify } from "../../tools/Alerts";
 
 function Login(props) {
   const { loginReducer } = props;
   const navigate = useNavigate();
 
   function loginfunction() {
-    props.setLoading(true);
     if (!props.loginReducer.loading) {
+      if (loginReducer.phone === "" || loginReducer.password === "") {
+        WarningNotify("Enter the details completely");
+        props.setLoading(false);
+        return;
+      }
+      props.setLoading(true);
       setTimeout(() => {
-        if (loginReducer.phone === "" || loginReducer.password === ""){
-            WarningNotify("Enter the details completely")
-            props.setLoading(false);
-            return;
-        }
         axios({
           url: "http://localhost:8080/api/auth/login",
           method: "POST",
@@ -37,7 +37,7 @@ function Login(props) {
           .then((res) => {
             console.log("res");
             props.setLoading(false);
-            SuccessNotify("You logined successfully!")
+            SuccessNotify("You logined successfully!");
             localStorage.setItem("access_token", res.data.access_token);
             if (res.data.refresh_token !== "") {
               localStorage.setItem("refresh_token", res.data.refresh_token);
@@ -73,17 +73,34 @@ function Login(props) {
             value={loginReducer.phone}
             onChange={(e) => props.changePhone(e)}
           />
-          <input
-            className={"form-control"}
-            value={loginReducer.password}
-            onChange={(e) => props.changePassword(e.target.value)}
-            style={{ width: "100%", marginTop: "20px" }}
-            type={"password"}
-            id="outlined-basic"
-            label="Enter your password"
-            variant="outlined"
-            placeholder={"Type a password..."}
-          />
+          <div className={"d-flex"}>
+            <input
+              className={"form-control"}
+              value={loginReducer.password}
+              onChange={(e) => props.changePassword(e.target.value)}
+              style={{ width: "90%", marginTop: "20px" }}
+              type={loginReducer.showPassword ? "text" : "password"}
+              id="outlined-basic"
+              label="Enter your password"
+              variant="outlined"
+              placeholder={"Type a password..."}
+            />
+            {!loginReducer.showPassword ? (
+              <span
+                style={{ marginTop: "26px", marginLeft: "16px" }}
+                onClick={() => props.setShowPassword()}
+              >
+                <i className="fa-solid fa-eye fa-fade fa-xl"></i>
+              </span>
+            ) : (
+              <span
+                style={{ marginTop: "26px", marginLeft: "14px" }}
+                onClick={() => props.setShowPassword()}
+              >
+                <i className="fa-solid fa-eye-slash fa-fade fa-xl"></i>
+              </span>
+            )}
+          </div>
           <div className={"d-flex justify-content-between"}>
             <label className={"my-3"}>
               <input
