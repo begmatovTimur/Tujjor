@@ -9,6 +9,7 @@ import Table from "../universal/Table/Table";
 import axios from "axios";
 import apiCall from "../../Config/apiCall";
 import "./Teritory.css";
+import EditButton from "../universal/Table/EditButton";
 
 const style = {
   position: "absolute",
@@ -61,10 +62,7 @@ function Teritory(props) {
   //   props.handleMapState({ center: [latitude, longitude], zoom: 10 });
   // }
 
-  function a(data) {
-    console.log(data)
-  };
-
+ 
   const { teritory } = props;
 
   useEffect(() => {
@@ -106,7 +104,7 @@ function Teritory(props) {
       key: "button",
       type: "jsx",
       show: true,
-      data: (item)=><button className="btn btn-warning" onClick={()=>a(item)}>Edit</button>
+      data:<button className="btn btn-warning">Edit</button>
     }
   ];
 
