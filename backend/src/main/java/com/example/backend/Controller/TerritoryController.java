@@ -27,6 +27,13 @@ public class TerritoryController {
         return territoryService.getFilteredTerritory(request);
     }
 
+
+    @GetMapping("/pagination")
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    public HttpEntity<?> pagination(@RequestParam Integer page,@RequestParam Integer limit) {
+        return territoryService.pagination(page,limit);
+    };
+
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping()
     public HttpEntity<?> getFilteredTerritory() {
