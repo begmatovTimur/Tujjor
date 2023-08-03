@@ -108,8 +108,8 @@ public class TerritoryServiceImpl implements TerritoryService {
     }
 
     @Override
-    public ResponseEntity<Resource> getExcelFile() throws IOException {
-        List<Territory> territoryFilter = territoryRepository.findAll();
+    public ResponseEntity<Resource> getExcelFile(List<TerritoryDTO> territories) throws IOException {
+        List<Territory> territoryFilter = territoryRepository.findAll() ;
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Company info");
         Row row = sheet.createRow(0);
@@ -148,6 +148,7 @@ public class TerritoryServiceImpl implements TerritoryService {
                 .headers(headers)
                 .body(resource);
     }
+
 
 
 

@@ -20,8 +20,7 @@ function* watchGetFilteredData(action){
         null,
         JSON.stringify(obj)
     )
-    console.log(res)
-    // yield put(tableActions.changeData(res.data))
+    yield put(tableActions.changeSateOfData(res.data))
 }
 
 function* watchQuickSearchData(action){
@@ -31,15 +30,13 @@ function* watchQuickSearchData(action){
         active : "",
         quickSearch:x.quickSearch
     }
-    console.log(obj)
     const res = yield apiCall(
         action.payload,
         "get",
         null,
         JSON.stringify(obj)
     )
-    console.log(res)
-    // yield put(tableActions.changeData(res.data))
+    yield put(tableActions.changeSateOfData(res.data))
 }
 
 function* watchGetActiveData(action){
@@ -49,18 +46,19 @@ function* watchGetActiveData(action){
         active : x.active.value,
         quickSearch:x.quickSearch
     }
-    console.log(obj)
     const res = yield apiCall(
         action.payload,
         "get",
         null,
         JSON.stringify(obj)
     )
-    // yield put(tableActions.changeData(res.data))
+    yield put(tableActions.changeSateOfData(res.data))
 }
 
-export function* filterSaga() {
-    yield takeEvery("table/getFilteredData", watchGetFilteredData);
+function* filterSaga() {
     yield takeEvery("table/getQuickSearchData",watchQuickSearchData)
+    yield takeEvery("table/getFilteredData", watchGetFilteredData);
     yield takeEvery("table/getActiveData",watchGetActiveData)
 }
+
+export default filterSaga

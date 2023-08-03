@@ -106,7 +106,6 @@ function App() {
             <Route path="/admin/settings/territory" element={<Teritory />} />
           </Route>
         </Route>
-        <Route path="/filter" element={<Filter filter={["quickSearch"]} />} />
         <Route path="/404" element={<NotFound />} />
       </Routes>
     </div>

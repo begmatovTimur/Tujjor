@@ -2,11 +2,14 @@ package com.example.backend.Controller;
 
 import com.example.backend.DTO.ExcelDTO;
 import com.example.backend.DTO.TerritoryDTO;
+import com.example.backend.Entity.Territory;
 import com.example.backend.Services.TerritoryService.TerritoryService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.security.PermitAll;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -20,17 +23,17 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@PermitAll
 @RequestMapping("/api/territory")
 public class TerritoryController {
     private final TerritoryService territoryService;
 
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+//    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping("/search")
     public HttpEntity<?> getFilteredTerritory(HttpServletRequest  request) {
         return territoryService.getFilteredTerritory(request);
@@ -42,11 +45,10 @@ public class TerritoryController {
     public HttpEntity<?>  pagination(@RequestParam Integer page,@RequestParam Integer limit) {
         return territoryService.pagination(page,limit);
     };
-
     @GetMapping("/excel")
-//    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    public ResponseEntity<Resource> excel() throws IOException {
-        return territoryService.getExcelFile();
+    public ResponseEntity<Resource> excel(HttpServletRequest request) throws IOException {
+
+        return null;
     };
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")

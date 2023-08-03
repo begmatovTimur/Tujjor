@@ -8,4 +8,5 @@ public interface TerritoryProjection {
 UUID getId();
 String getRegion();
 String getName();
+String getCode();
 }

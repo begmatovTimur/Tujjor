@@ -38,9 +38,10 @@ public class    SecurityConfig  {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                     auth->auth
-                                .requestMatchers("/api/rooms", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode","/api/bot","/api/territory/**","/api/territory","/api/customerCategory","/api/territory/excel").permitAll()
+                                .requestMatchers("/api/rooms", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode","/api/bot","/api/territory/**","/api/territory","/api/customerCategory").permitAll()
+                            .requestMatchers("/api/territory/excel").permitAll()
                             .anyRequest()
-                            .permitAll()
+                            .authenticated()
                 )
         .addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
