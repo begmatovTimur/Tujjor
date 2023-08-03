@@ -5,10 +5,14 @@ const slice = createSlice({
     initialState:{
         phone:"",
         password:"",
+        loading:false,
         remember: false,
         navigateTo:""
     },
     reducers:{
+        setLoading:(state,action)=>{
+            state.loading = action.payload;
+        },
         changePhone:(state, action)=>{
             state.phone = action.payload
         },

@@ -30,7 +30,6 @@ function Admin(props) {
     function handleClickOutside(event) {
       if (userBoxRef.current && !userBoxRef.current.contains(event.target)) {
         setUserBox(false);
-        // alert(userBox + " down")
       }
     }
     document.addEventListener("mousedown", handleClickOutside);

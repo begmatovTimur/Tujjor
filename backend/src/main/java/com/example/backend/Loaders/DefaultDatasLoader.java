@@ -45,7 +45,6 @@ public class DefaultDatasLoader implements CommandLineRunner {
                 && usersRepository.findByPhone(superVisorName).isEmpty()
                 && companyRepository.findByCompanyName(companyName)==null
         ){
-
             System.out.println(usersRepository.findByPhone(superVisorName).isEmpty());;
             Role savedRole = roleRepository.save(
                     Role.builder()

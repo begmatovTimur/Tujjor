@@ -1,11 +1,12 @@
 import {takeEvery, select, put, call} from "redux-saga/effects"
 import apiCall from "../../Config/apiCall";
 import {teritoryAction} from  "../reducers/teritoryReducer"
+import { ErrorNotify } from "../../tools/Alerts";
 
 function* addTeritory(action){
     const currentState = yield select((state) => state.teritory);
     if (action.payload.name === "" || action.payload.region === "" || action.payload.code === "" || action.payload.longitude === 0 || action.payload.latitude === 0){
-        alert("Iltimos malumotlarni yo'liq kiriting!!!")
+        ErrorNotify("Please fill all fields!")
     }else {
         const res = yield apiCall("/territory", "POST", action.payload)
         yield call(getTeritory)

@@ -1,82 +1,41 @@
 import React, {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import {YMaps, Map, Placemark, ZoomControl} from "react-yandex-maps";
 import {connect, useSelector} from "react-redux";
+import Filter from "../universal/Filter/Filter";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
-import Filter from "../universal/Filter/Filter";
 import "./Teritory.css";
 
 const style = {
-    position: "absolute",
-    top: "47%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "65%",
-    bgColor: "background.paper",
-    border: "none",
-    boxShadow: 24,
-    borderRadius: "10px",
-    overflow: "auto",
+  position: "absolute",
+  top: "47%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "65%",
+  backgroundColor:"white",
+  border: "none",
+  boxShadow: 24,
+  borderRadius: "10px",
+  overflow: "auto",
 };
 
 function Teritory(props) {
-    // const [data, setData] = useState([]);
-    //
-    // let columns = [
-    //   {
-    //     id: 1,
-    //     title: "Region",
-    //     key: "region",
-    //     type: "text",
-    //     show: true,
-    //   },
-    //   {
-    //     id: 2,
-    //     title: "Name",
-    //     key: "name",
-    //     type: "text",
-    //     show: true,
-    //   },
-    // ];
-    //
-    // useEffect(() => {
-    //   apiCall("/territory", "GET", ).then(
-    //     ({ data }) => {
-    //       setData(data);
-    //     }
-    //   );
-    // }, []);
-    //
-    //
-    // const { teritory } = props;
-    // function handleMapClick(event) {
-    //   const coords = event.get("coords");
-    //   const latitude = coords[0];
-    //   const longitude = coords[1];
-    //   props.handleTemplate([longitude, latitude]);
-    //   props.handleMapState({ center: [latitude, longitude], zoom: 10 });
-    // }
-
-    function a(data) {
-        console.log(data)
-    };
-
-    const {teritory} = props;
+    const {teritory} = props
 
     useEffect(() => {
         props.getTeritory();
-    }, []);
+    }, [])
 
-    function handleMapClick(event) {
-        const coords = event.get("coords");
-        const latitude = coords[0];
-        const longitude = coords[1];
-        props.handleTemplate([longitude, latitude]);
-        props.handleMapState({center: [latitude, longitude], zoom: 10});
-    }
+
+  function handleMapClick(event) {
+    const coords = event.get("coords");
+    const latitude = coords[0];
+    const longitude = coords[1];
+    props.handleTemplate([longitude, latitude]);
+    props.handleMapState({ center: [latitude, longitude], zoom: 10 });
+  }
 
     const columns = [
         {
@@ -105,7 +64,7 @@ function Teritory(props) {
             key: "button",
             type: "jsx",
             show: true,
-            data: (item) => <button className="btn btn-warning" onClick={() => a(item)}>Edit</button>
+            data: (item) => <button className="btn btn-warning" >Edit</button>
         }
     ];
 

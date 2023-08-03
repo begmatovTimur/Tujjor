@@ -68,8 +68,8 @@ function* changeSizeOfPage(action) {
   yield put({
     type: "table/changeData",
     payload: {
-      data:data.content,
-      size: LIMIT
+      data: data.content,
+      size: LIMIT,
     },
   });
 }
