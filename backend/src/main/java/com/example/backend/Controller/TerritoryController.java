@@ -30,7 +30,7 @@ import java.util.UUID;
 public class TerritoryController {
     private final TerritoryService territoryService;
 
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+//    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping("/search")
     public HttpEntity<?> getFilteredTerritory(HttpServletRequest  request) {
         return territoryService.getFilteredTerritory(request);
@@ -42,7 +42,6 @@ public class TerritoryController {
     public HttpEntity<?>  pagination(@RequestParam Integer page,@RequestParam Integer limit) {
         return territoryService.pagination(page,limit);
     };
-
     @GetMapping("/excel")
 //    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public ResponseEntity<Resource> excel() throws IOException {
