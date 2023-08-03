@@ -92,8 +92,7 @@ function Teritory(props) {
         open={teritory.openModal}
         onClose={() => props.handleClose()}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+        aria-describedby="modal-modal-description">
         <Box sx={style}>
           <div
             style={{

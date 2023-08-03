@@ -72,17 +72,22 @@ function Login(props) {
             value={loginReducer.phone}
             onChange={(e) => props.changePhone(e)}
           />
-          <input
-            className={"form-control"}
-            value={loginReducer.password}
-            onChange={(e) => props.changePassword(e.target.value)}
-            style={{ width: "100%", marginTop: "20px" }}
-            type={"password"}
-            id="outlined-basic"
-            label="Enter your password"
-            variant="outlined"
-            placeholder={"Type a password..."}
-          />
+          <div className={'d-flex'}>
+              <input
+                  className={"form-control"}
+                  value={loginReducer.password}
+                  onChange={(e) => props.changePassword(e.target.value)}
+                  style={{ width: "90%", marginTop: "20px" }}
+                  type={(loginReducer.showPassword)?"text":"password"}
+                  id="outlined-basic"
+                  label="Enter your password"
+                  variant="outlined"
+                  placeholder={"Type a password..."}
+              />{(!loginReducer.showPassword)? <span style={{marginTop:"26px", marginLeft:"16px"}} onClick={()=>props.setShowPassword()}><i
+              className="fa-solid fa-eye fa-fade fa-xl"></i></span>:
+              <span style={{marginTop:"26px", marginLeft:"14px"}} onClick={()=>props.setShowPassword()}><i
+                  className="fa-solid fa-eye-slash fa-fade fa-xl"></i></span>}
+          </div>
           <div className={"d-flex justify-content-between"}>
             <label className={"my-3"}>
               <input
