@@ -11,6 +11,8 @@ import Settings from "./pages/Settings/Settings";
 import Teritory from "./pages/Teritory/Teritory";
 import Company from "./pages/Settings/ChildComponents/Company";
 import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
+import NotFound from "./pages/404/NotFound";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [data, setData] = useState([]);
@@ -115,6 +117,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
@@ -132,6 +135,7 @@ function App() {
           </Route>
         </Route>
         <Route path="/filter" element={<Filter filter={["quickSearch"]} />} />
+        <Route path="/404" element={<NotFound />}/>
       </Routes>
     </div>
   );
