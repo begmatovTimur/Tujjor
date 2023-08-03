@@ -17,6 +17,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public HttpEntity<?> login(@RequestBody LoginReq loginReq) {
+        System.out.println("ouasnd");
             return service.login(loginReq);
     }
 

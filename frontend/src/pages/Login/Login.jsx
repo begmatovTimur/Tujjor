@@ -31,6 +31,7 @@ function Login(props) {
           },
         })
           .then((res) => {
+            console.log("res");
             props.setLoading(false);
             SuccessNotify("You logined successfully!")
             localStorage.setItem("access_token", res.data.access_token);
@@ -46,10 +47,10 @@ function Login(props) {
 
             navigate("/admin");
           })
-          .catch(() => {
+          .catch((err) => {
+            console.log(err);
             props.setLoading(false);
             ErrorNotify("Password Or Username Is Wrong!");
-            console.clear();
             localStorage.clear();
           });
       }, 1000);
