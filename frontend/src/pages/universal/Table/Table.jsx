@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
 import { useLocation } from "react-router-dom";
 import "./Table.css";
+import Filter from "../Filter/Filter";
 import axios from "axios";
 const Table = ({
   columnsProps,
@@ -51,8 +52,8 @@ const Table = ({
     <div className="universal_table">
       {/* 👇 Pagination Per Page Changing Select 👇  */}
 
-      <div className="d-flex  ps-4 me-5 pe-4 gap-2 justify-content-between">
-        <div className="d-flex gap-2">
+      <div>
+        <div className="d-flex justify-content-between gap-2">
           {changeSizeMode && columns.length ? (
             <label style={{ width: "140px" }}>
               <span>Items in per page:</span>
@@ -134,14 +135,17 @@ const Table = ({
 
             {/* 👇 Column Order 👇  */}
             {columnOrderMode && columns.length ? (
-              <button
-                data-toggle="modal"
-                data-target="#exampleModal"
-                className="column_order"
-                onClick={() => setColumnModalVisibility(true)}
-              >
-                Column Order
-              </button>
+                <div style={{width:"100%"}}  className={"d-flex justify-content-between align-items-center"}>
+                  <button
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                      className="column_order"
+                      onClick={() => setColumnModalVisibility(true)}
+                  >
+                    Column Order
+                  </button>
+                  <Filter paginationApi={"/territory/pagination"} quickSearch></Filter>
+                </div>
             ) : (
               ""
             )}

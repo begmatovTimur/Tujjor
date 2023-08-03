@@ -26,10 +26,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,22 +51,6 @@ public class TerritoryServiceImpl implements TerritoryService {
         Territory territoryData = generateNewTerritory(territory);
         territoryData.setId(id);
         return territoryRepository.save(territoryData);
-    }
-
-    @Override
-    public HttpEntity<?> getFilteredTerritory(HttpServletRequest request) {
-        try {
-            JsonNode jsonNode = WrapFromStringToObject(request);
-            List<TerritoryProjection> territories;
-            if (!jsonNode.get("active").asText().equals("")) {
-                territories = territoryRepository.findTerritoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(), jsonNode.get("active").asBoolean());
-            } else {
-                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText());
-            }
-            return ResponseEntity.ok(territories);
-        } catch (Exception e) {
-            return ResponseEntity.status(404).body("An error has occurred");
-        }
     }
 
     private static JsonNode WrapFromStringToObject(HttpServletRequest request) throws JsonProcessingException {
@@ -148,17 +134,30 @@ public class TerritoryServiceImpl implements TerritoryService {
     }
 
     @Override
-    public HttpEntity<?> pagination(Integer page, Integer limit) {
-        PageRequest pageable = PageRequest.of(page, limit);
-        List<Territory> allTerritories = territoryRepository.findAll(pageable).getContent();
-
-        // Manually set the total count to 1 if there's only one element in the database
-        if (allTerritories.isEmpty() && territoryRepository.count() == 1) {
-            return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
+    public HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request) {
+        try {
+            PageRequest pageable = PageRequest.of(page, limit);
+            JsonNode jsonNode = WrapFromStringToObject(request);
+            List<TerritoryProjection> territories;
+            if (!jsonNode.get("active").asText().equals("")) {
+                territories = territoryRepository.findTerritoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(),
+                        jsonNode.get("active").asBoolean(), pageable).getContent();
+            } else {
+                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(),pageable).getContent();
+            }
+            if (territories.isEmpty() && territoryRepository.count() == 1) {
+                return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
+            }
+            return ResponseEntity.ok(new PageImpl<>(territories, pageable,territories.size()));
+        } catch (Exception e) {
+            return ResponseEntity.status(404).body("An error has occurred");
         }
-
         return ResponseEntity.ok(new PageImpl<>(allTerritories, pageable, allTerritories.size()));
     }
+<<<<<<< HEAD
+=======
+  
+>>>>>>> da316f74b33d286a6b49bd359495150936a93939
     @Override
     public ResponseEntity<Resource> getExcelFile() throws IOException {
         List<Territory> territoryFilter = territoryRepository.findAll();

@@ -6,7 +6,6 @@ import dashboardDataReducer from "../reducers/dashboardDataReducer";
 import tableReducer from '../reducers/tableReducer';
 import settingsReducer from '../reducers/settingsReducer';
 import teritoryReducer from "../reducers/teritoryReducer";
-
 const sagaMiddleware = createSagaMiddleware();
 
 const store =  configureStore({

@@ -29,28 +29,27 @@ import java.util.UUID;
 public class TerritoryController {
     private final TerritoryService territoryService;
 
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    @GetMapping("/search")
-    public HttpEntity<?> getFilteredTerritory(HttpServletRequest  request) {
-        return territoryService.getFilteredTerritory(request);
-    }
-
 
     @GetMapping("/pagination")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+<<<<<<< HEAD
+    public HttpEntity<?> pagination(@RequestParam Integer page,@RequestParam Integer limit,HttpServletRequest request) {
+        return territoryService.pagination(page,limit,request);
+    };
+=======
     public HttpEntity<?>  pagination(@RequestParam Integer page,@RequestParam Integer limit) {
         return territoryService.pagination(page,limit);
     };
-
     @GetMapping("/excel")
 //    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public ResponseEntity<Resource> excel() throws IOException {
         return territoryService.getExcelFile();
     };
+>>>>>>> ee79f7a6c99ee4ad52025a08963fa7f634128413
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping()
-    public HttpEntity<?> getFilteredTerritory() {
+    public HttpEntity<?> getTerritories() {
         return territoryService.getTerritories();
     }
 
