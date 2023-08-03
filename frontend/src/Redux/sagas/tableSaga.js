@@ -6,26 +6,26 @@ function* changeSizeOfPage(action) {
   const LIMIT = action.payload.size;
   const SIZE_OF_PAGE = action.payload.page;
   let api = action.payload.api;
-  api = api.replace("{page}", SIZE_OF_PAGE-1).replace("{limit}", LIMIT);
-  const { data } = yield axios.get(api,{
-    headers:{
-      token:localStorage.getItem("access_token")
-    }
+  api = api.replace("{page}", SIZE_OF_PAGE - 1).replace("{limit}", LIMIT);
+  const { data } = yield axios.get(api, {
+    headers: {
+      token: localStorage.getItem("access_token"),
+    },
   });
   yield put({
     type: "table/changeData",
     payload: {
-      data:data.content,
-      size: LIMIT
+      data: data.content,
+      size: LIMIT,
     },
   });
 }
-function downloadExcelFile(action) {
-
+function* downloadExcelFile(action) {
+ 
 }
 function* tableSaga() {
   yield takeEvery(tableActions.changePaginationTo.type, changeSizeOfPage);
-  yield takeEvery(tableActions.getExcelFile.type,downloadExcelFile);
+  yield takeEvery(tableActions.getExcelFile.type, downloadExcelFile);
 }
 
 export default tableSaga;

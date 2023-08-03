@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
 import { useLocation } from "react-router-dom";
 import "./Table.css";
+import axios from "axios";
 const Table = ({
   columnsProps,
   dataProps,
@@ -85,7 +86,35 @@ const Table = ({
               style={{ width: "100px" }}
               className="column_order"
               download
-              onClick={() => getExcelFile(data)}
+              onClick={() => {
+                axios
+                  .post(
+                    "http://localhost:8080/api/territory/excel",
+                    {
+                      headers: columns,
+                      data,
+                    },
+                    {
+                      headers: {
+                        token: localStorage.getItem("access_token"),
+                        responseType: "arraybuffer",
+                      },
+                    }
+                  )
+                  .then((res) => {
+                    const blob = new Blob([res.data], {
+                      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    });
+                    const url = window.URL.createObjectURL(blob);
+
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "territory.xlsx";
+                    a.click();
+
+                    window.URL.revokeObjectURL(url);
+                  });
+              }}
             >
               Excel
             </button>
@@ -213,7 +242,7 @@ const Table = ({
             <tr key={item.id}>
               {columns.map((col) =>
                 col.type === "jsx" ? (
-                  <td>{col.data(item)}</td>
+                  <td>{col.data}</td>
                 ) : (
                   <td key={col.id}>{col.show ? item[col.key] : ""}</td>
                 )
