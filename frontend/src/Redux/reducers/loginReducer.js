@@ -7,11 +7,15 @@ const slice = createSlice({
         password:"",
         loading:false,
         remember: false,
-        navigateTo:""
+        navigateTo:"",
+        showPassword: false
     },
     reducers:{
         setLoading:(state,action)=>{
             state.loading = action.payload;
+        },
+        setShowPassword:(state,action)=>{
+            state.showPassword = !state.showPassword;
         },
         changePhone:(state, action)=>{
             state.phone = action.payload

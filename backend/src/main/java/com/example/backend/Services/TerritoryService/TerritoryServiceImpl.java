@@ -154,7 +154,10 @@ public class TerritoryServiceImpl implements TerritoryService {
         }
         return ResponseEntity.ok(new PageImpl<>(allTerritories, pageable, allTerritories.size()));
     }
+<<<<<<< HEAD
+=======
   
+>>>>>>> da316f74b33d286a6b49bd359495150936a93939
     @Override
     public ResponseEntity<Resource> getExcelFile() throws IOException {
         List<Territory> territoryFilter = territoryRepository.findAll();

@@ -245,7 +245,7 @@ function Teritory(props) {
                 </Box>
             </Modal>
         </div>
-    );
+    )
 }
 
 export default connect((state) => state, teritoryAction)(Teritory);
