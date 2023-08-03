@@ -6,8 +6,7 @@ import {BrowserRouter} from "react-router-dom"
 import {Provider} from "react-redux";
 import store from "./Redux/store/store";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import 'react-toastify/dist/ReactToastify.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>
