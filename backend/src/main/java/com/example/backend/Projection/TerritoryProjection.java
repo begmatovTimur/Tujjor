@@ -12,5 +12,4 @@ Boolean getActive();
 Double getLatitude();
 Double getLongitude();
 String getCode();
-
 }

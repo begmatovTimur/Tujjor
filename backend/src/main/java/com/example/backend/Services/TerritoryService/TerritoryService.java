@@ -20,10 +20,9 @@ public interface TerritoryService {
 
     ResponseEntity<InputStreamResource> downloadExcel(ExcelDTO userPayload);
     HttpEntity<?> getFilteredTerritory(HttpServletRequest request);
-
     HttpEntity<?> getTerritories();
 
-    HttpEntity<?> pagination(Integer page, Integer limit);
+    HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request);
 
     ResponseEntity<Resource> getExcelFile() throws IOException;
 

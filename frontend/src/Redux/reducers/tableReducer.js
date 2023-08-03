@@ -4,13 +4,14 @@ const tableReducer = createSlice({
     name: "table",
     initialState: {
         columns:[],
-        sizeOfPage: 0,
+        sizeOfPage: 1,
         copyOfColumns: [],
         currentDraggingColumn: 0,
         data: [],
         currentPage: 1,
         columnOrderModalVisibility: false,
         modalColumns: [],
+        limit: "",
         formInputs: {
             active: "",
             city: [],
@@ -72,6 +73,7 @@ const tableReducer = createSlice({
             state.modalColumns = state.columns;
         },
         changePaginationTo: (state, action) => {
+            state.limit = action.payload.size
         },
         changeData: (state, action) => {
             state.data = action.payload.data;

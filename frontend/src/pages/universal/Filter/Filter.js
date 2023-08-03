@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Select from "react-select";
 import Table from "../Table/Table";
 import {connect, useDispatch} from "react-redux";
@@ -9,7 +9,7 @@ function Filter(props) {
     const [options] = useState([
         { value: '10', label: 'Option' },
         { value: '20', label: 'Option' },
-        { value: '30', label: 'Option' },
+            { value: '30', label: 'Option' },
         { value: '40', label: 'Option' },
     ]);
     const [optionsActive] = useState([
@@ -52,6 +52,7 @@ function Filter(props) {
         const {name,value} = obj
         props.changeInputForms({...formInputsProps, [name]: value})
         props.getActiveData(props.paginationApi)
+        console.log(props)
     }
 
 
@@ -121,40 +122,41 @@ function Filter(props) {
         props.getQuickSearchData(props.paginationApi)
     }
 
-    const quickSearch=(
-        <label className='' style={{height:30}}><span style={{width:60, height:30}}>Quick search:</span>
-            <input onChange={(e)=>handleChangeSearch(e.target.value)} type='search' style={{width:180, height:30 }} className='my-1' placeholder=''/>
-        </label>
-    )
+    // const quickSearch=(
+    //     <label className='' style={{height:30}}><span style={{width:60, height:30}}>Quick search:</span>
+    //         <input onChange={(e)=>handleChangeSearch(e.target.value)} type='search' style={{width:180, height:30 }} className='my-1' placeholder=''/>
+    //     </label>
+    // )
 
-    const formInputs = {
-        active,
-        city,
-        weekDays,
-        tin,
-        customerCategories,
-        quickSearch,
-        day
-    }
-    // console.log(formInputs.active.props.children.props)
         return (
         <div>
             <div className='row'>
-                <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-between",width:"1380px"}}>
-                {
-                   props.filter? props.filter.map((item,index)=>{
-                        return (
-                            <div key={index}>
-                                {
-                                    formInputs[item]
-                                }
-                            </div>
-                        )
-                    }):""
-                }
+                <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-between", alignItems:"center"}}>
                     {
-                        formInputs[props.search]
+                        props.search? props.search.map((item,index)=>{
+                            return <div className={"my-2"} style={{width:300}}>
+                                <Select
+                                    key={index}
+                                    options={item.options}
+                                    styles={customStyles}
+                                    isMulti ={item.multi}
+                                    onChange={(e)=>handleChangeActive({name: item.name,value: e})}
+                                    placeh  older={item.placeholder}
+                                />
+                            </div>
+                        }):""
                     }
+                    {
+                        props.quickSearch?
+                            <label className='' style={{height:30}}><span style={{width:60, height:30}}>Quick search:</span>
+                                <input onChange={(e)=>handleChangeSearch(e.target.value)} type='search' style={{width:180, height:30 }} className='my-1' placeholder=''/>
+                            </label> :""
+                    }
+                    {/*{*/}
+                    {/*    props.quickSearch && props.paginationApi?*/}
+                    {/*        props.getQuickSearchData(props.paginationApi)*/}
+                    {/*         :""*/}
+                    {/*}*/}
                     {
                         formInputsProps.city === ""&&formInputsProps.city.length===0&&formInputsProps.tin===""&&formInputsProps.quickSearch===""&& formInputsProps.customerCategories.length===0  && formInputsProps.active?
                             <button onClick={()=>props.getFilteredData(props.paginationApi)} className={"btn btn-primary"} style={{display: "inline-block",height:40}} >Filter</button>
