@@ -13,6 +13,10 @@ import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory"
 import UniversalModal from "./pages/universal/Modal/UniverModal";
 
 function App() {
+import NotFound from "./pages/404/NotFound";
+import { ToastContainer } from "react-toastify";
+
+function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const permissions = [
@@ -88,6 +92,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
@@ -105,6 +110,7 @@ function App() {
           </Route>
         </Route>
         <Route path="/filter" element={<Filter filter={["quickSearch"]} />} />
+        <Route path="/404" element={<NotFound />}/>
       </Routes>
     </div>
   );
