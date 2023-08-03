@@ -119,7 +119,6 @@ function Filter(props) {
 
     function handleChangeSearch(val) {
         props.changeQuickSearch(val)
-        console.log(props)
         props.getQuickSearchData(props.paginationApi)
     }
 
@@ -129,7 +128,6 @@ function Filter(props) {
     //     </label>
     // )
 
-    console.log(props.paginationApi)
         return (
         <div>
             <div className='row'>

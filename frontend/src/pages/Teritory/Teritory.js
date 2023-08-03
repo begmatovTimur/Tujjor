@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import {YMaps, Map, Placemark, ZoomControl} from "react-yandex-maps";
 import {connect, useSelector} from "react-redux";
@@ -8,7 +7,6 @@ import Filter from "../universal/Filter/Filter";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
 import "./Teritory.css";
-import EditButton from "../universal/Table/EditButton";
 
 const style = {
   position: "absolute",
@@ -95,7 +93,7 @@ function Teritory(props) {
                         placeholder: "Active"
                     }
                     ]}
-                    paginationApi="/territory/search"/>
+                    paginationApi="/territory/pagination"/>
 
             </div>
             <Table

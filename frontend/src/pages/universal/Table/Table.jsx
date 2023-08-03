@@ -118,8 +118,23 @@ const Table = ({
             </button>
           </div>
 
-          <div className="h-100">
-            <Filter paginationApi={"/territory/search"} quickSearch></Filter>
+
+            {/* 👇 Column Order 👇  */}
+            {columnOrderMode && columns.length ? (
+                <div style={{width:"100%"}}  className={"d-flex justify-content-between align-items-center"}>
+                  <button
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                      className="column_order"
+                      onClick={() => setColumnModalVisibility(true)}
+                  >
+                    Column Order
+                  </button>
+                  <Filter paginationApi={"/territory/pagination"} quickSearch></Filter>
+                </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
 
@@ -195,7 +210,6 @@ const Table = ({
         ) : (
           ""
         )}
-      </div>
 
       {/* 👇 Table Data 👇  */}
 
@@ -241,7 +255,7 @@ const Table = ({
           shape="rounded"
         />
       </div>
-    </div>
+      </div>
   );
 };
 
