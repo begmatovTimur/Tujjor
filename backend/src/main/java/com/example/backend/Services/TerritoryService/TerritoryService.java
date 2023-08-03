@@ -14,9 +14,7 @@ public interface TerritoryService {
 
     Territory updateTerritory(UUID id, TerritoryDTO territory);
 
-    HttpEntity<?> getFilteredTerritory(HttpServletRequest request);
-
     HttpEntity<?> getTerritories();
 
-    HttpEntity<?> pagination(Integer page, Integer limit);
+    HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request);
 }

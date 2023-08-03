@@ -134,7 +134,7 @@ function Teritory(props) {
                         placeholder: "Active"
                     }
                     ]}
-                    paginationApi="/territory/search"/>
+                    paginationApi="/territory/pagination"/>
 
             </div>
             <Table
