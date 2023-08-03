@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import {YMaps, Map, Placemark, ZoomControl} from "react-yandex-maps";
 import {connect, useSelector} from "react-redux";
 import Filter from "../universal/Filter/Filter";
-import Modal from "@mui/material/Modal";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
 import "./Teritory.css";
-import EditButton from "../universal/Table/EditButton";
 
 const style = {
   position: "absolute",
@@ -40,36 +37,6 @@ function Teritory(props) {
     props.handleMapState({ center: [latitude, longitude], zoom: 10 });
   }
 
-  const columns = [
-    {
-      id: 1,
-      title: "Title",
-      key: "name",
-      type: "text",
-      show: true,
-    },
-    {
-      id: 2,
-      title: "Region",
-      key: "region",
-      type: "text",
-      show: true,
-    },
-    {
-      id: 3,
-      title: "Code",
-      key: "code",
-      type: "text",
-      show: true,
-    },{
-      id: 4,
-      title: "Edit",
-      key: "button",
-      type: "jsx",
-      show: true,
-      data:<button className="btn btn-warning">Edit</button>
-    }
-
     const columns = [
         {
             id: 1,
@@ -97,7 +64,7 @@ function Teritory(props) {
             key: "button",
             type: "jsx",
             show: true,
-            data: (item) => <button className="btn btn-warning" onClick={() => a(item)}>Edit</button>
+            data: (item) => <button className="btn btn-warning" >Edit</button>
         }
     ];
 
@@ -126,7 +93,7 @@ function Teritory(props) {
                         placeholder: "Active"
                     }
                     ]}
-                    paginationApi="/territory/search"/>
+                    paginationApi="/territory/pagination"/>
 
             </div>
             <Table

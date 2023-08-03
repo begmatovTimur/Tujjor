@@ -144,7 +144,7 @@ const Table = ({
                   >
                     Column Order
                   </button>
-                  <Filter paginationApi={"/territory/search"} quickSearch></Filter>
+                  <Filter paginationApi={"/territory/pagination"} quickSearch></Filter>
                 </div>
             ) : (
               ""
