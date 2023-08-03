@@ -8,7 +8,7 @@ const Settings = ({ data, getData, activeButtonIndex, setCurrentIndex }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getData();
+    console.log(getData());
   }, []);
   useEffect(() => {
     if (localStorage.getItem("selectedSettingsButton") && data.length) {
@@ -18,7 +18,6 @@ const Settings = ({ data, getData, activeButtonIndex, setCurrentIndex }) => {
       );
     }
   }, [data]);
-  console.log();
   return (
     <div className="settings">
       <div className="content">

@@ -35,7 +35,7 @@ public class ExcelController {
                     field.setAccessible(true);
                     Object cellValue = field.get(data);
                     Cell cell = row.createCell(cellNum++);
-                    cell.setCellValue(cellValue != null ? cellValue.toString() : "");
+                    cell.setCellValue(cellValue != null ? cellValue.toString() : "");                  
                 }
             }
 

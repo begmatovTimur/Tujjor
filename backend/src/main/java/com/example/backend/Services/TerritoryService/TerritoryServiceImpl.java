@@ -64,6 +64,7 @@ public class TerritoryServiceImpl implements TerritoryService {
         return downloadExcel(userPayload.getData(),userPayload.getHeaders());
     }
 
+
     public ResponseEntity<InputStreamResource> downloadExcel(List<?> data, List<String> headers) {
         try (Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("User Data");
@@ -152,12 +153,8 @@ public class TerritoryServiceImpl implements TerritoryService {
         } catch (Exception e) {
             return ResponseEntity.status(404).body("An error has occurred");
         }
-        return ResponseEntity.ok(new PageImpl<>(allTerritories, pageable, allTerritories.size()));
     }
-<<<<<<< HEAD
-=======
-  
->>>>>>> da316f74b33d286a6b49bd359495150936a93939
+
     @Override
     public ResponseEntity<Resource> getExcelFile() throws IOException {
         List<Territory> territoryFilter = territoryRepository.findAll();
@@ -179,7 +176,7 @@ public class TerritoryServiceImpl implements TerritoryService {
             dataRow.createCell(1).setCellValue(territory.getRegion());
             dataRow.createCell(2).setCellValue(territory.getName());
             dataRow.createCell(3).setCellValue(territory.getCode());
-            dataRow.createCell(4).setCellValue(territory.getActive());
+            dataRow.createCell(4).setCellValue(territory.getActive().toString());
             dataRow.createCell(5).setCellValue(territory.getLongitude());
             dataRow.createCell(6).setCellValue(territory.getLatitude());
         }

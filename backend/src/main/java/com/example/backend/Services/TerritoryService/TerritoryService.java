@@ -5,6 +5,7 @@ import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +20,6 @@ public interface TerritoryService {
     Territory updateTerritory(UUID id, TerritoryDTO territory);
 
     ResponseEntity<InputStreamResource> downloadExcel(ExcelDTO userPayload);
-    HttpEntity<?> getFilteredTerritory(HttpServletRequest request);
     HttpEntity<?> getTerritories();
 
     HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request);

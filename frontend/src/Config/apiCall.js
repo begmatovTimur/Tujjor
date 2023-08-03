@@ -1,8 +1,6 @@
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
 
-export default function (url, method, data,searchParam) {
-    const navigate = useNavigate();
+export default function (url, method, data,searchParam="") {
     let item = localStorage.getItem("access_token");
     return axios({
         url: "http://localhost:8080/api" + url,
@@ -13,7 +11,6 @@ export default function (url, method, data,searchParam) {
             "searchParam": searchParam
         },
     }).catch((err)=>{
-        if(err.response)
         if (err.response.status === 403){
             axios({
                 url: "http://localhost:8080/api/users/refresh?refreshToken="+localStorage.getItem("refresh_token"),
@@ -29,8 +26,7 @@ export default function (url, method, data,searchParam) {
                     }
                 })
             }).catch((err)=>{
-                window.location.reload()
-                navigate("/login")
+                window.location = "/login"
             })
         }
     })

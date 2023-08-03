@@ -5,7 +5,6 @@ import com.example.backend.Repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -14,18 +13,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
-public class    SecurityConfig  {
+public class SecurityConfig {
 
     private final UsersRepository usersRepository;
     private final MyFilter myFilter;
@@ -37,12 +34,13 @@ public class    SecurityConfig  {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                    auth->auth
-                            .requestMatchers("/api/rooms", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode","/api/bot","/api/territory/**","/api/territory","/api/customerCategory","/api/territory/excel").permitAll()
-                            .anyRequest()
-                            .authenticated()
+                        auth -> auth
+                                .requestMatchers("/api/rooms", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode", "/api/bot", "/api/territory/**", "/api/territory", "/api/customerCategory").permitAll()
+                                .requestMatchers("/api/territory/excel").permitAll()
+                                .anyRequest()
+                                .permitAll()
                 )
-        .addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
