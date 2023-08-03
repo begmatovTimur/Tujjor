@@ -6,8 +6,7 @@ import { YMaps, Map, Placemark, ZoomControl } from "react-yandex-maps";
 import { connect, useSelector } from "react-redux";
 import { teritoryAction } from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
-import axios from "axios";
-import apiCall from "../../Config/apiCall";
+import Filter from "../universal/Filter"
 import "./Teritory.css";
 
 const style = {
@@ -97,7 +96,6 @@ function Teritory(props) {
   return (
       <div style={{width: "100%"}}>
           <Button onClick={() => props.handleOpen()}>Open modal</Button>
-
           <Table
               pagination={false}
               changeSizeMode={true}
