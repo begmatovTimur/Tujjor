@@ -64,7 +64,7 @@ function Teritory(props) {
       key: "button",
       type: "jsx",
       show: true,
-      data:<button className="btn btn-warning">Edit</button>
+      data:(item)=><button onClick={()=>console.log(item)} className="btn btn-warning">Edit</button>
     }
 
   ]
@@ -74,7 +74,6 @@ function Teritory(props) {
             {value: 'false', label: 'Inactive'},
         ]
     )
-
     return (
         <div style={{width: "100%"}}>
             <div className="d-flex flex-column align-items-start">
