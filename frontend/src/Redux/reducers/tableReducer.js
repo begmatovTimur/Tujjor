@@ -12,6 +12,8 @@ const tableReducer = createSlice({
         columnOrderModalVisibility: false,
         modalColumns: [],
         limit: "",
+        page: "",
+        paginationApi1: "",
         formInputs: {
             active: "",
             city: [],
@@ -74,6 +76,8 @@ const tableReducer = createSlice({
         },
         changePaginationTo: (state, action) => {
             state.limit = action.payload.size
+            state.page = action.payload.page
+            state.paginationApi1 = action.payload.api
         },
         changeData: (state, action) => {
             state.data = action.payload.data;

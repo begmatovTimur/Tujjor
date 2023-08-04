@@ -24,19 +24,16 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-import java.awt.print.Pageable;
-=======
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
->>>>>>> ee79f7a6c99ee4ad52025a08963fa7f634128413
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -85,19 +82,19 @@ public class TerritoryServiceImpl implements TerritoryService {
     @Override
     public HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request) {
         try {
-            PageRequest pageable = PageRequest.of(page, limit);
-            JsonNode jsonNode = WrapFromStringToObject(request);
-            List<TerritoryProjection> territories;
+            Pageable pageable = PageRequest.of(page,limit);
+            JsonNode  jsonNode = WrapFromStringToObject(request);
+            Page<TerritoryProjection> territories;
             if (!jsonNode.get("active").asText().equals("")) {
                 territories = territoryRepository.findTerritoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(),
-                        jsonNode.get("active").asBoolean(), pageable).getContent();
+                        jsonNode.get("active").asBoolean(), pageable);
             } else {
-                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(),pageable).getContent();
+                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(),pageable);
             }
-            if (territories.isEmpty() && territoryRepository.count() == 1) {
-                return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
-            }
-            return ResponseEntity.ok(new PageImpl<>(territories, pageable,territories.size()));
+//            if (territories.isEmpty() && territoryRepository.count() == 1) {
+//                return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
+//            }
+            return ResponseEntity.ok(territories);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("An error has occurred");
         }

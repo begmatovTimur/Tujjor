@@ -52,7 +52,6 @@ function Filter(props) {
         const {name,value} = obj
         props.changeInputForms({...formInputsProps, [name]: value})
         props.getActiveData(props.paginationApi)
-        console.log(props)
     }
 
 
@@ -149,7 +148,7 @@ function Filter(props) {
                     {
                         props.quickSearch?
                             <label className='' style={{height:30}}><span style={{width:60, height:30}}>Quick search:</span>
-                                <input onChange={(e)=>handleChangeSearch(e.target.value)} type='search' style={{width:180, height:30 }} className='my-1' placeholder=''/>
+                                <input value={formInputsProps.quickSearch} onChange={(e)=>handleChangeSearch(e.target.value)} type='search' style={{width:180, height:30 }} className='my-1' placeholder=''/>
                             </label> :""
                     }
                     {/*{*/}

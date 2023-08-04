@@ -1,5 +1,5 @@
 import Select from "react-select";
-import { connect } from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import { tableActions } from "../../../Redux/reducers/tableReducer";
 import React, { useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
@@ -32,9 +32,9 @@ const Table = ({
   dropColumn,
   modalColumns,
   setModalColumns,
+                 changeQuickSearch
 }) => {
   const location = useLocation();
-
   useEffect(() => {
     claimData({ columns: columnsProps, data: dataProps });
     if (pagination === true && !paginationApi)
@@ -47,6 +47,16 @@ const Table = ({
       });
     }
   }, [dataProps]);
+
+  function handleChange(e, page) {
+    changeQuickSearch("")
+    handlePageChange(page);
+    changePaginationTo({
+      api: paginationApi,
+      size: sizeOfPage,
+      page,
+    });
+  }
 
   return (
     <div className="universal_table">
@@ -144,7 +154,7 @@ const Table = ({
                   >
                     Column Order
                   </button>
-                  <Filter paginationApi={"/territory/pagination"} quickSearch></Filter>
+                  <Filter quickSearch></Filter>
                 </div>
             ) : (
               ""
@@ -256,14 +266,7 @@ const Table = ({
       {/* 👇 Pagination 👇  */}
       <div className="d-flex justify-content-end pe-5">
         <Pagination
-          onChange={(e, page) => {
-            handlePageChange(page);
-            changePaginationTo({
-              api: paginationApi,
-              size: sizeOfPage,
-              page,
-            });
-          }}
+          onChange={(e,page)=>handleChange(e,page)}
           page={currentPage}
           count={Math.ceil(dataProps.length / sizeOfPage)}
           variant="outlined"

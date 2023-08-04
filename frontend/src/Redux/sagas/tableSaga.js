@@ -18,14 +18,16 @@ function* watchGetFilteredData(action){
     customerCategories: x.customerCategories,
     quickSearch:x.quickSearch
   }
+  let api = currentState.paginationApi1
+  api = api.replace("{page}", currentState.page-1).replace("{limit}", currentState.limit);
   const res = yield apiCall(
-      action.payload,
+      api,
       "get",
       null,
       JSON.stringify(obj)
   )
   yield put(tableActions.changeData({
-    data:res.data,
+    data:res.data.content,
     size: currentState.sizeOfPage===""? 1 : currentState.sizeOfPage
   }))
 }
@@ -37,14 +39,16 @@ function* watchQuickSearchData(action){
     active : "",
     quickSearch:x.quickSearch
   }
+  let api = currentState.paginationApi1
+  api = api.replace("{page}", currentState.page-1).replace("{limit}", currentState.limit);
   const res = yield apiCall(
-      action.payload,
+      api,
       "get",
       null,
       JSON.stringify(obj)
   )
   yield put(tableActions.changeData({
-    data:res.data,
+    data:res.data.content,
     size: currentState.sizeOfPage===""? 1 : currentState.sizeOfPage
   }))
 }
@@ -53,22 +57,21 @@ function* changeSizeOfPage(action) {
   const LIMIT = action.payload.size;
   const SIZE_OF_PAGE = action.payload.page;
   let api = action.payload.api;
-  console.log(api)
   api = api.replace("{page}", SIZE_OF_PAGE-1).replace("{limit}", LIMIT);
   let obj = {
     active : "",
     quickSearch:""
   }
-  const { data } = yield axios.get(api,{
-    headers:{
-      token:localStorage.getItem("access_token"),
-      searchParam: JSON.stringify(obj)
-    }
-  });
+  const res = yield apiCall(
+      api,
+      "get",
+      null,
+      JSON.stringify(obj)
+  )
   yield put({
     type: "table/changeData",
     payload: {
-      data: data.content,
+      data: res.data.content,
       size: LIMIT,
     },
   });
@@ -81,9 +84,10 @@ function* watchGetActiveData(action){
     active : x.active.value,
     quickSearch:x.quickSearch
   }
-  console.log(action.payload)
+  let api = currentState.paginationApi1
+  api = api.replace("{page}", currentState.page-1).replace("{limit}", currentState.limit);
   const res = yield apiCall(
-      action.payload + `?page=${currentState.sizeOfPage-1}&limit=${currentState.limit}`,
+      api,
       "get",
       null,
       JSON.stringify(obj)
