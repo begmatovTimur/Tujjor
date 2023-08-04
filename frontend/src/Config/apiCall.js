@@ -26,6 +26,7 @@ export default function (url, method, data,searchParam="") {
                     }
                 })
             }).catch((err)=>{
+                console.log(err);
                 window.location = "/login"
             })
         }

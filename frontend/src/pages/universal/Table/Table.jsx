@@ -1,5 +1,5 @@
 import Select from "react-select";
-import { connect } from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import { tableActions } from "../../../Redux/reducers/tableReducer";
 import React, { useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
@@ -34,9 +34,9 @@ const Table = ({
   dropColumn,
   modalColumns,
   setModalColumns,
+                 changeQuickSearch
 }) => {
   const location = useLocation();
-
   useEffect(() => {
     claimData({ columns: columnsProps, data: dataProps });
     if (pagination === true && !paginationApi)
@@ -49,6 +49,16 @@ const Table = ({
       });
     }
   }, [dataProps]);
+
+  function handleChange(e, page) {
+    changeQuickSearch("")
+    handlePageChange(page);
+    changePaginationTo({
+      api: paginationApi,
+      size: sizeOfPage,
+      page,
+    });
+  }
 
   return (
     <div className="universal_table">
@@ -108,6 +118,26 @@ const Table = ({
             >
               Excel
             </button>
+            {/* 👇 Hide / Show Columns 👇  */}
+            <label style={{ width: "200px" }}>
+              <span>Table Setup</span>
+              <Select
+                isMulti
+                name="columns"
+                options={columns.map((item) => ({
+                  label: item.title,
+                  value: item.id,
+                }))}
+                onChange={(state, action) =>
+                  filterVisibility({ selectedItem: state, action })
+                }
+                className="basic-multi-select"
+                classNamePrefix="select"
+              />
+            </label>
+
+            {/* 👇 Column Order 👇  */}
+           
             <button
               data-toggle="modal"
               data-target="#exampleModal"
@@ -233,14 +263,7 @@ const Table = ({
       {/* 👇 Pagination 👇  */}
       <div className="d-flex justify-content-end pe-5">
         <Pagination
-          onChange={(e, page) => {
-            handlePageChange(page);
-            changePaginationTo({
-              api: paginationApi,
-              size: sizeOfPage,
-              page,
-            });
-          }}
+          onChange={(e,page)=>handleChange(e,page)}
           page={currentPage}
           count={Math.ceil(dataProps.length / sizeOfPage)}
           variant="outlined"

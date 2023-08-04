@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,10 +24,10 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -137,19 +138,19 @@ public class TerritoryServiceImpl implements TerritoryService {
     @Override
     public HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request) {
         try {
-            PageRequest pageable = PageRequest.of(page, limit);
-            JsonNode jsonNode = WrapFromStringToObject(request);
-            List<TerritoryProjection> territories;
+            Pageable pageable = PageRequest.of(page,limit);
+            JsonNode  jsonNode = WrapFromStringToObject(request);
+            Page<TerritoryProjection> territories;
             if (!jsonNode.get("active").asText().equals("")) {
                 territories = territoryRepository.findTerritoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(),
-                        jsonNode.get("active").asBoolean(), pageable).getContent();
+                        jsonNode.get("active").asBoolean(), pageable);
             } else {
-                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(),pageable).getContent();
+                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(),pageable);
             }
-            if (territories.isEmpty() && territoryRepository.count() == 1) {
-                return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
-            }
-            return ResponseEntity.ok(new PageImpl<>(territories, pageable,territories.size()));
+//            if (territories.isEmpty() && territoryRepository.count() == 1) {
+//                return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
+//            }
+            return ResponseEntity.ok(territories);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("An error has occurred");
         }
