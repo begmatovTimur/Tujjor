@@ -1,5 +1,6 @@
 package com.example.backend.Services.TerritoryService;
 
+import com.example.backend.DTO.ExcelDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Projection.TerritoryProjection;
@@ -7,37 +8,33 @@ import com.example.backend.Repository.TerritoryRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @RequiredArgsConstructor
@@ -61,6 +58,65 @@ public class TerritoryServiceImpl implements TerritoryService {
         String value = request.getHeader("searchParam");
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readTree(value);
+    }
+
+    @Override
+    public ResponseEntity<InputStreamResource> downloadExcel(ExcelDTO userPayload) {
+        return downloadExcel(userPayload.getData(),userPayload.getHeaders());
+    }
+
+
+    public ResponseEntity<InputStreamResource> downloadExcel(List<?> data, List<String> headers) {
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("User Data");
+            int rowIdx = 0;
+
+            // Create a header row
+            Row headerRow = sheet.createRow(rowIdx++);
+            for (int i = 0; i < headers.size(); i++) {
+                headerRow.createCell(i).setCellValue(headers.get(i));
+            }// Populate the data rows using reflection
+            for (Object obj : data) {
+                Row dataRow = sheet.createRow(rowIdx++);
+                int colIdx = 0;
+                for (String header : headers) {
+                    Object value = getPropertyValue(obj, header);
+                    dataRow.createCell(colIdx++).setCellValue(value == null ? "" : value.toString());
+                }
+            }
+
+            // Convert the workbook to a byte array
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            workbook.write(baos);
+            byte[] bytes = baos.toByteArray();
+
+            // Prepare the response for download
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.add("Content-Disposition", "attachment; filename=user_data.xlsx");
+
+            // Create an InputStreamResource from the byte array
+            InputStreamResource inputStreamResource = new InputStreamResource(new ByteArrayInputStream(bytes));
+
+            return ResponseEntity
+                    .ok()
+                    .headers(responseHeaders)
+                    .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                    .body(inputStreamResource);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Object getPropertyValue(Object obj, String propertyName) {
+        try {
+            Field field = obj.getClass().getDeclaredField(propertyName);
+            field.setAccessible(true);
+            return field.get(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private Territory generateNewTerritory(TerritoryDTO territory) {
@@ -121,7 +177,7 @@ public class TerritoryServiceImpl implements TerritoryService {
             dataRow.createCell(1).setCellValue(territory.getRegion());
             dataRow.createCell(2).setCellValue(territory.getName());
             dataRow.createCell(3).setCellValue(territory.getCode());
-            dataRow.createCell(4).setCellValue(territory.getActive());
+            dataRow.createCell(4).setCellValue(territory.getActive().toString());
             dataRow.createCell(5).setCellValue(territory.getLongitude());
             dataRow.createCell(6).setCellValue(territory.getLatitude());
         }
