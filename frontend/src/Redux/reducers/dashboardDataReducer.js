@@ -17,6 +17,7 @@ const dashboardDataSlice = createSlice({
             state.error = action.payload
         },
         getDashboardData: (state, action) => {
+            console.log(action);
         },
         setShowUserSettingsModalSuccess: (state, action) => {
             state.showUserSettingsModal = !state.showUserSettingsModal
@@ -30,6 +31,6 @@ const dashboardDataSlice = createSlice({
     }
 })
 
-export const dashboardDataModel = dashboardDataSlice.actions
+export const dashboardDataModel = {...dashboardDataSlice.actions};
 
 export default dashboardDataSlice.reducer

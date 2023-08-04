@@ -1,11 +1,9 @@
 import axios from "axios";
-import { put,select,call, takeEvery } from "redux-saga/effects";
+import {saveAs} from 'file-saver';
+import { select,call, put, takeEvery } from "redux-saga/effects";
+import apiCall from '../../Config/apiCall';
 import { tableActions } from "../reducers/tableReducer"; // Make sure to import tableActions from the correct path
-import apiCall from "../../Config/apiCall"; // Make sure to import tableActions from the correct path
-
-function downloadExcelFile(action) {
-
-}
+import Cookie from 'js-cookie';
 
 function* watchGetFilteredData(action){
   const currentState = yield select((state) => state.table);
@@ -75,6 +73,17 @@ function* changeSizeOfPage(action) {
       size: LIMIT,
     },
   });
+}
+function* downloadExcelFile(action) {
+  axios
+  .get("http://localhost:8080/api/territory/excel", { responseType: 'blob' })
+  .then((res) => {
+    const file = new Blob([res.data], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    saveAs(file, "territory.xlsx");
+  });
+  
 }
 
 function* watchGetActiveData(action){
