@@ -13,16 +13,17 @@ export default function (url, method, data,searchParam="") {
     }).catch((err)=>{
         if (err.response.status === 403){
             axios({
-                url: "http://localhost:8080/api/users/refresh?refreshToken="+localStorage.getItem("refresh_token"),
+                url: "http://localhost:8080/api/auth/refresh?refreshToken="+localStorage.getItem("refresh_token"),
                 method: "POST"
             }).then((res)=>{
                 localStorage.setItem("access_token", res.data)
                 axios({
-                    url: "http://localhost:8080" + url,
+                    url: "http://localhost:8080/api" + url,
                     method: method,
                     data: data,
                     headers: {
-                        "key": item
+                        "token": item,
+                        "searchParam": searchParam
                     }
                 })
             }).catch((err)=>{
