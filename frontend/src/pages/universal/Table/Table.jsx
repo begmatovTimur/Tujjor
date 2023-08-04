@@ -1,7 +1,7 @@
 import Select from "react-select";
 import {connect, useDispatch} from "react-redux";
 import { tableActions } from "../../../Redux/reducers/tableReducer";
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import Pagination from "@mui/material/Pagination";
 import { saveAs } from "file-saver";
 import { useLocation } from "react-router-dom";
@@ -52,7 +52,6 @@ const Table = ({
   }, [dataProps]);
 
   function handleChange(e, page) {
-    changeQuickSearch("")
     handlePageChange(page);
     changePaginationTo({
       api: paginationApi,
@@ -60,7 +59,11 @@ const Table = ({
       page,
     });
   }
-
+  const [optionsActive] = useState([
+    { value: '', label: 'All' },
+    { value: 'true', label: 'Active' },
+    { value: 'false', label: 'Inactive' },
+  ]);
   return (
     <div className="universal_table">
       <label style={{ maxWidth: "500px" }}>
@@ -79,7 +82,15 @@ const Table = ({
           classNamePrefix="select"
         />
       </label>
-
+      <Filter
+          search={[{
+            name: "active",
+            multi: false,
+            options: optionsActive,
+            defaultValue: {value: "", label: "All"},
+            placeholder: "Active"
+          }
+          ]}/>
       <div>
         <div className="d-flex justify-content-between align-items-center gap-2">
           <div className="d-flex gap-4 align-items-end">
@@ -119,40 +130,10 @@ const Table = ({
             >
               Excel
             </button>
-            {/* 👇 Hide / Show Columns 👇  */}
-            <label style={{ width: "200px" }}>
-              <span>Table Setup</span>
-              <Select
-                isMulti
-                name="columns"
-                options={columns.map((item) => ({
-                  label: item.title,
-                  value: item.id,
-                }))}
-                onChange={(state, action) =>
-                  filterVisibility({ selectedItem: state, action })
-                }
-                className="basic-multi-select"
-                classNamePrefix="select"
-              />
-            </label>
+
 
             {/* 👇 Column Order 👇  */}
-            {columnOrderMode && columns.length ? (
-                <div style={{width:"100%"}}  className={"d-flex justify-content-between align-items-center"}>
-                  <button
-                      data-toggle="modal"
-                      data-target="#exampleModal"
-                      className="column_order"
-                      onClick={() => setColumnModalVisibility(true)}
-                  >
-                    Column Order
-                  </button>
-                  <Filter quickSearch></Filter>
-                </div>
-            ) : (
-              ""
-            )}
+
             <button
               data-toggle="modal"
               data-target="#exampleModal"
@@ -166,7 +147,6 @@ const Table = ({
           {/* 👇 Column Order 👇  */}
           {columnOrderMode && columns.length ? (
             <Filter
-              paginationApi={"/territory/pagination"}
               quickSearch
             ></Filter>
           ) : (
