@@ -24,6 +24,7 @@ function* watchGetFilteredData(action){
       null,
       JSON.stringify(obj)
   )
+  yield put(tableActions.changeTotalPages(res.data.totalPages))
   yield put(tableActions.changeData({
     data:res.data.content,
     size: currentState.sizeOfPage===""? 1 : currentState.sizeOfPage
@@ -33,8 +34,9 @@ function* watchGetFilteredData(action){
 function* watchQuickSearchData(action){
   const currentState = yield select((state) => state.table);
   const x = currentState.formInputs
+  console.log(x.quickSearch + "a")
   let obj = {
-    active : "",
+    active : currentState.formInputs.active!==""?currentState.formInputs.active.value: currentState.formInputs.active,
     quickSearch:x.quickSearch
   }
   let api = currentState.paginationApi1
@@ -45,6 +47,7 @@ function* watchQuickSearchData(action){
       null,
       JSON.stringify(obj)
   )
+  yield put(tableActions.changeTotalPages(res.data.totalPages))
   yield put(tableActions.changeData({
     data:res.data.content,
     size: currentState.sizeOfPage===""? 1 : currentState.sizeOfPage
@@ -52,13 +55,14 @@ function* watchQuickSearchData(action){
 }
 
 function* changeSizeOfPage(action) {
+  const currentState = yield select((state) => state.table);
   const LIMIT = action.payload.size;
   const SIZE_OF_PAGE = action.payload.page;
   let api = action.payload.api;
   api = api.replace("{page}", SIZE_OF_PAGE-1).replace("{limit}", LIMIT);
   let obj = {
-    active : "",
-    quickSearch:""
+    active : currentState.formInputs.active!==""?currentState.formInputs.active.value: currentState.formInputs.active,
+    quickSearch:currentState.formInputs.quickSearch
   }
   const res = yield apiCall(
       api,
@@ -66,6 +70,7 @@ function* changeSizeOfPage(action) {
       null,
       JSON.stringify(obj)
   )
+  yield put(tableActions.changeTotalPages(res.data.totalPages))
   yield put({
     type: "table/changeData",
     payload: {
@@ -101,6 +106,7 @@ function* watchGetActiveData(action){
       null,
       JSON.stringify(obj)
   )
+  yield put(tableActions.changeTotalPages(res.data.totalPages))
   yield put(tableActions.changeData({
     data:res.data.content,
     size: currentState.sizeOfPage

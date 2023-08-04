@@ -54,78 +54,10 @@ function Filter(props) {
         props.getActiveData(props.paginationApi)
     }
 
-
-    const active=(
-        <div className="my-2" style={{ width: 300 }}>
-            <Select
-                options={optionsActive}
-                style={{width: 70}}
-                styles={customStyles}
-                onChange={(e)=>handleChangeActive({name: "active",value: e})}
-                placeholder="Active"
-                isClearable={true}
-            />
-        </div>)
-    const city=(
-        <div className="my-2" style={{ width: 450 }}>
-            <Select
-                isMulti
-                styles={customStyles}
-                onChange={(e)=>handleChangeActive({name: "city",value: e})}
-                placeholder="City"
-            />
-        </div>)
-    const weekDays=(
-        <div className="my-2" style={{ width: 350 }}>
-            <Select
-                options={optionsWeeks}
-                styles={customStyles}
-                isMulti
-                placeholder="All weeks"
-                onChange={(e)=>handleChangeActive({name: "weekDays",value: e})}
-            />
-        </div>
-    )
-    const tin=(
-        <div className="my-2" style={{ width: 300 }}>
-            <Select
-                options={optionsTin}
-                styles={customStyles}
-                placeholder="TIN"
-                onChange={(e)=>handleChangeActive({name: "tin",value: e})}
-                isClearable={true}
-            />
-        </div>)
-    const customerCategories=(
-        <div className="my-2" style={{ width: 400 }}>
-            <Select
-                styles={customStyles}
-                isMulti
-                onChange={(e)=>handleChangeActive({name: "customerCategories",value: e})}
-                placeholder="Costumer Categories"
-            />
-        </div>)
-    const day=(
-        <div className="my-2" style={{ width: 400 }}>
-            <Select
-                options={optionsDay}
-                styles={customStyles}
-                isMulti
-                onChange={(e)=>handleChangeActive({name: "day",value: e})}
-                placeholder="Day"
-            />
-        </div>)
-
     function handleChangeSearch(val) {
         props.changeQuickSearch(val)
         props.getQuickSearchData(props.paginationApi)
     }
-
-    // const quickSearch=(
-    //     <label className='' style={{height:30}}><span style={{width:60, height:30}}>Quick search:</span>
-    //         <input onChange={(e)=>handleChangeSearch(e.target.value)} type='search' style={{width:180, height:30 }} className='my-1' placeholder=''/>
-    //     </label>
-    // )
 
         return (
         <div>
@@ -140,7 +72,7 @@ function Filter(props) {
                                     styles={customStyles}
                                     isMulti ={item.multi}
                                     onChange={(e)=>handleChangeActive({name: item.name,value: e})}
-                                    placeh  older={item.placeholder}
+                                    placeholder={item.placeholder}
                                 />
                             </div>
                         }):""
@@ -151,11 +83,6 @@ function Filter(props) {
                                 <input value={formInputsProps.quickSearch} onChange={(e)=>handleChangeSearch(e.target.value)} type='search' style={{width:180, height:30 }} className='my-1' placeholder=''/>
                             </label> :""
                     }
-                    {/*{*/}
-                    {/*    props.quickSearch && props.paginationApi?*/}
-                    {/*        props.getQuickSearchData(props.paginationApi)*/}
-                    {/*         :""*/}
-                    {/*}*/}
                     {
                         formInputsProps.city === ""&&formInputsProps.city.length===0&&formInputsProps.tin===""&&formInputsProps.quickSearch===""&& formInputsProps.customerCategories.length===0  && formInputsProps.active?
                             <button onClick={()=>props.getFilteredData(props.paginationApi)} className={"btn btn-primary"} style={{display: "inline-block",height:40}} >Filter</button>

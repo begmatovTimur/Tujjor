@@ -21,7 +21,8 @@ const tableReducer = createSlice({
             tin: "",
             customerCategories: [],
             quickSearch: ""
-        }
+        },
+        totalPages: "",
     },
     reducers: {
         claimData: (state, action) => {
@@ -82,6 +83,9 @@ const tableReducer = createSlice({
         changeData: (state, action) => {
             state.data = action.payload.data;
             state.sizeOfPage = action.payload.size;
+        },
+        changeTotalPages: (state, action) => {
+            state.totalPages = action.payload
         },
         changeSateOfData: (state, action) => {
             state.data = action.payload;

@@ -37,7 +37,7 @@ public class SecurityConfig {
                     auth->auth
                                 .requestMatchers("/api/rooms", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode","/api/bot","/api/territory/**","/api/territory","/api/customerCategory","/api/territory/excel").permitAll()
                             .anyRequest()
-                            .authentificated()
+                            .authenticated()
                 )
         .addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
