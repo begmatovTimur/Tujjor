@@ -26,6 +26,7 @@ function* watchGetFilteredData(action){
       null,
       JSON.stringify(obj)
   )
+  yield put(tableActions.changeTotalPages(res.data.totalPages))
   yield put(tableActions.changeData({
     data:res.data.content,
     size: currentState.sizeOfPage===""? 1 : currentState.sizeOfPage
@@ -47,6 +48,7 @@ function* watchQuickSearchData(action){
       null,
       JSON.stringify(obj)
   )
+  yield put(tableActions.changeTotalPages(res.data.totalPages))
   yield put(tableActions.changeData({
     data:res.data.content,
     size: currentState.sizeOfPage===""? 1 : currentState.sizeOfPage
@@ -68,6 +70,7 @@ function* changeSizeOfPage(action) {
       null,
       JSON.stringify(obj)
   )
+  yield put(tableActions.changeTotalPages(res.data.totalPages))
   yield put({
     type: "table/changeData",
     payload: {
@@ -92,6 +95,7 @@ function* watchGetActiveData(action){
       null,
       JSON.stringify(obj)
   )
+  yield put(tableActions.changeTotalPages(res.data.totalPages))
   yield put(tableActions.changeData({
     data:res.data.content,
     size: currentState.sizeOfPage

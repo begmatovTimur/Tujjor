@@ -32,7 +32,8 @@ const Table = ({
   dropColumn,
   modalColumns,
   setModalColumns,
-                 changeQuickSearch
+                 changeQuickSearch,
+                 totalPages
 }) => {
   const location = useLocation();
   useEffect(() => {
@@ -268,7 +269,7 @@ const Table = ({
         <Pagination
           onChange={(e,page)=>handleChange(e,page)}
           page={currentPage}
-          count={Math.ceil(dataProps.length / sizeOfPage)}
+          count={totalPages}
           variant="outlined"
           shape="rounded"
         />
