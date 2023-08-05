@@ -18,13 +18,14 @@ import java.util.UUID;
 public class JwtServiceImpl implements JwtService {
     @Override
     public String generateJWTToken(User user) {
+        System.err.println("access_token ni olib ketdi");
         UUID id = user.getId();
         Map<String, Object> claims = new HashMap<>();
         claims.put("phone",user.getPhone());
-        Date hourFromCurrentTime = new Date(System.currentTimeMillis() + 60 * 60 * 1000 * 24);
+        Date hourFromCurrentTime = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24);
         String jwt = Jwts.builder()
                 .addClaims(claims)
-                .setExpiration(hourFromCurrentTime)
+                .setExpiration(new Date(System.currentTimeMillis() + (10 * 10000000)))
                 .setIssuedAt(new Date())
                 .setSubject(id.toString())
                 .signWith(getSigningKey())
@@ -34,9 +35,10 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String generateJWTRefreshToken(User users) {
+        System.err.println("refresh token keldi");
         UUID id = users.getId();
         String jwt = Jwts.builder().
-                setExpiration(new Date(System.currentTimeMillis() + 10000 * 60 * 60 * 24))
+                setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
                 .setIssuedAt(new Date())
                 .setSubject(id.toString())
                 .signWith(getSigningKey())

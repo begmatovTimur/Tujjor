@@ -1,5 +1,5 @@
 .hidden {
-  visibility: hidden;
+  display: none;
 }
 .universal_table {
   display: flex;
@@ -60,4 +60,7 @@
   width: 10px;
   height: 100%;
   cursor: col-resize;
+}
+tbody tr:hover  td {
+  background-color: #eee !important;
 }
