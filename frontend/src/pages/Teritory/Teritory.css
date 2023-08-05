@@ -7,11 +7,31 @@
     padding: 20px;
 }
 .title {
-    font-size: 40px;
-    color: gray;
+    font-size: 26px;
+    color:#333333;
     font-weight: 300;
-    margin-left: 30px;
+    margin: 0px 0px 20px;
+    width: 100%;
+    text-align: start;
+    border-bottom:2px solid #e5e5e5;
 }
 .universal_table {
     margin-top: 10px !important;
+}
+.custom_edit_btn {
+    background-color: #39b3d7;
+    padding: 6px 10px;
+    border: none;
+    color: white;
+}
+.custom_add_btn {
+    /* background-color:#47a447; */
+    background: #5cb85c;
+    border: none;
+    padding: 6px 12px;
+    margin: 0px 0px 5px;
+    color: white;
+    display: flex;
+    align-items:center;
+    gap: 5px;
 }
