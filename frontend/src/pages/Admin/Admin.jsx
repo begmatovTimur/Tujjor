@@ -46,6 +46,13 @@ function Admin(props) {
     setUserBox((prevState) => !prevState);
   };
 
+  function logout() {
+    localStorage.removeItem("access_token")
+    localStorage.removeItem("refresh_token")
+    localStorage.removeItem("no_token")
+    navigate("/login")
+  }
+
   return (
     <div className={"bg-dark "} style={{height: "100vh", width: "auto" }}>
       <div style={{height:"10%"}} className="d-flex">
@@ -123,7 +130,7 @@ function Admin(props) {
                 <button className="btn text-white mt-3 w-100 text-start">
                   {icons.moneyIcon} Billing
                 </button>
-                <button className="btn text-white mt-3 w-100 text-start">
+                <button className="btn text-white mt-3 w-100 text-start" onMouseDown={()=>logout()}>
                   {icons.exitIcon} Exit
                 </button>
               </div>

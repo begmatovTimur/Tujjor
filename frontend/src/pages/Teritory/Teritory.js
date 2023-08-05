@@ -7,7 +7,6 @@ import {connect} from "react-redux";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
 import "./Teritory.css";
-import EditButton from "../universal/Table/EditButton";
 
 const style = {
     position: "absolute",
@@ -62,7 +61,7 @@ function Teritory(props) {
             show: true,
         }, {
             id: 4,
-            title: "",
+            title: "Actions",
             key: "button",
             type: "jsx",
             show: true,
