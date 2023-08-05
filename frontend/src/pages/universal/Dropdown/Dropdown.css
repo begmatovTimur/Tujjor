@@ -1,0 +1,86 @@
+.custom_btn {
+  background-color: #efefef;
+  border: 1px solid #c6c6c6;
+  padding: 6px 12px;
+  color: #777777;
+}
+
+.custom_btn_box {
+  position: relative;
+}
+
+.custom_layer {
+  background: radial-gradient(
+    ellipse farthest-corner at center,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: none;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.2s all;
+  z-index: 1;
+}
+
+.active_custom_layer_animation {
+  opacity: 1 !important;
+  z-index: 2;
+}
+
+.active_custom_layer {
+  display: block !important;
+  z-index: 2;
+}
+
+.page_size_body {
+  width: 160px;
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background: #efefef;
+  z-index: 3;
+}
+
+.page_size_body_item {
+  display: flex;
+  padding: 9px 10px;
+  cursor: pointer;
+  width: 160px;
+  height: 36px;
+}
+
+.page_size_body_item:hover {
+  background: #428bca !important;
+  color: #f2f2f2;
+}
+
+.active_page_size_item {
+  background-color: #428bca;
+  color: #fff;
+}
+
+.active_page_size_body {
+  display: flex !important;
+}
+
+.multi_selected {
+  background-color: #428bca;
+  color: #fff;
+}
+
+.multi_select_item:hover {
+  background: #efefef !important;
+  color: black;
+}
+
+.multi_select_active .multi_select_item:hover {
+  /* Disable hover effect for multiselect items when multiselect is active */
+  background: none !important;
+  color: inherit;
+}

@@ -106,7 +106,7 @@ function App() {
             <Route path="/admin/settings/territory" element={<Teritory />} />
           </Route>
         </Route>
-        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
