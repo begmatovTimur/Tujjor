@@ -1,5 +1,6 @@
 package com.example.backend.Services.TerritoryService;
 
+import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Projection.TerritoryProjection;
@@ -184,7 +185,7 @@ class TerritoryServiceImplTest {
         when(territoryRepository.findAll()).thenReturn(territories);
 
         // Call the getExcelFile method
-        ResponseEntity<Resource> response = underTest.getExcelFile();
+        ResponseEntity<Resource> response = underTest.getExcelFile(new SearchActiveDTO());
 
         // Verify the response
         assertEquals(HttpStatus.OK, response.getStatusCode());

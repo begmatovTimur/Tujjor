@@ -1,6 +1,7 @@
 package com.example.backend.Controller;
 
 import com.example.backend.DTO.ExcelDTO;
+import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Services.TerritoryService.TerritoryService;
@@ -41,7 +42,12 @@ public class TerritoryController {
     };
     @GetMapping("/excel")
     public ResponseEntity<Resource> excel(HttpServletRequest request) throws IOException {
-        return territoryService.getExcelFile();
+        String quickSearch = request.getHeader("quickSearch");
+        SearchActiveDTO searchActiveDTO = new SearchActiveDTO();
+        searchActiveDTO.setActive(request.getHeader("active"));
+        searchActiveDTO.setQuickSearch(quickSearch);
+        System.out.println(searchActiveDTO);
+        return territoryService.getExcelFile(searchActiveDTO);
     };
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")

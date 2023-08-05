@@ -62,7 +62,7 @@ function Teritory(props) {
             show: true,
         }, {
             id: 4,
-            title: "",
+            title: "Update",
             key: "button",
             type: "jsx",
             show: true,
@@ -86,7 +86,7 @@ function Teritory(props) {
                 paginationApi={"/territory/pagination?page={page}&limit={limit}"}
                 dataProps={teritory.teritories}
                 columnOrderMode={true}
-                changeSizeModeOptions={[1, 2, 3, 4, 5]}
+                changeSizeModeOptions={[10,20,50,100,200]}
                 columnsProps={columns}
             />
             <Modal
