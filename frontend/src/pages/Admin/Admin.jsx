@@ -43,7 +43,7 @@ function Admin(props) {
   };
 
   return (
-    <div className={"bg-dark "} style={{height: "100vh", width: "auto", backgroundColor:"#405058"}}>
+    <div className={"bg-white"} style={{height: "100vh", width: "auto", backgroundColor:"#405058"}}>
       <div style={{height:"7%", backgroundColor:"#405058"}} className="d-flex">
         <div
           className="ps-1 pt-2 d-flex justify-content-center"

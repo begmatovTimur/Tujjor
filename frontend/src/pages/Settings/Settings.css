@@ -41,6 +41,7 @@
   background: #fff;
 }
 .right {
+  /*border: 1px solid red;*/
   display: flex;
   width: 80%;
   padding: 20px;

@@ -5,7 +5,6 @@ import Home from "./pages/Home/Home";
 import { useEffect, useState } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
-import Filter from "./pages/universal/Filter/Filter";
 import Settings from "./pages/Settings/Settings";
 import Teritory from "./pages/Teritory/Teritory";
 import Company from "./pages/Settings/ChildComponents/Company";
@@ -106,6 +105,7 @@ function App() {
             <Route path="/admin/settings/territory" element={<Teritory />} />
           </Route>
         </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

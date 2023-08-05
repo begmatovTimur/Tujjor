@@ -97,6 +97,7 @@ const tableReducer = createSlice({
       state.modalColumns = action.payload;
     },
     saveColumnOrder: (state, action) => {
+      state.columnOrderModalVisibility = false;
       state.columns = state.modalColumns;
     },
     changeQuickSearch: (state, action) => {

@@ -131,7 +131,7 @@ function Login(props) {
           </div>
         </div>
         <h6 style={{ textAlign: "left", marginTop: "25px" }}>
-          Support Servise: +998 99 999 99 99
+          Support Servise: 998 97 300 20 27
         </h6>
       </div>
       <ToastContainer />
