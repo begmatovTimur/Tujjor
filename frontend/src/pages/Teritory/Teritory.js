@@ -76,8 +76,8 @@ function Teritory(props) {
         <div style={{width: "100%"}}>
             <div className="d-flex flex-column align-items-start">
                 <div className="title">Territory</div>
-                <div className="custom_add_btn" onClick={() => props.handleOpen()}>
-                <i style={{fontSize:"20px"}} class="fa fa-plus"></i>Add Territory 
+                <div className="custom_add_btn" style={{cursor: "pointer"}} onClick={() => props.handleOpen()}>
+                <i style={{fontSize:"20px"}} className="fa fa-plus"></i>Add Territory
                 </div>
             </div>
             <Table

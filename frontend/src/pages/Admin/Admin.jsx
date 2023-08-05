@@ -32,10 +32,7 @@ function Admin(props) {
 
   useEffect(() => {
     nextPermission();
-
     props.getDashboardData();
-
-    console.log("use effect is working");
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);

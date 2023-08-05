@@ -25,7 +25,6 @@ const Table = (props) => {
       });
     }
   }, [props.dataProps]);
-
   function handleChange(e, page) {
     props.handlePageChange(page);
     props.changePaginationTo({
@@ -222,7 +221,7 @@ const Table = (props) => {
       <div className="d-flex justify-content-end pe-5">
         {props.columns.length ? (
           <Pagination
-            onChange={(e, page) => props.handleChange(e, props.page)}
+            onChange={(e, page) => handleChange(e, props.page)}
             page={props.currentPage}
             count={props.totalPages}
             variant="outlined"
