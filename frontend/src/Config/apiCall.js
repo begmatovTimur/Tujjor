@@ -23,16 +23,22 @@ export default function (url, method, data, searchParam) {
             alert("olib keldim tokenni qayta")
             localStorage.setItem("access_token", res.data);
             axios({
-              url: "http://localhost:8080/api" + url,
-              method: method,
-              data: data,
-              headers: {
-                token: item,
-              },
-            });
-          })
-          .catch((err) => {});
-      }
-    }
-  });
+                url: "http://localhost:8080/api/auth/refresh?refreshToken="+localStorage.getItem("refresh_token"),
+                method: "POST"
+            }).then((res)=>{
+                localStorage.setItem("access_token", res.data)
+                axios({
+                    url: "http://localhost:8080/api" + url,
+                    method: method,
+                    data: data,
+                    headers: {
+                        "token": localStorage.getItem("access_token"),
+                        "searchParam": searchParam
+                    }
+                })
+            }).catch((err)=>{
+                window.location = "/login"
+            })
+        }
+    })
 }

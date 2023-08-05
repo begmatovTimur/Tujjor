@@ -22,7 +22,7 @@ public class JwtServiceImpl implements JwtService {
         UUID id = user.getId();
         Map<String, Object> claims = new HashMap<>();
         claims.put("phone",user.getPhone());
-
+        Date hourFromCurrentTime = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24);
         String jwt = Jwts.builder()
                 .addClaims(claims)
                 .setExpiration(new Date(System.currentTimeMillis() + (10 * 10000000)))
@@ -38,7 +38,7 @@ public class JwtServiceImpl implements JwtService {
         System.err.println("refresh token keldi");
         UUID id = users.getId();
         String jwt = Jwts.builder().
-                setExpiration(new Date(System.currentTimeMillis() + (30 * 100000000)))
+                setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
                 .setIssuedAt(new Date())
                 .setSubject(id.toString())
                 .signWith(getSigningKey())
