@@ -25,7 +25,6 @@ const Table = (props) => {
       });
     }
   }, [props.dataProps]);
-
   function handleChange(e, page) {
     props.handlePageChange(page);
     props.changePaginationTo({

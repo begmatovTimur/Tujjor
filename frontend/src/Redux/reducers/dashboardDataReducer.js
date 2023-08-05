@@ -17,7 +17,6 @@ const dashboardDataSlice = createSlice({
             state.error = action.payload
         },
         getDashboardData: (state, action) => {
-            console.log(action);
         },
         setShowUserSettingsModalSuccess: (state, action) => {
             state.showUserSettingsModal = !state.showUserSettingsModal
