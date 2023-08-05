@@ -8,11 +8,10 @@ import "./Admin.css";
 function Admin(props) {
   const dispatch = useDispatch();
   const location = useLocation();
-  const {dashboardData} = props.dashboardDataReducer;
+  const { dashboardData } = props.dashboardDataReducer;
   const navigate = useNavigate();
   const userBoxRef = useRef(null);
   const [userBox, setUserBox] = useState(false);
-
 
   function nextPermission() {
     if (
@@ -47,8 +46,8 @@ function Admin(props) {
   };
 
   return (
-    <div className={"bg-dark "} style={{height: "100vh", width: "auto" }}>
-      <div style={{height:"10%"}} className="d-flex">
+    <div className={"bg-dark "} style={{ height: "100vh", width: "auto" }}>
+      <div style={{ height: "10%" }} className="d-flex">
         <div
           className="ps-1 pt-2 d-flex justify-content-center"
           style={{
@@ -59,8 +58,22 @@ function Admin(props) {
         >
           <img src={Logo} alt="logo" width={"40%"} height={"80%"} />
         </div>
-        <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", width:"45%"}}>
-          <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginLeft:"5%"}}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "45%",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginLeft: "5%",
+            }}
+          >
             <button className={"btn text-white mx-3"}>Supervisor</button>
             <button className={"btn text-white mx-3"}>Sales</button>
             <select
@@ -135,47 +148,47 @@ function Admin(props) {
       </div>
       <div className={"d-flex"}>
         <div
-          style={{ width: 150, backgroundColor: "rgb(125, 125, 125)" }}
-          className={"pt-3"}
+          style={{ width: 94, backgroundColor: "rgb(125, 125, 125)" }}
+          className={"pt-3 left_side"}
         >
           <button
             className="btn text-white button_hover"
-            style={{ width: 150, height: 94 }}
+            style={{ width: 90, height: 68 }}
           >
             {icons.rocketIcon}
             <p className="text text-center text-white">Plans</p>
           </button>
           <button
             className="btn text-white button_hover"
-            style={{ width: 150, height: 94 }}
+            style={{ width: 90, height: 94 }}
           >
             {icons.cartIcon}
             <p className="text text-center text-white">Applications</p>
           </button>
           <button
             className="btn text-white button_hover"
-            style={{ width: 150, height: 94 }}
+            style={{ width: 90, height: 94 }}
           >
             {icons.stockIcon}
             <p className="text text-center text-white">Stock</p>
           </button>
           <button
             className="btn text-white button_hover"
-            style={{ width: 150, height: 94 }}
+            style={{ width: 90, height: 94 }}
           >
             {icons.clientsIcon}
             <p className="text text-center text-white">Clients</p>
           </button>
           <button
             className="btn text-white button_hover"
-            style={{ width: 150, height: 94 }}
+            style={{ width: 90, height: 68 }}
           >
             {icons.androidIcon}
             <p className="text text-center text-white">Agents</p>
           </button>
           <button
             className="btn text-white button_hover"
-            style={{ width: 150, height: 94 }}
+            style={{ width: 90, height: 68 }}
           >
             {icons.reportsIcon}
             <p className="text text-center text-white">Reports</p>
@@ -188,7 +201,7 @@ function Admin(props) {
                 ? " active_button_admin"
                 : "")
             }
-            style={{ width: 150, height: 94 }}
+            style={{ width: 90, height: 68 }}
           >
             {icons.settingsIcon}
             <p className="text text-center text-white m-0">Settings</p>
