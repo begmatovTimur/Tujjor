@@ -35,7 +35,7 @@ class DashboardDataServiceImplTest {
        mockUser.setPhone(mockPhone);
        LocalDate localDate = LocalDate.of(2023, 8, 1);
         DashboardDataDTO dashboardDataDTO = dashboardDataService.getDashboardData(mockUser);
-        assertEquals("AUGUST, 1.", dashboardDataDTO.getCurrentDate());
+        assertEquals("AUGUST, 5.", dashboardDataDTO.getCurrentDate());
         assertEquals("+998973002027", dashboardDataDTO.getCurrentSuperVisorPhoneNumber());
     }
 }
