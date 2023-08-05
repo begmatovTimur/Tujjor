@@ -46,40 +46,26 @@ function Admin(props) {
   };
 
   return (
-    <div className={"bg-dark "} style={{ height: "100vh", width: "auto" }}>
-      <div style={{ height: "10%" }} className="d-flex">
+    <div className={"bg-dark "} style={{height: "100vh", width: "auto", backgroundColor:"#405058"}}>
+      <div style={{height:"10%", backgroundColor:"#405058"}} className="d-flex">
         <div
           className="ps-1 pt-2 d-flex justify-content-center"
           style={{
             width: "9.9%",
             height: "100%",
-            backgroundColor: "rgb(77, 77, 77)",
+            backgroundColor: "#405065",
           }}
         >
-          <img src={Logo} alt="logo" width={"40%"} height={"80%"} />
+          <img src={Logo} alt="logo" width={"38%"} height={"80%"} style={{marginLeft:"-7%"}} />
         </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "45%",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginLeft: "5%",
-            }}
-          >
-            <button className={"btn text-white mx-3"}>Supervisor</button>
-            <button className={"btn text-white mx-3"}>Sales</button>
+        <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", width:"47%"}}>
+          <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", width:"100%"}}>
+            <button style={{fontSize:"14px"}} className={"btn text-white mx-3"}>Supervisor</button>
+            <button style={{fontSize:"14px"}} className={"btn text-white mx-3"}>Sales</button>
             <select
               defaultValue={"DEFAULT"}
-              className={"form-select bg-dark text-white border-0"}
-              style={{ width: "auto" }}
+              className={"form-select text-white border-0"}
+              style={{ width: "auto", backgroundColor:"#405058", fontSize:"14px"}}
             >
               <option value="DEFAULT" style={{ fontSize: "20px" }}>
                 Cash Register
@@ -88,20 +74,20 @@ function Admin(props) {
 
             <select
               className={
-                "form-select mx-3 d-flex bg-dark text-white align-items-center border-0"
+                "form-select mx-3 d-flex text-white align-items-center border-0"
               }
               defaultValue={"DEFAULT"}
-              style={{ width: "auto" }}
+              style={{ width: "auto", backgroundColor:"#405058",fontSize:"14px"}}
             >
-              <option value="DEFAULT">Gps</option>
+              <option value="DEFAULT"><i className="fa-solid fa-location-dot"></i> Gps</option>
             </select>
-            <button className="btn btn-success text-white d-flex align-items-center mb-3 mt-3">
+            <button style={{fontSize:"14px"}} className="btn btn-success text-white d-flex align-items-center mb-3 mt-3">
               {icons.onlineHelpIcon}
               Online Help
             </button>
           </div>
         </div>
-        <div className={"ps-5 d-flex align-items-center"}>
+        <div style={{width:"35%", marginLeft:"10%", backgroundColor:"#405058"}} className={"ps-2 d-flex align-items-center"}>
           <button className="btn btn-info text-white me-2">
             {icons.calendarIcon}
             {dashboardData.currentDate}
@@ -148,50 +134,49 @@ function Admin(props) {
       </div>
       <div className={"d-flex"}>
         <div
-          style={{ width: 94, backgroundColor: "rgb(125, 125, 125)" }}
-          className={"pt-3 left_side"}
+          style={{width: "8%", backgroundColor:"#405058", padding:"10px 10px 0px", display: "flex", flexDirection:"column", gap:"10px"}}
         >
           <button
             className="btn text-white button_hover"
-            style={{ width: 90, height: 68 }}
+            style={{ width: "100%", height: "11%", paddingTop:"12%", wordBreak:"break-all"}}
           >
             {icons.rocketIcon}
-            <p className="text text-center text-white">Plans</p>
+            <p style={{fontSize:"13px", marginTop:"8px"}} className="text text-center text-white">Plans</p>
           </button>
           <button
             className="btn text-white button_hover"
-            style={{ width: 90, height: 94 }}
+            style={{ width: "100%", height: "11%", paddingTop:"12%", wordBreak:"break-all"}}
           >
             {icons.cartIcon}
-            <p className="text text-center text-white">Applications</p>
+            <p style={{fontSize:"12px", marginTop:"8px"}} className="text text-center text-white">Applications</p>
           </button>
           <button
             className="btn text-white button_hover"
-            style={{ width: 90, height: 94 }}
+            style={{ width: "100%", height: "11%", paddingTop:"12%", wordBreak:"break-all"}}
           >
             {icons.stockIcon}
-            <p className="text text-center text-white">Stock</p>
+            <p style={{fontSize:"13px", marginTop:"8px"}} className="text text-center text-white">Stock</p>
           </button>
           <button
             className="btn text-white button_hover"
-            style={{ width: 90, height: 94 }}
+            style={{ width: "100%", height: "11%", paddingTop:"12%", wordBreak:"break-all"}}
           >
             {icons.clientsIcon}
-            <p className="text text-center text-white">Clients</p>
+            <p style={{fontSize:"13px", marginTop:"8px"}} className="text text-center text-white">Clients</p>
           </button>
           <button
             className="btn text-white button_hover"
-            style={{ width: 90, height: 68 }}
+            style={{ width: "100%", height: "11%", paddingTop:"12%", wordBreak:"break-all"}}
           >
             {icons.androidIcon}
-            <p className="text text-center text-white">Agents</p>
+            <p style={{fontSize:"13px", marginTop:"8px"}} className="text text-center text-white">Agents</p>
           </button>
           <button
             className="btn text-white button_hover"
-            style={{ width: 90, height: 68 }}
+            style={{ width: "100%", height: "11%", paddingTop:"12%", wordBreak:"break-all"}}
           >
             {icons.reportsIcon}
-            <p className="text text-center text-white">Reports</p>
+            <p style={{fontSize:"13px", marginTop:"8px"}} className="text text-center text-white">Reports</p>
           </button>
           <button
             onClick={() => navigate("/admin/settings")}
@@ -201,10 +186,10 @@ function Admin(props) {
                 ? " active_button_admin"
                 : "")
             }
-            style={{ width: 90, height: 68 }}
+            style={{ width: "100%", paddingTop:"12%", wordBreak:"break-all"}}
           >
             {icons.settingsIcon}
-            <p className="text text-center text-white m-0">Settings</p>
+            <p style={{fontSize:"13px", marginTop:"8px"}} className="text text-center text-white m-0">Settings</p>
           </button>
         </div>
         <Outlet />
