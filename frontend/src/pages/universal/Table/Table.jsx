@@ -222,7 +222,9 @@ const Table = (props) => {
       <div className="d-flex justify-content-end pe-5">
         {props.columns.length ? (
           <Pagination
-            onChange={(e, page) => props.handleChange(e, props.page)}
+            onChange={(e, page) => {
+              handleChange(e,page)
+            }}
             page={props.currentPage}
             count={props.totalPages}
             variant="outlined"
