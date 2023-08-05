@@ -62,13 +62,13 @@ function Teritory(props) {
             show: true,
         }, {
             id: 4,
-            title: "Edit",
+            title: "",
             key: "button",
             type: "jsx",
             show: true,
-            data: (item) => <button className="btn btn-warning" onClick={() => {
+            data: (item) => <button className="custom_edit_btn" onClick={() => {
                 props.editeTeritory(item);
-            }}>Edit</button>
+            }}><i class="fa fa-edit"></i></button>
         }
     ];
 
@@ -76,8 +76,8 @@ function Teritory(props) {
         <div style={{width: "100%"}}>
             <div className="d-flex flex-column align-items-start">
                 <div className="title">Territory</div>
-                <div className="btn btn-success ms-4" onClick={() => props.handleOpen()}>
-                    Add Territory +
+                <div className="custom_add_btn" onClick={() => props.handleOpen()}>
+                <i style={{fontSize:"20px"}} class="fa fa-plus"></i>Add Territory 
                 </div>
             </div>
             <Table
