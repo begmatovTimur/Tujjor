@@ -52,7 +52,7 @@ const Table = ({
   }, [dataProps]);
 
   function handleChange(e, page) {
-    handlePageChange(page);
+        handlePageChange(page);
     changePaginationTo({
       api: paginationApi,
       size: sizeOfPage,
