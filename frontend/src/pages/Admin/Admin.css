@@ -9,3 +9,16 @@
     border: 1px solid #fff !important;
     opacity: 1 !important;
 }
+.left_side svg {
+    width: 25px !important;
+}
+.left_side {
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100vh;
+}
+.button_hover {
+    display: flex;
+    height: 100px !important;
+}

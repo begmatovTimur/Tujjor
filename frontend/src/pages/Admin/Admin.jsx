@@ -8,11 +8,10 @@ import "./Admin.css";
 function Admin(props) {
   const dispatch = useDispatch();
   const location = useLocation();
-  const {dashboardData} = props.dashboardDataReducer;
+  const { dashboardData } = props.dashboardDataReducer;
   const navigate = useNavigate();
   const userBoxRef = useRef(null);
   const [userBox, setUserBox] = useState(false);
-
 
   function nextPermission() {
     if (

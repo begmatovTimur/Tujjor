@@ -65,47 +65,48 @@ public class TerritoryServiceImpl implements TerritoryService {
     }
 
 
-    public ResponseEntity<InputStreamResource> downloadExcel(List<?> data, List<String> headers) {
-        try (Workbook workbook = new XSSFWorkbook()) {
-            Sheet sheet = workbook.createSheet("User Data");
-            int rowIdx = 0;
+        public ResponseEntity<InputStreamResource> downloadExcel(List<?> data, List<String> headers) {
+            try (Workbook workbook = new XSSFWorkbook()) {
+                Sheet sheet = workbook.createSheet("User Data");
+                int rowIdx = 0;
 
-            // Create a header row
-            Row headerRow = sheet.createRow(rowIdx++);
-            for (int i = 0; i < headers.size(); i++) {
-                headerRow.createCell(i).setCellValue(headers.get(i));
-            }// Populate the data rows using reflection
-            for (Object obj : data) {
-                Row dataRow = sheet.createRow(rowIdx++);
-                int colIdx = 0;
-                for (String header : headers) {
-                    Object value = getPropertyValue(obj, header);
-                    dataRow.createCell(colIdx++).setCellValue(value == null ? "" : value.toString());
+                // Create a header row
+                Row headerRow = sheet.createRow(rowIdx++);
+                for (int i = 0; i < headers.size(); i++) {
+                    headerRow.createCell(i).setCellValue(headers.get(i));
+                }// Populate the data rows using reflection
+                for (Object obj : data) {
+                    Row dataRow = sheet.createRow(rowIdx++);
+                    int colIdx = 0;
+                    for (String header : headers) {
+                        Object value = getPropertyValue(obj, header);
+                        dataRow.createCell(colIdx++).setCellValue(value == null ? "" : value.toString());
+                    }
                 }
+
+                // Convert the workbook to a byte array
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                workbook.write(baos);
+                byte[] bytes = baos.toByteArray();
+
+                // Prepare the response for download
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.add("Content-Disposition", "attachment; filename=user_data.xlsx");
+
+                // Create an InputStreamResource from the byte array
+                InputStreamResource inputStreamResource = new InputStreamResource(new ByteArrayInputStream(bytes));
+
+                return ResponseEntity
+                        .ok()
+                        .headers(responseHeaders)
+                        .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                        .body(inputStreamResource);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            // Convert the workbook to a byte array
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            workbook.write(baos);
-            byte[] bytes = baos.toByteArray();
-
-            // Prepare the response for download
-            HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.add("Content-Disposition", "attachment; filename=user_data.xlsx");
-
-            // Create an InputStreamResource from the byte array
-            InputStreamResource inputStreamResource = new InputStreamResource(new ByteArrayInputStream(bytes));
-
-            return ResponseEntity
-                    .ok()
-                    .headers(responseHeaders)
-                    .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
-                    .body(inputStreamResource);
-        } catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
-    }
+
 
     private Object getPropertyValue(Object obj, String propertyName) {
         try {
@@ -129,9 +130,12 @@ public class TerritoryServiceImpl implements TerritoryService {
                 .build();
     }
 
+
+
     @Override
     public HttpEntity<?> getTerritories() {
-        return ResponseEntity.ok(territoryRepository.findAll());
+        List<Territory> territories = territoryRepository.findAll();
+        return ResponseEntity.ok(territories);
     }
 
     @Override
