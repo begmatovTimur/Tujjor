@@ -22,7 +22,7 @@ export default function (url, method, data,searchParam="") {
                     method: method,
                     data: data,
                     headers: {
-                        "token": item,
+                        "token": localStorage.getItem("access_token"),
                         "searchParam": searchParam
                     }
                 })

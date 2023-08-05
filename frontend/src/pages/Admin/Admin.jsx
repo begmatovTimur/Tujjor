@@ -47,25 +47,20 @@ function Admin(props) {
   };
 
   return (
-    <div className={"bg-dark "} style={{ height: 80, width: "auto" }}>
-      <div className="d-flex justify-content-between">
+    <div className={"bg-dark "} style={{height: "100vh", width: "auto" }}>
+      <div style={{height:"10%"}} className="d-flex">
         <div
-          className="ps-2 pt-2 d-flex justify-content-center"
+          className="ps-1 pt-2 d-flex justify-content-center"
           style={{
-            width: 180,
-            height: 80,
+            width: "9.9%",
+            height: "100%",
             backgroundColor: "rgb(77, 77, 77)",
           }}
         >
-          <div
-            style={{ width: 60, height: 60 }}
-            onClick={() => navigate("/admin")}
-          >
-            <img src={Logo} alt="logo" width={60} height={60} />
-          </div>
+          <img src={Logo} alt="logo" width={"40%"} height={"80%"} />
         </div>
-        <div>
-          <div className="d-flex align-items-center justify-content-between ls-5">
+        <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", width:"45%"}}>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginLeft:"5%"}}>
             <button className={"btn text-white mx-3"}>Supervisor</button>
             <button className={"btn text-white mx-3"}>Sales</button>
             <select
@@ -87,7 +82,7 @@ function Admin(props) {
             >
               <option value="DEFAULT">Gps</option>
             </select>
-            <button className="btn btn-success text-white d-flex align-items-center mb-2 mt-2">
+            <button className="btn btn-success text-white d-flex align-items-center mb-3 mt-3">
               {icons.onlineHelpIcon}
               Online Help
             </button>
