@@ -21,7 +21,7 @@ const Settings = ({ data, getData, activeButtonIndex, setCurrentIndex }) => {
   return (
     <div className="settings">
       <div className="content">
-        <div className="left  pt-5">
+        <div className="left  pt-3">
           <button className="btn_panel">Settings Panel</button>
           {data.map((item, index) => (
             <button
@@ -36,7 +36,7 @@ const Settings = ({ data, getData, activeButtonIndex, setCurrentIndex }) => {
                 setCurrentIndex(index);
               }}
             >
-              {index + 1}. {item.name}
+              <span>{index + 1}</span>. {item.name}
             </button>
           ))}
         </div>
