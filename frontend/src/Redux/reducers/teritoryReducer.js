@@ -50,6 +50,7 @@ const teritoryReducer = createSlice({
         },
         handleTitle:(state, action)=>{
             state.title = action.payload
+            console.log(state.title)
         },
         handleCode:(state, action)=>{
             state.code = action.payload
