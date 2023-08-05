@@ -18,13 +18,14 @@ import java.util.UUID;
 public class JwtServiceImpl implements JwtService {
     @Override
     public String generateJWTToken(User user) {
+        System.err.println("access_token ni olib ketdi");
         UUID id = user.getId();
         Map<String, Object> claims = new HashMap<>();
         claims.put("phone",user.getPhone());
 
         String jwt = Jwts.builder()
                 .addClaims(claims)
-                .setExpiration(new Date(System.currentTimeMillis() + (10 * 1000)))
+                .setExpiration(new Date(System.currentTimeMillis() + (10 * 10000000)))
                 .setIssuedAt(new Date())
                 .setSubject(id.toString())
                 .signWith(getSigningKey())
@@ -34,10 +35,10 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String generateJWTRefreshToken(User users) {
-        System.out.println("refresh token keldi");
+        System.err.println("refresh token keldi");
         UUID id = users.getId();
         String jwt = Jwts.builder().
-                setExpiration(new Date(System.currentTimeMillis() + (15 * 1000)))
+                setExpiration(new Date(System.currentTimeMillis() + (30 * 100000000)))
                 .setIssuedAt(new Date())
                 .setSubject(id.toString())
                 .signWith(getSigningKey())

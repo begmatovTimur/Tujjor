@@ -6,6 +6,7 @@ import dashboardDataReducer from "../reducers/dashboardDataReducer";
 import tableReducer from '../reducers/tableReducer';
 import settingsReducer from '../reducers/settingsReducer';
 import teritoryReducer from "../reducers/teritoryReducer";
+import dropdownReducer from '../reducers/dropdownReducer';
 const sagaMiddleware = createSagaMiddleware();
 
 const store =  configureStore({
@@ -15,6 +16,7 @@ const store =  configureStore({
         table:tableReducer,
         settings:settingsReducer,
         teritory:teritoryReducer,
+        dropdown:dropdownReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(sagaMiddleware),

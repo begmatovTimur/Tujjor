@@ -21,12 +21,13 @@ import java.util.UUID;
 
 @Repository
 public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
-    @Query(value=" SELECT t.active, t.latitude, t.longitude, id, code, name, region FROM territory t  ",nativeQuery = true)
+    @Query(value = " SELECT t.active, t.latitude, t.longitude, id, code, name, region FROM territory t  ", nativeQuery = true)
     List<TerritoryProjection> findAllByCreatedAt();
 
     @Query(value = "select id,region,name,code,longitude,latitude,active from territory t where t.active = :status and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')) like lower(concat('%',:search,'%')) order by id",nativeQuery = true)
     Page<TerritoryProjection> findTerritoryByActiveAndRegionName(String search, Boolean status, Pageable pageable);
 
-    @Query(value = "select id,region,name,code,longitude,latitude,active from territory t where lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')) like lower(concat('%',:search,'%')) order by id",nativeQuery = true)
+
+    @Query(value = "select id,region,name,code,longitude,latitude,active from territory t where lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')) like lower(concat('%',:search,'%')) order by id", nativeQuery = true)
     Page<TerritoryProjection> findTerritoryByRegionAndName(String search, Pageable pageable);
 }

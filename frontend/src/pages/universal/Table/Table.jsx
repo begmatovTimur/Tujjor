@@ -1,159 +1,107 @@
 import Select from "react-select";
-import {connect, useDispatch} from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { tableActions } from "../../../Redux/reducers/tableReducer";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import { saveAs } from "file-saver";
 import { useLocation } from "react-router-dom";
 import "./Table.css";
 import Filter from "../Filter/Filter";
 import axios from "axios";
-const FileSaver = require("file-saver");
-const Table = ({
-  columnsProps,
-  dataProps,
-  columnOrderModalVisibility,
-  columns,
-  pagination,
-  changeSizeMode,
-  setColumnModalVisibility,
-  claimData,
-  filterVisibility,
-  paginationApi,
-  handlePageChange,
-  changePaginationTo,
-  sizeOfPage,
-  data,
-  additionalColumns,
-  changeSizeModeOptions,
-  columnOrderMode,
-  getExcelFile,
-  currentPage,
-  saveColumnOrder,
-  setCurrentDragingColumn,
-  dropColumn,
-  modalColumns,
-  setModalColumns,
-                 changeQuickSearch
-}) => {
-  const location = useLocation();
+import Dropdown from "../Dropdown/Dropdown";
+const Table = (props) => {
   useEffect(() => {
-    claimData({ columns: columnsProps, data: dataProps });
-    if (pagination === true && !paginationApi)
+    props.claimData({ columns: props.columnsProps, data: props.dataProps });
+    if (props.pagination === true && !props.paginationApi)
       alert("Pagination API is  required!");
-    if (paginationApi) {
-      changePaginationTo({
-        api: paginationApi,
-        size: sizeOfPage === 0 ? changeSizeModeOptions[0] : sizeOfPage,
-        page: currentPage,
+    if (props.paginationApi) {
+      props.changePaginationTo({
+        api: props.paginationApi,
+        size:
+          props.sizeOfPage === 0
+            ? props.changeSizeModeOptions[0]
+            : props.sizeOfPage,
+        page: props.currentPage,
       });
     }
-  }, [dataProps]);
+  }, [props.dataProps]);
 
   function handleChange(e, page) {
-    changeQuickSearch("")
-    handlePageChange(page);
-    changePaginationTo({
-      api: paginationApi,
-      size: sizeOfPage,
-      page,
+    props.handlePageChange(page);
+    props.changePaginationTo({
+      api: props.paginationApi,
+      size: props.sizeOfPage,
+      page: props.page,
     });
   }
-
+  const [optionsActive] = useState([
+    { value: "", label: "All" },
+    { value: "true", label: "Active" },
+    { value: "false", label: "Inactive" },
+  ]);
   return (
     <div className="universal_table">
-      <label style={{ maxWidth: "500px" }}>
-        <span>Table Setup</span>
-        <Select
-          isMulti
-          name="columns"
-          options={columns.map((item) => ({
-            label: item.title,
-            value: item.id,
-          }))}
-          onChange={(state, action) =>
-            filterVisibility({ selectedItem: state, action })
-          }
-          className="basic-multi-select"
-          classNamePrefix="select"
-        />
-      </label>
-
+      <Filter
+        search={[
+          {
+            name: "active",
+            multi: false,
+            options: optionsActive,
+            defaultValue: { value: "", label: "All" },
+            placeholder: "Active",
+          },
+        ]}
+      />
       <div>
         <div className="d-flex justify-content-between align-items-center gap-2">
-          <div className="d-flex gap-4 align-items-end">
-            {changeSizeMode && columns.length ? (
-              <label style={{ width: "140px" }}>
-                <span>Items in per page:</span>
-
-                <select
-                  className="form-select"
-                  defaultValue={"10"}
-                  onChange={(e) => {
-                    handlePageChange(1);
-                    changePaginationTo({
-                      api: paginationApi,
-                      size: parseInt(e.target.value),
-                      page: 1,
-                    });
-                  }}
-                >
-                  {changeSizeModeOptions.map((item, index) => (
-                    <option value={item} key={index}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            ) : (
-              ""
-            )}
+          <div className="d-flex align-items-end">
+            <Dropdown
+              multiSelect={false}
+              dropdownId="1"
+              body={props.changeSizeModeOptions}
+              onItemClick={(item) => {
+                props.handlePageChange(1);
+                props.changePaginationTo({
+                  api: props.paginationApi,
+                  size: item,
+                  page: 1,
+                });
+              }}
+            />
+            <Dropdown
+              customTitle="Table Setup"
+              multiSelect={true}
+              dropdownId="2"
+              body={props.columnsProps.map((item) => item.title)}
+              onItemClick={(item) => {
+                props.filterVisibility(item);
+              }}
+            />
             <button
               style={{ width: "100px" }}
-              className="column_order"
+              className="custom_btn"
               download
               onClick={() => {
-                getExcelFile(data);
+                props.getExcelFile(props.data);
               }}
             >
               Excel
             </button>
-            {/* 👇 Hide / Show Columns 👇  */}
-            <label style={{ width: "200px" }}>
-              <span>Table Setup</span>
-              <Select
-                isMulti
-                name="columns"
-                options={columns.map((item) => ({
-                  label: item.title,
-                  value: item.id,
-                }))}
-                onChange={(state, action) =>
-                  filterVisibility({ selectedItem: state, action })
-                }
-                className="basic-multi-select"
-                classNamePrefix="select"
-              />
-            </label>
 
             {/* 👇 Column Order 👇  */}
-           
             <button
               data-toggle="modal"
               data-target="#exampleModal"
-              className="column_order"
-              onClick={() => setColumnModalVisibility(true)}
+              className="custom_btn"
+              onClick={() => props.setColumnModalVisibility(true)}
             >
               Column Order
             </button>
           </div>
 
           {/* 👇 Column Order 👇  */}
-          {columnOrderMode && columns.length ? (
-            <Filter
-              paginationApi={"/territory/pagination"}
-              quickSearch
-            ></Filter>
+          {props.columnOrderMode && props.columns.length ? (
+            <Filter quickSearch></Filter>
           ) : (
             ""
           )}
@@ -162,7 +110,7 @@ const Table = ({
 
       {/* Bootstrap Modal */}
 
-      {columnOrderModalVisibility ? (
+      {props.columnOrderModalVisibility ? (
         <div
           className="modal fade"
           id="exampleModal"
@@ -187,15 +135,15 @@ const Table = ({
                 </button>
               </div>
               <div className="modal-body d-flex flex-column gap-1">
-                {modalColumns.map((item, index) => (
+                {props.modalColumns.map((item, index) => (
                   <div
                     draggable={true}
                     onDrop={(e) => {
                       e.preventDefault();
-                      dropColumn(index);
+                      props.dropColumn(index);
                     }}
                     onDragStart={() => {
-                      setCurrentDragingColumn(index);
+                      props.setCurrentDragingColumn(index);
                     }}
                     key={item.id}
                     onDragOverCapture={(e) => e.preventDefault()}
@@ -210,7 +158,7 @@ const Table = ({
               </div>
               <div className="modal-footer">
                 <button
-                  onClick={() => setModalColumns(columns)}
+                  onClick={() => props.setModalColumns(props.columns)}
                   type="button"
                   className="btn btn-secondary"
                   data-dismiss="modal"
@@ -218,7 +166,7 @@ const Table = ({
                   Close
                 </button>
                 <button
-                  onClick={saveColumnOrder}
+                  onClick={props.saveColumnOrder}
                   data-dismiss="modal"
                   type="button"
                   className="btn btn-primary"
@@ -238,23 +186,33 @@ const Table = ({
       <table className="table mytable">
         <thead>
           <tr>
-            {columns.map((item) => (
-              <th key={item.id}>{item.show ? item.title : ""}</th>
+            {props.columns.map((item) => (
+              <th className={item.show ? "" : " hidden"} key={item.id}>
+                {item.show ? item.title : ""}
+              </th>
             ))}
-            {additionalColumns ? <th>More</th> : ""}
+            {props.additionalColumns ? <th>More</th> : ""}
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
+          {props.data.map((item) => (
             <tr key={item.id}>
-              {columns.map((col) =>
+              {props.columns.map((col) =>
                 col.type === "jsx" ? (
-                  <td>{col.data ? col.data(item) : ""}</td>
+                  <td className={col.show ? "" : " hidden"}>
+                    {col.data ? col.data(item) : ""}
+                  </td>
                 ) : (
-                  <td key={col.id}>{col.show ? item[col.key] : ""}</td>
+                  <td className={col.show ? "" : " hidden"} key={col.id}>
+                    {item[col.key]}
+                  </td>
                 )
               )}
-              {additionalColumns ? <td>{additionalColumns}</td> : ""}
+              {props.additionalColumns ? (
+                <td>{props.additionalColumns}</td>
+              ) : (
+                ""
+              )}
             </tr>
           ))}
         </tbody>
@@ -262,13 +220,17 @@ const Table = ({
 
       {/* 👇 Pagination 👇  */}
       <div className="d-flex justify-content-end pe-5">
-        <Pagination
-          onChange={(e,page)=>handleChange(e,page)}
-          page={currentPage}
-          count={Math.ceil(dataProps.length / sizeOfPage)}
-          variant="outlined"
-          shape="rounded"
-        />
+        {props.columns.length ? (
+          <Pagination
+            onChange={(e, page) => props.handleChange(e, props.page)}
+            page={props.currentPage}
+            count={props.totalPages}
+            variant="outlined"
+            shape="rounded"
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
