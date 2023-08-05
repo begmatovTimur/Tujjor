@@ -1,6 +1,7 @@
 package com.example.backend.Services.TerritoryService;
 
 import com.example.backend.DTO.ExcelDTO;
+import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Projection.TerritoryProjection;
@@ -14,24 +15,20 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,7 +58,7 @@ public class TerritoryServiceImpl implements TerritoryService {
 
     @Override
     public ResponseEntity<InputStreamResource> downloadExcel(ExcelDTO userPayload) {
-        return downloadExcel(userPayload.getData(),userPayload.getHeaders());
+        return downloadExcel(userPayload.getData(), userPayload.getHeaders());
     }
 
 
@@ -107,6 +104,7 @@ public class TerritoryServiceImpl implements TerritoryService {
         return null;
     }
 
+
     private Object getPropertyValue(Object obj, String propertyName) {
         try {
             Field field = obj.getClass().getDeclaredField(propertyName);
@@ -129,22 +127,24 @@ public class TerritoryServiceImpl implements TerritoryService {
                 .build();
     }
 
+
     @Override
     public HttpEntity<?> getTerritories() {
-        return ResponseEntity.ok(territoryRepository.findAll());
+        List<Territory> territories = territoryRepository.findAll();
+        return ResponseEntity.ok(territories);
     }
 
     @Override
-    public HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request) {
+    public HttpEntity<?> pagination(Integer page, Integer limit, HttpServletRequest request) {
         try {
-            Pageable pageable = PageRequest.of(page,limit);
-            JsonNode  jsonNode = WrapFromStringToObject(request);
+            Pageable pageable = PageRequest.of(page, limit);
+            JsonNode jsonNode = WrapFromStringToObject(request);
             Page<TerritoryProjection> territories;
             if (!jsonNode.get("active").asText().equals("")) {
                 territories = territoryRepository.findTerritoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(),
                         jsonNode.get("active").asBoolean(), pageable);
             } else {
-                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(),pageable);
+                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(), pageable);
             }
             if (territories.isEmpty() && territoryRepository.count() == 1) {
                 return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
@@ -156,8 +156,14 @@ public class TerritoryServiceImpl implements TerritoryService {
     }
 
     @Override
-    public ResponseEntity<Resource> getExcelFile() throws IOException {
-        List<Territory> territoryFilter = territoryRepository.findAll();
+    public ResponseEntity<Resource> getExcelFile(SearchActiveDTO dto) throws IOException {
+        List<TerritoryProjection> territoryFilter = null;
+        if (dto.getActive().equals("ALL")) {
+            territoryFilter = territoryRepository.findByQuickSearchWithoutActive(dto.getQuickSearch());
+        } else {
+            territoryFilter = territoryRepository.findByQuickSearch(Boolean.valueOf(dto.getActive()),dto.getQuickSearch());
+        }
+        System.out.println(territoryFilter);
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Company info");
         Row row = sheet.createRow(0);
@@ -169,7 +175,7 @@ public class TerritoryServiceImpl implements TerritoryService {
         row.createCell(5).setCellValue("Longitude");
         row.createCell(6).setCellValue("Latitude");
         int counter = 1;
-        for (Territory territory : territoryFilter) {
+        for (TerritoryProjection territory : territoryFilter) {
             Row dataRow = sheet.createRow(counter);
             counter++;
             dataRow.createCell(0).setCellValue(territory.getId().toString());
@@ -196,7 +202,6 @@ public class TerritoryServiceImpl implements TerritoryService {
                 .headers(headers)
                 .body(resource);
     }
-
 
 
 }

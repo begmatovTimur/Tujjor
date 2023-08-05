@@ -25,7 +25,7 @@ public class JwtServiceImpl implements JwtService {
         Date hourFromCurrentTime = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24);
         String jwt = Jwts.builder()
                 .addClaims(claims)
-                .setExpiration(new Date(System.currentTimeMillis() + (10 * 10000000)))
+                .setExpiration(hourFromCurrentTime)
                 .setIssuedAt(new Date())
                 .setSubject(id.toString())
                 .signWith(getSigningKey())
