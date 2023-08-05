@@ -17,10 +17,7 @@ const Table = (props) => {
     if (props.paginationApi) {
       props.changePaginationTo({
         api: props.paginationApi,
-        size:
-          props.sizeOfPage === 0
-            ? props.changeSizeModeOptions[0]
-            : props.sizeOfPage,
+        size: props.changeSizeModeOptions[0],
         page: props.currentPage,
       });
     }
@@ -51,7 +48,7 @@ const Table = (props) => {
           },
         ]}
       />
-      <div>
+      <div className="bg-white p-3">
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-end ">
