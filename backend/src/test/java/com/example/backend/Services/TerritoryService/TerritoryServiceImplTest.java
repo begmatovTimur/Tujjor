@@ -54,8 +54,11 @@ class TerritoryServiceImplTest {
         assertEquals(territories, response.getBody());
     }
 
+    // TerritoryServiceImplTest.java
+
     @Test
     void testAddTerritory() {
+<<<<<<< HEAD
         TerritoryDTO mockTerritory = TerritoryDTO.builder()
                 .region("Bukhara")
                 .name("Kagan")
@@ -66,10 +69,24 @@ class TerritoryServiceImplTest {
                 .build();
         Territory territory = underTest.addTerritory(mockTerritory);
         System.out.println(territory);
+=======
+        // Prepare test data
+        TerritoryDTO mockTerritoryDTO = new TerritoryDTO();
+        mockTerritoryDTO.setRegion("Test Region");
+        mockTerritoryDTO.setTitle("Test Title");
+        mockTerritoryDTO.setCode("TEST001");
+        mockTerritoryDTO.setActive(true);
+        mockTerritoryDTO.setLongitude(10.12345);
+        mockTerritoryDTO.setLatitude(20.54321);
+        when(territoryRepository.save(any(Territory.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        Territory resultTerritory = territoryService.addTerritory(mockTerritoryDTO);
+        assertEquals("Test Region", resultTerritory.getRegion()); // Line 76: NullPointerException occurs here
+>>>>>>> a465415d03b8004afc48154de9526a19f2a1f499
     }
 
     @Test
     void testUpdateTerritory() {
+<<<<<<< HEAD
 //        UUID id = UUID.randomUUID();
 //        TerritoryDTO territoryDTO = new TerritoryDTO();
 //        territoryDTO.setRegion("Sample Region");
@@ -212,3 +229,39 @@ class TerritoryServiceImplTest {
     }
 
 
+=======
+        // Prepare test data
+        UUID mockTerritoryId = UUID.randomUUID();
+        TerritoryDTO mockTerritoryDTO = new TerritoryDTO();
+        mockTerritoryDTO.setRegion("Updated Region");
+        mockTerritoryDTO.setTitle("Updated Title");
+        mockTerritoryDTO.setCode("UPDATED001");
+        mockTerritoryDTO.setActive(false);
+        mockTerritoryDTO.setLongitude(50.12345);
+        mockTerritoryDTO.setLatitude(60.54321);
+
+        // Mock behavior of repository save method
+        when(territoryRepository.save(any(Territory.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Save the territory first
+        Territory savedTerritory = territoryService.addTerritory(mockTerritoryDTO);
+        UUID savedTerritoryId = savedTerritory.getId();
+
+        // Perform the actual test
+        Territory resultTerritory = territoryService.updateTerritory(savedTerritoryId, mockTerritoryDTO);
+
+        // Assert the result
+        assertEquals(savedTerritoryId, resultTerritory.getId());
+        assertEquals("Updated Region", resultTerritory.getRegion());
+        assertEquals("Updated Title", resultTerritory.getTitle());
+        assertEquals("UPDATED001", resultTerritory.getCode());
+        assertEquals(false, resultTerritory.getActive());
+        assertEquals(50.12345, resultTerritory.getLongitude());
+        assertEquals(60.54321, resultTerritory.getLatitude());
+
+        // Verify that territoryRepository.save was called twice (once for setting id and once for updating)
+        verify(territoryRepository, times(2)).save(any(Territory.class));
+    }
+
+}
+>>>>>>> a465415d03b8004afc48154de9526a19f2a1f499
