@@ -57,3 +57,12 @@
   color: #fff;
   font-size: 12px;
 }
+
+.custom_btn_success {
+  background-color: #5cb85c;
+  height: 100%;
+  border: none;
+}
+.custom_btn_success svg {
+  width: 30px !important;
+}

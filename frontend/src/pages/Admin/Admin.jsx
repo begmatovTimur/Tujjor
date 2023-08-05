@@ -47,7 +47,7 @@ function Admin(props) {
 
   return (
     <div className={"bg-dark "} style={{height: "100vh", width: "auto", backgroundColor:"#405058"}}>
-      <div style={{height:"10%", backgroundColor:"#405058"}} className="d-flex">
+      <div style={{height:"7%", backgroundColor:"#405058"}} className="d-flex">
         <div
           className="ps-1 pt-2 d-flex justify-content-center"
           style={{
@@ -56,10 +56,10 @@ function Admin(props) {
             backgroundColor: "#405065",
           }}
         >
-          <img src={Logo} alt="logo" width={"38%"} height={"80%"} style={{marginLeft:"-7%"}} />
+          <img src={Logo} alt="logo" width={"38%"} height={"80%"} style={{marginLeft:"-7%",objectFit:"contain"}} />
         </div>
         <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", width:"47%"}}>
-          <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", width:"100%"}}>
+          <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", width:"100%",height:"100%"}}>
             <button style={{fontSize:"14px"}} className={"btn text-white mx-3"}>Supervisor</button>
             <button style={{fontSize:"14px"}} className={"btn text-white mx-3"}>Sales</button>
             <select
@@ -81,7 +81,7 @@ function Admin(props) {
             >
               <option value="DEFAULT"><i className="fa-solid fa-location-dot"></i> Gps</option>
             </select>
-            <button style={{fontSize:"14px"}} className="btn btn-success text-white d-flex align-items-center mb-3 mt-3">
+            <button style={{fontSize:"14px"}} className="custom_btn_success text-white d-flex align-items-center h-100">
               {icons.onlineHelpIcon}
               Online Help
             </button>
