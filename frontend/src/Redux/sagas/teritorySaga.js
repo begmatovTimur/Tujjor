@@ -2,7 +2,7 @@ import {takeEvery, select, put, call} from "redux-saga/effects"
 import apiCall from "../../Config/apiCall";
 import {teritoryAction} from  "../reducers/teritoryReducer"
 import { ErrorNotify } from "../../tools/Alerts";
-
+import { SuccessNotify } from "../../tools/Alerts";
 function* addTeritory(action){
     const currentState = yield select((state) => state.teritory);
     console.log(currentState.itemForTeritoryEdite)
@@ -16,6 +16,7 @@ function* addTeritory(action){
             yield put(teritoryAction.resetAllTeritoryData())
         }else {
             const res = yield apiCall("/territory", "POST", action.payload)
+            SuccessNotify("Teritory added Successfully!")
             yield call(getTeritory)
             yield put(teritoryAction.changeModal(false))
             yield put(teritoryAction.resetAllTeritoryData())

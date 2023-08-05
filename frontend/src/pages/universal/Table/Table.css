@@ -64,3 +64,6 @@
 tbody tr:hover  td {
   background-color: #eee !important;
 }
+.table_responsive {
+  min-height: 300px;
+}
