@@ -19,14 +19,14 @@ public class Client {
     @OneToOne
     private Territory territory;
     private String name;
-    private String address;
+    @OneToOne
+    private Address address;
     private String phone;
     private String tin;
     private String companyName;
     private double longitude;
     private double latitude;
-
-    @OneToOne
+    private Boolean active;
+    @ManyToOne
     private CustomerCategory category;
-
 }

@@ -39,8 +39,10 @@ public class TerritoryController {
     public HttpEntity<?> pagination(@RequestParam Integer page,@RequestParam Integer limit,HttpServletRequest request) {
         return territoryService.pagination(page,limit,request);
     };
+
+
     @GetMapping("/excel")
-    public ResponseEntity<Resource> excel(HttpServletRequest request) throws IOException {
+    public ResponseEntity<Resource> excel() throws IOException {
         return territoryService.getExcelFile();
     };
 
