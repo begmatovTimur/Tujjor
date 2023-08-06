@@ -65,28 +65,12 @@ function Admin(props) {
                         width: "100%",
                         height: "100%"
                     }}>
-                        <button style={{fontSize: "14px"}} className={"btn text-white"}>Supervisor</button>
-                        <button style={{fontSize: "14px"}} className={"btn text-white"}>Sales</button>
-                        <select
-                            defaultValue={"DEFAULT"}
-                            className={"form-select text-white border-0"}
-                            style={{width: "auto", backgroundColor: "#405058", fontSize: "14px"}}
-                        >
-                            <option value="DEFAULT" style={{fontSize: "20px"}}>
-                                Cash Register
-                            </option>
-                        </select>
-                        <select
-                            className={
-                                "form-select d-flex text-white align-items-center border-0"
-                            }
-                            defaultValue={"DEFAULT"}
-                            style={{width: "auto", backgroundColor: "#405058", fontSize: "14px"}}
-                        >
-                            <option value="DEFAULT"> Gps</option>
-                        </select>
+                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Supervisor</button>
+                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Sales</button>
+                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Cash Register</button>
+                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Gps</button>
                         <button style={{fontSize: "14px"}}
-                                className="custom_btn_success text-white d-flex align-items-center h-100">
+                                className="custom_btn_success text-white d-flex align-items-center h-100 ms-3">
                             {icons.onlineHelpIcon}
                             Online Help
                         </button>
