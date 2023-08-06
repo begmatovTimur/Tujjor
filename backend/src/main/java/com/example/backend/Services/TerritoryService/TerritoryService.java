@@ -1,6 +1,7 @@
 package com.example.backend.Services.TerritoryService;
 
 import com.example.backend.DTO.ExcelDTO;
+import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 
@@ -24,6 +25,6 @@ public interface TerritoryService {
 
     HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request);
 
-    ResponseEntity<Resource> getExcelFile() throws IOException;
+    ResponseEntity<Resource> getExcelFile(SearchActiveDTO dto) throws IOException;
 
 }

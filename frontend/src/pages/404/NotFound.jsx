@@ -14,7 +14,7 @@ const NotFound = () => {
           The page you are looking for might have been removed had its name
           changed or is temporarily unavailable.
         </p>
-        <p onClick={()=>navigate("/login")}>Go To Homepage</p>
+        <p onClick={()=>navigate("/admin")}>Go To Homepage</p>
       </div>
     </div>
   );

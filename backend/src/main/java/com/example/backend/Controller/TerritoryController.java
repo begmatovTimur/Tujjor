@@ -1,21 +1,10 @@
 package com.example.backend.Controller;
 
-import com.example.backend.DTO.ExcelDTO;
+import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
-import com.example.backend.Entity.Territory;
 import com.example.backend.Services.TerritoryService.TerritoryService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.security.PermitAll;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -42,8 +29,13 @@ public class TerritoryController {
 
 
     @GetMapping("/excel")
-    public ResponseEntity<Resource> excel() throws IOException {
-        return territoryService.getExcelFile();
+    public ResponseEntity<Resource> excel(HttpServletRequest request) throws IOException {
+        String quickSearch = request.getHeader("quickSearch");
+        SearchActiveDTO searchActiveDTO = new SearchActiveDTO();
+        searchActiveDTO.setActive(request.getHeader("active"));
+        searchActiveDTO.setQuickSearch(quickSearch);
+        System.out.println(searchActiveDTO);
+        return territoryService.getExcelFile(searchActiveDTO);
     };
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")

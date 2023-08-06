@@ -80,8 +80,19 @@ function* changeSizeOfPage(action) {
   });
 }
 function* downloadExcelFile(action) {
+  const currentState = yield select((state) => state.table);
+  const x = currentState.formInputs
+  let obj = {
+    active : x.active.value,
+    quickSearch:x.quickSearch
+  }
+  if(obj.active===undefined) obj.active = "ALL";
+  console.log(obj);
   axios
-  .get("http://localhost:8080/api/territory/excel", { responseType: 'blob' })
+  .get("http://localhost:8080/api/territory/excel", { responseType: 'blob', headers:{
+    active:obj.active,
+    quickSearch:obj.quickSearch,
+  }})
   .then((res) => {
     const file = new Blob([res.data], {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
