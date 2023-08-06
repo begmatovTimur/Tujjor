@@ -141,10 +141,11 @@ public class TerritoryServiceImpl implements TerritoryService {
             JsonNode jsonNode = WrapFromStringToObject(request);
             Page<TerritoryProjection> territories;
             if (!jsonNode.get("active").asText().equals("")) {
+                System.out.println(pageable);
                 territories = territoryRepository.findTerritoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(),
                         jsonNode.get("active").asBoolean(), pageable);
             } else {
-                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(), pageable);
+                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(),pageable);
             }
             if (territories.isEmpty() && territoryRepository.count() == 1) {
                 return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
