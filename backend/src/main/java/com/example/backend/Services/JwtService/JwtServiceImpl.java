@@ -18,7 +18,6 @@ import java.util.UUID;
 public class JwtServiceImpl implements JwtService {
     @Override
     public String generateJWTToken(User user) {
-        System.err.println("access_token ni olib ketdi");
         UUID id = user.getId();
         Map<String, Object> claims = new HashMap<>();
         claims.put("phone",user.getPhone());
@@ -35,7 +34,6 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String generateJWTRefreshToken(User users) {
-        System.err.println("refresh token keldi");
         UUID id = users.getId();
         String jwt = Jwts.builder().
                 setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))

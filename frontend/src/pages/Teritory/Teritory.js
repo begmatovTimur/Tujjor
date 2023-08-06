@@ -7,8 +7,6 @@ import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
 
 function Teritory(props) {
-    const [openModal, setOpenModal] = useState(false)
-    const [txt, setTxt] = useState("")
 
     const {teritory} = props
 
@@ -73,6 +71,7 @@ function Teritory(props) {
                 <i style={{fontSize:"20px"}} className="fa fa-plus"></i>Add Territory
                 </div>
             </div>
+
             <Table
                 pagination={true}
                 changeSizeMode={true}

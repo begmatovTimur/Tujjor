@@ -83,10 +83,10 @@ const UniversalModal = ({inpData = "", isOpen, closeFunction, modalTitle, width,
                                                     inpData?.map((item, index)=>{
                                                         return <div key={index}>
                                                             {
-                                                                item.type === "checkbox"?
+                                                                item?.type === "checkbox"?
                                                                     <div style={{display:"flex", marginTop:"10px", gap:(item?.title === undefined || item?.title === "")? "0%" : "10%", justifyContent:"space-between"}}>
                                                                         <span style={{maxWidth:"20%", wordBreak:"break-all"}}>{(item?.title === undefined)? "" : item?.title + " "} </span>
-                                                                        <label style={{position:"relative",width: (item?.title === undefined || item?.title === "")?"100%":"70%"}}><input className={'form-check'} type={item?.type} value={item?.value} style={{width: "25px"}} onChange={item?.onChange}/> <span style={{position:"absolute", left:"35px", top:"8px"}}>{item.labelValue}</span></label>
+                                                                        <label style={{position:"relative",width: (item?.title === undefined || item?.title === "")?"100%":"70%"}}><input className={'form-check'} type={item?.type} checked={item?.value} style={{width: "25px"}} onChange={item?.onChange}/> <span style={{position:"absolute", left:"35px", top:"8px"}}>{item?.labelValue}</span></label>
                                                                     </div>
                                                                     :
                                                                     <div style={{marginTop:"10px"}} className={'d-flex g-2 justify-content-between'}>
@@ -121,10 +121,10 @@ const UniversalModal = ({inpData = "", isOpen, closeFunction, modalTitle, width,
                                                 inpData?.map((item, index)=>{
                                                     return <div key={index}>
                                                         {
-                                                            item.type === "checkbox"?
+                                                            item?.type === "checkbox"?
                                                                 <div style={{display:"flex", marginTop:"10px", gap:(item?.title === undefined || item?.title === "")? "0%" : "10%", justifyContent:"space-between"}}>
                                                                     <span style={{maxWidth:"20%", wordBreak:"break-all"}}>{(item?.title === undefined)? "" : item?.title + " "} </span>
-                                                                    <label style={{position:"relative",width: (item?.title === undefined || item?.title === "")?"100%":"70%"}}><input className={'form-check'} type={item?.type} value={item?.value} style={{width: "25px"}} onChange={item?.onChange}/> <span style={{position:"absolute", left:"35px", top:"8px"}}>{item.labelValue}</span></label>
+                                                                    <label style={{position:"relative",width: (item?.title === undefined || item?.title === "")?"100%":"70%"}}><input className={'form-check'} type={item?.type} checked={item?.value} style={{width: "25px"}} onChange={item?.onChange}/> <span style={{position:"absolute", left:"35px", top:"8px"}}>{item?.labelValue}</span></label>
                                                                 </div>
                                                                 :
                                                                 <div style={{marginTop:"10px"}} className={'d-flex g-2 justify-content-between'}>
