@@ -27,6 +27,13 @@ function Teritory(props) {
 
     const columns = [
         {
+            id:0,
+            title:"№",
+            key:"index",
+            type:"index",
+            show:true,
+        },
+        {
             id: 1,
             title: "Title",
             key: "name",

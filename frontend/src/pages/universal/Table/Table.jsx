@@ -155,7 +155,7 @@ const Table = (props) => {
             </tr>
             </thead>
             <tbody>
-            {props.data.map((item) => (
+            {props.data.map((item,index) => (
                 <tr key={item.id}>
                   {props.columns.map((col) =>
                       col.type === 'jsx' ? (
@@ -164,7 +164,7 @@ const Table = (props) => {
                           </td>
                       ) : (
                           <td className={col.show ? '' : 'hidden'} key={col.id}>
-                            {item[col.key]}
+                            {col.type==="index"?index+1:item[col.key]}
                           </td>
                       )
                   )}
