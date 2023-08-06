@@ -49,7 +49,7 @@ const Table = (props) => {
           },
         ]}
       />
-      <div className="bg-white p-3">
+      <div className="bg-white d-flex flex-column gap-2 p-2">
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-end ">
@@ -142,7 +142,7 @@ const Table = (props) => {
 
         {/* 👇 Table Data 👇  */}
 
-        <div style={{ height: '400px', overflow: 'auto' }}>
+        <div style={{ height: '350px', overflow: 'auto' }}>
           <table className="table mt-2 mytable">
             <thead>
             <tr>
