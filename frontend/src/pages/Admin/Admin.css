@@ -1,24 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
 .button_hover:hover {
     border: 1px solid #fff !important;
     opacity: 0.5 !important;
 }
+
 .active_button_admin {
     border: 1px solid #fff !important;
 }
+
 .active_button_admin:hover {
     border: 1px solid #fff !important;
     opacity: 1 !important;
 }
+
 .left_side svg {
     width: 25px !important;
 }
+
 .left_side {
-    display:flex;
+    display: flex;
     flex-direction: column;
     gap: 10px;
     height: 100vh;
 }
+
 .button_hover {
     display: flex;
     height: 100px !important;
+}
+
+.custom_calendar {
+    width: 91px;
+    height: 34px;
+    padding: 6px 12px;
+    margin: 8px 0px 0px;
+    position: relative;
+    background-color: #0a819c;
+    border: 1px #097992 solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom_calendar span {
+    font-size: 10px;
+    position: absolute;
+    bottom: 8px;
+    right: 6px;
+    color: #ffffff;
+}
+
+.custom_calendar i {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    color: #ffffff;
+}
+.phone_number {
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+    display: inline-block;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    text-align: center;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-bottom: 0;
+    margin-top: 0px;
+    color: #fff;
+    font-size: 24px;
+    text-shadow: 1px 1px 1px #000;
 }

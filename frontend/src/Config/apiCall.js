@@ -11,6 +11,7 @@ export default function (url, method, data,searchParam="") {
             "searchParam": searchParam
         },
     }).catch((err)=>{
+        console.log(err);
         if (err.response.status === 403){
             axios({
                 url: "http://localhost:8080/api/auth/refresh?refreshToken="+localStorage.getItem("refresh_token"),

@@ -88,8 +88,6 @@ const Table = (props) => {
 
               {/* 👇 Column Order 👇  */}
               <button
-                data-toggle="modal"
-                data-target="#exampleModal"
                 className="custom_btn"
                 onClick={() => props.setColumnModalVisibility(true)}
               >
@@ -117,24 +115,24 @@ const Table = (props) => {
             JsxData={
               <div className="modal-body d-flex flex-column gap-1">
                 {props.modalColumns.map((item, index) => (
-                  <div
-                    draggable={true}
-                    onDrop={(e) => {
-                      e.preventDefault();
-                      props.dropColumn(index);
-                    }}
-                    onDragStart={() => {
-                      props.setCurrentDragingColumn(index);
-                    }}
-                    key={item.id}
-                    onDragOverCapture={(e) => e.preventDefault()}
-                    className={
-                      "w-100 d-flex bg-secondary text-white p-2" +
-                      (item.show ? "" : " hidden")
-                    }
-                  >
-                    {item.title}
-                  </div>
+                  item.show?<div
+                  draggable={true}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    props.dropColumn(index);
+                  }}
+                  onDragStart={() => {
+                    props.setCurrentDragingColumn(index);
+                  }}
+                  key={item.id}
+                  onDragOverCapture={(e) => e.preventDefault()}
+                  className={
+                    "w-100 d-flex bg-secondary text-white p-2" +
+                    (item.show ? "" : " hidden")
+                  }
+                >
+                  {item.title}
+                </div>:""
                 ))}
               </div>
             }
@@ -144,42 +142,39 @@ const Table = (props) => {
 
         {/* 👇 Table Data 👇  */}
 
-        <div className="table_responsive">
+        <div style={{ height: '400px', overflow: 'auto' }}>
           <table className="table mt-2 mytable">
             <thead>
-              <tr>
-                {props.columns.map((item) => (
-                  <th className={item.show ? "" : " hidden"} key={item.id}>
-                    {item.show ? item.title : ""}
+            <tr>
+              {props.columns.map((item) => (
+                  <th className={item.show ? '' : 'hidden'} key={item.id}>
+                    {item.show ? item.title : ''}
                   </th>
-                ))}
-                {props.additionalColumns ? <th>More</th> : ""}
-              </tr>
+              ))}
+              {props.additionalColumns ? <th>More</th> : ''}
+            </tr>
             </thead>
             <tbody>
-              {props.data.map((item) => (
+            {props.data.map((item) => (
                 <tr key={item.id}>
                   {props.columns.map((col) =>
-                    col.type === "jsx" ? (
-                      <td className={col.show ? "" : " hidden"}>
-                        {col.data ? col.data(item) : ""}
-                      </td>
-                    ) : (
-                      <td className={col.show ? "" : " hidden"} key={col.id}>
-                        {item[col.key]}
-                      </td>
-                    )
+                      col.type === 'jsx' ? (
+                          <td width={50} className={col.show ? '' : 'hidden'}>
+                            {col.data ? col.data(item) : ''}
+                          </td>
+                      ) : (
+                          <td className={col.show ? '' : 'hidden'} key={col.id}>
+                            {item[col.key]}
+                          </td>
+                      )
                   )}
-                  {props.additionalColumns ? (
-                    <td>{props.additionalColumns}</td>
-                  ) : (
-                    ""
-                  )}
+                  {props.additionalColumns ? <td>{props.additionalColumns}</td> : ''}
                 </tr>
-              ))}
+            ))}
             </tbody>
           </table>
         </div>
+
       </div>
 
       {/* 👇 Pagination 👇  */}
