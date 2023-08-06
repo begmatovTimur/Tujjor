@@ -74,3 +74,21 @@
     font-size: 24px;
     text-shadow: 1px 1px 1px #000;
 }
+.custom_dashboard_button::before {
+    position: absolute;
+    content: "";
+    background: white;
+    height: 2px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    transform: scale(0);
+    transform-origin: left;
+    transition: 0.3s all;
+}
+.custom_dashboard_button {
+    position: relative;
+}
+.custom_dashboard_button:hover::before {
+    transform: scale(1);
+}
