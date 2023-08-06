@@ -5,11 +5,11 @@ import React, { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import { saveAs } from "file-saver";
 import { useLocation } from "react-router-dom";
-import "./Table.css";
 import Filter from "../Filter/Filter";
 import axios from "axios";
 import Dropdown from "../Dropdown/Dropdown";
 import UniversalModal from "../Modal/UniverModal";
+import "./Table.css";
 const Table = (props) => {
   useEffect(() => {
     props.claimData({ columns: props.columnsProps, data: props.dataProps });
@@ -144,7 +144,7 @@ const Table = (props) => {
 
         <div style={{ height: '350px', overflow: 'auto' }}>
           <table className="table mt-2 mytable">
-            <thead>
+            <thead className={"table_thead"}>
             <tr>
               {props.columns.map((item) => (
                   <th className={item.show ? '' : 'hidden'} key={item.id}>
