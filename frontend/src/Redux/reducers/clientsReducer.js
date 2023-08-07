@@ -26,16 +26,7 @@ const clientsReducer = createSlice({
         openModal: (state, action) => {
             state.openModal = true
         },
-        getTeritories:(state, action)=>{
-
-        },
-        getSuccessAllTeritories:(state, action)=>{
-            state.teritories = action.payload.res
-        },
-        yourActionFailureTeritories:(state, action)=>{
-            state.errMessage = action.payload
-        },
-        closeModal:(state, action)=>{
+        closeModal: (state, action) => {
             state.openModal = false
         },
         handleTemplate: (state, action) => {
@@ -60,6 +51,15 @@ const clientsReducer = createSlice({
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload
+        },
+        getTeritories:(state, action)=>{
+
+        },
+        getSuccessAllTeritories:(state, action)=>{
+            state.teritories = action.payload.res
+        },
+        yourActionFailureTeritories:(state, action)=>{
+            state.errMessage = action.payload
         },
         changeTeritoryId:(state, action)=>{
             state.teritoryId = action.payload;
