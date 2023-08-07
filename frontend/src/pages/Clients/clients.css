@@ -1,0 +1,10 @@
+#clientsFatherDiv{
+    display: block;
+    width: 98%;
+    margin: 15px 15px;
+    background-color: white;
+    text-align: start;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}

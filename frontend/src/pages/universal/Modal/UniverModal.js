@@ -42,7 +42,7 @@ import './modal.css'
 const UniversalModal = ({inpData = "", isOpen, closeFunction, modalTitle, width, functionforSaveBtn, JsxData = ""})=> {
     const style = {
         position: "absolute",
-        top: "47%",
+        top: "48%",
         left: "50%",
         transform: "translate(-50%, -50%)",
         backgroundColor:"white",
@@ -51,6 +51,7 @@ const UniversalModal = ({inpData = "", isOpen, closeFunction, modalTitle, width,
         borderRadius: "10px",
         width: width+"%",
         overflow: "auto",
+        maxHeight: "655px"
     };
     return (
         <div>
