@@ -51,6 +51,6 @@ public interface ClientRepository extends JpaRepository<Client,UUID> {
             "    )\n" +
             "ORDER BY\n" +
             "    c.id")
-    Page<ClientProjection> getAllFilteredFields(String city, boolean active, String search, Pageable pageable);
+    Page<ClientProjection> getAllFilteredFields(String city, Boolean active, String search, Pageable pageable);
 
 }
