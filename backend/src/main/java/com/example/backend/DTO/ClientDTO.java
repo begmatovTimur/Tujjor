@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -20,6 +21,7 @@ public class ClientDTO {
     private String address;
     private String phone;
     private Boolean active;
+    private LocalDate registrationDate;
     private String tin;
     private double longitude;
     private double latitude;

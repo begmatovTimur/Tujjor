@@ -44,68 +44,44 @@ function Clients(props) {
         {
             id: 3,
             title: "Telephone",
-            key: "Telephone",
-            type: "text",
-            show: true,
-        },
-        {
-            id: 4,
-            title: "Telephone",
             key: "telephone",
             type: "text",
             show: true,
         },
         {
-            id: 5,
-            title: "Agent",
+            id: 4,
+            title: "Territory",
             key: "territory",
             type: "text",
             show: true,
         },
         {
-            id: 6,
-            title: "Telephone",
-            key: "Telephone",
-            type: "text",
-            show: true,
-        },
-        {
-            id: 7,
+            id: 5,
             title: "Address",
             key: "address",
             type: "text",
             show: true,
         },
         {
-            id: 8,
+            id: 6,
             title: "Category",
             key: "category",
             type: "text",
             show: true,
         },
         {
-            id: 8,
+            id: 7,
             title: "Activity",
             key: "activity",
             type: "text",
             show: true,
         },
         {
-            id: 9,
+            id: 8,
             title: "",
             key: "actions",
             type: "text",
             show: true,
-        },
-        {
-            id: 10,
-            title: "Update",
-            key: "button",
-            type: "jsx",
-            show: true,
-            data: (item) => <button className="custom_edit_btn" onClick={() => {
-                props.editeTeritory(item);
-            }}><i class="fa fa-edit"></i></button>
         }
     ];
     return (
@@ -121,7 +97,11 @@ function Clients(props) {
                         pagination = {true}
                         changeSizeMode = {true}
                         paginationApi={"/client/pagination?page={page}&limit={limit}"}
+<<<<<<< HEAD
                         dataProps={clients?.clients}
+=======
+                        dataProps={props.data}
+>>>>>>> 655d241480e3606fe153de153040dc97a785f16c
                         columnOrderMode={true}
                         changeSizeModeOptions={[10,20,50,100,200]}
                         columnsProps={columns}
