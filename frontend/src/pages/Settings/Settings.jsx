@@ -11,12 +11,12 @@ const Settings = ({ data, getData, activeButtonIndex, setCurrentIndex }) => {
     console.log(getData());
   }, []);
   useEffect(() => {
-    if (localStorage.getItem("selectedSettingsButton") && data.length) {
-      navigate(
-        "/admin/settings" +
-          data[localStorage.getItem("selectedSettingsButton")].path
-      );
-    }
+    // if (localStorage.getItem("selectedSettingsButton") && data.length) {
+    //   navigate(
+    //     "/admin/settings" +
+    //       data[localStorage.getItem("selectedSettingsButton")].path
+    //   );
+    // }
   }, [data]);
   return (
     <div className="settings">

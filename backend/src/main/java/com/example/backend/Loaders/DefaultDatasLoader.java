@@ -93,6 +93,13 @@ public class DefaultDatasLoader implements CommandLineRunner {
             settings.add(new Settings(null,"Company Profile","/company-profile"));
             settings.add(new Settings(null,"Customer Category","/customer-category"));
             settings.add(new Settings(null,"Territory","/territory"));
+            settings.add(new Settings(null,"Payment Method","/payment"));
+            settings.add(new Settings(null,"Units Of measurement","/units-of-measurement"));
+            settings.add(new Settings(null,"Client Type","/client-type"));
+            settings.add(new Settings(null,"Product Category","/product-category"));
+            settings.add(new Settings(null,"Product","/product"));
+            settings.add(new Settings(null,"Price","/price"));
+            settings.add(new Settings(null,"Price Type","/price-type"));
 
 
             settingsRepository.saveAll(settings);
