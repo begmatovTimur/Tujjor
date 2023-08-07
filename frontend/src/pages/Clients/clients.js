@@ -4,10 +4,14 @@ import {connect} from "react-redux";
 import {clientsAction} from "../../Redux/reducers/clientsReducer";
 import UniversalModal from "../universal/Modal/UniverModal";
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
+import {options} from "axios";
 import Table from "../universal/Table/Table";
 
 function Clients(props) {
     const {clients} = props
+    useEffect(()=>{
+        props.getTeritories()
+    },[])
     function handleMapClick(event){
         const coords = event.get("coords");
         const latitude = coords[0];
@@ -131,40 +135,50 @@ function Clients(props) {
                 isOpen={clients.openModal}
                 closeFunction={() => props.closeModal()}
                 width={70}
+                functionforSaveBtn={() => props.saveClients()}
                 JsxData={
                     <div style={{display:"flex", gap:"4%"}}>
                         <div className={'w-50'}>
                             <div className={'d-flex'}>
                                 <div style={{display:"flex", flexDirection:"column", gap:"20px", width:"48%"}}>
                                     <label><span className={'d-block'}>clients*</span>
-                                        <input className={"form-control w-100"} type="text" name="" id=""/>
+                                        <select onChange={(e)=>props.changeTeritoryId(e.target.value)} value={clients.teritoryId} className={'form-select'}>
+                                            <option value="" selected disabled>All Teritories</option>
+                                            {
+                                                clients?.teritories?.map((item)=>{
+                                                    return <option value={item?.id}>{item?.name}</option>
+                                                })
+                                            }
+                                        </select>
                                     </label>
                                     <label><span className={'d-block'}>Name*</span>
-                                        <input className={"form-control w-100"} type="text" name="" id=""/>
+                                        <input onChange={(e)=>props.changeName(e.target.value)} value={clients.name} className={"form-control w-100"} type="text" name="" id=""/>
                                     </label>
                                     <label><span className={'d-block'}>Address*</span>
-                                        <input className={"form-control w-100"} type="text" name="" id=""/>
+                                        <input onChange={(e)=>props.changeAddress(e.target.value)} value={clients.address} className={"form-control w-100"} type="text" name="" id=""/>
                                     </label>
                                     <label><span className={'d-block'}>Telephone*</span>
-                                        <input className={"form-control w-100"} type="text" name="" id=""/>
+                                        <input onChange={(e)=>props.changeTelephone(e.target.value)} value={clients.telephone} className={"form-control w-100"} type="text" name="" id=""/>
                                     </label>
                                     <label><span className={'d-block'}>TIN</span>
-                                        <input className={"form-control w-100"} type="text" name="" id=""/>
+                                        <input onChange={(e)=>props.changeTin(e.target.value)} value={clients.tin} className={"form-control w-100"} type="text" name="" id=""/>
                                     </label>
                                     <label className={'d-flex'}>
                                         <span>Active:</span>
-                                        <input className={"form-check w-25"} type="checkbox" name="" id=""/>
+                                        <input onChange={(e)=>props.changeActive(e.target.checked)} checked={clients.active} className={"form-check w-25"} type="checkbox" name="" id=""/>
                                     </label>
                                 </div>
                                 <div style={{display:"flex", flexDirection:"column", gap:"20px", width:"48%", marginLeft:"4%"}}>
                                     <label><span className={'d-block'}>Category*</span>
-                                        <input className={"form-control w-100"} type="text" name="" id=""/>
+                                        <select className={'form-select'}>
+                                            <option>-</option>
+                                        </select>
                                     </label>
                                     <label><span className={'d-block'}>Company name</span>
-                                        <input className={"form-control w-100"} type="text" name="" id=""/>
+                                        <input onChange={(e)=>props.changeCompanyName(e.target.value)} value={clients.companyName} className={"form-control w-100"} type="text" name="" id=""/>
                                     </label>
                                     <label><span className={'d-block'}>Reference point</span>
-                                        <input className={"form-control w-100"} type="text" name="" id=""/>
+                                        <input onChange={(e)=>props.changeReferencePoint(e.target.value)} value={clients.referencePoint} className={"form-control w-100"} type="text" name="" id=""/>
                                     </label>
                                 </div>
                             </div>
@@ -180,8 +194,7 @@ function Clients(props) {
                                     lang: "en_US",
                                     coordorder: "latlong",
                                     load: "package.full",
-                                }}
-                            >
+                                }}>
                                 <Map
                                     width={430}
                                     height={300}

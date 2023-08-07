@@ -3,7 +3,7 @@ import dashboardDataSaga from "./dashboardDataSaga";
 import settingsSaga from "./settingsSaga";
 import {territorySaga} from "./teritorySaga";
 import tableSaga from "./tableSaga";
-import {clientSaga} from "./clientSaga";
+import {clientsSaga} from "./clientsSaga";
 
 
 export function* rootSaga(){
@@ -12,6 +12,6 @@ export function* rootSaga(){
         fork(settingsSaga),
         fork(dashboardDataSaga),
         fork(territorySaga),
-        fork(clientSaga),
+        fork(clientsSaga),
     ])
 }

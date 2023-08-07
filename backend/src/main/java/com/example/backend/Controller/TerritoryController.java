@@ -20,7 +20,6 @@ import java.util.UUID;
 public class TerritoryController {
     private final TerritoryService territoryService;
 
-
     @GetMapping("/pagination")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> pagination(@RequestParam Integer page,@RequestParam Integer limit,HttpServletRequest request) {
