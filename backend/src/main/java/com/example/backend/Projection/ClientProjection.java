@@ -15,7 +15,7 @@ public interface ClientProjection {
      @Value("#{target.company_name}")
      String getCompanyName();
      @Value("#{target.phone}")
-     Boolean getTelephone();
+     String getTelephone();
 
      Double getLatitude();
 

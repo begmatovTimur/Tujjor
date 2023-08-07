@@ -4,14 +4,23 @@ import {clientsAction} from "../reducers/clientsReducer";
 
 function* getClients(action){
     try {
-        const res = yield apiCall("/client", "GET")
+        const res = yield apiCall("/client", "GET", null)
         console.log(res.data)
         yield put(clientsAction.getClientsSuccess(res.data.content))
     } catch (err) {
         yield put(clientsAction.yourActionFailureClients(err.message));
     }
 }
+function* getTeritories(action){
+    try {
+        const res = yield apiCall("/territory", "GET", null)
+        yield put(clientsAction.getSuccessAllTeritories({res: res.data}))
+    } catch (err) {
+        yield put(clientsAction.yourActionFailureTeritories(err.message));
+    }
+}
 
 export function* clientSaga() {
     yield takeEvery("clients/getClients", getClients)
+    yield takeEvery("clients/getTeritories", getTeritories)
 }

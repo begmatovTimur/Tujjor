@@ -10,6 +10,7 @@ function Clients(props) {
     const {clients} = props
     useEffect(()=>{
         props.getTeritories()
+        // props.getClients()
     },[])
     function handleMapClick(event){
         const coords = event.get("coords");
@@ -97,11 +98,7 @@ function Clients(props) {
                         pagination = {true}
                         changeSizeMode = {true}
                         paginationApi={"/client/pagination?page={page}&limit={limit}"}
-<<<<<<< HEAD
-                        dataProps={clients?.clients}
-=======
                         dataProps={props.data}
->>>>>>> 655d241480e3606fe153de153040dc97a785f16c
                         columnOrderMode={true}
                         changeSizeModeOptions={[10,20,50,100,200]}
                         columnsProps={columns}

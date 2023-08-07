@@ -36,7 +36,6 @@ const Table = (props) => {
     { value: "true", label: "Active" },
     { value: "false", label: "Inactive" },
   ]);
-  console.log(props.data)
   return (
     <div className="universal_table">
       {/*<Filter*/}
