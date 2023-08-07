@@ -61,27 +61,24 @@ public class ClientServiceImple implements ClientService {
                 return ResponseEntity.badRequest().body("Invalid page or limit value");
             }
             JsonNode jsonNode = wrapToObject(request);
-            if (jsonNode == null || !jsonNode.has("city") || !jsonNode.has("category") || !jsonNode.has("day") ||
-                    !jsonNode.has("weeks") || !jsonNode.has("quickSearch") || !jsonNode.has("tin")) {
-                return ResponseEntity.badRequest().body("Invalid JSON input");
-            }
+//            if (jsonNode == null || !jsonNode.has("city") || !jsonNode.has("category") || !jsonNode.has("day") ||
+//                    !jsonNode.has("weeks") || !jsonNode.has("quickSearch") || !jsonNode.has("tin")) {
+//                return ResponseEntity.badRequest().body("Invalid JSON input");
+//            }
             boolean activeFilter = jsonNode.has("active") && jsonNode.get("active").isBoolean();
             Pageable pageable = PageRequest.of(page,limit);
-            Page<Client> clients = null;
-//            if(!activeFilter){
-//                clients = clientRepository.filterWithoutActive(jsonNode.get("city").asText(),
-//                        jsonNode.get("category").asInt(),jsonNode.get("day").asInt(),
-//                        jsonNode.get("weeks").asInt(), jsonNode.get("quickSearch").asText(),jsonNode.get("tin").asInt(),pageable);
-//            }else{
-//                clients = clientRepository.getAllFilteredFields(jsonNode.get("city").asText(),
-//                        jsonNode.get("category").asInt(),jsonNode.get("day").asInt(),
-//                        jsonNode.get("weeks").asInt(), jsonNode.get("quickSearch").asText(),jsonNode.get("tin").asInt(),jsonNode.get("active").asBoolean(),pageable);
-//            }
-//            if (clients.isEmpty()) {
-//                return ResponseEntity.ok(new PageImpl<>(Collections.emptyList(), pageable, 0));
-//            }
+            Page<Client> clients;
+            if(!activeFilter){
+                clients = clientRepository.filterWithoutActive(jsonNode.get("city").asText(),pageable);
+            }else{
+                clients = clientRepository.getAllFilteredFields(jsonNode.get("city").asText(),jsonNode.get("active").isBoolean(),pageable);
+            }
+            if (clients.isEmpty()) {
+                return ResponseEntity.ok(new PageImpl<>(Collections.emptyList(), pageable, 0));
+            }
             return ResponseEntity.ok(clients);
         }catch (Exception e){
+            e.printStackTrace();
             return ResponseEntity.status(500).body("An error has occurred");
         }
     }

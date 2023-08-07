@@ -151,7 +151,9 @@ const Table = (props) => {
                     {item.show ? item.title : ''}
                   </th>
               ))}
-              {props.additionalColumns ? <th>More</th> : ''}
+              {
+                props.additionalColumns?
+                props.additionalColumns ? <th>More</th> : '' :""}
             </tr>
             </thead>
             <tbody>
