@@ -36,19 +36,20 @@ const Table = (props) => {
     { value: "true", label: "Active" },
     { value: "false", label: "Inactive" },
   ]);
+  console.log(props.data)
   return (
     <div className="universal_table">
-      <Filter
-        search={[
-          {
-            name: "active",
-            multi: false,
-            options: optionsActive,
-            defaultValue: { value: "", label: "All" },
-            placeholder: "Active",
-          },
-        ]}
-      />
+      {/*<Filter*/}
+      {/*  search={[*/}
+      {/*    {*/}
+      {/*      name: "active",*/}
+      {/*      multi: false,*/}
+      {/*      options: optionsActive,*/}
+      {/*      defaultValue: { value: "", label: "All" },*/}
+      {/*      placeholder: "Active",*/}
+      {/*    },*/}
+      {/*  ]}*/}
+      {/*/>*/}
       <div className="bg-white d-flex flex-column gap-2 p-2">
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between align-items-center">
@@ -95,12 +96,12 @@ const Table = (props) => {
               </button>
             </div>
 
-            {/* 👇 Column Order 👇  */}
-            {props.columnOrderMode && props.columns.length ? (
-              <Filter quickSearch></Filter>
-            ) : (
-              ""
-            )}
+            {/*/!* 👇 Column Order 👇  *!/*/}
+            {/*{props.columnOrderMode && props.columns.length ? (*/}
+            {/*  <Filter quickSearch></Filter>*/}
+            {/*) : (*/}
+            {/*  ""*/}
+            {/*)}*/}
           </div>
         </div>
 
@@ -157,7 +158,9 @@ const Table = (props) => {
             </tr>
             </thead>
             <tbody>
-            {props.data.map((item,index) => (
+            {
+              props.data?
+              props.data.map((item,index) => (
                 <tr key={item.id}>
                   {props.columns.map((col) =>
                       col.type === 'jsx' ? (
@@ -172,7 +175,9 @@ const Table = (props) => {
                   )}
                   {props.additionalColumns ? <td>{props.additionalColumns}</td> : ''}
                 </tr>
-            ))}
+            ))
+            :""
+            }
             </tbody>
           </table>
         </div>

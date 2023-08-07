@@ -4,6 +4,7 @@ import com.example.backend.DTO.ClientDTO;
 import com.example.backend.Entity.Client;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Projection.ClientProjection;
 import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Repository.CustomerCategoryRepository;
 import com.example.backend.Repository.TerritoryRepository;
@@ -67,11 +68,11 @@ public class ClientServiceImple implements ClientService {
 //            }
             boolean activeFilter = jsonNode.has("active") && jsonNode.get("active").isBoolean();
             Pageable pageable = PageRequest.of(page,limit);
-            Page<Client> clients;
+            Page<ClientProjection> clients;
             if(!activeFilter){
-                clients = clientRepository.filterWithoutActive(jsonNode.get("city").asText(),pageable);
+                clients = clientRepository.filterWithoutActive(jsonNode.get("city").asText(),jsonNode.get("quickSearch").asText(),pageable);
             }else{
-                clients = clientRepository.getAllFilteredFields(jsonNode.get("city").asText(),jsonNode.get("active").isBoolean(),pageable);
+                clients = clientRepository.getAllFilteredFields(jsonNode.get("city").asText(),jsonNode.get("active").isBoolean(),jsonNode.get("quickSearch").asText(),pageable);
             }
             if (clients.isEmpty()) {
                 return ResponseEntity.ok(new PageImpl<>(Collections.emptyList(), pageable, 0));
@@ -102,6 +103,7 @@ public class ClientServiceImple implements ClientService {
             client.setName(clientDTO.getName());
             client.setAddress(clientDTO.getAddress());
             client.setTin(clientDTO.getTin());
+            client.setRegistrationDate(clientDTO.getRegistrationDate());
             client.setLatitude(clientDTO.getLatitude());
             client.setLongitude(clientDTO.getLongitude());
             client.setPhone(clientDTO.getPhone());
@@ -131,6 +133,7 @@ public class ClientServiceImple implements ClientService {
         UUID clientId = UUID.randomUUID();
         return Client.builder()
                 .id(clientId)
+                .registrationDate(clientDTO.getRegistrationDate())
                 .active(clientDTO.getActive())
                 .phone(clientDTO.getPhone())
                 .category(categoryRepository.findById(clientDTO.getCategoryId()).orElseThrow())

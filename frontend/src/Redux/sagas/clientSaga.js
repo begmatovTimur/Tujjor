@@ -6,7 +6,7 @@ function* getClients(action){
     try {
         const res = yield apiCall("/client", "GET")
         console.log(res.data)
-        yield put(clientsAction.getClientsSuccess(res.data))
+        yield put(clientsAction.getClientsSuccess(res.data.content))
     } catch (err) {
         yield put(clientsAction.yourActionFailureClients(err.message));
     }
