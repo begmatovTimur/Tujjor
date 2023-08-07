@@ -1,26 +1,21 @@
 package com.example.backend.Loaders;
 
-import com.example.backend.Entity.Address;
 import com.example.backend.Entity.Company;
 import com.example.backend.Entity.Role;
 import com.example.backend.Entity.Settings;
 import com.example.backend.Entity.User;
 import com.example.backend.Enums.RoleEnum;
-import com.example.backend.Repository.AddressRepository;
 import com.example.backend.Repository.CompanyRepository;
 import com.example.backend.Repository.RoleRepository;
 import com.example.backend.Repository.SettingsRepository;
 import com.example.backend.Repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -29,7 +24,6 @@ public class DefaultDatasLoader implements CommandLineRunner {
     private final UsersRepository usersRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AddressRepository addressRepository;
     private final SettingsRepository settingsRepository;
 
 
@@ -62,23 +56,14 @@ public class DefaultDatasLoader implements CommandLineRunner {
                           roles
                   )
             );
-            Address address = Address.builder()
-                    .longitude(41.3775)
-                    .latitude(64.5853)
-                    .city("Bukhara")
-                    .district("Bukhara")
-                    .street("ShiftAcademy")
-                    .build();
-            addressRepository.save(address);
-            Address savedAddress = addressRepository.findById(address.getId()).orElseThrow();
             companyRepository.save(
                     Company.builder()
                             .companyName("Tujjor")
-                            .region(address.getCity())
+                            .region("Buxara")
                             .superVisor(superVisor)
                             .supportPhone("+998912075995")
                             .email("email@gmail.com")
-                            .address(savedAddress)
+                            .address("ShiftAcademy")
                             .build()
             );
 
@@ -86,10 +71,8 @@ public class DefaultDatasLoader implements CommandLineRunner {
         }
 
 
-        if(settingsRepository.findAll().size()==0) { // settings adding..
-
+        if(settingsRepository.findAll().size()==0) {
             List<Settings> settings = new ArrayList<>();
-
             settings.add(new Settings(null,"Company Profile","/company-profile"));
             settings.add(new Settings(null,"Customer Category","/customer-category"));
             settings.add(new Settings(null,"Territory","/territory"));
@@ -100,8 +83,6 @@ public class DefaultDatasLoader implements CommandLineRunner {
             settings.add(new Settings(null,"Product","/product"));
             settings.add(new Settings(null,"Price","/price"));
             settings.add(new Settings(null,"Price Type","/price-type"));
-
-
             settingsRepository.saveAll(settings);
         }
     }

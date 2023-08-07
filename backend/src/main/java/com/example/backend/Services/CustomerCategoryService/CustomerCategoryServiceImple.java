@@ -1,5 +1,6 @@
 package com.example.backend.Services.CustomerCategoryService;
 
+import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Projection.CompanyProjection;
 import com.example.backend.Projection.CustomerCategoryProjection;
 import com.example.backend.Projection.TerritoryProjection;
@@ -29,7 +30,17 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
             }
             return ResponseEntity.ok(categories);
         }catch (Exception e){
-            return ResponseEntity.status(404).body("An error has occurred");
+            return ResponseEntity.status(500).body("An error has occurred");
+        }
+    }
+
+    @Override
+    public HttpEntity<?> getCategories() {
+        try {
+            List<CustomerCategory> categories = customerCategoryRepository.findAll();
+            return ResponseEntity.ok(categories);
+        }catch (Exception e){
+            return ResponseEntity.status(500).body("An error has occurred");
         }
     }
 }

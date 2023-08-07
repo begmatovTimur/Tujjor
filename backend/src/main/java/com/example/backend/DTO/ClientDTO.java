@@ -1,6 +1,6 @@
-package com.example.backend.Entity;
+package com.example.backend.DTO;
 
-import jakarta.persistence.*;
+import com.example.backend.Entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,26 +8,19 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Entity
 @Builder
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
-    @OneToOne
-    private Territory territory;
+public class ClientDTO {
+    private UUID territoryId;
+    private Integer categoryId;
     private String name;
+    private String companyName;
     private String address;
     private String phone;
+    private Boolean active;
     private String tin;
-    private String companyName;
     private double longitude;
     private double latitude;
-    private Boolean active;
-    @ManyToOne
-    private CustomerCategory category;
 }

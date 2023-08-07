@@ -18,8 +18,14 @@ public class CustomerCategoryController {
 
 
 //    @PreAuthorize("isAuthenticated()")
-    @GetMapping()
+    @GetMapping("/pagination")
     public HttpEntity<?> getFilteredCategories(@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "") String status){
         return categoryService.getFilteredCustomerCategory(search,status);
+    }
+
+//    @PreAuthorize("isAuthenticated()")
+    @GetMapping
+    public HttpEntity<?> getCategories(){
+        return categoryService.getCategories();
     }
 }
