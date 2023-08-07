@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const clientsReducer = createSlice({
     name: "clients",
     initialState: {
-        clients:[],
+        data:[],
         openModal: false,
         template: null,
         mapState: {center: [0, 0], zoom: 0},
@@ -36,7 +36,7 @@ const clientsReducer = createSlice({
 
         },
         getClientsSuccess:(state,action)=>{
-            state.clients = action.payload
+            state.data = action.payload
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload

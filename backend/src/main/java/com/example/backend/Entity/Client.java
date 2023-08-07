@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -28,6 +29,7 @@ public class Client {
     private double longitude;
     private double latitude;
     private Boolean active;
+    private LocalDate registrationDate;
     @ManyToOne
     private CustomerCategory category;
 }
