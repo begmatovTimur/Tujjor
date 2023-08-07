@@ -12,10 +12,10 @@ public interface ClientProjection {
 
      @Value("#{target.name}")
      String getClientName();
-     @Value("#{target.company_name}")
+     @Value("#{target.companyName}")
      String getCompanyName();
      @Value("#{target.phone}")
-     Boolean getTelephone();
+     String getTelephone();
 
      Double getLatitude();
 
@@ -25,11 +25,9 @@ public interface ClientProjection {
 
      String getAddress();
 
-     @Value("#{target.categoryName}")
-     String getCategoryName();
-
+     @Value("#{target.active}")
      Boolean getActive();
 
-     @Value("#{target.registration_date}")
+     @Value("#{target.registrationDate}")
      LocalDate getRegistrationDate();
 }
