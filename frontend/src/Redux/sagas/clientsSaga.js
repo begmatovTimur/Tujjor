@@ -9,7 +9,19 @@ function* getTeritories(action){
         yield put(clientsAction.yourActionFailureTeritories(err.message));
     }
 }
+
+function* getClients(action){
+    try {
+        const res = yield apiCall("/client", "GET")
+        console.log(res.data)
+        yield put(clientsAction.getClientsSuccess(res.data))
+    } catch (err) {
+        yield put(clientsAction.yourActionFailureClients(err.message));
+    }
+}
+
 export function* clientsSaga() {
     yield takeEvery("clients/getTeritories", getTeritories)
+    yield takeEvery("clients/getClients", getClients)
     // yield takeEvery("clients/getTeritory", getTeritory)
 }

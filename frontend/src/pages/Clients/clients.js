@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {clientsAction} from "../../Redux/reducers/clientsReducer";
 import UniversalModal from "../universal/Modal/UniverModal";
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
-import {options} from "axios";
 import Table from "../universal/Table/Table";
 
 function Clients(props) {
@@ -122,7 +121,7 @@ function Clients(props) {
                         pagination = {true}
                         changeSizeMode = {true}
                         paginationApi={"/client/pagination?page={page}&limit={limit}"}
-                        dataProps={props.clients}
+                        dataProps={clients?.clients}
                         columnOrderMode={true}
                         changeSizeModeOptions={[10,20,50,100,200]}
                         columnsProps={columns}

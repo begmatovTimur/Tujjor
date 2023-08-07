@@ -87,7 +87,7 @@ function Teritory(props) {
                 isOpen={teritory.openModal}
                 closeFunction={() => props.handleClose()}
                 width={60}
-                functionforSaveBtn={() => props.saveClients()}
+                functionforSaveBtn={() => props.saveTeritory()}
                 JsxData={
                 <div className={"w-50"}>
                     <YMaps
