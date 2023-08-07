@@ -23,6 +23,5 @@ public class Company {
     private String supportPhone;
     private String email;
     private String region;
-    @OneToOne
-    private Address address;
+    private String address;
 }
