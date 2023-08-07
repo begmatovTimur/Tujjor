@@ -5,6 +5,7 @@ import {clientsAction} from "../../Redux/reducers/clientsReducer";
 import UniversalModal from "../universal/Modal/UniverModal";
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
 import {options} from "axios";
+import Table from "../universal/Table/Table";
 
 function Clients(props) {
     const {clients} = props
@@ -18,12 +19,115 @@ function Clients(props) {
         props.handleTemplate([longitude, latitude]);
         props.handleMapState({center: [latitude, longitude], zoom: 10});
     }
+
+    const columns = [
+        {
+            id:0,
+            title:"№",
+            key:"index",
+            type:"index",
+            show:true,
+        },
+        {
+            id: 1,
+            title: "Client name",
+            key: "clientName",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 2,
+            title: "Company name",
+            key: "companyName",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 3,
+            title: "Telephone",
+            key: "Telephone",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 4,
+            title: "Telephone",
+            key: "telephone",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 5,
+            title: "Agent",
+            key: "territory",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 6,
+            title: "Telephone",
+            key: "Telephone",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 7,
+            title: "Address",
+            key: "address",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 8,
+            title: "Category",
+            key: "category",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 8,
+            title: "Activity",
+            key: "activity",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 9,
+            title: "",
+            key: "actions",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 10,
+            title: "Update",
+            key: "button",
+            type: "jsx",
+            show: true,
+            data: (item) => <button className="custom_edit_btn" onClick={() => {
+                props.editeTeritory(item);
+            }}><i class="fa fa-edit"></i></button>
+        }
+    ];
     return (
         <div style={{width:"100%", backgroundColor:"#dae2e3"}}>
             <div id={'clientsFatherDiv'}>
-                <div style={{display:"flex", justifyContent:"space-between", borderBottom:"1px solid #dae2e3", marginTop:"10px"}}>
-                    <p style={{fontSize:"30px"}}>Clients</p>
-                    <button onClick={() => props.openModal()} style={{display:"block", height:"40px", backgroundColor:"#4dce4d", border:"none", padding:"5px 15px"}}>+ Add Client</button>
+                <div>
+                    <div style={{display:"flex", justifyContent:"space-between", borderBottom:"1px solid #dae2e3", marginTop:"10px"}}>
+                        <p style={{fontSize:"30px"}}>Clients</p>
+                        <button onClick={() => props.openModal()} style={{display:"block", height:"40px", backgroundColor:"#4dce4d", border:"none", padding:"5px 15px"}}>+ Add Client</button>
+                    </div>
+                    <div>
+                        <Table
+                        pagination = {true}
+                        changeSizeMode = {true}
+                        paginationApi={"/client/pagination?page={page}&limit={limit}"}
+                        dataProps={props.clients}
+                        columnOrderMode={true}
+                        changeSizeModeOptions={[10,20,50,100,200]}
+                        columnsProps={columns}
+                        />
+                    </div>
                 </div>
             </div>
             <UniversalModal

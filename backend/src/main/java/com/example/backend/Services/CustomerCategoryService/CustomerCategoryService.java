@@ -6,4 +6,6 @@ import org.springframework.http.HttpEntity;
 public interface CustomerCategoryService {
 
     HttpEntity<?> getFilteredCustomerCategory(String search, String status);
+
+    HttpEntity<?> getCategories();
 }
