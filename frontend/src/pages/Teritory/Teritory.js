@@ -7,8 +7,6 @@ import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
 
 function Teritory(props) {
-    const [openModal, setOpenModal] = useState(false)
-    const [txt, setTxt] = useState("")
 
     const {teritory} = props
 
@@ -66,13 +64,14 @@ function Teritory(props) {
     ];
 
     return (
-        <div style={{width: "100%"}}>
+        <div style={{width:"100%", backgroundColor:"#dae2e3"}}>
             <div className="d-flex flex-column align-items-start">
                 <div className="title">Territory</div>
                 <div className="custom_add_btn" style={{cursor: "pointer"}} onClick={() => props.handleOpen()}>
                 <i style={{fontSize:"20px"}} className="fa fa-plus"></i>Add Territory
                 </div>
             </div>
+
             <Table
                 pagination={true}
                 changeSizeMode={true}
