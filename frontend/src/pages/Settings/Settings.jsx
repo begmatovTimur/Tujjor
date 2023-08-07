@@ -16,7 +16,7 @@ const Settings = ({ data, getData, activeButtonIndex, setCurrentIndex }) => {
     //     "/admin/settings" +
     //       data[localStorage.getItem("selectedSettingsButton")].path
     //   );
-    // }
+    // }  
   }, [data]);
   return (
     <div className="settings">
