@@ -2,6 +2,7 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Data
 @Table(name = "customer_category")
 @Entity
+@Builder
 public class CustomerCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

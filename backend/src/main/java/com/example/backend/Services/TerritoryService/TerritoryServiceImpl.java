@@ -1,10 +1,10 @@
 package com.example.backend.Services.TerritoryService;
 
-import com.example.backend.DTO.ExcelDTO;
 import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Projection.TerritoryProjection;
+import com.example.backend.Projection.TerritoryRegionProjection;
 import com.example.backend.Repository.TerritoryRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -56,10 +56,6 @@ public class TerritoryServiceImpl implements TerritoryService {
         return objectMapper.readTree(value);
     }
 
-    @Override
-    public ResponseEntity<InputStreamResource> downloadExcel(ExcelDTO userPayload) {
-        return downloadExcel(userPayload.getData(), userPayload.getHeaders());
-    }
 
 
     public ResponseEntity<InputStreamResource> downloadExcel(List<?> data, List<String> headers) {
@@ -147,9 +143,9 @@ public class TerritoryServiceImpl implements TerritoryService {
             } else {
                 territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(),pageable);
             }
-            if (territories.isEmpty() && territoryRepository.count() == 1) {
-                return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
-            }
+                if (territories.isEmpty() && territoryRepository.count() == 1) {
+                    return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
+                }
             return ResponseEntity.ok(territories);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("An error has occurred");
@@ -164,7 +160,6 @@ public class TerritoryServiceImpl implements TerritoryService {
         } else {
             territoryFilter = territoryRepository.findByQuickSearch(Boolean.valueOf(dto.getActive()),dto.getQuickSearch());
         }
-        System.out.println(territoryFilter);
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Company info");
         Row row = sheet.createRow(0);
@@ -205,4 +200,13 @@ public class TerritoryServiceImpl implements TerritoryService {
     }
 
 
+    @Override
+    public HttpEntity<?> getTerritoryRegion() {
+        try {
+            return ResponseEntity.ok(territoryRepository.findAllRegion());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("An error has occurred");
+        }
+    }
 }

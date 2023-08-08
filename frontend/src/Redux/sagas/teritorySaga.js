@@ -5,7 +5,6 @@ import { ErrorNotify } from "../../tools/Alerts";
 import { SuccessNotify } from "../../tools/Alerts";
 function* addTeritory(action){
     const currentState = yield select((state) => state.teritory);
-    console.log(currentState.itemForTeritoryEdite)
     if (action.payload.name === "" || action.payload.region === "" || action.payload.code === "" || action.payload.longitude === 0 || action.payload.latitude === 0){
         ErrorNotify("Please fill all fields!")
     }else {

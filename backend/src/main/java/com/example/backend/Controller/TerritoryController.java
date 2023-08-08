@@ -20,7 +20,6 @@ import java.util.UUID;
 public class TerritoryController {
     private final TerritoryService territoryService;
 
-
     @GetMapping("/pagination")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> pagination(@RequestParam Integer page,@RequestParam Integer limit,HttpServletRequest request) {
@@ -34,7 +33,6 @@ public class TerritoryController {
         SearchActiveDTO searchActiveDTO = new SearchActiveDTO();
         searchActiveDTO.setActive(request.getHeader("active"));
         searchActiveDTO.setQuickSearch(quickSearch);
-        System.out.println(searchActiveDTO);
         return territoryService.getExcelFile(searchActiveDTO);
     };
 
@@ -42,6 +40,12 @@ public class TerritoryController {
     @GetMapping()
     public HttpEntity<?> getTerritories() {
         return territoryService.getTerritories();
+    }
+
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    @GetMapping("/region")
+    public HttpEntity<?> getTerritoryRegion() {
+        return territoryService.getTerritoryRegion();
     }
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
