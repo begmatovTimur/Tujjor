@@ -11,6 +11,7 @@ function Clients(props) {
     useEffect(()=>{
         props.getTeritories()
         props.getClients()
+        props.getCustomCategory()
     },[])
     function handleMapClick(event){
         const coords = event.get("coords");
@@ -119,7 +120,7 @@ function Clients(props) {
                         <div className={'w-50'}>
                             <div className={'d-flex'}>
                                 <div style={{display:"flex", flexDirection:"column", gap:"20px", width:"48%"}}>
-                                    <label><span className={'d-block'}>clients*</span>
+                                    <label><span className={'d-block'}>Teritories*</span>
                                         <select onChange={(e)=>props.changeTeritoryId(e.target.value)} value={clients.teritoryId} className={'form-select'}>
                                             <option value="" selected disabled>All Teritories</option>
                                             {
@@ -148,8 +149,13 @@ function Clients(props) {
                                 </div>
                                 <div style={{display:"flex", flexDirection:"column", gap:"20px", width:"48%", marginLeft:"4%"}}>
                                     <label><span className={'d-block'}>Category*</span>
-                                        <select className={'form-select'}>
-                                            <option>-</option>
+                                        <select onChange={(e)=>props.changeCategoriesId(e.target.value)} value={clients.categoryId} className={'form-select'}>
+                                            <option value="" selected disabled>All Category</option>
+                                            {
+                                                clients.customCategories?.map((item)=>{
+                                                    return <option value={item?.id}>{item?.name}</option>
+                                                })
+                                            }
                                         </select>
                                     </label>
                                     <label><span className={'d-block'}>Company name</span>

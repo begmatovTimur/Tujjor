@@ -2,6 +2,7 @@ package com.example.backend.Repository;
 
 import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Projection.TerritoryClientProjection;
 import com.example.backend.Projection.TerritoryRegionProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -49,4 +50,8 @@ public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
 
     @Query(nativeQuery = true,value = "select region from territory")
     List<TerritoryRegionProjection> findAllRegion();
+    @Query(nativeQuery = true, value = """
+            SELECT t.id, t.name, t.code, t.region, t.active FROM territory t LEFT JOIN client c ON t.id = c.territory_id WHERE c.id IS NULL
+            """)
+    List<TerritoryClientProjection> getAllteritoryForCliens();
 }
