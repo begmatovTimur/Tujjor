@@ -35,20 +35,21 @@ function Admin(props) {
     useEffect(() => {
         nextPermission();
         props.getDashboardData();
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
     }, []);
 
-    const handleUserDropDown = () => {
-        setUserBox((prevState) => !prevState);
+    const handleUserDropDown = (status) => {
+        setUserBox(status);
     };
     const handleMouseEnterF = () => {
         setIsHovered(true);
     };
     const handleMouseLeaveF = () => {
         setIsHovered(false);
+    }
+
+    function logOut() {
+        localStorage.clear();
+        navigate("/login");
     }
 
     return (
@@ -95,8 +96,9 @@ function Admin(props) {
                     <button className="btn text-white">{icons.notificationIcon}</button>
                     <div style={{position: "relative"}}>
                         <button
+                            onMouseLeave={()=>handleUserDropDown(false)}
+                            onMouseOverCapture={()=>handleUserDropDown(true)}
                             className="btn text-white"
-                            onClick={handleUserDropDown}
                             ref={userBoxRef}
                         >
                             {icons.userIcon}
@@ -104,22 +106,24 @@ function Admin(props) {
                         </button>
                         {userBox ? (
                             <div
+                                onMouseLeave={()=>handleUserDropDown(false)}
+                                onMouseOverCapture={()=>handleUserDropDown(true)}
                                 style={{
                                     position: "absolute",
-                                    top: 40,
+                                    top: 34,
                                     right: 10,
                                     width: 300,
                                     height: 200,
                                 }}
-                                className={"bg-dark p-4"}
+                                className={"user_box_admin"}
                             >
-                                <button className="btn text-white mt-3 w-100 text-start">
-                                    {icons.keyIcon} Change login and password
+                                <button className="custom_userbox_button">
+                                    {icons.keyIcon} Change login & password
                                 </button>
-                                <button className="btn text-white mt-3 w-100 text-start">
+                                <button className="custom_userbox_button">
                                     {icons.moneyIcon} Billing
                                 </button>
-                                <button className="btn text-white mt-3 w-100 text-start">
+                                <button className="custom_userbox_button" onClick={logOut}>
                                     {icons.exitIcon} Exit
                                 </button>
                             </div>

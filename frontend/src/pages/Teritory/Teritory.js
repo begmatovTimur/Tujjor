@@ -6,6 +6,19 @@ import Table from "../universal/Table/Table";
 import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
 
+const style = {
+    position: "absolute",
+    top: "47%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "65%",
+    backgroundColor: "white",
+    border: "none",
+    boxShadow: 24,
+    borderRadius: "10px",
+    overflow: "auto",
+};
+
 function Teritory(props) {
     const {teritory} = props
 

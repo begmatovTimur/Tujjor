@@ -99,8 +99,7 @@ const Dropdown = (props) => {
             (dropdownState.layer ? " active_page_size_body" : "")
           }
         >
-          {props.body.map((item, index) => (
-            <div
+          {props.body.map((item, index) => (<div
               key={index}
               className={
                 "page_size_body_item" +
