@@ -5,6 +5,7 @@ import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
 import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
+import Filter from "../universal/Filter/Filter";
 
 const style = {
     position: "absolute",
@@ -71,10 +72,14 @@ function Teritory(props) {
             show: true,
             data: (item) => <button className="custom_edit_btn" onClick={() => {
                 props.editeTeritory(item);
-            }}><i class="fa fa-edit"></i></button>
+            }}><i className="fa fa-edit"></i></button>
         }
     ];
-
+    const [optionsActive] = useState([
+        { value: "", label: "All" },
+        { value: "true", label: "Active" },
+        { value: "false", label: "Inactive" },
+    ]);
     return (
         <div style={{width:"100%", backgroundColor:"#dae2e3"}}>
             <div className="d-flex flex-column align-items-start">
@@ -83,7 +88,17 @@ function Teritory(props) {
                 <i style={{fontSize:"20px"}} className="fa fa-plus"></i>Add Territory
                 </div>
             </div>
-
+            <Filter
+                search={[
+                    {
+                        name: "active",
+                        multi: false,
+                        options: optionsActive,
+                        defaultValue: { value: "", label: "All" },
+                        placeholder: "Active",
+                    }
+                ]}
+            />
             <Table
                 pagination={true}
                 filterActive={true}

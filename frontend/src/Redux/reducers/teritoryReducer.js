@@ -14,6 +14,7 @@ const teritoryReducer = createSlice({
         teritories: [],
         error: "",
         itemForTeritoryEdite: "",
+        regions:[],
     },
     name: "teritory",
     reducers: {
@@ -32,7 +33,6 @@ const teritoryReducer = createSlice({
             state.itemForTeritoryEdite = ""
         },
         getTeritory:(state, action)=>{
-
         },
         getteritoriesSuccess:(state, action)=>{
             state.teritories = action.payload.res;
@@ -99,6 +99,11 @@ const teritoryReducer = createSlice({
             state.region = action.payload.region
             state.active = action.payload.active
             state.mapState = { center: [action.payload.latitude, action.payload.longitude], zoom: 10 }
+        },
+        getCities:(state, action)=>{
+        },
+        getCitiesSuccess:(state, action)=>{
+            state.regions = action.payload.res
         }
     },
 });
