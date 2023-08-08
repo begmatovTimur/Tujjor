@@ -63,7 +63,7 @@ function Teritory(props) {
     ];
 
     return (
-        <div style={{width:"100%", backgroundColor:"#dae2e3"}}>
+        <div style={{width:"100%"}}>
             <div className="d-flex flex-column align-items-start">
                 <div className="title">Territory</div>
                 <div className="custom_add_btn" style={{cursor: "pointer"}} onClick={() => props.handleOpen()}>

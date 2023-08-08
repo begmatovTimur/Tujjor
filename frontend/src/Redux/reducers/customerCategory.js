@@ -52,7 +52,6 @@ const customerCategory = createSlice({
         },
         handleTitle: (state, action) => {
             state.title = action.payload
-            console.log(state.title)
         },
         handleCode: (state, action) => {
             state.code = action.payload
@@ -75,8 +74,9 @@ const customerCategory = createSlice({
             state.title = ""
             state.code = ""
             state.region = ""
+            state.description = "";
+            state.name = "";
             state.active = false
-            state.mapState = {center: [[0], [1]], zoom: 10}
             state.itemForTeritoryEdite = ""
         },
         saveCategory: (state, action) => {
@@ -90,7 +90,6 @@ const customerCategory = createSlice({
             }
         },
         editeCategory: (state, action) => {
-            console.log(action.payload)
             state.itemForTeritoryEdite = action.payload
             state.openModal = true
             state.name = action.payload.name
