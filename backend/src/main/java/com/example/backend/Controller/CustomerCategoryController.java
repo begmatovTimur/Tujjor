@@ -38,7 +38,7 @@ public class CustomerCategoryController {
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping()
-    public HttpEntity<?> getTerritories() {
+    public HttpEntity<?> getCategories() {
         return categoryService.getCategories();
     }
 
@@ -53,11 +53,5 @@ public class CustomerCategoryController {
     public HttpEntity<?> updateCategory(@PathVariable Integer id, @RequestBody CustomerCategoryDTO categoryDTO){
         return ResponseEntity.ok(categoryService.updateCategory(id, categoryDTO));
 
-    }
-
-//    @PreAuthorize("isAuthenticated()")
-    @GetMapping
-    public HttpEntity<?> getCategories(){
-        return categoryService.getCategories();
     }
 }

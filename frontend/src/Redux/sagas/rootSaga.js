@@ -15,7 +15,7 @@ export function* rootSaga(){
         fork(dashboardDataSaga),
         fork(territorySaga),
         fork(customerCategorySaga),
-        fork(companyProfileSaga)
+        fork(companyProfileSaga),
         fork(clientsSaga),
     ])
 }

@@ -32,12 +32,6 @@ const Table = (props) => {
   };
 
 
-  console.log(
-      props.data.map(item=>props.columnsProps.map(col=>{
-        console.log(col.key);
-        return item[col.key]
-      }))
-  )
   function handleChange(e, page) {
     props.handlePageChange(page);
     props.changePaginationTo({

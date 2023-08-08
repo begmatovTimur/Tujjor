@@ -26,14 +26,6 @@ public class CompanyController {
       return ResponseEntity.ok(companyService.getComapanies());
     };
 
-    @GetMapping("/excel")
-    HttpEntity<?> excel(HttpServletRequest request) {
-        String quickSearch = request.getHeader("quickSearch");
-        SearchActiveDTO searchActiveDTO = new SearchActiveDTO();
-        searchActiveDTO.setActive(request.getHeader("active"));
-        searchActiveDTO.setQuickSearch(quickSearch);
-        System.out.println(searchActiveDTO);
-        return categoryService.getExcelFile(searchActiveDTO);
-    };
+
 
 }
