@@ -22,5 +22,5 @@ public class CustomerCategory {
     private  String code;
     private String  name;
     private String description;
-    private Boolean  active;
+    private Boolean active;
 }

@@ -3,19 +3,10 @@ import apiCall from "../../Config/apiCall";
 import {clientsAction} from "../reducers/clientsReducer";
 import {ErrorNotify, SuccessNotify} from "../../tools/Alerts";
 import {teritoryAction} from "../reducers/teritoryReducer";
-function* getTeritories(action){
-    try {
-        const res = yield apiCall("/territory", "GET", null)
-        yield put(clientsAction.getSuccessAllTeritories({res: res.data}))
-    } catch (err) {
-        yield put(clientsAction.yourActionFailureTeritories(err.message));
-    }
-}
 
 function* getClients(action){
     try {
         const res = yield apiCall("/client", "GET", null)
-        console.log(res.data)
         yield put(clientsAction.getClientsSuccess(res.data))
     } catch (err) {
         yield put(clientsAction.yourActionFailureClients(err.message));
@@ -30,10 +21,10 @@ function* saveClients(action){
         if (currentState.editeClient !== ""){
             const res = yield apiCall("/client?clientId="+action.payload.id, "PUT", action.payload)
             try {
-                SuccessNotify("Teritory update Successfully!")
                 yield call(getClients())
                 yield put(clientsAction.closeModal())
                 yield put(clientsAction.resetAllClientsData())
+                SuccessNotify("Territory update Successfully!")
             }catch (err){
                 if (err.response.status === 500){
 
@@ -52,8 +43,6 @@ function* saveClients(action){
 }
 
 export function* clientsSaga() {
-    yield takeEvery("clients/getTeritories", getTeritories)
     yield takeEvery("clients/getClients", getClients)
     yield takeEvery("clients/saveClients", saveClients)
-    // yield takeEvery("clients/getTeritory", getTeritory)
 }

@@ -9,8 +9,6 @@ const clientsReducer = createSlice({
         mapState: {center: [0, 0], zoom: 0},
         longitute: 0,
         latitute: 0,
-        regions:[],
-        teritories: [],
         errMessage: "",
         teritoryId: "",
         name: "",
@@ -18,7 +16,7 @@ const clientsReducer = createSlice({
         telephone: "",
         tin: "",
         active: false,
-        categoriesId: 0,
+        categoryId: 0,
         companyName: "",
         referencePoint: "",
         error:"",
@@ -58,19 +56,13 @@ const clientsReducer = createSlice({
             state.mapState = {center: [0, 1], zoom: 10}
         },
         getClients: (state, action) => {
-            console.log("salom")
+
         },
         getClientsSuccess:(state,action)=>{
             state.data = action.payload
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload
-        },
-        getTeritories:(state, action)=>{
-
-        },
-        getSuccessAllTeritories:(state, action)=>{
-            state.teritories = action.payload.res
         },
         yourActionFailureTeritories:(state, action)=>{
             state.errMessage = action.payload
@@ -86,6 +78,9 @@ const clientsReducer = createSlice({
         },
         changeTelephone:(state, action)=>{
             state.telephone = action.payload;
+        },
+        changeCategoryId:(state, action)=>{
+            state.categoryId = action.payload;
         },
         changeTin:(state, action)=>{
             state.tin = action.payload;

@@ -21,6 +21,8 @@ import java.util.UUID;
 public class CustomerCategoryController {
 
     private final CustomerCategoryService categoryService;
+
+
     @GetMapping("/pagination")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> pagination(@RequestParam Integer page, @RequestParam Integer limit, HttpServletRequest request) {
