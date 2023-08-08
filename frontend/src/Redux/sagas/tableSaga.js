@@ -8,21 +8,24 @@ function* watchGetFilteredData(action) {
     const currentState = yield select((state) => state.table);
     const x = currentState.formInputs
     let obj = {
-        active: x.active.value,
+        active: x.active.value? x.active.value : x.active,
         city: x.city,
+        allWeeks:x.allWeeks.value,
         weekDays: x.weekDays,
         tin: x.tin.value,
         customerCategories: x.customerCategories,
         quickSearch: x.quickSearch
     }
+    console.log(obj)
     let api = currentState.paginationApi1
-    api = api.replace("{page}", currentState.page - 1).replace("{limit}", currentState.limit);
+    api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
     const res = yield apiCall(
         api,
         "get",
         null,
         JSON.stringify(obj)
     )
+    yield put(tableActions.changeCurrentPage(1))
     yield put(tableActions.changeTotalPages(res.data.totalPages))
     yield put(tableActions.changeData({
         data: res.data.content,

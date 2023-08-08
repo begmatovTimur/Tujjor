@@ -19,7 +19,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @OneToOne
+    @ManyToOne
     private Territory territory;
     private String name;
     private String address;

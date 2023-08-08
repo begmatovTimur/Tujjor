@@ -3,55 +3,47 @@ import apiCall from "../../Config/apiCall";
 import {clientsAction} from "../reducers/clientsReducer";
 import {ErrorNotify, SuccessNotify} from "../../tools/Alerts";
 import {teritoryAction} from "../reducers/teritoryReducer";
+import {tableActions} from "../reducers/tableReducer";
 
-function* getClients(action){
+function* getClients(action) {
     try {
+        const currentState = yield select((state) => state.table);
         const res = yield apiCall("/client", "GET", null)
         yield put(clientsAction.getClientsSuccess(res.data))
     } catch (err) {
         yield put(clientsAction.yourActionFailureClients(err.message));
     }
 }
-function* getCustomCategory(action){
-    try {
-        const res = yield apiCall("/customer-category", "GET", null)
-        yield put(clientsAction.getCustomCategorySuccess(res.data))
-    } catch (err) {
-        yield put(clientsAction.yourActionFailureCustomCategory(err.message));
-    }
-}
-function* saveClients(action){
+
+function* saveClients(action) {
     const currentState = yield select((state) => state.clients);
-    console.log(currentState)
-    if (action.payload.name === "" || action.payload.territoryId === "" || action.payload.address === "" || action.payload.phone === "" || action.payload.tin === "" || action.payload.companyName === "" || action.payload.referencePoint === "" || action.payload.longitude === "" || action.payload.latitude === ""){
+    if (action.payload.name === "" || action.payload.territoryId === "" || action.payload.address === "" || action.payload.phone === "" || action.payload.tin === "" || action.payload.companyName === "" || action.payload.categoryId === "" || action.payload.longitude === "" || action.payload.latitude === "") {
         ErrorNotify("Please fill all fields!")
-    }else {
-        if (currentState.editeClient !== ""){
-            const res = yield apiCall("/client?clientId="+action.payload.id, "PUT", action.payload)
+    } else {
+        if (currentState.editeClient !== "") {
+            const res = yield apiCall("/client?clientId=" + action.payload.id, "PUT", action.payload)
             try {
-                yield call(getClients())
+                yield call(getClients)
                 yield put(clientsAction.closeModal())
                 yield put(clientsAction.resetAllClientsData())
-                SuccessNotify("Territory update Successfully!")
-            }catch (err){
-                if (err.response.status === 500){
-
-                }else {
-
+                SuccessNotify("Client update Successfully!")
+            } catch (err) {
+                if (err.response.status === 500) {
+                    ErrorNotify("An internal server mistake")
+                } else {
+                    ErrorNotify(err.response.message)
                 }
             }
-        }else {
+        } else {
             const res = yield apiCall("/client", "POST", action.payload)
-            SuccessNotify("Teritory added Successfully!")
-            yield call(getClients())
-            yield put(clientsAction.closeModal())
-            yield put(clientsAction.resetAllClientsData())
+              if(res){
+                  yield put(clientsAction.closeModal())
+                  yield call(getClients)
+                  yield put(clientsAction.resetAllClientsData())
+                  SuccessNotify("Client added Successfully!")
+              }
         }
-            const res = yield apiCall("/client", "POST", action.payload)
-            SuccessNotify("Teritory added Successfully!")
-            yield put(clientsAction.closeModal())
-            yield put(clientsAction.resetAllClientsData())
-        }
+    }
 
 }
 

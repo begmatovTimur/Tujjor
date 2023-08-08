@@ -38,7 +38,7 @@ const clientsReducer = createSlice({
             state.telephone = "";
             state.tin = "";
             state.active = false;
-            state.categoriesId = 0;
+            state.categoryId = 0;
             state.companyName = "";
             state.referencePoint = ""
             state.longitute = "";
@@ -92,9 +92,6 @@ const clientsReducer = createSlice({
         changeActive:(state, action)=>{
             state.active = action.payload;
         },
-        changeCategoriesId:(state, action)=>{
-            state.categoriesId = action.payload;
-        },
         changeCompanyName:(state, action)=>{
             state.companyName = action.payload;
         },
@@ -132,7 +129,7 @@ const clientsReducer = createSlice({
                 phone: state.telephone,
                 tin: state.tin,
                 active: state.active,
-                categoryId: state.categoriesId,
+                categoryId: state.categoryId,
                 companyName: state.companyName,
                 referencePoint: state.referencePoint,
                 longitude: state.longitute,
@@ -141,7 +138,6 @@ const clientsReducer = createSlice({
         },
         editeClients:(state, action)=>{
             state.editeClient = action.payload
-            console.log(state.editeClient)
             state.openModal = true;
             state.teritoryId = action.payload;
             state.name = action.payload.clientName;
@@ -151,7 +147,6 @@ const clientsReducer = createSlice({
             state.active = action.payload.active;
             state.categoryId = action.payload;
             state.companyName = action.payload.companyName;
-            state.referencePoint = action.payload.region;
             state.longitute = action.payload.longitude;
             state.latitute = action.payload.latitude;
         }

@@ -23,7 +23,6 @@ const Table = (props) => {
       });
     }
   }, [props.dataProps]);
-  console.log(props.dataProps)
   const getValueByKeys = (obj, keys) => {
     const keysArray = keys.split("+").map((key) => key.trim());
     const values = keysArray.map((key) =>
