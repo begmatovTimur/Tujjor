@@ -1,10 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './clients.css'
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {clientsAction} from "../../Redux/reducers/clientsReducer";
 import UniversalModal from "../universal/Modal/UniverModal";
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
 import Table from "../universal/Table/Table";
+import Filter from "../universal/Filter/Filter";
+import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 
 function Clients(props) {
     const {clients} = props
@@ -21,13 +23,19 @@ function Clients(props) {
         props.handleMapState({center: [latitude, longitude], zoom: 10});
     }
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(teritoryAction.getCities())
+    }, [dispatch])
+
     const columns = [
         {
-            id:0,
-            title:"№",
-            key:"index",
-            type:"index",
-            show:true,
+            id: 0,
+            title: "№",
+            key: "index",
+            type: "index",
+            show: true,
         },
         {
             id: 1,
@@ -80,6 +88,13 @@ function Clients(props) {
         },
         {
             id: 8,
+            title: "Category",
+            key: "categoryName",
+            type: "text",
+            show: true,
+        },
+        {
+            id: 9,
             title: "Activity",
             key: "active",
             type: "boolean",
@@ -95,23 +110,112 @@ function Clients(props) {
             }><i class="fa fa-edit"></i></button>
         }
     ];
+    const [optionsActive] = useState([
+        {value: "", label: "All"},
+        {value: "true", label: "Active"},
+        {value: "false", label: "Inactive"},
+    ]);
+
+    function generateOptionsOfCity(){
+        const optionsCity = []
+        props.teritory.regions.map((item,index)=>{
+             optionsCity.push({
+                value: item.id,
+                    label: item.region
+            })
+        })
+        return optionsCity
+    }
     return (
-        <div style={{width:"100%", backgroundColor:"#dae2e3"}}>
+        <div style={{width: "100%", backgroundColor: "#dae2e3"}}>
             <div id={'clientsFatherDiv'}>
                 <div>
-                    <div style={{display:"flex", justifyContent:"space-between", borderBottom:"1px solid #dae2e3", marginTop:"10px"}}>
-                        <p style={{fontSize:"30px"}}>Clients</p>
-                        <button onClick={() => props.openModal()} style={{display:"block", height:"40px", backgroundColor:"#4dce4d", border:"none", padding:"5px 15px"}}>+ Add Client</button>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        borderBottom: "1px solid #dae2e3",
+                        marginTop: "10px"
+                    }}>
+                        <p style={{fontSize: "30px"}}>Clients</p>
+                        <button onClick={() => props.openModal()} style={{
+                            display: "block",
+                            height: "40px",
+                            backgroundColor: "#4dce4d",
+                            border: "none",
+                            padding: "5px 15px"
+                        }}>+ Add Client
+                        </button>
                     </div>
                     <div>
+                        <Filter
+                            search={[
+                                {
+                                    name: "active",
+                                    multi: false,
+                                    options: optionsActive,
+                                    defaultValue: {value: "", label: "All"},
+                                    placeholder: "Active",
+                                },
+                                {
+                                    name: "city",
+                                    multi: true,
+                                    options: generateOptionsOfCity(),
+                                    defaultValue: {value: "", label: "All"},
+                                    placeholder: "City",
+                                },
+                                {
+                                    name: "category",
+                                    multi: false,
+                                    options: optionsActive,
+                                    defaultValue: {value: "", label: "All"},
+                                    placeholder: "Customer categories",
+                                },
+                                {
+                                    name: "day",
+                                    multi: false,
+                                    options: optionsActive,
+                                    defaultValue: {value: "", label: "All"},
+                                    placeholder: "day",
+                                },
+                                {
+                                    name: "allWeeks",
+                                    multi: false,
+                                    options: optionsActive,
+                                    defaultValue: {value: "", label: "All"},
+                                    placeholder: "All weeks",
+                                },
+                                {
+                                    name: "tin",
+                                    multi: false,
+                                    options: optionsActive,
+                                    defaultValue: {value: "", label: "All"},
+                                    placeholder: "Tin",
+                                },
+                                {
+                                    name: "location",
+                                    multi: false,
+                                    options: optionsActive,
+                                    defaultValue: {value: "", label: "All"},
+                                    placeholder: "Location",
+                                },
+                                {
+                                    name: "withInventory",
+                                    multi: false,
+                                    options: optionsActive,
+                                    defaultValue: {value: "", label: "All"},
+                                    placeholder: "With Inventory",
+                                }
+                            ]}
+                            filterButton={true}
+                        />
                         <Table
-                        pagination = {true}
-                        changeSizeMode = {true}
-                        paginationApi={"/client/pagination?page={page}&limit={limit}"}
-                        dataProps={clients?.clients}
-                        columnOrderMode={true}
-                        changeSizeModeOptions={[10,20,50,100,200]}
-                        columnsProps={columns}
+                            pagination={true}
+                            changeSizeMode={true}
+                            paginationApi={"/client/pagination?page={page}&limit={limit}"}
+                            dataProps={props.data}
+                            columnOrderMode={true}
+                            changeSizeModeOptions={[10, 20, 50, 100, 200]}
+                            columnsProps={columns}
                         />
                     </div>
                 </div>
@@ -123,7 +227,7 @@ function Clients(props) {
                 width={70}
                 functionforSaveBtn={() => props.saveClients()}
                 JsxData={
-                    <div style={{display:"flex", gap:"4%"}}>
+                    <div style={{display: "flex", gap: "4%"}}>
                         <div className={'w-50'}>
                             <div className={'d-flex'}>
                                 <div style={{display:"flex", flexDirection:"column", gap:"20px", width:"48%"}}>
@@ -154,7 +258,13 @@ function Clients(props) {
                                         <input onChange={(e)=>props.changeActive(e.target.checked)} checked={clients.active} className={"form-check w-25"} type="checkbox" name="" id=""/>
                                     </label>
                                 </div>
-                                <div style={{display:"flex", flexDirection:"column", gap:"20px", width:"48%", marginLeft:"4%"}}>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: "20px",
+                                    width: "48%",
+                                    marginLeft: "4%"
+                                }}>
                                     <label><span className={'d-block'}>Category*</span>
                                         <select onChange={(e)=>props.changeCategoriesId(e.target.value)} value={clients.categoryId} className={'form-select'}>
                                             <option value="" selected disabled>All Category</option>
@@ -177,7 +287,7 @@ function Clients(props) {
 
                             </div>
                         </div>
-                        
+
                         <div className={"w-50"}>
                             <YMaps
                                 query={{

@@ -48,7 +48,7 @@ public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
 """, nativeQuery = true)
     List<TerritoryProjection> findByQuickSearchWithoutActive(String quickSearch);
 
-    @Query(nativeQuery = true,value = "select region from territory")
+    @Query(nativeQuery = true,value = "select id,region from territory")
     List<TerritoryRegionProjection> findAllRegion();
     @Query(nativeQuery = true, value = """
             SELECT t.id, t.name, t.code, t.region, t.active FROM territory t LEFT JOIN client c ON t.id = c.territory_id WHERE c.id IS NULL

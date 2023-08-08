@@ -23,6 +23,7 @@ const Table = (props) => {
       });
     }
   }, [props.dataProps]);
+  console.log(props.dataProps)
   const getValueByKeys = (obj, keys) => {
     const keysArray = keys.split("+").map((key) => key.trim());
     const values = keysArray.map((key) =>
@@ -40,24 +41,8 @@ const Table = (props) => {
       page,
     });
   }
-  const [optionsActive] = useState([
-    { value: "", label: "All" },
-    { value: "true", label: "Active" },
-    { value: "false", label: "Inactive" },
-  ]);
   return (
     <div className="universal_table">
-      {props.filterActive? <Filter
-          search={[
-            {
-              name: "active",
-              multi: false,
-              options: optionsActive,
-              defaultValue: { value: "", label: "All" },
-              placeholder: "Active",
-            },
-          ]}
-      />:""}
       <div className="bg-white d-flex flex-column gap-2 p-2">
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between align-items-center">
@@ -89,7 +74,7 @@ const Table = (props) => {
                 className="custom_btn"
                 download
                 onClick={() => {
-                  props.getExcelFile({data:props.data,path:props.excelPath});
+                  props.getExcelFile({excelWithoutSearch:props.excelWithoutSearch,path:props.excelPath});
                 }}
               >
                 Excel
@@ -104,12 +89,12 @@ const Table = (props) => {
               </button>
             </div>
 
-            {/*/!* 👇 Column Order 👇  *!/*/}
-            {/*{props.columnOrderMode && props.columns.length ? (*/}
-            {/*  <Filter quickSearch></Filter>*/}
-            {/*) : (*/}
-            {/*  ""*/}
-            {/*)}*/}
+            {/* 👇 Column Order 👇  */}
+            {props.columnOrderMode && props.columns.length ? (
+              <Filter quickSearch></Filter>
+            ) : (
+              ""
+            )}
           </div>
         </div>
 

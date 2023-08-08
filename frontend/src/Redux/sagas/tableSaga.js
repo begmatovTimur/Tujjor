@@ -100,20 +100,37 @@ function* downloadExcelFile(action) {
         customerCategories: x.customerCategories,
     }
     if (obj.active === undefined) obj.active = "ALL";
-    axios
-        .get("http://localhost:8080/api/territory/excel", {
-            responseType: 'blob',
-            headers: {
-                active: obj.active,
-                quickSearch: obj.quickSearch
-            }
-        })
-        .then((res) => {
-            const file = new Blob([res.data], {
-                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    if(action.payload.excelWithoutSearch) {
+        axios
+            .get("http://localhost:8080/api"+action.payload.path, {
+                responseType: 'blob',
+                headers:{
+                    token:localStorage.getItem("access_token")
+                }
+            })
+            .then((res) => {
+                const file = new Blob([res.data], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                });
+                saveAs(file, "territory.xlsx");
             });
-            saveAs(file, "territory.xlsx");
-        });
+    }else {
+        axios
+            .get("http://localhost:8080/api"+action.payload.path, {
+                responseType: 'blob',
+                headers: {
+                    active: obj.active,
+                    quickSearch: obj.quickSearch,
+                    token:localStorage.getItem("token")
+                }
+            })
+            .then((res) => {
+                const file = new Blob([res.data], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                });
+                saveAs(file, "territory.xlsx");
+            });
+    }
 
 }
 

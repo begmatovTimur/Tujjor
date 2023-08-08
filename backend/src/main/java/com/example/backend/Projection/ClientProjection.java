@@ -14,6 +14,8 @@ public interface ClientProjection {
      String getClientName();
      @Value("#{target.companyName}")
      String getCompanyName();
+     @Value("#{target.categoryName}")
+     String getCategoryName();
      @Value("#{target.phone}")
      String getTelephone();
 

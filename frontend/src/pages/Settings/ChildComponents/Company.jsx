@@ -72,13 +72,14 @@ function Company(props) {
         <div style={{width: "100%"}}>
 
             <Table
+                excelWithoutSearch={true}
                 filterActive={false}
                 columnOrderMode={false}
                 dataProps={companyProfile.companies}
                 changeSizeModeOptions={[10, 20, 50, 100, 200]}
                 pagination={false}
                 changeSizeMode={false}
-                excelPath={"/customer-category/excel"}
+                excelPath={"/company/excel"}
                 columnsProps={columns}
             />
 
