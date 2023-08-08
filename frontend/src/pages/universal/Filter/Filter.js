@@ -58,7 +58,6 @@ function Filter(props) {
     props.changeQuickSearch(val);
     props.getQuickSearchData(props.paginationApi);
   }
-
   return (
     <div>
       <div className="row">
@@ -103,12 +102,10 @@ function Filter(props) {
           ) : (
             ""
           )}
-          {formInputsProps.city === "" &&
-          formInputsProps.city.length === 0 &&
-          formInputsProps.tin === "" &&
-          formInputsProps.quickSearch === "" &&
-          formInputsProps.customerCategories.length === 0 &&
-          formInputsProps.active ? (
+          {
+
+            props.filterButton
+                ?
             <button
               onClick={() => props.getFilteredData(props.paginationApi)}
               className={"btn btn-primary"}
@@ -116,7 +113,7 @@ function Filter(props) {
             >
               Filter
             </button>
-          ) : (
+          : (
             ""
           )}
         </div>

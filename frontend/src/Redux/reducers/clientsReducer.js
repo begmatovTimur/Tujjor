@@ -9,7 +9,8 @@ const clientsReducer = createSlice({
         mapState: {center: [0, 0], zoom: 0},
         longitute: 0,
         latitute: 0,
-        error:""
+        error:"",
+        regions:[],
     },
     reducers: {
         openModal: (state, action) => {
@@ -33,14 +34,14 @@ const clientsReducer = createSlice({
             state.mapState = {center: [0, 1], zoom: 10}
         },
         getClients: (state, action) => {
-
+            console.log("salom")
         },
         getClientsSuccess:(state,action)=>{
             state.data = action.payload
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload
-        },
+        }
     }
 })
 export const clientsAction = {...clientsReducer.actions};

@@ -48,6 +48,6 @@ public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
 """, nativeQuery = true)
     List<TerritoryProjection> findByQuickSearchWithoutActive(String quickSearch);
 
-    @Query(nativeQuery = true,value = "select region from territory")
+    @Query(nativeQuery = true,value = "select id,region from territory")
     List<TerritoryRegionProjection> findAllRegion();
 }

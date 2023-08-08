@@ -43,7 +43,7 @@ public class TerritoryController {
         return territoryService.getTerritories();
     }
 
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+//    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping("/region")
     public HttpEntity<?> getTerritoryRegion() {
         return territoryService.getTerritoryRegion();
