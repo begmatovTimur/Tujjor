@@ -55,7 +55,7 @@ public class TerritoryController {
     }
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public HttpEntity<?> updateTerritory(@PathVariable UUID id, @RequestBody TerritoryDTO territoryDTO){
         return ResponseEntity.ok(territoryService.updateTerritory(id, territoryDTO));
     }
