@@ -10,6 +10,7 @@ function Clients(props) {
     const {clients} = props
     useEffect(()=>{
         props.getTeritories()
+        props.getClients()
     },[])
     function handleMapClick(event){
         const coords = event.get("coords");
@@ -50,38 +51,40 @@ function Clients(props) {
         },
         {
             id: 4,
-            title: "Territory",
-            key: "territory",
-            type: "text",
-            show: true,
-        },
-        {
-            id: 5,
             title: "Address",
             key: "address",
             type: "text",
             show: true,
         },
         {
+            id: 5,
+            title: "Longitude",
+            key: "longitude",
+            type: "text",
+            show: true,
+        },
+        {
             id: 6,
-            title: "Category",
-            key: "category",
+            title: "Latitude",
+            key: "latitude",
             type: "text",
             show: true,
         },
         {
             id: 7,
             title: "Activity",
-            key: "activity",
-            type: "text",
+            key: "active",
+            type: "boolean",
             show: true,
-        },
-        {
+        },{
             id: 8,
-            title: "",
-            key: "actions",
-            type: "text",
+            title: "Update",
+            key: "button",
+            type: "jsx",
             show: true,
+            data: (item) => <button className="custom_edit_btn" onClick={() =>
+                props.editeClients(item)
+            }><i class="fa fa-edit"></i></button>
         }
     ];
     return (

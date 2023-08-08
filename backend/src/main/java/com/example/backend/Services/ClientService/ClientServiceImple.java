@@ -40,7 +40,8 @@ public class ClientServiceImple implements ClientService {
         try {
             ResponseEntity<String> body = ifExistInputs(clientDTO);
             if (body != null) return body;
-            return ResponseEntity.ok(clientRepository.save(generateClient(clientDTO)));
+            Client save = clientRepository.save(generateClient(clientDTO));
+            return ResponseEntity.ok(save);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("An error has occurred");
         }

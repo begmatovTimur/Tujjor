@@ -17,10 +17,11 @@ const clientsReducer = createSlice({
         telephone: "",
         tin: "",
         active: false,
-        categoriesId: "",
+        categoriesId: 0,
         companyName: "",
         referencePoint: "",
-        error:""
+        error:"",
+        editeClient:""
     },
     reducers: {
         openModal: (state, action) => {
@@ -28,6 +29,18 @@ const clientsReducer = createSlice({
         },
         closeModal: (state, action) => {
             state.openModal = false
+            state.teritoryId = "";
+            state.name = "";
+            state.address = "";
+            state.telephone = "";
+            state.tin = "";
+            state.active = false;
+            state.categoriesId = 0;
+            state.companyName = "";
+            state.referencePoint = ""
+            state.longitute = "";
+            state.latitute = "";
+            state.editeClient = "";
         },
         handleTemplate: (state, action) => {
             state.template = action.payload
@@ -88,19 +101,50 @@ const clientsReducer = createSlice({
         changeReferencePoint:(state, action)=>{
             state.referencePoint = action.payload;
         },
+        resetAllClientsData:(state, action)=>{
+            state.teritoryId = "";
+            state.name = "";
+            state.address = "";
+            state.telephone = "";
+            state.tin = "";
+            state.active = false;
+            state.categoriesId = 0;
+            state.companyName = "";
+            state.referencePoint = ""
+            state.longitute = "";
+            state.latitute = "";
+            state.editeClient = "";
+        },
         saveClients:(state, action)=>{
-            let obj = {
-                teritoryId:state.teritoryId,
-                name:state.name,
-                address:state.address,
-                telephone:state.telephone,
-                tin:state.tin,
-                active:state.active,
-                categoriesId:state.categoriesId,
-                companyName:state.companyName,
-                referencePoint:state.referencePoint,
+            action.payload = {
+                territoryId: state.teritoryId,
+                name: state.name,
+                address: state.address,
+                phone: state.telephone,
+                tin: state.tin,
+                active: state.active,
+                categoryId: 1,
+                companyName: state.companyName,
+                referencePoint: state.referencePoint,
+                longitude: state.longitute,
+                latitude: state.latitute,
             }
-            console.log(obj)
+        },
+        editeClients:(state, action)=>{
+            state.editeClient = action.payload
+            console.log(state.editeClient)
+            state.openModal = true;
+            // state.teritoryId = action.payload;
+            state.name = action.payload.clientName;
+            state.address = action.payload.address;
+            state.telephone = action.payload.telephone;
+            // state.tin = action.payload;
+            state.active = action.payload.active;
+            // state.categoriesId = action.payload;
+            state.companyName = action.payload.companyName;
+            state.referencePoint = action.payload.region;
+            state.longitute = action.payload.longitude;
+            state.latitute = action.payload.latitude;
         }
     }
 })
