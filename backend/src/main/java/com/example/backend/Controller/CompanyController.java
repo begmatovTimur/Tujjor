@@ -26,6 +26,9 @@ public class CompanyController {
       return ResponseEntity.ok(companyService.getComapanies());
     };
 
-
+    @GetMapping("/excel")
+    public ResponseEntity<Resource> excel() throws IOException {
+        return companyService.getExcel();
+    };
 
 }

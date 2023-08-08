@@ -73,7 +73,7 @@ const Table = (props) => {
                 className="custom_btn"
                 download
                 onClick={() => {
-                  props.getExcelFile({data:props.data,path:props.excelPath});
+                  props.getExcelFile({excelWithoutSearch:props.excelWithoutSearch,path:props.excelPath});
                 }}
               >
                 Excel
