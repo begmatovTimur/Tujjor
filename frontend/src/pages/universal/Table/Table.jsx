@@ -36,7 +36,6 @@ const Table = (props) => {
     { value: "true", label: "Active" },
     { value: "false", label: "Inactive" },
   ]);
-  console.log(props.data)
   return (
     <div className="universal_table">
       {/*<Filter*/}
@@ -169,7 +168,9 @@ const Table = (props) => {
                           </td>
                       ) : (
                           <td className={col.show ? '' : 'hidden'} key={col.id}>
-                            {col.type==="index"?index+1:item[col.key]}
+                            {col.key==="active"? col.type==="index"?index+1:item[col.key] === true? <p className={'text-success'}>active</p>:
+                              <p className={'text-danger'}>no active</p>
+                              : col.type==="index"?index+1:item[col.key]}
                           </td>
                       )
                   )}

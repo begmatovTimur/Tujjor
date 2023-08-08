@@ -7,7 +7,6 @@ import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
 
 function Teritory(props) {
-
     const {teritory} = props
 
     useEffect(() => {

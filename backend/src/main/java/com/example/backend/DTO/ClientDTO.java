@@ -18,6 +18,7 @@ public class ClientDTO {
     private Integer categoryId;
     private String name;
     private String companyName;
+    private String referencePoint;;
     private String address;
     private String phone;
     private Boolean active;
