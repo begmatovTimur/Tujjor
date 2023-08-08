@@ -25,9 +25,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -65,20 +63,30 @@ public class ClientServiceImple implements ClientService {
                 return ResponseEntity.badRequest().body("Invalid page or limit value");
             }
             JsonNode jsonNode = wrapToObject(request);
-//            if (jsonNode == null || !jsonNode.has("city") || !jsonNode.has("category") || !jsonNode.has("day") ||
-//                    !jsonNode.has("weeks") || !jsonNode.has("quickSearch") || !jsonNode.has("tin")) {
-//                return ResponseEntity.badRequest().body("Invalid JSON input");
-//            }
-            boolean activeFilter = jsonNode.has("active") && jsonNode.get("active").isBoolean();
+            JsonNode cityArrayNode = jsonNode.get("city");
+            List<UUID> cities = new ArrayList<>();
+            for (JsonNode cityNode : cityArrayNode) {
+                UUID cityId = UUID.fromString(cityNode.asText());
+                cities.add(cityId);
+            }
+            JsonNode categoryArray = jsonNode.get("customerCategories");
+            List<Integer> customerCategoriesParam = new ArrayList<>();
+            for (JsonNode cityNode : categoryArray) {
+                customerCategoriesParam.add(cityNode.asInt());
+            }
+            System.out.println(customerCategoriesParam);
             Pageable pageable = PageRequest.of(page,limit);
             Page<ClientProjection> clients;
-            if(!activeFilter){
-                clients = clientRepository.filterWithoutActive(jsonNode.get("city").asText(),jsonNode.get("quickSearch").asText(),pageable);
+            if(jsonNode.get("active").asText().equals("")){
+                clients = clientRepository.filterWithoutActive(cities,customerCategoriesParam,jsonNode.get("quickSearch").asText(),pageable);
             }else{
-                clients = clientRepository.getAllFilteredFields(jsonNode.get("city").asText(),jsonNode.get("active").isBoolean(),jsonNode.get("quickSearch").asText(),pageable);
+                clients = clientRepository.getAllFilteredFields(cities,customerCategoriesParam,jsonNode.get("active").asBoolean(),jsonNode.get("quickSearch").asText(),pageable);
             }
             if (clients.isEmpty()) {
                 return ResponseEntity.ok(new PageImpl<>(Collections.emptyList(), pageable, 0));
+            }
+            for (ClientProjection client : clients.getContent()) {
+                System.out.println(client.getClientName()); // Print or log the client information
             }
             return ResponseEntity.ok(clients);
         }catch (Exception e){

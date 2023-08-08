@@ -61,8 +61,8 @@ function Clients(props) {
         },
         {
             id: 4,
-            title: "TeritoryName",
-            key: "territory.name",
+            title: "Territory",
+            key: "region",
             type: "text",
             show: true,
         },
@@ -185,6 +185,7 @@ function Clients(props) {
                                     options: optionsActive,
                                     defaultValue: {value: "", label: "All"},
                                     placeholder: "Active",
+                                    selfEmployer: false
                                 },
                                 {
                                     name: "city",
@@ -192,19 +193,22 @@ function Clients(props) {
                                     options: generateOptionsOfCity(),
                                     defaultValue: {value: "", label: "All"},
                                     placeholder: "City",
+                                    selfEmployer: false
                                 },
                                 {
-                                    name: "category",
-                                    multi: false,
+                                    name: "customerCategories",
+                                    multi: true,
                                     options: generateOptionsOfCategory(),
                                     defaultValue: {value: "", label: "All"},
                                     placeholder: "Customer categories",
+                                    selfEmployer: false
                                 },
                                 {
                                     name: "day",
                                     multi: false,
-                                        defaultValue: {value: "", label: "All"},
+                                    defaultValue: {value: "", label: "All"},
                                     placeholder: "day",
+                                    selfEmployer: false
                                 },
                                 {
                                     name: "allWeeks",
@@ -212,6 +216,7 @@ function Clients(props) {
                                     options: optionsAllWeeks,
                                     defaultValue: {value: "", label: "All"},
                                     placeholder: "All weeks",
+                                    selfEmployer: false
                                 },
                                 {
                                     name: "tin",
@@ -219,18 +224,21 @@ function Clients(props) {
                                     options: optionsTin,
                                     defaultValue: {value: "", label: "All"},
                                     placeholder: "Tin",
+                                    selfEmployer: false
                                 },
                                 {
                                     name: "location",
                                     multi: false,
                                     defaultValue: {value: "", label: "All"},
                                     placeholder: "Location",
+                                    selfEmployer: false
                                 },
                                 {
                                     name: "withInventory",
                                     multi: false,
                                     defaultValue: {value: "", label: "All"},
                                     placeholder: "With Inventory",
+                                    selfEmployer: false
                                 }
                             ]}
                             filterButton={true}
@@ -241,7 +249,7 @@ function Clients(props) {
                             paginationApi={"/client/pagination?page={page}&limit={limit}"}
                             dataProps={props.data}
                             columnOrderMode={true}
-                            changeSizeModeOptions={[10, 20, 50, 100, 200]}
+                            changeSizeModeOptions={[5,7,10,20]}
                             columnsProps={columns}
                         />
                     </div>
@@ -316,11 +324,6 @@ function Clients(props) {
                                         <input onChange={(e) => props.changeCompanyName(e.target.value)}
                                                value={clients.companyName} className={"form-control w-100"} type="text"
                                                name="" id=""/>
-                                    </label>
-                                    <label><span className={'d-block'}>Reference point</span>
-                                        <input onChange={(e) => props.changeReferencePoint(e.target.value)}
-                                               value={clients.referencePoint} className={"form-control w-100"}
-                                               type="text" name="" id=""/>
                                     </label>
                                 </div>
                             </div>
