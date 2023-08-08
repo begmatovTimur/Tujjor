@@ -2,15 +2,18 @@ package com.example.backend.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,8 +28,8 @@ public class Client {
     private String companyName;
     private double longitude;
     private double latitude;
-
-    @OneToOne
+    private Boolean active;
+    private LocalDate registrationDate;
+    @ManyToOne
     private CustomerCategory category;
-
 }

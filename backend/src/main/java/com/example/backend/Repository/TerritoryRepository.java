@@ -2,6 +2,7 @@ package com.example.backend.Repository;
 
 import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Projection.TerritoryRegionProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,4 +46,7 @@ public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
         OR LOWER(t.name) LIKE LOWER(CONCAT('%', :quickSearch, '%')))
 """, nativeQuery = true)
     List<TerritoryProjection> findByQuickSearchWithoutActive(String quickSearch);
+
+    @Query(nativeQuery = true,value = "select region from territory")
+    List<TerritoryRegionProjection> findAllRegion();
 }

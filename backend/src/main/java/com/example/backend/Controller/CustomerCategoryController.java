@@ -52,5 +52,12 @@ public class CustomerCategoryController {
     @PutMapping("{id}")
     public HttpEntity<?> updateCategory(@PathVariable Integer id, @RequestBody CustomerCategoryDTO categoryDTO){
         return ResponseEntity.ok(categoryService.updateCategory(id, categoryDTO));
+
+    }
+
+//    @PreAuthorize("isAuthenticated()")
+    @GetMapping
+    public HttpEntity<?> getCategories(){
+        return categoryService.getCategories();
     }
 }

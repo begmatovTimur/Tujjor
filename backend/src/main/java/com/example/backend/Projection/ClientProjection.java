@@ -1,0 +1,33 @@
+package com.example.backend.Projection;
+
+
+import org.springframework.beans.factory.annotation.Value;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+public interface ClientProjection {
+
+     UUID getId();
+
+     @Value("#{target.name}")
+     String getClientName();
+     @Value("#{target.companyName}")
+     String getCompanyName();
+     @Value("#{target.phone}")
+     String getTelephone();
+
+     Double getLatitude();
+
+     Double getLongitude();
+     @Value("#{target.city}")
+     String getRegion();
+
+     String getAddress();
+
+     @Value("#{target.active}")
+     Boolean getActive();
+
+     @Value("#{target.registrationDate}")
+     LocalDate getRegistrationDate();
+}

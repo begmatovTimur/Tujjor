@@ -2,16 +2,16 @@ import "./App.css";
 import Login from "./pages/Login/Login";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
 import Settings from "./pages/Settings/Settings";
 import Teritory from "./pages/Teritory/Teritory";
 import Company from "./pages/Settings/ChildComponents/Company";
 import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
-import UniversalModal from "./pages/universal/Modal/UniverModal";
 import NotFound from "./pages/404/NotFound";
 import { ToastContainer } from "react-toastify";
+import Clients from "./pages/Clients/clients";
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -104,6 +104,7 @@ function App() {
             />
             <Route path="/admin/settings/territory" element={<Teritory />} />
           </Route>
+          <Route path="/admin/clients" element={<Clients/>}></Route>
         </Route>
 
         <Route path="*" element={<NotFound />} />

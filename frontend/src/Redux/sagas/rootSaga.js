@@ -5,6 +5,7 @@ import {territorySaga} from "./teritorySaga";
 import tableSaga from "./tableSaga";
 import {customerCategorySaga} from "./customerCategorySaga";
 import companyProfileSaga from "./companyProfileSaga";
+import {clientsSaga} from "./clientsSaga";
 
 
 export function* rootSaga(){
@@ -15,5 +16,6 @@ export function* rootSaga(){
         fork(territorySaga),
         fork(customerCategorySaga),
         fork(companyProfileSaga)
+        fork(clientsSaga),
     ])
 }

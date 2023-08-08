@@ -28,7 +28,7 @@ const teritoryReducer = createSlice({
             state.code = ""
             state.region = ""
             state.active = false
-            state.mapState = { center: [[0], [1]], zoom: 10 }
+            state.mapState = { center: [0, 1], zoom: 10 }
             state.itemForTeritoryEdite = ""
         },
         getTeritory:(state, action)=>{
@@ -64,7 +64,7 @@ const teritoryReducer = createSlice({
         clearAllTeritory:(state, action)=>{
             state.longitute = 0;
             state.latitute = 0;
-            state.mapState = { center: [[0], [1]], zoom: 10 }
+            state.mapState = { center: [0, 1], zoom: 10 }
         },
         changeModal:(state, action)=>{
             state.openModal = action.payload
@@ -76,11 +76,10 @@ const teritoryReducer = createSlice({
             state.code = ""
             state.region = ""
             state.active = false
-            state.mapState = { center: [[0], [1]], zoom: 10 }
+            state.mapState = { center: [0, 1], zoom: 10 }
             state.itemForTeritoryEdite = ""
         },
         saveTeritory:(state, action)=>{
-            
             action.payload = {
                 name: state.title,
                 region: state.region,
@@ -99,8 +98,7 @@ const teritoryReducer = createSlice({
             state.code = action.payload.code
             state.region = action.payload.region
             state.active = action.payload.active
-            state.mapState = { center: [[action.payload.latitude], [action.payload.longitude]], zoom: 10 }
-            console.log(state.itemForTeritoryEdite)
+            state.mapState = { center: [action.payload.latitude, action.payload.longitude], zoom: 10 }
         }
     },
 });

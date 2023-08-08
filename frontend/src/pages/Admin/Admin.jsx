@@ -10,6 +10,7 @@ import "./Admin.css";
 function Admin(props) {
     const dispatch = useDispatch();
     const location = useLocation();
+    const [isHovered, setIsHovered] = useState(false);
     const {dashboardData} = props.dashboardDataReducer;
     const navigate = useNavigate();
     const userBoxRef = useRef(null);
@@ -43,9 +44,15 @@ function Admin(props) {
     const handleUserDropDown = () => {
         setUserBox((prevState) => !prevState);
     };
+    const handleMouseEnterF = () => {
+        setIsHovered(true);
+    };
+    const handleMouseLeaveF = () => {
+        setIsHovered(false);
+    }
 
     return (
-        <div className={"bg-white"} style={{height: "100vh", width: "auto", backgroundColor: "#405058"}}>
+        <div style={{height: "100vh", width: "auto", backgroundColor: "#EEEEEE"}}>
             <div style={{height: "7%", backgroundColor: "#405058"}} className="d-flex">
                 <div
                     className="ps-1 pt-2 d-flex justify-content-center"
@@ -151,11 +158,10 @@ function Admin(props) {
                         path={"/admin/stock"}
                         icon={icons.stockIcon}
                     />
-                    <DashboardButton
-                        title={"Clients"}
-                        path={"/admin/clients"}
-                        icon={icons.clientsIcon}
-                    />
+                    <button className={"dashboard_clients_button"} onMouseEnter={handleMouseEnterF} onMouseLeave={handleMouseLeaveF}>
+                        {icons.clientsIcon}
+                        <span>Clients</span>
+                    </button>
                     <DashboardButton
                         title={"Agents"}
                         path={"/admin/agents"}
@@ -172,6 +178,12 @@ function Admin(props) {
                         icon={<i className="fa fa-cogs"></i>}
                     />
                 </div>
+                {isHovered &&
+                    <div onMouseEnter={handleMouseEnterF} onMouseLeave={handleMouseLeaveF} id={"clientDatasBox"}>
+                        <p onClick={()=>navigate("/admin/clients") & setIsHovered(false)}>Clients</p>
+                        <p>Clients on the map</p>
+                        <p style={{padding:"0px"}}></p>
+                    </div>}
                 <Outlet/>
             </div>
         </div>

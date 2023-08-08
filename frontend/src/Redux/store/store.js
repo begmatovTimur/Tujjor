@@ -11,6 +11,7 @@ import customerCategoryReducer from "../reducers/customerCategoryReducer";
 import customerCategory from "../reducers/customerCategory";
 import companyProfile from "../reducers/companyProfile";
 import companyProfileReducer from "../reducers/companyProfile";
+import clientsReducer from "../reducers/clientsReducer";
 const sagaMiddleware = createSagaMiddleware();
 
 const store =  configureStore({
@@ -22,7 +23,8 @@ const store =  configureStore({
         teritory:teritoryReducer,
         dropdown:dropdownReducer,
         customerCategory:customerCategory,
-        companyProfile:companyProfileReducer
+        companyProfile:companyProfileReducer,
+        clients: clientsReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(sagaMiddleware),

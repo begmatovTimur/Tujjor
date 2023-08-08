@@ -51,6 +51,7 @@ const Table = (props) => {
     { value: "true", label: "Active" },
     { value: "false", label: "Inactive" },
   ]);
+  console.log(props.data)
   return (
     <div className="universal_table">
       {props.filterActive? <Filter
@@ -110,12 +111,12 @@ const Table = (props) => {
               </button>
             </div>
 
-            {/* 👇 Column Order 👇  */}
-            {props.columnOrderMode && props.columns.length ? (
-              <Filter quickSearch></Filter>
-            ) : (
-              ""
-            )}
+            {/*/!* 👇 Column Order 👇  *!/*/}
+            {/*{props.columnOrderMode && props.columns.length ? (*/}
+            {/*  <Filter quickSearch></Filter>*/}
+            {/*) : (*/}
+            {/*  ""*/}
+            {/*)}*/}
           </div>
         </div>
 
@@ -166,11 +167,15 @@ const Table = (props) => {
                     {item.show ? item.title : ''}
                   </th>
               ))}
-              {props.additionalColumns ? <th>More</th> : ''}
+              {
+                props.additionalColumns?
+                props.additionalColumns ? <th>More</th> : '' :""}
             </tr>
             </thead>
             <tbody>
-            {props.data.map((item,index) => (
+            {
+              props.data?
+              props.data.map((item,index) => (
                 <tr key={item.id}>
                   {props.columns.map((col) =>
                       col.type === 'jsx' ? (
@@ -185,7 +190,9 @@ const Table = (props) => {
                   )}
                   {props.additionalColumns ? <td>{props.additionalColumns}</td> : ''}
                 </tr>
-            ))}
+            ))
+            :""
+            }
             </tbody>
           </table>
         </div>

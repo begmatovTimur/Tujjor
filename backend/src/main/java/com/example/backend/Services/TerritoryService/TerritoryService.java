@@ -25,4 +25,6 @@ public interface TerritoryService {
 
     ResponseEntity<Resource> getExcelFile(SearchActiveDTO dto) throws IOException;
 
+    HttpEntity<?> getTerritoryRegion();
+
 }
