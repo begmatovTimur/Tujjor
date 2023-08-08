@@ -88,7 +88,7 @@ function CustomerCategory(props) {
                 modalTitle={"Add Category"}
                 isOpen={customerCategory.openModal}
                 closeFunction={() => props.handleClose()}
-                width={60}
+                width={40}
                 functionforSaveBtn={() => props.saveCategory()}
 
                 inpData={[

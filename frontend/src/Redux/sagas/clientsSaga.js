@@ -5,7 +5,7 @@ import {ErrorNotify, SuccessNotify} from "../../tools/Alerts";
 import {teritoryAction} from "../reducers/teritoryReducer";
 function* getTeritories(action){
     try {
-        const res = yield apiCall("/territory", "GET", null)
+        const res = yield apiCall("/client/teritoriesForClients", "GET", null)
         yield put(clientsAction.getSuccessAllTeritories({res: res.data}))
     } catch (err) {
         yield put(clientsAction.yourActionFailureTeritories(err.message));
@@ -15,10 +15,17 @@ function* getTeritories(action){
 function* getClients(action){
     try {
         const res = yield apiCall("/client", "GET", null)
-        console.log(res.data)
         yield put(clientsAction.getClientsSuccess(res.data))
     } catch (err) {
         yield put(clientsAction.yourActionFailureClients(err.message));
+    }
+}
+function* getCustomCategory(action){
+    try {
+        const res = yield apiCall("/customer-category", "GET", null)
+        yield put(clientsAction.getCustomCategorySuccess(res.data))
+    } catch (err) {
+        yield put(clientsAction.yourActionFailureCustomCategory(err.message));
     }
 }
 function* saveClients(action){
@@ -28,32 +35,24 @@ function* saveClients(action){
         ErrorNotify("Please fill all fields!")
     }else {
         if (currentState.editeClient !== ""){
-            const res = yield apiCall("/client?clientId="+action.payload.id, "PUT", action.payload)
-            try {
-                SuccessNotify("Teritory update Successfully!")
-                yield call(getClients())
-                yield put(clientsAction.closeModal())
-                yield put(clientsAction.resetAllClientsData())
-            }catch (err){
-                if (err.response.status === 500){
-
-                }else {
-
-                }
-            }
-        }else {
-            const res = yield apiCall("/client", "POST", action.payload)
-            SuccessNotify("Teritory added Successfully!")
-            yield call(getClients())
+            const res = yield apiCall("/client?clientId="+currentState.editeClient.id, "PUT", action.payload)
+            SuccessNotify("Teritory update Successfully!")
+            yield call(getTeritories)
             yield put(clientsAction.closeModal())
             yield put(clientsAction.resetAllClientsData())
         }
-    }
+            const res = yield apiCall("/client", "POST", action.payload)
+            SuccessNotify("Teritory added Successfully!")
+            yield call(getTeritories)
+            yield put(clientsAction.closeModal())
+            yield put(clientsAction.resetAllClientsData())
+        }
+
 }
 
 export function* clientsSaga() {
     yield takeEvery("clients/getTeritories", getTeritories)
     yield takeEvery("clients/getClients", getClients)
     yield takeEvery("clients/saveClients", saveClients)
-    // yield takeEvery("clients/getTeritory", getTeritory)
+    yield takeEvery("clients/getCustomCategory", getCustomCategory)
 }
