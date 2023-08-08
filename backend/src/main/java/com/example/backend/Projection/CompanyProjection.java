@@ -9,12 +9,11 @@ public interface CompanyProjection {
 
 Integer getId();
 String getRegion();
-String getUserName();
 
 @Value("#{target.company_name}")
 String getCompanyName();
 @Value("#{target.support_phone}")
 String getSupportPhone();
 String getEmail();
-Object getAddress();
+String getAddress();
 }

@@ -12,6 +12,14 @@ function* getClients(action){
         yield put(clientsAction.yourActionFailureClients(err.message));
     }
 }
+function* getCustomCategory(action){
+    try {
+        const res = yield apiCall("/customer-category", "GET", null)
+        yield put(clientsAction.getCustomCategorySuccess(res.data))
+    } catch (err) {
+        yield put(clientsAction.yourActionFailureCustomCategory(err.message));
+    }
+}
 function* saveClients(action){
     const currentState = yield select((state) => state.clients);
     console.log(currentState)
@@ -39,7 +47,12 @@ function* saveClients(action){
             yield put(clientsAction.closeModal())
             yield put(clientsAction.resetAllClientsData())
         }
-    }
+            const res = yield apiCall("/client", "POST", action.payload)
+            SuccessNotify("Teritory added Successfully!")
+            yield put(clientsAction.closeModal())
+            yield put(clientsAction.resetAllClientsData())
+        }
+
 }
 
 export function* clientsSaga() {

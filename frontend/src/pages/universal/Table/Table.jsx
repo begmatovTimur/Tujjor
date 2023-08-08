@@ -23,6 +23,7 @@ const Table = (props) => {
       });
     }
   }, [props.dataProps]);
+  console.log(props.dataProps)
   const getValueByKeys = (obj, keys) => {
     const keysArray = keys.split("+").map((key) => key.trim());
     const values = keysArray.map((key) =>
@@ -73,7 +74,7 @@ const Table = (props) => {
                 className="custom_btn"
                 download
                 onClick={() => {
-                  props.getExcelFile({data:props.data,path:props.excelPath});
+                  props.getExcelFile({excelWithoutSearch:props.excelWithoutSearch,path:props.excelPath});
                 }}
               >
                 Excel

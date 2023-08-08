@@ -15,7 +15,7 @@ function Clients(props) {
         props.getClients()
     }, [])
 
-    function handleMapClick(event) {
+    function handleMapClick(event){
         const coords = event.get("coords");
         const latitude = coords[0];
         const longitude = coords[1];
@@ -61,8 +61,8 @@ function Clients(props) {
         },
         {
             id: 4,
-            title: "Territory",
-            key: "region",
+            title: "TeritoryName",
+            key: "territory.name",
             type: "text",
             show: true,
         },
@@ -100,13 +100,15 @@ function Clients(props) {
             key: "active",
             type: "boolean",
             show: true,
-        },
-        {
-            id: 10,
-            title: "Actions",
-            key: "actions",
-            type: "text",
-            show: true
+        },{
+            id: 9,
+            title: "Update",
+            key: "button",
+            type: "jsx",
+            show: true,
+            data: (item) => <button className="custom_edit_btn" onClick={() =>
+                props.editeClients(item)
+            }><i className="fa fa-edit"></i></button>
         }
     ];
     const [optionsActive] = useState([

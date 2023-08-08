@@ -42,4 +42,10 @@ public class ClientController {
     public HttpEntity<?> getFilteredClients(@RequestParam Integer page,@RequestParam Integer limit, HttpServletRequest request) throws JsonProcessingException {
         return clientService.getFilteredClients(page,limit,request);
     }
+    @GetMapping("/teritoriesForClients")
+//    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    public HttpEntity<?> getTeritoryForClients() {
+        System.out.println("Saom");
+        return clientService.getTeritoriesForClients();
+    }
 }

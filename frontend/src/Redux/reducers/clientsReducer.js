@@ -9,6 +9,9 @@ const clientsReducer = createSlice({
         mapState: {center: [0, 0], zoom: 0},
         longitute: 0,
         latitute: 0,
+        regions:[],
+        teritories: [],
+        customCategories: [],
         errMessage: "",
         teritoryId: "",
         name: "",
@@ -31,6 +34,7 @@ const clientsReducer = createSlice({
             state.teritoryId = "";
             state.name = "";
             state.address = "";
+            state.categoryId = 0;
             state.telephone = "";
             state.tin = "";
             state.active = false;
@@ -97,6 +101,15 @@ const clientsReducer = createSlice({
         changeReferencePoint:(state, action)=>{
             state.referencePoint = action.payload;
         },
+        getCustomCategory:(state, action)=>{
+
+        },
+        getCustomCategorySuccess:(state, action)=>{
+            state.customCategories = action.payload;
+        },
+        yourActionFailureCustomCategory:(state, action)=>{
+            state.error = action.payload;
+        },
         resetAllClientsData:(state, action)=>{
             state.teritoryId = "";
             state.name = "";
@@ -104,7 +117,7 @@ const clientsReducer = createSlice({
             state.telephone = "";
             state.tin = "";
             state.active = false;
-            state.categoriesId = 0;
+            state.categoryId = 0;
             state.companyName = "";
             state.referencePoint = ""
             state.longitute = "";
@@ -119,7 +132,7 @@ const clientsReducer = createSlice({
                 phone: state.telephone,
                 tin: state.tin,
                 active: state.active,
-                categoryId: 1,
+                categoryId: state.categoriesId,
                 companyName: state.companyName,
                 referencePoint: state.referencePoint,
                 longitude: state.longitute,
@@ -130,13 +143,13 @@ const clientsReducer = createSlice({
             state.editeClient = action.payload
             console.log(state.editeClient)
             state.openModal = true;
-            // state.teritoryId = action.payload;
+            state.teritoryId = action.payload;
             state.name = action.payload.clientName;
             state.address = action.payload.address;
             state.telephone = action.payload.telephone;
-            // state.tin = action.payload;
+            state.tin = action.payload;
             state.active = action.payload.active;
-            // state.categoriesId = action.payload;
+            state.categoryId = action.payload;
             state.companyName = action.payload.companyName;
             state.referencePoint = action.payload.region;
             state.longitute = action.payload.longitude;
