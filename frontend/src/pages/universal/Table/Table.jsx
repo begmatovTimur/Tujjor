@@ -23,6 +23,21 @@ const Table = (props) => {
       });
     }
   }, [props.dataProps]);
+  const getValueByKeys = (obj, keys) => {
+    const keysArray = keys.split("+").map((key) => key.trim());
+    const values = keysArray.map((key) =>
+        key.split('.').reduce((acc, k) => (acc && acc[k]) || '', obj)
+    );
+    return values.join(" ");
+  };
+
+
+  console.log(
+      props.data.map(item=>props.columnsProps.map(col=>{
+        console.log(col.key);
+        return item[col.key]
+      }))
+  )
   function handleChange(e, page) {
     props.handlePageChange(page);
     props.changePaginationTo({
@@ -39,34 +54,34 @@ const Table = (props) => {
   console.log(props.data)
   return (
     <div className="universal_table">
-      {/*<Filter*/}
-      {/*  search={[*/}
-      {/*    {*/}
-      {/*      name: "active",*/}
-      {/*      multi: false,*/}
-      {/*      options: optionsActive,*/}
-      {/*      defaultValue: { value: "", label: "All" },*/}
-      {/*      placeholder: "Active",*/}
-      {/*    },*/}
-      {/*  ]}*/}
-      {/*/>*/}
+      {props.filterActive? <Filter
+          search={[
+            {
+              name: "active",
+              multi: false,
+              options: optionsActive,
+              defaultValue: { value: "", label: "All" },
+              placeholder: "Active",
+            },
+          ]}
+      />:""}
       <div className="bg-white d-flex flex-column gap-2 p-2">
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-end ">
-              <Dropdown
-                multiSelect={false}
-                dropdownId="1"
-                body={props.changeSizeModeOptions}
-                onItemClick={(item) => {
-                  props.handlePageChange(1);
-                  props.changePaginationTo({
-                    api: props.paginationApi,
-                    size: item,
-                    page: 1,
-                  });
-                }}
-              />
+              {props.changeSizeMode?<Dropdown
+                  multiSelect={false}
+                  dropdownId="1"
+                  body={props.changeSizeModeOptions}
+                  onItemClick={(item) => {
+                    props.handlePageChange(1);
+                    props.changePaginationTo({
+                      api: props.paginationApi,
+                      size: item,
+                      page: 1,
+                    });
+                  }}
+              />:""}
               <Dropdown
                 customTitle="Table Setup"
                 multiSelect={true}
@@ -81,7 +96,7 @@ const Table = (props) => {
                 className="custom_btn"
                 download
                 onClick={() => {
-                  props.getExcelFile(props.data);
+                  props.getExcelFile({data:props.data,path:props.excelPath});
                 }}
               >
                 Excel
@@ -169,7 +184,7 @@ const Table = (props) => {
                           </td>
                       ) : (
                           <td className={col.show ? '' : 'hidden'} key={col.id}>
-                            {col.type==="index"?index+1:item[col.key]}
+                            {col.type==="index"?index+1:getValueByKeys(item,col.key)}
                           </td>
                       )
                   )}
@@ -186,7 +201,7 @@ const Table = (props) => {
 
       {/* 👇 Pagination 👇  */}
       <div className="d-flex justify-content-end pe-5">
-        {props.columns.length ? (
+        {props.pagination&&props.columns.length ? (
           <Pagination
             onChange={(e, page) => {
               handleChange(e, page);
