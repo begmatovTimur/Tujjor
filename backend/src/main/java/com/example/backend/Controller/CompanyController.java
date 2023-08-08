@@ -1,14 +1,19 @@
 package com.example.backend.Controller;
 
+import com.example.backend.DTO.CompanyProfileDTO;
+import com.example.backend.DTO.CustomerCategoryDTO;
+import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.Services.CompanyService.CompanyService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/company")
@@ -16,10 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CompanyController {
 
     private final CompanyService companyService;
+    @GetMapping
+    HttpEntity<?> getCompanies() {
+      return ResponseEntity.ok(companyService.getComapanies());
+    };
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping()
-    public HttpEntity<?> getCompany(@RequestParam(defaultValue = "") String search){
-        return companyService.getFilteredCompanies(search);
-    }
+
+
 }

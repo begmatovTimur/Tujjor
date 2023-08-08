@@ -7,8 +7,20 @@ import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
 import Filter from "../universal/Filter/Filter";
 
-function Teritory(props) {
+const style = {
+    position: "absolute",
+    top: "47%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "65%",
+    backgroundColor: "white",
+    border: "none",
+    boxShadow: 24,
+    borderRadius: "10px",
+    overflow: "auto",
+};
 
+function Teritory(props) {
     const {teritory} = props
 
     useEffect(() => {
@@ -89,6 +101,7 @@ function Teritory(props) {
             />
             <Table
                 pagination={true}
+                filterActive={true}
                 changeSizeMode={true}
                 paginationApi={"/territory/pagination?page={page}&limit={limit}"}
                 dataProps={teritory.teritories}

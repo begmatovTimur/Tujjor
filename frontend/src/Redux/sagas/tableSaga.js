@@ -1,10 +1,8 @@
 import axios from "axios";
 import {saveAs} from 'file-saver';
-import {select, call, put, takeEvery} from "redux-saga/effects";
-import apiCall from '../../Config/apiCall';
+import { select,call, put, takeEvery } from "redux-saga/effects";
+import apiCall, {domen} from '../../Config/apiCall';
 import {tableActions} from "../reducers/tableReducer"; // Make sure to import tableActions from the correct path
-import Cookie from 'js-cookie';
-import api from "js-cookie";
 
 function* watchGetFilteredData(action) {
     const currentState = yield select((state) => state.table);

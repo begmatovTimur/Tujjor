@@ -18,7 +18,7 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String companyName;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private User superVisor;
     private String supportPhone;
     private String email;

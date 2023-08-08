@@ -26,6 +26,7 @@ public class Client {
     private String phone;
     private String tin;
     private String companyName;
+    private String referencePoint;
     private double longitude;
     private double latitude;
     private Boolean active;

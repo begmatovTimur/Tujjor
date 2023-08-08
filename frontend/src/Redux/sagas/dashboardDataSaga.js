@@ -5,7 +5,7 @@ import {GET_DASHBOARD_DATA, SET_SHOW_USER_MODAL} from "../constants/dashboardDat
 
 function* watchGetDashboardData() {
     try {
-        const {data} = yield apiCall("/dashboard-data", "GET")
+        const {data} = yield apiCall("/dashboard-data", "GET", null)
         yield put(dashboardDataModel.getDashboardDataSuccess(data))
     } catch (e) {
         yield put(dashboardDataModel.getDashboardDataFailure(e.data()))

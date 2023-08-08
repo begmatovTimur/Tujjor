@@ -20,7 +20,6 @@ import java.util.UUID;
 public class TerritoryController {
     private final TerritoryService territoryService;
 
-
     @GetMapping("/pagination")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> pagination(@RequestParam Integer page,@RequestParam Integer limit,HttpServletRequest request) {
@@ -56,7 +55,7 @@ public class TerritoryController {
     }
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public HttpEntity<?> updateTerritory(@PathVariable UUID id, @RequestBody TerritoryDTO territoryDTO){
         return ResponseEntity.ok(territoryService.updateTerritory(id, territoryDTO));
     }

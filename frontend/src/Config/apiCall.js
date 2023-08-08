@@ -1,9 +1,10 @@
 import axios from "axios";
-
+export const domen = "http://localhost:8080/api";
 export default function (url, method, data,searchParam="") {
     let item = localStorage.getItem("access_token");
     return axios({
-        url: "http://localhost:8080/api" + url,
+        baseURL:domen,
+        url,
         method: method,
         data,
         headers: {
@@ -11,7 +12,6 @@ export default function (url, method, data,searchParam="") {
             "searchParam": searchParam
         },
     }).catch((err)=>{
-        console.log(err);
         if (err.response.status === 403){
             axios({
                 url: "http://localhost:8080/api/auth/refresh?refreshToken="+localStorage.getItem("refresh_token"),

@@ -1,7 +1,8 @@
 package com.example.backend.Services.CompanyService;
 
-import org.springframework.http.HttpEntity;
+import com.example.backend.Entity.Company;
+import java.util.List;
 
 public interface CompanyService {
-    HttpEntity<?> getFilteredCompanies(String value);
+    List<Company> getComapanies();
 }

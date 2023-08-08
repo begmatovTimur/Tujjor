@@ -1,6 +1,5 @@
 package com.example.backend.DTO;
 
-import com.example.backend.Entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +17,7 @@ public class ClientDTO {
     private Integer categoryId;
     private String name;
     private String companyName;
+    private String referencePoint;;
     private String address;
     private String phone;
     private Boolean active;
