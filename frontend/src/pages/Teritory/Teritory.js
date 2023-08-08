@@ -7,8 +7,6 @@ import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
 
 function Teritory(props) {
-    const [openModal, setOpenModal] = useState(false)
-    const [txt, setTxt] = useState("")
 
     const {teritory} = props
 
@@ -75,6 +73,7 @@ function Teritory(props) {
             </div>
             <Table
                 pagination={true}
+                filterActive={true}
                 changeSizeMode={true}
                 paginationApi={"/territory/pagination?page={page}&limit={limit}"}
                 dataProps={teritory.teritories}

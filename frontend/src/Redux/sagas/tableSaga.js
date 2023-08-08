@@ -1,7 +1,7 @@
 import axios from "axios";
 import {saveAs} from 'file-saver';
 import { select,call, put, takeEvery } from "redux-saga/effects";
-import apiCall from '../../Config/apiCall';
+import apiCall, {domen} from '../../Config/apiCall';
 import { tableActions } from "../reducers/tableReducer"; // Make sure to import tableActions from the correct path
 import Cookie from 'js-cookie';
 
@@ -89,9 +89,10 @@ function* downloadExcelFile(action) {
   if(obj.active===undefined) obj.active = "ALL";
   console.log(obj);
   axios
-  .get("http://localhost:8080/api/territory/excel", { responseType: 'blob', headers:{
+  .get(domen+action.payload.path, { responseType: 'blob', headers:{
     active:obj.active,
     quickSearch:obj.quickSearch,
+      token:localStorage.getItem("access_token")
   }})
   .then((res) => {
     const file = new Blob([res.data], {

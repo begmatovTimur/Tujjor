@@ -1,6 +1,5 @@
 package com.example.backend.Services.TerritoryService;
 
-import com.example.backend.DTO.ExcelDTO;
 import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
@@ -56,10 +55,6 @@ public class TerritoryServiceImpl implements TerritoryService {
         return objectMapper.readTree(value);
     }
 
-    @Override
-    public ResponseEntity<InputStreamResource> downloadExcel(ExcelDTO userPayload) {
-        return downloadExcel(userPayload.getData(), userPayload.getHeaders());
-    }
 
 
     public ResponseEntity<InputStreamResource> downloadExcel(List<?> data, List<String> headers) {
