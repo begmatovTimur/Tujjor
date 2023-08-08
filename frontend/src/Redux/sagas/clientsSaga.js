@@ -3,14 +3,6 @@ import apiCall from "../../Config/apiCall";
 import {clientsAction} from "../reducers/clientsReducer";
 import {ErrorNotify, SuccessNotify} from "../../tools/Alerts";
 import {teritoryAction} from "../reducers/teritoryReducer";
-function* getTeritories(action){
-    try {
-        const res = yield apiCall("/client/teritoriesForClients", "GET", null)
-        yield put(clientsAction.getSuccessAllTeritories({res: res.data}))
-    } catch (err) {
-        yield put(clientsAction.yourActionFailureTeritories(err.message));
-    }
-}
 
 function* getClients(action){
     try {
@@ -35,15 +27,28 @@ function* saveClients(action){
         ErrorNotify("Please fill all fields!")
     }else {
         if (currentState.editeClient !== ""){
-            const res = yield apiCall("/client?clientId="+currentState.editeClient.id, "PUT", action.payload)
-            SuccessNotify("Teritory update Successfully!")
-            yield call(getTeritories)
+            const res = yield apiCall("/client?clientId="+action.payload.id, "PUT", action.payload)
+            try {
+                yield call(getClients())
+                yield put(clientsAction.closeModal())
+                yield put(clientsAction.resetAllClientsData())
+                SuccessNotify("Territory update Successfully!")
+            }catch (err){
+                if (err.response.status === 500){
+
+                }else {
+
+                }
+            }
+        }else {
+            const res = yield apiCall("/client", "POST", action.payload)
+            SuccessNotify("Teritory added Successfully!")
+            yield call(getClients())
             yield put(clientsAction.closeModal())
             yield put(clientsAction.resetAllClientsData())
         }
             const res = yield apiCall("/client", "POST", action.payload)
             SuccessNotify("Teritory added Successfully!")
-            yield call(getTeritories)
             yield put(clientsAction.closeModal())
             yield put(clientsAction.resetAllClientsData())
         }
@@ -51,8 +56,6 @@ function* saveClients(action){
 }
 
 export function* clientsSaga() {
-    yield takeEvery("clients/getTeritories", getTeritories)
     yield takeEvery("clients/getClients", getClients)
     yield takeEvery("clients/saveClients", saveClients)
-    yield takeEvery("clients/getCustomCategory", getCustomCategory)
 }

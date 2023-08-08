@@ -8,7 +8,7 @@ import settingsReducer from '../reducers/settingsReducer';
 import teritoryReducer from "../reducers/teritoryReducer";
 import dropdownReducer from '../reducers/dropdownReducer';
 import customerCategoryReducer from "../reducers/customerCategoryReducer";
-import customerCategory from "../reducers/customerCategory";
+import customerCategory from "../reducers/customerCategoryReducer";
 import companyProfile from "../reducers/companyProfile";
 import companyProfileReducer from "../reducers/companyProfile";
 import clientsReducer from "../reducers/clientsReducer";
