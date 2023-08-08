@@ -73,6 +73,7 @@ function Teritory(props) {
 
             <Table
                 pagination={true}
+                filterActive={true}
                 changeSizeMode={true}
                 paginationApi={"/territory/pagination?page={page}&limit={limit}"}
                 dataProps={teritory.teritories}
