@@ -31,6 +31,8 @@ const Table = (props) => {
     return values.join(" ");
   };
 
+  console.log(props.dataProps)
+
 
   function handleChange(e, page) {
     props.handlePageChange(page);
