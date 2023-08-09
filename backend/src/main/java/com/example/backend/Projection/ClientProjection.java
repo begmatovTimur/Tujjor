@@ -34,6 +34,8 @@ public interface ClientProjection {
      @Value("#{target.city}")
      String getRegion();
 
+     String getTin();
+
      String getAddress();
 
      @Value("#{target.active}")

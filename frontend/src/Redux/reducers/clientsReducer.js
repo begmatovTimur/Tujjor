@@ -138,6 +138,7 @@ const clientsReducer = createSlice({
             }
         },
         editeClients:(state, action)=>{
+            console.log(action.payload)
             state.editeClient = action.payload
             state.openModal = true;
             state.teritoryId = action.payload.territoryId;
