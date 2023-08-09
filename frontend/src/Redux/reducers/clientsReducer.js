@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const clientsReducer = createSlice({
     name: "clients",
     initialState: {
-        data:[],
+        clients:[],
         openModal: false,
         template: null,
         mapState: {center: [0, 0], zoom: 0},
@@ -63,7 +63,7 @@ const clientsReducer = createSlice({
 
         },
         getClientsSuccess:(state,action)=>{
-            state.data = action.payload
+            state.clients = action.payload
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload
@@ -137,13 +137,14 @@ const clientsReducer = createSlice({
             }
         },
         editeClients:(state, action)=>{
+            console.log(action.payload)
             state.editeClient = action.payload
             state.openModal = true;
             state.teritoryId = action.payload;
             state.name = action.payload.clientName;
             state.address = action.payload.address;
             state.telephone = action.payload.telephone;
-            state.tin = action.payload;
+            state.tin = action.payload.tin;
             state.active = action.payload.active;
             state.categoryId = action.payload;
             state.companyName = action.payload.companyName;

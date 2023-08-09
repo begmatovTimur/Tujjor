@@ -132,9 +132,9 @@ public class ClientServiceImple implements ClientService {
 
 
     private static ResponseEntity<String> ifExistInputs(ClientDTO clientDTO) {
-        if (clientDTO.getTerritoryId() == null || clientDTO.getAddress() == null || clientDTO.getPhone() == null || clientDTO.getTin() == null
-                || clientDTO.getTerritoryId().toString().isEmpty()
-                || clientDTO.getPhone().isEmpty() || clientDTO.getTin().isEmpty()) {
+        if (clientDTO.getTerritoryId() == null || clientDTO.getAddress() == null || clientDTO.getPhone() == null ||
+                clientDTO.getTerritoryId().toString().isEmpty()
+                || clientDTO.getPhone().isEmpty()) {
             return ResponseEntity.status(404).body("Fill the gaps!");
         }
         return null;

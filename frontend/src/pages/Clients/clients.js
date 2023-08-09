@@ -75,32 +75,26 @@ function Clients(props) {
         },
         {
             id: 6,
-            title: "Longitude",
-            key: "longitude",
-            type: "text",
-            show: true,
-        },
-        {
-            id: 7,
-            title: "Latitude",
-            key: "latitude",
-            type: "text",
-            show: true,
-        },
-        {
-            id: 8,
             title: "Category",
             key: "categoryName",
             type: "text",
             show: true,
         },
         {
-            id: 9,
+            id: 7,
             title: "Activity",
             key: "active",
             type: "boolean",
             show: true,
-        },{
+        },
+        {
+            id: 8,
+            title: "Registration Date",
+            key: "registrationDate",
+            type: "boolean",
+            show: true,
+        },
+        {
             id: 9,
             title: "Update",
             key: "button",
@@ -247,7 +241,7 @@ function Clients(props) {
                             pagination={true}
                             changeSizeMode={true}
                             paginationApi={"/client/pagination?page={page}&limit={limit}"}
-                            dataProps={props.data}
+                            dataProps={clients.clients}
                             columnOrderMode={true}
                             changeSizeModeOptions={[5,7,10,20]}
                             columnsProps={columns}
