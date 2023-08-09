@@ -91,7 +91,7 @@ const Dropdown = (props) => {
           className="custom_btn"
           onClick={handleButtonClick}
         >
-          {props.customTitle ? props.customTitle : `By ${props.body[0]}`}
+          {dropdownState.currentItem!=-1?"By "+props.body[dropdownState.currentItem]:props.customTitle}
         </button>
         <div
           className={
