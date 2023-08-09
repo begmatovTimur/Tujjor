@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import Table from '../../universal/Table/Table'
 import UniversalModal from "../../universal/Modal/UniverModal";
-import {customerCategoryActions} from "../../../Redux/reducers/customerCategory";
+import {customerCategoryActions} from "../../../Redux/reducers/customerCategoryReducer";
 import "./CustomerCategory.css";
 import Filter from "../../universal/Filter/Filter";
 

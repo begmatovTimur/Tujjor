@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ErrorNotify} from "../tools/Alerts";
 export const domen = "http://localhost:8080/api";
 export default function (url, method, data,searchParam="") {
     let item = localStorage.getItem("access_token");
@@ -12,6 +13,7 @@ export default function (url, method, data,searchParam="") {
             "searchParam": searchParam
         },
     }).catch((err)=>{
+        console.log(err)
         if (err.response.status === 403){
             axios({
                 url: "http://localhost:8080/api/auth/refresh?refreshToken="+localStorage.getItem("refresh_token"),
@@ -30,6 +32,10 @@ export default function (url, method, data,searchParam="") {
             }).catch((err)=>{
                 window.location = "/login"
             })
+        }else if(err.response.status===404){
+            ErrorNotify(err.response.data)
+        }else if(err.response.status===500){
+            ErrorNotify(err.response.data)
         }
     })
 }

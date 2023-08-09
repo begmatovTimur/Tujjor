@@ -96,6 +96,7 @@ function Teritory(props) {
                         options: optionsActive,
                         defaultValue: { value: "", label: "All" },
                         placeholder: "Active",
+                        selfEmployer: true
                     }
                 ]}
             />

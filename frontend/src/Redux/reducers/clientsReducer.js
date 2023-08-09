@@ -11,6 +11,7 @@ const clientsReducer = createSlice({
         latitute: 0,
         regions:[],
         teritories: [],
+        clients: [],
         customCategories: [],
         errMessage: "",
         teritoryId: "",
@@ -19,7 +20,7 @@ const clientsReducer = createSlice({
         telephone: "",
         tin: "",
         active: false,
-        categoriesId: 0,
+        categoryId: 0,
         companyName: "",
         referencePoint: "",
         error:"",
@@ -34,10 +35,11 @@ const clientsReducer = createSlice({
             state.teritoryId = "";
             state.name = "";
             state.address = "";
+            state.categoryId = 0;
             state.telephone = "";
             state.tin = "";
             state.active = false;
-            state.categoriesId = 0;
+            state.categoryId = 0;
             state.companyName = "";
             state.referencePoint = ""
             state.longitute = "";
@@ -59,19 +61,13 @@ const clientsReducer = createSlice({
             state.mapState = {center: [0, 1], zoom: 10}
         },
         getClients: (state, action) => {
-            console.log("salom")
+
         },
         getClientsSuccess:(state,action)=>{
             state.clients = action.payload
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload
-        },
-        getTeritories:(state, action)=>{
-
-        },
-        getSuccessAllTeritories:(state, action)=>{
-            state.teritories = action.payload.res
         },
         yourActionFailureTeritories:(state, action)=>{
             state.errMessage = action.payload
@@ -88,14 +84,14 @@ const clientsReducer = createSlice({
         changeTelephone:(state, action)=>{
             state.telephone = action.payload;
         },
+        changeCategoryId:(state, action)=>{
+            state.categoryId = action.payload;
+        },
         changeTin:(state, action)=>{
             state.tin = action.payload;
         },
         changeActive:(state, action)=>{
             state.active = action.payload;
-        },
-        changeCategoriesId:(state, action)=>{
-            state.categoriesId = action.payload;
         },
         changeCompanyName:(state, action)=>{
             state.companyName = action.payload;
@@ -119,7 +115,7 @@ const clientsReducer = createSlice({
             state.telephone = "";
             state.tin = "";
             state.active = false;
-            state.categoriesId = 0;
+            state.categoryId = 0;
             state.companyName = "";
             state.referencePoint = ""
             state.longitute = "";
@@ -134,7 +130,7 @@ const clientsReducer = createSlice({
                 phone: state.telephone,
                 tin: state.tin,
                 active: state.active,
-                categoryId: state.categoriesId,
+                categoryId: state.categoryId,
                 companyName: state.companyName,
                 referencePoint: state.referencePoint,
                 longitude: state.longitute,
@@ -143,19 +139,18 @@ const clientsReducer = createSlice({
         },
         editeClients:(state, action)=>{
             state.editeClient = action.payload
-            console.log(state.editeClient)
             state.openModal = true;
-            // state.teritoryId = action.payload;
+            state.teritoryId = action.payload.territoryId;
             state.name = action.payload.clientName;
             state.address = action.payload.address;
             state.telephone = action.payload.telephone;
-            // state.tin = action.payload;
+            state.tin = action.payload.tin;
             state.active = action.payload.active;
-            // state.categoriesId = action.payload;
+            state.categoryId = action.payload.categoryId;
             state.companyName = action.payload.companyName;
-            state.referencePoint = action.payload.region;
             state.longitute = action.payload.longitude;
             state.latitute = action.payload.latitude;
+            state.mapState = { center: [action.payload.latitude, action.payload.longitude], zoom: 10 }
         }
     }
 })
