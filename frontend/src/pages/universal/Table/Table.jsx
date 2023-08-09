@@ -37,14 +37,7 @@ const Table = (props) => {
             page,
         });
     }
-  }, [props.dataProps]);
-  const getValueByKeys = (obj, keys) => {
-    const keysArray = keys.split("+").map((key) => key.trim());
-    const values = keysArray.map((key) =>
-        key.split('.').reduce((acc, k) => (acc && acc[k]) || '', obj)
-    );
-    return values.join(" ");
-  };
+
 
 
     return (
@@ -55,6 +48,7 @@ const Table = (props) => {
                         <div className="d-flex align-items-end ">
                             {props.changeSizeMode ? <Dropdown
                                 multiSelect={false}
+                                customTitle={"By "+props.changeSizeModeOptions[0]}
                                 dropdownId="1"
                                 body={props.changeSizeModeOptions}
                                 onItemClick={(item) => {
