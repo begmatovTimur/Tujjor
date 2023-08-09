@@ -11,7 +11,7 @@ function* addCategory(action){
     }else {
         if (currentState.itemForTeritoryEdite !== ""){
             const res = yield apiCall(`/customer-category/${currentState.itemForTeritoryEdite.id}`, "PUT", action.payload)
-            yield call(getCategories)
+            yield getCategories();
             yield put(customerCategoryActions.changeModal(false))
             yield put(teritoryAction.resetAllTeritoryData())
         }else {

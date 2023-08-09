@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface ClientProjection {
 
      UUID getId();
-
+     
      @Value("#{target.name}")
      String getClientName();
      @Value("#{target.companyName}")
@@ -18,6 +18,15 @@ public interface ClientProjection {
      String getCategoryName();
      @Value("#{target.phone}")
      String getTelephone();
+
+     @Value("#{target.territoryId}")
+     String getTerritoryId();
+
+     @Value("#{target.categoryId}")
+     String getCategoryId();
+
+     String getTin();
+
 
      Double getLatitude();
 

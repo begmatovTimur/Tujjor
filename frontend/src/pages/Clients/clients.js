@@ -166,7 +166,8 @@ function Clients(props) {
                             height: "40px",
                             backgroundColor: "#4dce4d",
                             border: "none",
-                            padding: "5px 15px"
+                            padding: "5px 15px",
+                            color:"white"
                         }}>+ Add Client
                         </button>
                     </div>
@@ -250,7 +251,7 @@ function Clients(props) {
                 </div>
             </div>
             <UniversalModal
-                modalTitle={"Add Client"}
+                modalTitle={clients.editeClient === ""? "Add Client" : "Edite Client"}
                 isOpen={clients.openModal}
                 closeFunction={() => props.closeModal()}
                 width={70}
