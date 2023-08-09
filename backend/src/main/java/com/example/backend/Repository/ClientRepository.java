@@ -18,6 +18,9 @@ public interface ClientRepository extends JpaRepository<Client,UUID> {
 
     @Query(nativeQuery = true,value = "SELECT\n" +
             "    c.id,\n" +
+            " t.id as territoryId, " +
+            "  cc.id as categoryId,  " +
+            "  c.tin,  " +
             "    c.name,\n" +
             "    c.company_name AS companyName,\n" +
             "    c.phone,\n" +
@@ -46,7 +49,10 @@ public interface ClientRepository extends JpaRepository<Client,UUID> {
     Page<ClientProjection> filterWithoutActive(List<UUID> city, List<Integer> category, String search, Pageable pageable);
 
     @Query(nativeQuery = true, value = "SELECT\n" +
-            "    c.id,\n" +
+            "    c.id," +
+            " t.id as territoryId,  \n" +
+            "  cc.id as categoryId,  " +
+            "  c.tin,  " +
             "    c.name,\n" +
             "    c.company_name AS companyName,\n" +
             "    c.phone,\n" +

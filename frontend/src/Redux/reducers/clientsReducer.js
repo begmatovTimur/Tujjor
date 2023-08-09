@@ -139,16 +139,17 @@ const clientsReducer = createSlice({
         editeClients:(state, action)=>{
             state.editeClient = action.payload
             state.openModal = true;
-            state.teritoryId = action.payload;
+            state.teritoryId = action.payload.territoryId;
             state.name = action.payload.clientName;
             state.address = action.payload.address;
             state.telephone = action.payload.telephone;
-            state.tin = action.payload;
+            state.tin = action.payload.tin;
             state.active = action.payload.active;
-            state.categoryId = action.payload;
+            state.categoryId = action.payload.categoryId;
             state.companyName = action.payload.companyName;
             state.longitute = action.payload.longitude;
             state.latitute = action.payload.latitude;
+            state.mapState = { center: [action.payload.latitude, action.payload.longitude], zoom: 10 }
         }
     }
 })

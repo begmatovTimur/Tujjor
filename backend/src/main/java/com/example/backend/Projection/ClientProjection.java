@@ -19,6 +19,15 @@ public interface ClientProjection {
      @Value("#{target.phone}")
      String getTelephone();
 
+     @Value("#{target.territoryId}")
+     String getTerritoryId();
+
+     @Value("#{target.categoryId}")
+     String getCategoryId();
+
+     String getTin();
+
+
      Double getLatitude();
 
      Double getLongitude();
