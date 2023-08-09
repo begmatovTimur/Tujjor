@@ -102,8 +102,10 @@ function Teritory(props) {
             />
             <Table
                 pagination={true}
-                filterActive={true}
                 changeSizeMode={true}
+                excelPath={"/territory/excel"}
+                fileName={"territories"}
+                excelWithoutSearch={false}
                 paginationApi={"/territory/pagination?page={page}&limit={limit}"}
                 dataProps={teritory.teritories}
                 columnOrderMode={true}

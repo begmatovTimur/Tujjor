@@ -248,7 +248,7 @@ function Clients(props) {
                             pagination={true}
                             changeSizeMode={true}
                             paginationApi={"/client/pagination?page={page}&limit={limit}"}
-                            dataProps={clients.data}
+                            dataProps={clients.clients}
                             columnOrderMode={true}
                             changeSizeModeOptions={[5,7,10,20]}
                             columnsProps={columns}

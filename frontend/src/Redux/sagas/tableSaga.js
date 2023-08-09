@@ -115,7 +115,7 @@ function* downloadExcelFile(action) {
                 const file = new Blob([res.data], {
                     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 });
-                saveAs(file, "territory.xlsx");
+                saveAs(file, action.payload.fileName+".xlsx");
             });
     }else {
         axios
@@ -124,14 +124,14 @@ function* downloadExcelFile(action) {
                 headers: {
                     active: obj.active,
                     quickSearch: obj.quickSearch,
-                    token:localStorage.getItem("token")
+                    token:localStorage.getItem("access_token")
                 }
             })
             .then((res) => {
                 const file = new Blob([res.data], {
                     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 });
-                saveAs(file, "territory.xlsx");
+                saveAs(file, action.payload.fileName+".xlsx");
             });
     }
 
