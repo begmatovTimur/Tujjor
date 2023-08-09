@@ -13,6 +13,7 @@ function Clients(props) {
     useEffect(()=>{
         props.getTeritories()
         props.getClients()
+        props.getCustomCategory()
     },[])
     function handleMapClick(event){
         const coords = event.get("coords");
@@ -59,8 +60,8 @@ function Clients(props) {
         },
         {
             id: 4,
-            title: "Territory",
-            key: "region",
+            title: "TeritoryName",
+            key: "territory.name",
             type: "text",
             show: true,
         },
@@ -98,13 +99,15 @@ function Clients(props) {
             key: "active",
             type: "boolean",
             show: true,
-        },
-        {
-            id: 10,
-            title: "Actions",
-            key: "actions",
-            type: "text",
-            show: true
+        },{
+            id: 9,
+            title: "Update",
+            key: "button",
+            type: "jsx",
+            show: true,
+            data: (item) => <button className="custom_edit_btn" onClick={() =>
+                props.editeClients(item)
+            }><i class="fa fa-edit"></i></button>
         }
     ];
     const [optionsActive] = useState([
@@ -209,7 +212,7 @@ function Clients(props) {
                             pagination={true}
                             changeSizeMode={true}
                             paginationApi={"/client/pagination?page={page}&limit={limit}"}
-                            dataProps={props.data}
+                            dataProps={clients.clients}
                             columnOrderMode={true}
                             changeSizeModeOptions={[10, 20, 50, 100, 200]}
                             columnsProps={columns}
@@ -227,8 +230,8 @@ function Clients(props) {
                     <div style={{display: "flex", gap: "4%"}}>
                         <div className={'w-50'}>
                             <div className={'d-flex'}>
-                                <div style={{display: "flex", flexDirection: "column", gap: "20px", width: "48%"}}>
-                                    <label><span className={'d-block'}>clients*</span>
+                                <div style={{display:"flex", flexDirection:"column", gap:"20px", width:"48%"}}>
+                                    <label><span className={'d-block'}>Teritories*</span>
                                         <select onChange={(e)=>props.changeTeritoryId(e.target.value)} value={clients.teritoryId} className={'form-select'}>
                                             <option value="" selected disabled>All Teritories</option>
                                             {
@@ -263,8 +266,13 @@ function Clients(props) {
                                     marginLeft: "4%"
                                 }}>
                                     <label><span className={'d-block'}>Category*</span>
-                                        <select className={'form-select'}>
-                                            <option>-</option>
+                                        <select onChange={(e)=>props.changeCategoriesId(e.target.value)} value={clients.categoryId} className={'form-select'}>
+                                            <option value="" selected disabled>All Category</option>
+                                            {
+                                                clients.customCategories?.map((item)=>{
+                                                    return <option value={item?.id}>{item?.name}</option>
+                                                })
+                                            }
                                         </select>
                                     </label>
                                     <label><span className={'d-block'}>Company name</span>

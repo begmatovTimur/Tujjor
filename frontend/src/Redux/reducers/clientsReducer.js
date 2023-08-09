@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const clientsReducer = createSlice({
     name: "clients",
     initialState: {
-        data:[],
+        clients:[],
         openModal: false,
         template: null,
         mapState: {center: [0, 0], zoom: 0},
@@ -11,6 +11,7 @@ const clientsReducer = createSlice({
         latitute: 0,
         regions:[],
         teritories: [],
+        customCategories: [],
         errMessage: "",
         teritoryId: "",
         name: "",
@@ -61,7 +62,7 @@ const clientsReducer = createSlice({
             console.log("salom")
         },
         getClientsSuccess:(state,action)=>{
-            state.data = action.payload
+            state.clients = action.payload
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload
@@ -102,6 +103,15 @@ const clientsReducer = createSlice({
         changeReferencePoint:(state, action)=>{
             state.referencePoint = action.payload;
         },
+        getCustomCategory:(state, action)=>{
+
+        },
+        getCustomCategorySuccess:(state, action)=>{
+            state.customCategories = action.payload;
+        },
+        yourActionFailureCustomCategory:(state, action)=>{
+            state.error = action.payload;
+        },
         resetAllClientsData:(state, action)=>{
             state.teritoryId = "";
             state.name = "";
@@ -124,7 +134,7 @@ const clientsReducer = createSlice({
                 phone: state.telephone,
                 tin: state.tin,
                 active: state.active,
-                categoryId: 1,
+                categoryId: state.categoriesId,
                 companyName: state.companyName,
                 referencePoint: state.referencePoint,
                 longitude: state.longitute,

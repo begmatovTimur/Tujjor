@@ -5,6 +5,7 @@ import com.example.backend.Entity.Client;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Projection.ClientProjection;
+import com.example.backend.Projection.TerritoryClientProjection;
 import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Repository.CustomerCategoryRepository;
 import com.example.backend.Repository.TerritoryRepository;
@@ -25,6 +26,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -148,4 +150,10 @@ public class ClientServiceImple implements ClientService {
                 .build();
     }
 
+    @Override
+    public HttpEntity<?> getTeritoriesForClients() {
+        System.out.println("kirdi");
+        List<TerritoryClientProjection> allteritoryForCliens = territoryRepository.getAllteritoryForCliens();
+        return ResponseEntity.ok(allteritoryForCliens);
+    }
 }
