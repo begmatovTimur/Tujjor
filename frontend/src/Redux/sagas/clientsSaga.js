@@ -21,7 +21,7 @@ function* saveClients(action) {
         console.log(currentState.editeClient)
         if (currentState.editeClient !== "") {
             const res = yield apiCall("/client?clientId=" + currentState.editeClient.id, "PUT", action.payload)
-                yield call(getClients)
+                // yield call(getClients)
                 yield put(clientsAction.closeModal())
                 yield put(clientsAction.resetAllClientsData())
                 SuccessNotify("Client update Successfully!")
@@ -29,7 +29,7 @@ function* saveClients(action) {
             const res = yield apiCall("/client", "POST", action.payload)
               if(res){
                   yield put(clientsAction.closeModal())
-                  yield call(getClients)
+                  // yield call(getClients)
                   yield put(clientsAction.resetAllClientsData())
                   SuccessNotify("Client added Successfully!")
               }
@@ -39,6 +39,6 @@ function* saveClients(action) {
 }
 
 export function* clientsSaga() {
-    yield takeEvery("clients/getClients", getClients)
+    // yield takeEvery("clients/getClients", getClients)
     yield takeEvery("clients/saveClients", saveClients)
 }

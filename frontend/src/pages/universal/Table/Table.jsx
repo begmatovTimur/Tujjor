@@ -37,14 +37,6 @@ const Table = (props) => {
             page,
         });
     }
-  }, [props.dataProps]);
-  const getValueByKeys = (obj, keys) => {
-    const keysArray = keys.split("+").map((key) => key.trim());
-    const values = keysArray.map((key) =>
-        key.split('.').reduce((acc, k) => (acc && acc[k]) || '', obj)
-    );
-    return values.join(" ");
-  };
 
 
     return (
