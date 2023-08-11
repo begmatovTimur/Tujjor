@@ -60,7 +60,7 @@ function App() {
                 window.location.reload();
               }
             }
-            if (err.response.status === 403) {
+            if (err.response.status === 401) {
               axios({
                 url:
                   "http://localhost:8080/api/auth/refresh?refreshToken=" +

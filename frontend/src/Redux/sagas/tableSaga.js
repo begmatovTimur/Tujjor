@@ -1,16 +1,16 @@
 import axios from "axios";
 import {saveAs} from 'file-saver';
-import { select,call, put, takeEvery } from "redux-saga/effects";
-import apiCall, {domen} from '../../Config/apiCall';
+import {call, put, select, takeEvery} from "redux-saga/effects";
+import apiCall from '../../Config/apiCall';
 import {tableActions} from "../reducers/tableReducer"; // Make sure to import tableActions from the correct path
 
 function* watchGetFilteredData(action) {
     const currentState = yield select((state) => state.table);
     const x = currentState.formInputs
     let obj = {
-        active: x.active.value? x.active.value : x.active,
+        active: x.active.value ? x.active.value : x.active,
         city: x.city,
-        allWeeks:x.allWeeks.value,
+        allWeeks: x.allWeeks.value,
         weekDays: x.weekDays,
         tin: x.tin.value,
         customerCategories: x.customerCategories,
@@ -75,12 +75,13 @@ function* changeSizeOfPage(action) {
         tin: x.tin.value,
         customerCategories: x.customerCategories,
     }
-    const res = yield apiCall(
+    const res = yield call(
+        apiCall,
         api,
         "get",
         null,
         JSON.stringify(obj)
-    )
+    );
     yield put(tableActions.changeTotalPages(res.data.totalPages))
     yield put({
         type: "table/changeData",
@@ -103,37 +104,39 @@ function* downloadExcelFile(action) {
         customerCategories: x.customerCategories,
     }
     if (obj.active === undefined) obj.active = "ALL";
-    if(action.payload.excelWithoutSearch) {
+    if (action.payload.excelWithoutSearch) {
         axios
-            .get("http://localhost:8080/api"+action.payload.path, {
+            .get("http://localhost:8080/api" + action.payload.path, {
                 responseType: 'blob',
-                headers:{
-                    token:localStorage.getItem("access_token")
+                headers: {
+                    token: localStorage.getItem("access_token")
                 }
             })
             .then((res) => {
                 const file = new Blob([res.data], {
                     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 });
-                saveAs(file, action.payload.fileName+".xlsx");
+                saveAs(file, action.payload.fileName + ".xlsx");
             });
-    }else {
+    } else {
         axios
-            .get("http://localhost:8080/api"+action.payload.path, {
+            .get("http://localhost:8080/api" + action.payload.path, {
                 responseType: 'blob',
                 headers: {
                     active: obj.active,
                     quickSearch: obj.quickSearch,
-                    token:localStorage.getItem("access_token")
+                    token: localStorage.getItem("access_token")
                 }
             })
             .then((res) => {
                 const file = new Blob([res.data], {
                     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 });
-                saveAs(file, action.payload.fileName+".xlsx");
+                saveAs(file, action.payload.fileName + ".xlsx");
             });
     }
+
+    let firstname,lastname,age;
 
 }
 
@@ -150,12 +153,8 @@ function* watchGetActiveData(action) {
     }
     let api = currentState.paginationApi1
     api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
-    const res = yield apiCall(
-        api,
-        "get",
-        null,
-        JSON.stringify(obj)
-    )
+    const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
+
     yield put(tableActions.changeCurrentPage(1))
     yield put(tableActions.changeTotalPages(res.data.totalPages))
     yield put(tableActions.changeData({
