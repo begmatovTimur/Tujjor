@@ -12,7 +12,7 @@ function* watchGetFilteredData(action) {
         city: x.city,
         allWeeks: x.allWeeks.value,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
         quickSearch: x.quickSearch
     }
@@ -41,7 +41,7 @@ function* watchQuickSearchData(action) {
         quickSearch: x.quickSearch,
         city: x.city,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     let api = currentState.paginationApi1
@@ -72,7 +72,7 @@ function* changeSizeOfPage(action) {
         quickSearch: currentState.formInputs.quickSearch,
         city: "",
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     const res = yield call(
@@ -100,7 +100,7 @@ function* downloadExcelFile(action) {
         quickSearch: x.quickSearch,
         city: x.city,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     if (obj.active === undefined) obj.active = "ALL";
@@ -148,7 +148,7 @@ function* watchGetActiveData(action) {
         quickSearch: x.quickSearch,
         city: x.city,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     let api = currentState.paginationApi1

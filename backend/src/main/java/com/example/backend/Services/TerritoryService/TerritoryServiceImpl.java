@@ -143,9 +143,6 @@ public class TerritoryServiceImpl implements TerritoryService {
             } else {
                 territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(),pageable);
             }
-                if (territories.isEmpty() && territoryRepository.count() == 1) {
-                    return ResponseEntity.ok(new PageImpl<>(List.of(territoryRepository.findAll().get(0)), pageable, 1));
-                }
             return ResponseEntity.ok(territories);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("An error has occurred");

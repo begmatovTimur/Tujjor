@@ -74,9 +74,6 @@ const Dropdown = (props) => {
       props.onItemClick(item);
     }
   };
-  console.log(props.body)
-
-  console.log(dropdownState.currentItem)
 
   return (
     <>

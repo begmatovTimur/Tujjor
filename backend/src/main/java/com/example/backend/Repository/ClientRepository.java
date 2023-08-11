@@ -13,41 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client,UUID> {
-
-
-    @Query(nativeQuery = true,value = "SELECT\n" +
-            "    c.id,\n" +
-            " t.id as territoryId, " +
-            "  cc.id as categoryId,  " +
-            "  c.tin,  " +
-            "    c.name,\n" +
-            "    c.company_name AS companyName,\n" +
-            "    c.phone,\n" +
-            "    c.latitude,\n" +
-            "    c.longitude," +
-            "  c.tin, \n" +
-            "    c.address,\n" +
-            "    c.active,\n" +
-            "    c.registration_date AS registrationDate,\n" +
-            "    t.region AS city,\n" +
-            "    cc.name as categoryName\n" +
-            "FROM\n" +
-            "    client c\n" +
-            "        LEFT JOIN\n" +
-            "    territory t ON c.territory_id = t.id\n" +
-            "left join customer_category cc on cc.id = c.category_id\n" +
-            "WHERE\n" +
-            "( t.id IN :city OR :city IS NULL) and " +
-            "(cc.id IN :category OR :category IS NULL)" +
-            "  AND (\n" +
-            "            LOWER(c.name) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
-            "        OR LOWER(c.phone) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
-            "        OR LOWER(c.company_name) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
-            "    )\n" +
-            "ORDER BY\n" +
-            "    c.id")
-    Page<ClientProjection> filterWithoutActive(List<UUID> city, List<Integer> category, String search, Pageable pageable);
+public interface ClientRepository extends JpaRepository<Client, UUID> {
 
     @Query(nativeQuery = true, value = "SELECT\n" +
             "    c.id," +
@@ -73,7 +39,12 @@ public interface ClientRepository extends JpaRepository<Client,UUID> {
             "WHERE\n" +
             "(t.id IN :city OR :city IS NULL) and " +
             "(cc.id IN :category OR :category IS NULL) and " +
-            "c.active = :active " +
+            "CASE WHEN :active = 'true' THEN c.active = true " +
+            "     WHEN :active = 'false' THEN c.active = false " +
+            "     ELSE true END AND " +
+            "CASE WHEN :tin = 'true' THEN c.tin <> '' " +
+            "     WHEN :tin = 'false' THEN c.tin IS NULL " +
+            "     ELSE true END " +
             "  AND (\n" +
             "            LOWER(c.name) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
             "        OR LOWER(c.phone) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
@@ -81,6 +52,6 @@ public interface ClientRepository extends JpaRepository<Client,UUID> {
             "    )\n" +
             "ORDER BY\n" +
             "    c.id")
-    Page<ClientProjection> getAllFilteredFields(List<UUID> city, List<Integer> category, Boolean active, String search, Pageable pageable);
+    Page<ClientProjection> getAllFilteredFields(List<UUID> city, List<Integer> category, String active, String tin, String search, Pageable pageable);
 
 }
