@@ -1,4 +1,4 @@
-package com.example.backend.Payload;
+package com.example.backend.Payload.Reaquest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -57,7 +57,14 @@ public class ClientController {
     }
 
     @GetMapping("/excel")
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public ResponseEntity<Resource> excel() throws IOException {
         return clientService.getExcel();
     }
+    @GetMapping("/clientsLocation")
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    public HttpEntity<?> clientsLocation() {
+        return clientService.getAllLocation();
+    }
+
 }

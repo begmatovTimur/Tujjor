@@ -39,7 +39,6 @@ const Table = (props) => {
     }
 
 
-
     return (
         <div className="universal_table">
             <div className="bg-white d-flex flex-column gap-2 p-2">

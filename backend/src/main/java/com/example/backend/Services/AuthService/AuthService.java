@@ -1,10 +1,8 @@
 package com.example.backend.Services.AuthService;
 
 import com.example.backend.DTO.UserDTO;
-import com.example.backend.Payload.LoginReq;
+import com.example.backend.Payload.Reaquest.LoginReq;
 import org.springframework.http.HttpEntity;
-
-import java.util.UUID;
 
 public interface AuthService {
     HttpEntity<?> register(UserDTO dto);

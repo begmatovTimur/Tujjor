@@ -1,7 +1,7 @@
 package com.example.backend.Controller;
 
 import com.example.backend.DTO.UserDTO;
-import com.example.backend.Payload.LoginReq;
+import com.example.backend.Payload.Reaquest.LoginReq;
 import com.example.backend.Services.AuthService.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;

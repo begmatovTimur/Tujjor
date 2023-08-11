@@ -5,6 +5,7 @@ import com.example.backend.DTO.ClientSearchDTO;
 import com.example.backend.Entity.Client;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Payload.Respons.ResClientsTerritories;
 import com.example.backend.Projection.ClientProjection;
 import com.example.backend.Projection.CompanyProjection;
 import com.example.backend.Projection.TerritoryClientProjection;
@@ -222,5 +223,18 @@ public class ClientServiceImple implements ClientService {
                 .status(HttpStatus.OK)
                 .headers(headers)
                 .body(resource);
+    }
+
+    @Override
+    public HttpEntity<?> getAllLocation() {
+        List<ResClientsTerritories> result = new ArrayList<>();
+        List<Client> clients = clientRepository.findAll();
+        for (Client client : clients) {
+            result.add(new ResClientsTerritories(
+                    client.getName(),
+                    List.of(client.getLatitude(), client.getLongitude())
+            ));
+        }
+        return ResponseEntity.ok(result);
     }
 }
