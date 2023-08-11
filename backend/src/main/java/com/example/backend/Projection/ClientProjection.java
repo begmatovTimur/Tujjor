@@ -25,9 +25,6 @@ public interface ClientProjection {
      @Value("#{target.categoryId}")
      String getCategoryId();
 
-     String getTin();
-
-
      Double getLatitude();
 
      Double getLongitude();

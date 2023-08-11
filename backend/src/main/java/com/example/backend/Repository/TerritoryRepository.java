@@ -26,11 +26,11 @@ import java.util.UUID;
 public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
 
 
-    @Query(value = "select id,region,name,code,longitude,latitude,active from territory t where t.active = :status and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')) like lower(concat('%',:search,'%')) order by id",nativeQuery = true)
+    @Query(value = "select id,region,name,code,longitude,latitude,active,code from territory t where t.active = :status and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')  || ' ' || COALESCE(t.code, '')) like lower(concat('%',:search,'%')) order by id",nativeQuery = true)
     Page<TerritoryProjection> findTerritoryByActiveAndRegionName(String search, Boolean status, Pageable pageable);
 
 
-    @Query(value = "select id,region,name,code,longitude,latitude,active from territory t where lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')) like lower(concat('%',:search,'%')) order by id", nativeQuery = true)
+    @Query(value = "select id,region,name,code,longitude,latitude,active,code from territory t where lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')  || ' ' || COALESCE(t.code, '')) like lower(concat('%',:search,'%')) order by id", nativeQuery = true)
     Page<TerritoryProjection> findTerritoryByRegionAndName(String search, Pageable pageable);
     @Query(value = """
     SELECT * FROM territory t
