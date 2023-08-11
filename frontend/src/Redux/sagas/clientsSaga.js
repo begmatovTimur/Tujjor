@@ -12,6 +12,15 @@ function* getClients(action) {
         yield put(clientsAction.yourActionFailureClients(err.message));
     }
 }
+function* getAllClientsTerritories(action) {
+    try {
+        const currentState = yield select((state) => state.table);
+        const res = yield apiCall("/client/clientsLocation", "GET", null)
+        yield put(clientsAction.getAllClientsTerritoriesSuccess(res.data))
+    } catch (err) {
+        yield put(clientsAction.getAllClientsTerritoriesError(err.message));
+    }
+}
 
 function* saveClients(action) {
     const currentState = yield select((state) => state.clients);
@@ -39,6 +48,6 @@ function* saveClients(action) {
 }
 
 export function* clientsSaga() {
-    // yield takeEvery("clients/getClients", getClients)
+    yield takeEvery("clients/getAllClientsTerritories", getAllClientsTerritories)
     yield takeEvery("clients/saveClients", saveClients)
 }
