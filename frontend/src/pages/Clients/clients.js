@@ -76,7 +76,7 @@ function Clients(props) {
         {
             id: 6,
             title: "Category",
-            key: "category.name",
+            key: "categoryName",
             type: "text",
             show: true,
         },
@@ -118,9 +118,9 @@ function Clients(props) {
     ]);
 
     const [optionsTin] = useState([
-        {value: "1", label: "Tin"},
-        {value: "2", label: "With Tin"},
-        {value: "3", label: "Without Tin"},
+        {value: "", label: "Tin"},
+        {value: "true", label: "With Tin"},
+        {value: "false", label: "Without Tin"},
     ]);
 
     const [optionsLocation] = useState([

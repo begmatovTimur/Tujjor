@@ -48,7 +48,7 @@ public class ClientController {
     @GetMapping("/pagination")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> getFilteredClients(@RequestParam Integer page,@RequestParam Integer limit, HttpServletRequest request) throws JsonProcessingException {
-        return ResponseEntity.ok(repository.findAll(PageRequest.of(page,limit)));
+        return clientService.getFilteredClients(page,limit,request);
     }
     @GetMapping("/teritoriesForClients")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
