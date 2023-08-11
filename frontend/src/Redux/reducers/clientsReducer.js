@@ -11,7 +11,6 @@ const clientsReducer = createSlice({
         latitute: 0,
         regions:[],
         teritories: [],
-        clients: [],
         customCategories: [],
         errMessage: "",
         teritoryId: "",
@@ -24,7 +23,8 @@ const clientsReducer = createSlice({
         companyName: "",
         referencePoint: "",
         error:"",
-        editeClient:""
+        editeClient:"",
+        allClientTerritoriesForMap:[]
     },
     reducers: {
         openModal: (state, action) => {
@@ -68,6 +68,15 @@ const clientsReducer = createSlice({
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload
+        },
+        getAllClientsTerritories: (state, action) => {
+
+        },
+        getAllClientsTerritoriesSuccess: (state, action) => {
+            state.allClientTerritoriesForMap = action.payload
+        },
+        getAllClientsTerritoriesError: (state, action) => {
+            state.errMessage = action.payload
         },
         yourActionFailureTeritories:(state, action)=>{
             state.errMessage = action.payload

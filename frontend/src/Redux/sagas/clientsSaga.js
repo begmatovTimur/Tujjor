@@ -12,6 +12,15 @@ function* getClients(action) {
         yield put(clientsAction.yourActionFailureClients(err.message));
     }
 }
+function* getAllClientsTerritories(action) {
+    try {
+        const currentState = yield select((state) => state.table);
+        const res = yield apiCall("/client/clientsLocation", "GET", null)
+        yield put(clientsAction.getAllClientsTerritoriesSuccess(res.data))
+    } catch (err) {
+        yield put(clientsAction.getAllClientsTerritoriesError(err.message));
+    }
+}
 
 function* saveClients(action) {
     const currentState = yield select((state) => state.clients);
@@ -21,7 +30,7 @@ function* saveClients(action) {
         console.log(currentState.editeClient)
         if (currentState.editeClient !== "") {
             const res = yield apiCall("/client?clientId=" + currentState.editeClient.id, "PUT", action.payload)
-                yield call(getClients)
+                // yield call(getClients)
                 yield put(clientsAction.closeModal())
                 yield put(clientsAction.resetAllClientsData())
                 SuccessNotify("Client update Successfully!")
@@ -29,7 +38,7 @@ function* saveClients(action) {
             const res = yield apiCall("/client", "POST", action.payload)
               if(res){
                   yield put(clientsAction.closeModal())
-                  yield call(getClients)
+                  // yield call(getClients)
                   yield put(clientsAction.resetAllClientsData())
                   SuccessNotify("Client added Successfully!")
               }
@@ -39,6 +48,6 @@ function* saveClients(action) {
 }
 
 export function* clientsSaga() {
-    yield takeEvery("clients/getClients", getClients)
+    yield takeEvery("clients/getAllClientsTerritories", getAllClientsTerritories)
     yield takeEvery("clients/saveClients", saveClients)
 }

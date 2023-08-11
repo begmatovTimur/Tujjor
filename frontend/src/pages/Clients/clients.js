@@ -76,7 +76,7 @@ function Clients(props) {
         {
             id: 6,
             title: "Category",
-            key: "categoryName",
+            key: "category.name",
             type: "text",
             show: true,
         },
@@ -246,6 +246,8 @@ function Clients(props) {
                             columnOrderMode={true}
                             changeSizeModeOptions={[5,7,10,20]}
                             columnsProps={columns}
+                            fileName={"clients"}
+                            excelPath={"/client/excel"}
                         />
                     </div>
                 </div>

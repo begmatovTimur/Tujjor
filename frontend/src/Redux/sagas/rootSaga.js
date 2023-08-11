@@ -9,13 +9,17 @@ import {clientsSaga} from "./clientsSaga";
 
 
 export function* rootSaga(){
-    yield all([
-        fork(tableSaga),
-        fork(settingsSaga),
-        fork(dashboardDataSaga),
-        fork(territorySaga),
-        fork(customerCategorySaga),
-        fork(companyProfileSaga),
-        fork(clientsSaga),
-    ])
+    try {
+        yield all([
+            fork(tableSaga),
+            fork(settingsSaga),
+            fork(dashboardDataSaga),
+            fork(territorySaga),
+            fork(customerCategorySaga),
+            fork(companyProfileSaga),
+            fork(clientsSaga),
+        ])
+    }catch (error) {
+        console.log(error)
+    }
 }

@@ -1,10 +1,13 @@
 package com.example.backend.Services.ClientService;
 
 import com.example.backend.DTO.ClientDTO;
+import com.example.backend.DTO.ClientSearchDTO;
 import com.example.backend.Entity.Client;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Payload.Respons.ResClientsTerritories;
 import com.example.backend.Projection.ClientProjection;
+import com.example.backend.Projection.CompanyProjection;
 import com.example.backend.Projection.TerritoryClientProjection;
 import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Repository.CustomerCategoryRepository;
@@ -16,15 +19,24 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -163,5 +175,66 @@ public class ClientServiceImple implements ClientService {
         System.out.println("kirdi");
         List<TerritoryClientProjection> allteritoryForCliens = territoryRepository.getAllteritoryForCliens();
         return ResponseEntity.ok(allteritoryForCliens);
+    }
+
+    @Override
+    @SneakyThrows
+    public ResponseEntity<Resource> getExcel() {
+//        Pageable pageable = PageRequest.of(dto.getPage(),dto.getLimit());
+        List<Client> all = clientRepository.findAll();
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Company info");
+        Row row = sheet.createRow(0);
+        row.createCell(0).setCellValue("Name");
+        row.createCell(1).setCellValue("Address");
+        row.createCell(2).setCellValue("Phone");
+        row.createCell(3).setCellValue("Tin");
+        row.createCell(4).setCellValue("Company Name");
+        row.createCell(5).setCellValue("Longitude");
+        row.createCell(6).setCellValue("Latitude");
+        row.createCell(7).setCellValue("Active");
+        row.createCell(8).setCellValue("Registration Date");
+        int counter = 1;
+        for (Client client : all) {
+            Row dataRow = sheet.createRow(counter);
+            counter++;
+            dataRow.createCell(0).setCellValue(client.getName());
+            dataRow.createCell(1).setCellValue(client.getAddress());
+            dataRow.createCell(2).setCellValue(client.getPhone());
+            dataRow.createCell(3).setCellValue(client.getTin());
+            dataRow.createCell(4).setCellValue(client.getCompanyName());
+            dataRow.createCell(5).setCellValue(client.getLongitude());
+            dataRow.createCell(6).setCellValue(client.getLatitude());
+            dataRow.createCell(7).setCellValue(client.getActive().toString());
+            dataRow.createCell(8).setCellValue(client.getRegistrationDate());
+        }
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        workbook.write(outputStream);
+        workbook.close();
+
+        ByteArrayResource resource = new ByteArrayResource(outputStream.toByteArray());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_TYPE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=CompanyInfo.xlsx");
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .headers(headers)
+                .body(resource);
+    }
+
+    @Override
+    public HttpEntity<?> getAllLocation() {
+        List<ResClientsTerritories> result = new ArrayList<>();
+        List<Client> clients = clientRepository.findAll();
+        for (Client client : clients) {
+            result.add(new ResClientsTerritories(
+                    client.getName(),
+                    List.of(client.getLatitude(), client.getLongitude())
+            ));
+        }
+        return ResponseEntity.ok(result);
     }
 }

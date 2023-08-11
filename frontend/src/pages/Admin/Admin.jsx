@@ -162,7 +162,7 @@ function Admin(props) {
                         path={"/admin/stock"}
                         icon={icons.stockIcon}
                     />
-                    <button className={"dashboard_clients_button"} onMouseEnter={handleMouseEnterF} onMouseLeave={handleMouseLeaveF}>
+                    <button className={"dashboard_clients_button"} onMouseEnter={handleMouseEnterF} onMouseLeave={handleMouseLeaveF} style={{zIndex:"10000"}}>
                         {icons.clientsIcon}
                         <span>Clients</span>
                     </button>
@@ -185,9 +185,10 @@ function Admin(props) {
                 {isHovered &&
                     <div onMouseEnter={handleMouseEnterF} onMouseLeave={handleMouseLeaveF} id={"clientDatasBox"}>
                         <p onClick={()=>navigate("/admin/clients") & setIsHovered(false)}>Clients</p>
-                        <p>Clients on the map</p>
+                        <p onClick={()=>navigate("/admin/clients_on_the_map") & setIsHovered(false)}>Clients on the map</p>
                         <p style={{padding:"0px"}}></p>
-                    </div>}
+                    </div>
+                }
                 <Outlet/>
             </div>
         </div>
