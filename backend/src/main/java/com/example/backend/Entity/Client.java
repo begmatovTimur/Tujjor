@@ -19,7 +19,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Territory territory;
     private String name;
     private String address;
@@ -31,6 +31,6 @@ public class Client {
     private double latitude;
     private Boolean active;
     private LocalDate registrationDate;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private CustomerCategory category;
 }

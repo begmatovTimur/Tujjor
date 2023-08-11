@@ -11,7 +11,6 @@ const clientsReducer = createSlice({
         latitute: 0,
         regions:[],
         teritories: [],
-        clients: [],
         customCategories: [],
         errMessage: "",
         teritoryId: "",

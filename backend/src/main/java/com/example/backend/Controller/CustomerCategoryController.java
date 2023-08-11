@@ -21,7 +21,6 @@ public class CustomerCategoryController {
     private final CustomerCategoryService categoryService;
 
     @GetMapping("/pagination")
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> pagination(@RequestParam Integer page, @RequestParam Integer limit, HttpServletRequest request) {
         return categoryService.pagination(page, limit, request);
     }
@@ -40,19 +39,16 @@ public class CustomerCategoryController {
 
     ;
 
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping()
     public HttpEntity<?> getCategories() {
         return categoryService.getCategories();
     }
 
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @PostMapping()
     public HttpEntity<?> saveCustomerCategor(@RequestBody CustomerCategoryDTO categoryDTO) {
         return ResponseEntity.ok(categoryService.addCategory(categoryDTO));
     }
 
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @PutMapping("{id}")
     public HttpEntity<?> updateCategory(@PathVariable Integer id, @RequestBody CustomerCategoryDTO categoryDTO) {
         return ResponseEntity.ok(categoryService.updateCategory(id, categoryDTO));
