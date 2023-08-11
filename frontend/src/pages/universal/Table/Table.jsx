@@ -47,6 +47,7 @@ const Table = (props) => {
                         <div className="d-flex align-items-end ">
                             {props.changeSizeMode ? <Dropdown
                                 multiSelect={false}
+                                customTitle={"By "+props.changeSizeModeOptions[0]}
                                 dropdownId="1"
                                 body={props.changeSizeModeOptions}
                                 onItemClick={(item) => {

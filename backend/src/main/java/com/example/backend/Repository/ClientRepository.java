@@ -25,7 +25,8 @@ public interface ClientRepository extends JpaRepository<Client,UUID> {
             "    c.company_name AS companyName,\n" +
             "    c.phone,\n" +
             "    c.latitude,\n" +
-            "    c.longitude,\n" +
+            "    c.longitude," +
+            "  c.tin, \n" +
             "    c.address,\n" +
             "    c.active,\n" +
             "    c.registration_date AS registrationDate,\n" +
@@ -60,6 +61,7 @@ public interface ClientRepository extends JpaRepository<Client,UUID> {
             "    c.longitude,\n" +
             "    c.address,\n" +
             "    c.active,\n" +
+            " c.tin," +
             "    c.registration_date AS registrationDate,\n" +
             "    t.region AS city,\n" +
             "    cc.name as categoryName\n" +
