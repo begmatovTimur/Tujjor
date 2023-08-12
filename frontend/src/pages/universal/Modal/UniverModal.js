@@ -71,7 +71,11 @@ const UniversalModal = ({inpData = "", isOpen, closeFunction, modalTitle, width,
                         borderTopLeftRadius: "10px",
                         borderTopRightRadius: "10px"
                     }}>
-                        {modalTitle}
+                        <div style={{width:"100%" ,display:"flex", justifyContent:"space-between"}}>
+                            <b>{modalTitle}</b>
+                            <button style={{margin:"-4px 3% 5px 0px"}} className={'btn btn-danger'} onClick={closeFunction}>
+                                <i className="fa-regular fa-circle-xmark"></i></button>
+                        </div>
                     </div>
                     <div id={"bottomChildForUModal"}>
                         <div>

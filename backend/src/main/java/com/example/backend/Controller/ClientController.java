@@ -23,12 +23,10 @@ import java.util.UUID;
 public class ClientController {
 
     private final ClientService clientService;
-    private final ClientRepository repository;
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> saveClient(@RequestBody ClientDTO clientDTO){
-        System.out.println("Client keldi va ana: "+clientDTO);
         return clientService.saveClient(clientDTO);
     }
 
@@ -41,7 +39,6 @@ public class ClientController {
     @PutMapping
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> updateClient(@RequestParam(defaultValue = "") UUID clientId, @RequestBody ClientDTO clientDTO){
-        System.out.println("client Yangilandi");
         return clientService.updateClient(clientId,clientDTO);
     }
 

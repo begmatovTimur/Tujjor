@@ -92,9 +92,6 @@ public class ClientServiceImple implements ClientService {
             if (clients.isEmpty()) {
                 return ResponseEntity.ok(new PageImpl<>(Collections.emptyList(), pageable, 0));
             }
-            for (ClientProjection client : clients.getContent()) {
-                System.out.println(client.getClientName()); // Print or log the client information
-            }
             return ResponseEntity.ok(clients);
         } catch (Exception e) {
             e.printStackTrace();
@@ -166,7 +163,6 @@ public class ClientServiceImple implements ClientService {
 
     @Override
     public HttpEntity<?> getTeritoriesForClients() {
-        System.out.println("kirdi");
         List<TerritoryClientProjection> allteritoryForCliens = territoryRepository.getAllteritoryForCliens();
         return ResponseEntity.ok(allteritoryForCliens);
     }
