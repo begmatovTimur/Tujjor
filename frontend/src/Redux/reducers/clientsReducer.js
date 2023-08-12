@@ -5,10 +5,11 @@ const clientsReducer = createSlice({
     initialState: {
         clients:[],
         openModal: false,
-        template: null,
-        mapState: {center: [0, 0], zoom: 0},
-        longitute: 0,
-        latitute: 0,
+        template: "",
+        mapState: { center: ["",""], zoom: 10 },
+        defaultCenter: [39.7756, 64.4253],
+        longitute: "",
+        latitute: "",
         regions:[],
         teritories: [],
         customCategories: [],
@@ -45,6 +46,7 @@ const clientsReducer = createSlice({
             state.longitute = "";
             state.latitute = "";
             state.editeClient = "";
+            state.defaultCenter = [39.7756, 64.4253];
         },
         handleTemplate: (state, action) => {
             state.template = action.payload
@@ -56,9 +58,9 @@ const clientsReducer = createSlice({
             state.mapState = action.payload
         },
         clearAllclients: (state, action) => {
-            state.longitute = 0;
-            state.latitute = 0;
-            state.mapState = {center: [0, 1], zoom: 10}
+            state.longitute = "";
+            state.latitute = "";
+            state.mapState = { center: ["",""], zoom: 10 };
         },
         getClients: (state, action) => {
 
@@ -130,6 +132,8 @@ const clientsReducer = createSlice({
             state.longitute = "";
             state.latitute = "";
             state.editeClient = "";
+            state.defaultCenter = [39.7756, 64.4253];
+            state.mapState = { center: ["",""], zoom: 10 };
         },
         saveClients:(state, action)=>{
             action.payload = {
@@ -147,7 +151,6 @@ const clientsReducer = createSlice({
             }
         },
         editeClients:(state, action)=>{
-            console.log(action.payload)
             state.editeClient = action.payload
             state.openModal = true;
             state.teritoryId = action.payload.territoryId;
@@ -160,6 +163,7 @@ const clientsReducer = createSlice({
             state.companyName = action.payload.companyName;
             state.longitute = action.payload.longitude;
             state.latitute = action.payload.latitude;
+            state.defaultCenter = [action.payload.latitude, action.payload.longitude]
             state.mapState = { center: [action.payload.latitude, action.payload.longitude], zoom: 10 }
         }
     }
