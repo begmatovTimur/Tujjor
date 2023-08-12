@@ -33,8 +33,7 @@ function ClientsOnTheMap(props) {
                             clients.allClientTerritoriesForMap.map((address, index)=>{
                                 return <Placemark properties={{
                                     balloonContent: address.name
-                                }}
-                                               options={{iconColor: 'red'}} key={index} geometry={address.territories} />
+                                }} options={{iconColor: 'red'}} key={index} geometry={address.territories} />
                             })
                         }
                     </Map>

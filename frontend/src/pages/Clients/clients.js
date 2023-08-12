@@ -105,6 +105,7 @@ function Clients(props) {
             }><i className="fa fa-edit"></i></button>
         }
     ];
+
     const [optionsActive] = useState([
         {value: "", label: "All"},
         {value: "true", label: "Active"},
@@ -341,21 +342,16 @@ function Clients(props) {
                                     width={430}
                                     height={300}
                                     defaultState={{
-                                        center: [39.7756, 64.4253],
+                                        center: clients.defaultCenter,
                                         zoom: 10,
                                     }}
                                     onClick={handleMapClick}
                                     modules={["templateLayoutFactory"]}
-                                >
-                                    <ZoomControl options={{float: "right"}}/>
-                                    {clients.template &&
-                                        clients.longitute !== "" &&
-                                        clients.latitude !== "" && (
-                                            <Placemark
-                                                geometry={clients.mapState.center}
-                                                modules={["geoObject.addon.balloon"]}
-                                            />
-                                        )}
+                                ><ZoomControl options={{float: "right"}}/>
+                                    <Placemark
+                                        geometry={clients.mapState.center}
+                                        modules={["geoObject.addon.balloon"]}
+                                    />
                                 </Map>
                             </YMaps>
                             <div className={"d-flex my-3 g-4"}>
