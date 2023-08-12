@@ -308,7 +308,7 @@ function Clients(props) {
                                 }}>
                                     <label><span className={'d-block'}>Category*</span>
                                             <select defaultValue={""} onChange={(e) => props.changeCategoryId(e.target.value)}
-                                                    value={props.customerCategory.categoryId} className={'form-select'}>
+                                                    value={clients.categoryId} className={'form-select'}>
                                                 <option value="" disabled>Category</option>
                                                 {
                                                     props.customerCategory.categories?.map((item) => {

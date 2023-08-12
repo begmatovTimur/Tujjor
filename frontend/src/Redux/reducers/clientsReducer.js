@@ -19,7 +19,7 @@ const clientsReducer = createSlice({
         telephone: "",
         tin: "",
         active: false,
-        categoryId: 0,
+        categoryId: "",
         companyName: "",
         referencePoint: "",
         error:"",
@@ -35,11 +35,11 @@ const clientsReducer = createSlice({
             state.teritoryId = "";
             state.name = "";
             state.address = "";
-            state.categoryId = 0;
+            state.categoryId = "";
             state.telephone = "";
             state.tin = "";
             state.active = false;
-            state.categoryId = 0;
+            state.categoryId = "";
             state.companyName = "";
             state.referencePoint = ""
             state.longitute = "";
@@ -124,7 +124,7 @@ const clientsReducer = createSlice({
             state.telephone = "";
             state.tin = "";
             state.active = false;
-            state.categoryId = 0;
+            state.categoryId = "";
             state.companyName = "";
             state.referencePoint = ""
             state.longitute = "";

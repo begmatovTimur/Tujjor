@@ -39,4 +39,6 @@ public interface ClientProjection {
 
      @Value("#{target.registrationDate}")
      LocalDate getRegistrationDate();
+     @Value("#{target.tin}")
+     String getTin();
 }
