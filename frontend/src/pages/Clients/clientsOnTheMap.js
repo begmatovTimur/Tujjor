@@ -10,7 +10,7 @@ function ClientsOnTheMap(props) {
     },[])
     return (
         <div style={{width:"100%", backgroundColor: "#dae2e3", padding:"20px 20px"}}>
-            <div style={{width:"100%", height:"100%", backgroundColor:"white", padding:"10px 20px", borderRadius:"10px"}}>
+            <div style={{overflow:"hidden",width:"100%", height:"100%", backgroundColor:"white", padding:"10px 20px", borderRadius:"10px"}}>
                 <p style={{fontSize: "30px", textAlign:"start"}}>Clients On The Map</p><hr/>
                 <YMaps
                     query={{
@@ -22,7 +22,7 @@ function ClientsOnTheMap(props) {
                 >
                     <Map
                         width={"100%"}
-                        height={590}
+                        height={"85%"}
                         defaultState={{
                             center: [39.7756, 64.4253],
                             zoom: 10,

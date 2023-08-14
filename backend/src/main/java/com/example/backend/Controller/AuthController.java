@@ -27,7 +27,6 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public HttpEntity<?> refreshToken(@RequestParam String refreshToken) {
-        System.out.println("access token uchun keldi");
         return service.refreshToken(refreshToken);
     }
 }
