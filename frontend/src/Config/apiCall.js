@@ -32,7 +32,6 @@ export default function apiCall(url, method, data, searchParam = "") {
                     },
                 });
             }).catch((refreshErr) => {
-                console.log(refreshErr);
                 window.location = "/login";
                 throw refreshErr;
             });
