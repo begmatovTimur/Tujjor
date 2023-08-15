@@ -145,12 +145,13 @@ function Clients(props) {
         const optionsCategory = []
         props.customerCategory.categories.map((item, index) => {
             optionsCategory.push({
-                value: item.id,
-                label: item.name
+                label: item.name,
+                value: item.id
             })
         })
         return optionsCategory
     }
+
 
     return (
         <div style={{width: "100%",height:"90vh", backgroundColor: "#dae2e3"}}>
@@ -190,7 +191,7 @@ function Clients(props) {
                                     options: generateOptionsOfCity(),
                                     defaultValue: {value: "", label: "All"},
                                     placeholder: "City",
-                                    selfEmployer: false
+                                    selfEmployer: false,
                                 },
                                 {
                                     name: "customerCategories",
