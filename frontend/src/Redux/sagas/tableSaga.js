@@ -1,8 +1,8 @@
 import axios from "axios";
 import {saveAs} from 'file-saver';
-import {call, put, select, takeEvery} from "redux-saga/effects";
+import {call, put,delay, select, takeEvery} from "redux-saga/effects";
 import apiCall from '../../Config/apiCall';
-import {tableActions} from "../reducers/tableReducer"; // Make sure to import tableActions from the correct path
+import {tableActions} from "../reducers/tableReducer";
 
 function* watchGetFilteredData(action) {
     const currentState = yield select((state) => state.table);
@@ -16,7 +16,9 @@ function* watchGetFilteredData(action) {
         customerCategories: x.customerCategories,
         quickSearch: x.quickSearch
     }
-    console.log(obj)
+    yield put(tableActions.changeIsLoading(true));
+    yield delay(400);
+    yield put(tableActions.changeIsLoading(false));
     let api = currentState.paginationApi1
     api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
     const res = yield apiCall(
@@ -151,6 +153,9 @@ function* watchGetActiveData(action) {
         tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
+    yield put(tableActions.changeIsLoading(true));
+    yield delay(300);
+    yield put(tableActions.changeIsLoading(false));
     let api = currentState.paginationApi1
     api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
     const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));

@@ -30,10 +30,14 @@ const tableReducer = createSlice({
             city:[],
         },
         totalPages: "",
+        isLoading:false
     },
     reducers: {
         setLayer: (state, action) => {
             state.layer = action.payload;
+        },
+        changeIsLoading:(state, action)=>{
+            state.isLoading = action.payload
         },
         changeCurrentPage: (state, action) => {
             state.currentPage = action.payload;
