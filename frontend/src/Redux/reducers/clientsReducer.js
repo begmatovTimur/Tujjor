@@ -17,6 +17,7 @@ const clientsReducer = createSlice({
         telephone: "",
         tin: "",
         active: false,
+        isLoading:false,
         categoriesId: 0,
         companyName: "",
         referencePoint: "",
@@ -145,6 +146,9 @@ const clientsReducer = createSlice({
             state.referencePoint = action.payload.region;
             state.longitute = action.payload.longitude;
             state.latitute = action.payload.latitude;
+        },
+        changeLoadingActive: (state, action)=>{
+            state.isLoading = action.payload
         }
     }
 })

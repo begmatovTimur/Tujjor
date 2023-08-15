@@ -11,6 +11,7 @@ const tableReducer = createSlice({
         data: [],
         currentPage: 1,
         columnOrderModalVisibility: false,
+        isLoading:false,
         modalColumns: [],
         limit: "",
         page: "",
@@ -126,6 +127,9 @@ const tableReducer = createSlice({
         },
         getExcelFile: (state, action) => {
         },
+        changeLoadingActive: (state, action)=>{
+            state.isLoading = action.payload
+        }
     },
 });
 
