@@ -8,6 +8,7 @@ import Table from "../universal/Table/Table";
 import Filter from "../universal/Filter/Filter";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import {customerCategoryActions} from "../../Redux/reducers/customerCategoryReducer";
+import PhoneInput from "react-phone-input-2";
 
 function Clients(props) {
     const {clients} = props
@@ -152,9 +153,9 @@ function Clients(props) {
     }
 
     return (
-        <div style={{width: "100%", backgroundColor: "#dae2e3"}}>
+        <div style={{width: "100%",height:"90vh", backgroundColor: "#dae2e3"}}>
             <div id={'clientsFatherDiv'}>
-                <div>
+                <div style={{height:"100%"}}>
                     <div style={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -285,9 +286,11 @@ function Clients(props) {
                                                name="" id=""/>
                                     </label>
                                     <label><span className={'d-block'}>Telephone*</span>
-                                        <input onChange={(e) => props.changeTelephone(e.target.value)}
-                                               value={clients.telephone} className={"form-control w-100"} type="text"
-                                               name="" id=""/>
+                                        <PhoneInput
+                                            inputStyle={{ width: "100%" }}
+                                            value={clients.telephone}
+                                            onChange={(e) => props.changeTelephone(e)}
+                                        />
                                     </label>
                                     <label><span className={'d-block'}>TIN</span>
                                         <input onChange={(e) => props.changeTin(e.target.value)} value={clients.tin}
@@ -323,6 +326,25 @@ function Clients(props) {
                                                value={clients.companyName} className={"form-control w-100"} type="text"
                                                name="" id=""/>
                                     </label>
+                                    <label style={{marginTop:"87px"}}>
+                                        <span>
+                                            Longitude:
+                                        </span>
+                                        <input disabled={true}
+                                               type="text"
+                                               value={clients.longitute}
+                                        />
+                                    </label>
+                                    <label>
+                                        <span>
+                                            Latitude:
+                                        </span>
+                                        <input
+                                            disabled={true}
+                                            type="text"
+                                            value={clients.latitute}
+                                        />
+                                    </label>
                                 </div>
                             </div>
                             <div>
@@ -340,7 +362,7 @@ function Clients(props) {
                                 }}>
                                 <Map
                                     width={430}
-                                    height={300}
+                                    height={400}
                                     defaultState={{
                                         center: clients.defaultCenter,
                                         zoom: 10,
@@ -354,29 +376,9 @@ function Clients(props) {
                                     />
                                 </Map>
                             </YMaps>
-                            <div className={"d-flex my-3 g-4"}>
-                                <label>
-                                    <p>
-                                        Long:
-                                    </p>
-                                    <input disabled={true}
-                                           type="text"
-                                           value={clients.longitute}
-                                    />
-                                </label>
-                                <label className={'mx-5'}>
-                                    <p>
-                                        Lat:
-                                    </p>
-                                    <input
-                                        disabled={true}
-                                        type="text"
-                                        value={clients.latitute}
-                                    />
-                                </label>
-                            </div>
+
                             <button
-                                className={"btn btn-danger"}
+                                className={"btn btn-danger my-2"}
                                 onClick={() => props.clearAllclients()}>
                                 Clear
                             </button>
