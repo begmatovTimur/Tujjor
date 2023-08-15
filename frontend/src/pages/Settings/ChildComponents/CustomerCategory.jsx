@@ -1,9 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import Table from '../../universal/Table/Table'
 import UniversalModal from "../../universal/Modal/UniverModal";
-import {customerCategoryActions} from "../../../Redux/reducers/customerCategory";
+import {customerCategoryActions} from "../../../Redux/reducers/customerCategoryReducer";
 import "./CustomerCategory.css";
+import Filter from "../../universal/Filter/Filter";
 
 function CustomerCategory(props) {
 
@@ -60,6 +61,11 @@ function CustomerCategory(props) {
             }}><i class="fa fa-edit"></i></button>
         }
     ];
+    const [optionsActive] = useState([
+        { value: "", label: "All" },
+        { value: "true", label: "Active" },
+        { value: "false", label: "Inactive" },
+    ]);
 
 
     return (
@@ -70,6 +76,18 @@ function CustomerCategory(props) {
                     <i style={{fontSize: "20px"}} className="fa fa-plus"></i>Add Category
                 </div>
             </div>
+            <Filter
+                search={[
+                    {
+                        name: "active",
+                        multi: false,
+                        options: optionsActive,
+                        defaultValue: { value: "", label: "All" },
+                        placeholder: "Active",
+                        selfEmployer:true
+                    }
+                ]}
+            />
 
             <Table
                 filterActive={true}
@@ -79,6 +97,7 @@ function CustomerCategory(props) {
                 pagination={true}
                 paginationApi={"/customer-category/pagination?page={page}&limit={limit}"}
                 changeSizeMode={true}
+                fileName={"categories"}
                 excelPath={"/customer-category/excel"}
                 columnsProps={columns}
             />
@@ -88,7 +107,7 @@ function CustomerCategory(props) {
                 modalTitle={"Add Category"}
                 isOpen={customerCategory.openModal}
                 closeFunction={() => props.handleClose()}
-                width={60}
+                width={40}
                 functionforSaveBtn={() => props.saveCategory()}
 
                 inpData={[

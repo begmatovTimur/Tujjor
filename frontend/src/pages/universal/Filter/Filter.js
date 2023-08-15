@@ -59,6 +59,19 @@ function Filter(props) {
     props.getQuickSearchData(props.paginationApi);
   }
 
+  function handleFilter(obj) {
+    const { name, value } = obj;
+    const myArr = []
+    if(obj.value.length){
+      obj.value.map((item,index)=>{
+        myArr.push(item.value)
+      })
+      props.changeInputForms({ ...formInputsProps, [name]: myArr});
+    }else {
+      props.changeInputForms({ ...formInputsProps, [name]: value });
+    }
+  }
+
   return (
     <div>
       <div className="row">
@@ -71,22 +84,39 @@ function Filter(props) {
           }}
         >
           {props.search
-            ? props.search.map((item, index) => {
-                return (
-                  <div className={"my-2"} style={{ width: 300 }}>
-                    <Select
-                      key={index}
-                      options={item.options}
-                      styles={customStyles}
-                      isMulti={item.multi}
-                      onChange={(e) =>
-                        handleChangeActive({ name: item.name, value: e })
-                      }
-                      placeholder={item.placeholder}
-                    />
-                  </div>
-                );
-              })
+            ?
+                props.search.map((item, index) => {
+                  if(item.selfEmployer){
+                    return (
+                        <div className={"my-2"} style={{ width: 300 }}>
+                          <Select
+                              key={index}
+                              options={item.options}
+                              styles={customStyles}
+                              isMulti={item.multi}
+                              onChange={(e) =>
+                                  handleChangeActive({ name: item.name, value: e })
+                              }
+                              placeholder={item.placeholder}
+                          />
+                        </div>
+                    );
+                  }else {
+                    return (
+                        <div className={"my-2"} style={{ width: 300 }}>
+                          <Select
+                              key={index}
+                              options={item.options}
+                              styles={customStyles}
+                              isMulti={item.multi}
+                              onChange={(e) =>
+                                  handleFilter({ name: item.name, value: e })}
+                              placeholder={item.placeholder}
+                          />
+                        </div>
+                    );
+                  }
+                })
             : ""}
           {props.quickSearch ? (
             <label className="" style={{ height: 30 }}>
@@ -103,12 +133,10 @@ function Filter(props) {
           ) : (
             ""
           )}
-          {formInputsProps.city === "" &&
-          formInputsProps.city.length === 0 &&
-          formInputsProps.tin === "" &&
-          formInputsProps.quickSearch === "" &&
-          formInputsProps.customerCategories.length === 0 &&
-          formInputsProps.active ? (
+          {
+
+            props.filterButton
+                ?
             <button
               onClick={() => props.getFilteredData(props.paginationApi)}
               className={"btn btn-primary"}
@@ -116,7 +144,7 @@ function Filter(props) {
             >
               Filter
             </button>
-          ) : (
+          : (
             ""
           )}
         </div>

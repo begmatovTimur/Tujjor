@@ -13,25 +13,27 @@ import java.util.UUID;
 
 public interface CustomerCategoryRepository extends JpaRepository<CustomerCategory, Integer> {
 
-    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where c.active = :status and lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '')) like lower(concat('%',:search,'%')) order by id",nativeQuery = true)
+    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where c.active = :status and lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '')) like lower(concat('%',:search,'%')) order by id", nativeQuery = true)
     Page<CustomerCategoryProjection> findCustomerCategoryByActiveAndRegionName(String search, Boolean status, Pageable pageable);
 
 
     @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '')) like lower(concat('%',:search,'%')) order by id", nativeQuery = true)
     Page<CustomerCategoryProjection> findCustomerCategoryByRegionAndName(String search, Pageable pageable);
+
     @Query(value = """
-    SELECT c.id,c.code,c.region,c.name,c.description,c.active FROM customer_category c
-    WHERE c.active = :active
-      AND (LOWER(c.region) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
-        OR LOWER(c.code) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
-        OR LOWER(c.name) LIKE LOWER(CONCAT('%', :quickSearch, '%')))
-""", nativeQuery = true)
+                SELECT c.id,c.code,c.region,c.name,c.description,c.active FROM customer_category c
+                WHERE c.active = :active
+                  AND (LOWER(c.region) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
+                    OR LOWER(c.code) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
+                    OR LOWER(c.name) LIKE LOWER(CONCAT('%', :quickSearch, '%')))
+            """, nativeQuery = true)
     List<CustomerCategoryProjection> findByQuickSearch(Boolean active, String quickSearch);
+
     @Query(value = """
-    SELECT c.id,c.code,c.region,c.name,c.description,c.active FROM customer_category c
-      where (LOWER(c.region) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
-        OR LOWER(c.code) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
-        OR LOWER(c.name) LIKE LOWER(CONCAT('%', :quickSearch, '%')))
-""", nativeQuery = true)
+                SELECT c.id,c.code,c.region,c.name,c.description,c.active FROM customer_category c
+                  where (LOWER(c.region) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
+                    OR LOWER(c.code) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
+                    OR LOWER(c.name) LIKE LOWER(CONCAT('%', :quickSearch, '%')))
+            """, nativeQuery = true)
     List<CustomerCategoryProjection> findByQuickSearchWithoutActive(String quickSearch);
 }

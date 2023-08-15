@@ -30,7 +30,16 @@ function* getTeritory(action){
         yield put(teritoryAction.yourActionFailureTeritories(err.message));
     }
 }
+function* getCities(action){
+    try {
+        const res = yield apiCall("/territory/region", "GET")
+        yield put(teritoryAction.getCitiesSuccess({res: res.data}))
+    } catch (err) {
+        yield put(teritoryAction.yourActionFailureTeritories(err.message));
+    }
+}
 export function* territorySaga() {
     yield takeEvery("teritory/saveTeritory", addTeritory)
     yield takeEvery("teritory/getTeritory", getTeritory)
+    yield takeEvery("teritory/getCities", getCities)
 }

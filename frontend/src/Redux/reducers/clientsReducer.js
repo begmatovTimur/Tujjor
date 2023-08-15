@@ -3,13 +3,16 @@ import {createSlice} from "@reduxjs/toolkit";
 const clientsReducer = createSlice({
     name: "clients",
     initialState: {
-        data:[],
+        clients:[],
         openModal: false,
-        template: null,
-        mapState: {center: [0, 0], zoom: 0},
-        longitute: 0,
-        latitute: 0,
+        template: "",
+        mapState: "",
+        defaultCenter: [39.7756, 64.4253],
+        longitute: "",
+        latitute: "",
+        regions:[],
         teritories: [],
+        customCategories: [],
         errMessage: "",
         teritoryId: "",
         name: "",
@@ -19,10 +22,12 @@ const clientsReducer = createSlice({
         active: false,
         isLoading:false,
         categoriesId: 0,
+        categoryId: "",
         companyName: "",
         referencePoint: "",
         error:"",
-        editeClient:""
+        editeClient:"",
+        allClientTerritoriesForMap:[]
     },
     reducers: {
         openModal: (state, action) => {
@@ -33,15 +38,18 @@ const clientsReducer = createSlice({
             state.teritoryId = "";
             state.name = "";
             state.address = "";
+            state.categoryId = "";
             state.telephone = "";
             state.tin = "";
             state.active = false;
-            state.categoriesId = 0;
+            state.categoryId = "";
             state.companyName = "";
             state.referencePoint = ""
             state.longitute = "";
             state.latitute = "";
             state.editeClient = "";
+            state.mapState = { center: ["",""], zoom: 10 };
+            state.defaultCenter = [39.7756, 64.4253];
         },
         handleTemplate: (state, action) => {
             state.template = action.payload
@@ -53,24 +61,27 @@ const clientsReducer = createSlice({
             state.mapState = action.payload
         },
         clearAllclients: (state, action) => {
-            state.longitute = 0;
-            state.latitute = 0;
-            state.mapState = {center: [0, 1], zoom: 10}
+            state.longitute = "";
+            state.latitute = "";
+            state.mapState = { center: ["",""], zoom: 10 };
         },
         getClients: (state, action) => {
 
         },
         getClientsSuccess:(state,action)=>{
-            state.data = action.payload
+            state.clients = action.payload
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload
         },
-        getTeritories:(state, action)=>{
+        getAllClientsTerritories: (state, action) => {
 
         },
-        getSuccessAllTeritories:(state, action)=>{
-            state.teritories = action.payload.res
+        getAllClientsTerritoriesSuccess: (state, action) => {
+            state.allClientTerritoriesForMap = action.payload
+        },
+        getAllClientsTerritoriesError: (state, action) => {
+            state.errMessage = action.payload
         },
         yourActionFailureTeritories:(state, action)=>{
             state.errMessage = action.payload
@@ -87,20 +98,29 @@ const clientsReducer = createSlice({
         changeTelephone:(state, action)=>{
             state.telephone = action.payload;
         },
+        changeCategoryId:(state, action)=>{
+            state.categoryId = action.payload;
+        },
         changeTin:(state, action)=>{
             state.tin = action.payload;
         },
         changeActive:(state, action)=>{
             state.active = action.payload;
         },
-        changeCategoriesId:(state, action)=>{
-            state.categoriesId = action.payload;
-        },
         changeCompanyName:(state, action)=>{
             state.companyName = action.payload;
         },
         changeReferencePoint:(state, action)=>{
             state.referencePoint = action.payload;
+        },
+        getCustomCategory:(state, action)=>{
+
+        },
+        getCustomCategorySuccess:(state, action)=>{
+            state.customCategories = action.payload;
+        },
+        yourActionFailureCustomCategory:(state, action)=>{
+            state.error = action.payload;
         },
         resetAllClientsData:(state, action)=>{
             state.teritoryId = "";
@@ -109,12 +129,14 @@ const clientsReducer = createSlice({
             state.telephone = "";
             state.tin = "";
             state.active = false;
-            state.categoriesId = 0;
+            state.categoryId = "";
             state.companyName = "";
             state.referencePoint = ""
             state.longitute = "";
             state.latitute = "";
             state.editeClient = "";
+            state.defaultCenter = [39.7756, 64.4253];
+            state.mapState = { center: ["",""], zoom: 10 };
         },
         saveClients:(state, action)=>{
             action.payload = {
@@ -124,7 +146,7 @@ const clientsReducer = createSlice({
                 phone: state.telephone,
                 tin: state.tin,
                 active: state.active,
-                categoryId: 1,
+                categoryId: state.categoryId,
                 companyName: state.companyName,
                 referencePoint: state.referencePoint,
                 longitude: state.longitute,
@@ -133,21 +155,21 @@ const clientsReducer = createSlice({
         },
         editeClients:(state, action)=>{
             state.editeClient = action.payload
-            console.log(state.editeClient)
             state.openModal = true;
-            // state.teritoryId = action.payload;
+            state.teritoryId = action.payload.territoryId;
             state.name = action.payload.clientName;
             state.address = action.payload.address;
             state.telephone = action.payload.telephone;
-            // state.tin = action.payload;
+            state.tin = action.payload.tin;
             state.active = action.payload.active;
-            // state.categoriesId = action.payload;
+            state.categoryId = action.payload.categoryId;
             state.companyName = action.payload.companyName;
-            state.referencePoint = action.payload.region;
             state.longitute = action.payload.longitude;
             state.latitute = action.payload.latitude;
+            state.defaultCenter = [action.payload.latitude, action.payload.longitude]
+            state.mapState = { center: [action.payload.latitude, action.payload.longitude], zoom: 10 }
         },
-        changeLoadingActive: (state, action)=>{
+        changeLoadingActive: (state, action)=> {
             state.isLoading = action.payload
         }
     }

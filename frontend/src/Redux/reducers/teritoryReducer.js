@@ -4,9 +4,10 @@ const teritoryReducer = createSlice({
     initialState: {
         openModal:false,
         template:null,
-        mapState:{ center: [0, 0], zoom: 0 },
-        longitute: 0,
-        latitute: 0,
+        mapState: { center: ["", ""], zoom: 10 },
+        defaultCenter: [39.7756, 64.4253],
+        longitute: "",
+        latitute: "",
         title: "",
         code: "",
         active: false,
@@ -14,25 +15,26 @@ const teritoryReducer = createSlice({
         teritories: [],
         error: "",
         itemForTeritoryEdite: "",
+        regions:[],
     },
     name: "teritory",
     reducers: {
         handleOpen:(state, action)=>{
-            state.openModal = true
+            state.openModal = true;
         },
         handleClose:(state, action)=>{
-            state.openModal = false
-            state.longitute = 0
-            state.latitute = 0
-            state.title = ""
-            state.code = ""
-            state.region = ""
-            state.active = false
-            state.mapState = { center: [0, 1], zoom: 10 }
-            state.itemForTeritoryEdite = ""
+            state.openModal = false;
+            state.longitute = "";
+            state.latitute = "";
+            state.title = "";
+            state.code = "";
+            state.region = "";
+            state.active = false;
+            state.mapState = { center: ["", ""], zoom: 10 };
+            state.itemForTeritoryEdite = "";
+            state.defaultCenter = [39.7756, 64.4253];
         },
         getTeritory:(state, action)=>{
-
         },
         getteritoriesSuccess:(state, action)=>{
             state.teritories = action.payload.res;
@@ -62,22 +64,24 @@ const teritoryReducer = createSlice({
             state.region = action.payload
         },
         clearAllTeritory:(state, action)=>{
-            state.longitute = 0;
-            state.latitute = 0;
-            state.mapState = { center: [0, 1], zoom: 10 }
+            state.longitute = "";
+            state.latitute = "";
+            state.mapState = { center: ["", ""], zoom: 10 };
+            state.defaultCenter = [39.7756, 64.4253];
         },
         changeModal:(state, action)=>{
             state.openModal = action.payload
         },
         resetAllTeritoryData:(state, action)=>{
-            state.longitute = 0
-            state.latitute = 0
-            state.title = ""
-            state.code = ""
-            state.region = ""
-            state.active = false
-            state.mapState = { center: [0, 1], zoom: 10 }
-            state.itemForTeritoryEdite = ""
+            state.longitute = "";
+            state.latitute = "";
+            state.title = "";
+            state.code = "";
+            state.region = "";
+            state.active = false;
+            state.mapState = { center: ["", ""], zoom: 10 };
+            state.itemForTeritoryEdite = "";
+            state.defaultCenter = [39.7756, 64.4253];
         },
         saveTeritory:(state, action)=>{
             action.payload = {
@@ -91,14 +95,20 @@ const teritoryReducer = createSlice({
         },
         editeTeritory:(state, action)=>{
             state.itemForTeritoryEdite = action.payload
-            state.openModal = true
-            state.longitute = action.payload.latitude
-            state.latitute = action.payload.longitude
-            state.title = action.payload.name
-            state.code = action.payload.code
-            state.region = action.payload.region
-            state.active = action.payload.active
-            state.mapState = { center: [action.payload.latitude, action.payload.longitude], zoom: 10 }
+            state.openModal = true;
+            state.longitute = action.payload.latitude;
+            state.latitute = action.payload.longitude;
+            state.title = action.payload.name;
+            state.code = action.payload.code;
+            state.region = action.payload.region;
+            state.active = action.payload.active;
+            state.defaultCenter = [action.payload.latitude, action.payload.longitude];
+            state.mapState = { center: [action.payload.latitude, action.payload.longitude], zoom: 10 };
+        },
+        getCities:(state, action)=>{
+        },
+        getCitiesSuccess:(state, action)=>{
+            state.regions = action.payload.res
         }
     },
 });

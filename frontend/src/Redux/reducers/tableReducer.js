@@ -19,10 +19,12 @@ const tableReducer = createSlice({
         formInputs: {
             active: "",
             city: [],
+            allWeeks:"",
             weekDays: [],
             tin: "",
             customerCategories: [],
             quickSearch: "",
+            offset:""
         },
         totalPages: "",
     },
@@ -124,6 +126,7 @@ const tableReducer = createSlice({
             state.formInputs = action.payload;
         },
         getFilteredData: (state, action) => {
+
         },
         getExcelFile: (state, action) => {
         },

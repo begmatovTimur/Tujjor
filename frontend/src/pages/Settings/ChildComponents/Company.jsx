@@ -1,9 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import Table from '../../universal/Table/Table'
 import UniversalModal from "../../universal/Modal/UniverModal";
 import {companyProfileActions} from "../../../Redux/reducers/companyProfile";
 import "./CustomerCategory.css";
+import Filter from "../../universal/Filter/Filter";
 
 function Company(props) {
 
@@ -61,24 +62,27 @@ function Company(props) {
         {
             id: 5,
             title: "Address",
-            key: "address.city + address.district + address.street",
+            key: "address",
             type: "text",
             show: true,
         }
     ];
 
 
+
     return (
         <div style={{width: "100%"}}>
 
             <Table
-                filterActive={false}
+                excelWithoutSearch={true}
+
                 columnOrderMode={false}
                 dataProps={companyProfile.companies}
                 changeSizeModeOptions={[10, 20, 50, 100, 200]}
                 pagination={false}
                 changeSizeMode={false}
-                excelPath={"/customer-category/excel"}
+                fileName={"companies"}
+                excelPath={"/company/excel"}
                 columnsProps={columns}
             />
 

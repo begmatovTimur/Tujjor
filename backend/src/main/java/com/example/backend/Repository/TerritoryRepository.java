@@ -2,6 +2,7 @@ package com.example.backend.Repository;
 
 import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Projection.TerritoryClientProjection;
 import com.example.backend.Projection.TerritoryRegionProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,11 +26,11 @@ import java.util.UUID;
 public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
 
 
-    @Query(value = "select id,region,name,code,longitude,latitude,active from territory t where t.active = :status and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')) like lower(concat('%',:search,'%')) order by id",nativeQuery = true)
+    @Query(value = "select id,region,name,code,longitude,latitude,active,code from territory t where t.active = :status and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')  || ' ' || COALESCE(t.code, '')) like lower(concat('%',:search,'%')) order by id",nativeQuery = true)
     Page<TerritoryProjection> findTerritoryByActiveAndRegionName(String search, Boolean status, Pageable pageable);
 
 
-    @Query(value = "select id,region,name,code,longitude,latitude,active from territory t where lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')) like lower(concat('%',:search,'%')) order by id", nativeQuery = true)
+    @Query(value = "select id,region,name,code,longitude,latitude,active,code from territory t where lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')  || ' ' || COALESCE(t.code, '')) like lower(concat('%',:search,'%')) order by id", nativeQuery = true)
     Page<TerritoryProjection> findTerritoryByRegionAndName(String search, Pageable pageable);
     @Query(value = """
     SELECT * FROM territory t
@@ -47,6 +48,10 @@ public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
 """, nativeQuery = true)
     List<TerritoryProjection> findByQuickSearchWithoutActive(String quickSearch);
 
-    @Query(nativeQuery = true,value = "select region from territory")
+    @Query(nativeQuery = true,value = "select id,region from territory")
     List<TerritoryRegionProjection> findAllRegion();
+    @Query(nativeQuery = true, value = """
+            SELECT t.id, t.name, t.code, t.region, t.active FROM territory t LEFT JOIN client c ON t.id = c.territory_id WHERE c.id IS NULL
+            """)
+    List<TerritoryClientProjection> getAllteritoryForCliens();
 }

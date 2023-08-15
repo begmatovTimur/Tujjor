@@ -104,9 +104,6 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
             } else {
                 territories = customerCategoryRepository.findCustomerCategoryByRegionAndName(jsonNode.get("quickSearch").asText(), pageable);
             }
-            if (territories.isEmpty() && customerCategoryRepository.count() == 1) {
-                return ResponseEntity.ok(new PageImpl<>(List.of(customerCategoryRepository.findAll().get(0)), pageable, 1));
-            }
             return ResponseEntity.ok(territories);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("An error has occurred");
@@ -121,14 +118,15 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
         } else {
             territoryFilter = customerCategoryRepository.findByQuickSearch(Boolean.valueOf(dto.getActive()),dto.getQuickSearch());
         }
-        System.out.println(territoryFilter);
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Company info");
         Row row = sheet.createRow(0);
         row.createCell(0).setCellValue("ID");
-        row.createCell(1).setCellValue("Code");
-        row.createCell(2).setCellValue("Name");
-        row.createCell(3).setCellValue("Description");
+        row.createCell(1).setCellValue("Name");
+        row.createCell(2).setCellValue("Email");
+        row.createCell(3).setCellValue("Region");
+        row.createCell(3).setCellValue("Support Phone");
+        row.createCell(3).setCellValue("Address");
         int counter = 1;
         for (CustomerCategoryProjection territory : territoryFilter) {
             Row dataRow = sheet.createRow(counter);

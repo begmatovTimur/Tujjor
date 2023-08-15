@@ -9,19 +9,28 @@ import java.util.UUID;
 public interface ClientProjection {
 
      UUID getId();
-
+     
      @Value("#{target.name}")
      String getClientName();
      @Value("#{target.companyName}")
      String getCompanyName();
+     @Value("#{target.categoryName}")
+     String getCategoryName();
      @Value("#{target.phone}")
      String getTelephone();
+
+     @Value("#{target.territoryId}")
+     String getTerritoryId();
+
+     @Value("#{target.categoryId}")
+     String getCategoryId();
 
      Double getLatitude();
 
      Double getLongitude();
      @Value("#{target.city}")
      String getRegion();
+
 
      String getAddress();
 
@@ -30,4 +39,6 @@ public interface ClientProjection {
 
      @Value("#{target.registrationDate}")
      LocalDate getRegistrationDate();
+     @Value("#{target.tin}")
+     String getTin();
 }

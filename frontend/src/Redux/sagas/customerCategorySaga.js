@@ -3,7 +3,7 @@ import apiCall from "../../Config/apiCall";
 import {teritoryAction} from  "../reducers/teritoryReducer"
 import { ErrorNotify } from "../../tools/Alerts";
 import { SuccessNotify } from "../../tools/Alerts";
-import customerCategory, {customerCategoryActions} from "../reducers/customerCategory";
+import customerCategory, {customerCategoryActions} from "../reducers/customerCategoryReducer";
 function* addCategory(action){
     const currentState = yield select((state) => state.customerCategory);
     if (action.payload.name === "" || action.payload.region === "" || action.payload.code === "" || action.payload.description===""){
@@ -11,7 +11,7 @@ function* addCategory(action){
     }else {
         if (currentState.itemForTeritoryEdite !== ""){
             const res = yield apiCall(`/customer-category/${currentState.itemForTeritoryEdite.id}`, "PUT", action.payload)
-            yield call(getCategories)
+            yield getCategories();
             yield put(customerCategoryActions.changeModal(false))
             yield put(teritoryAction.resetAllTeritoryData())
         }else {

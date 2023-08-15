@@ -5,6 +5,7 @@ import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
 import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
+import Filter from "../universal/Filter/Filter";
 
 const style = {
     position: "absolute",
@@ -71,23 +72,40 @@ function Teritory(props) {
             show: true,
             data: (item) => <button className="custom_edit_btn" onClick={() => {
                 props.editeTeritory(item);
-            }}><i class="fa fa-edit"></i></button>
+            }}><i className="fa fa-edit"></i></button>
         }
     ];
-
+    const [optionsActive] = useState([
+        { value: "", label: "All" },
+        { value: "true", label: "Active" },
+        { value: "false", label: "Inactive" },
+    ]);
     return (
-        <div style={{width:"100%", backgroundColor:"#dae2e3"}}>
+        <div style={{width:"100%"}}>
             <div className="d-flex flex-column align-items-start">
                 <div className="title">Territory</div>
                 <div className="custom_add_btn" style={{cursor: "pointer"}} onClick={() => props.handleOpen()}>
                 <i style={{fontSize:"20px"}} className="fa fa-plus"></i>Add Territory
                 </div>
             </div>
-
+            <Filter
+                search={[
+                    {
+                        name: "active",
+                        multi: false,
+                        options: optionsActive,
+                        defaultValue: { value: "", label: "All" },
+                        placeholder: "Active",
+                        selfEmployer: true
+                    }
+                ]}
+            />
             <Table
                 pagination={true}
-                filterActive={true}
                 changeSizeMode={true}
+                excelPath={"/territory/excel"}
+                fileName={"territories"}
+                excelWithoutSearch={false}
                 paginationApi={"/territory/pagination?page={page}&limit={limit}"}
                 dataProps={teritory.teritories}
                 columnOrderMode={true}
@@ -96,7 +114,7 @@ function Teritory(props) {
             />
 
             <UniversalModal
-                modalTitle={"Add teritory"}
+                modalTitle={teritory.itemForTeritoryEdite ===""?"Add teritory":"Edite teritory"}
                 isOpen={teritory.openModal}
                 closeFunction={() => props.handleClose()}
                 width={60}
@@ -115,21 +133,15 @@ function Teritory(props) {
                             width={400}
                             height={300}
                             defaultState={{
-                                center: [39.7756, 64.4253],
+                                center: teritory.defaultCenter,
                                 zoom: 10,
                             }}
                             onClick={handleMapClick}
                             modules={["templateLayoutFactory"]}
-                        >
-                            <ZoomControl options={{float: "right"}}/>
-                            {teritory.template &&
-                                teritory.longitute !== "" &&
-                                teritory.latitude !== "" && (
-                                    <Placemark
-                                        geometry={teritory.mapState.center}
-                                        modules={["geoObject.addon.balloon"]}
-                                    />
-                                )}
+                        ><ZoomControl options={{float: "right"}}/>
+                            <Placemark
+                                geometry={teritory.mapState.center}
+                                modules={["geoObject.addon.balloon"]}/>
                         </Map>
                     </YMaps>
                     <div className={"d-flex my-3 g-4"}>

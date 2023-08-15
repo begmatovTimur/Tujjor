@@ -1,28 +1,31 @@
 import axios from "axios";
 import {saveAs} from 'file-saver';
-import { select,call, put, takeEvery } from "redux-saga/effects";
-import apiCall, {domen} from '../../Config/apiCall';
+import {call, put, select, takeEvery} from "redux-saga/effects";
+import apiCall from '../../Config/apiCall';
 import {tableActions} from "../reducers/tableReducer"; // Make sure to import tableActions from the correct path
 
 function* watchGetFilteredData(action) {
     const currentState = yield select((state) => state.table);
     const x = currentState.formInputs
     let obj = {
-        active: x.active.value,
+        active: x.active.value ? x.active.value : x.active,
         city: x.city,
+        allWeeks: x.allWeeks.value,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
         quickSearch: x.quickSearch
     }
+    console.log(obj)
     let api = currentState.paginationApi1
-    api = api.replace("{page}", currentState.page - 1).replace("{limit}", currentState.limit);
+    api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
     const res = yield apiCall(
         api,
         "get",
         null,
         JSON.stringify(obj)
     )
+    yield put(tableActions.changeCurrentPage(1))
     yield put(tableActions.changeTotalPages(res.data.totalPages))
     yield put(tableActions.changeData({
         data: res.data.content,
@@ -38,7 +41,7 @@ function* watchQuickSearchData(action) {
         quickSearch: x.quickSearch,
         city: x.city,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     let api = currentState.paginationApi1
@@ -69,15 +72,16 @@ function* changeSizeOfPage(action) {
         quickSearch: currentState.formInputs.quickSearch,
         city: "",
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
-    const res = yield apiCall(
+    const res = yield call(
+        apiCall,
         api,
         "get",
         null,
         JSON.stringify(obj)
-    )
+    );
     yield put(tableActions.changeTotalPages(res.data.totalPages))
     yield put({
         type: "table/changeData",
@@ -96,24 +100,43 @@ function* downloadExcelFile(action) {
         quickSearch: x.quickSearch,
         city: x.city,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     if (obj.active === undefined) obj.active = "ALL";
-    axios
-        .get("http://localhost:8080/api/territory/excel", {
-            responseType: 'blob',
-            headers: {
-                active: obj.active,
-                quickSearch: obj.quickSearch
-            }
-        })
-        .then((res) => {
-            const file = new Blob([res.data], {
-                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    if (action.payload.excelWithoutSearch) {
+        axios
+            .get("http://localhost:8080/api" + action.payload.path, {
+                responseType: 'blob',
+                headers: {
+                    token: localStorage.getItem("access_token")
+                }
+            })
+            .then((res) => {
+                const file = new Blob([res.data], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                });
+                saveAs(file, action.payload.fileName + ".xlsx");
             });
-            saveAs(file, "territory.xlsx");
-        });
+    } else {
+        axios
+            .get("http://localhost:8080/api" + action.payload.path, {
+                responseType: 'blob',
+                headers: {
+                    active: obj.active,
+                    quickSearch: obj.quickSearch,
+                    token: localStorage.getItem("access_token")
+                }
+            })
+            .then((res) => {
+                const file = new Blob([res.data], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                });
+                saveAs(file, action.payload.fileName + ".xlsx");
+            });
+    }
+
+    let firstname,lastname,age;
 
 }
 
@@ -125,17 +148,13 @@ function* watchGetActiveData(action) {
         quickSearch: x.quickSearch,
         city: x.city,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     let api = currentState.paginationApi1
     api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
-    const res = yield apiCall(
-        api,
-        "get",
-        null,
-        JSON.stringify(obj)
-    )
+    const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
+
     yield put(tableActions.changeCurrentPage(1))
     yield put(tableActions.changeTotalPages(res.data.totalPages))
     yield put(tableActions.changeData({
