@@ -181,11 +181,11 @@ const UniversalModal = ({inpData = "", isOpen, closeFunction, modalTitle, width,
                         borderTopRightRadius: "10px"
                     }}>
                         <div style={{width:"100%" ,display:"flex", justifyContent:"space-between"}}>
-                            <b>O'zgarishlar o'chib ketadi. Rozimisiz ?</b>
+                            <b>O'zgarishlar saqlansinmi ?</b>
                         </div>
                         <div className={'d-flex justify-content-between'} style={{marginTop:"24px", paddingRight:"12%"}}>
-                            <button onClick={()=>setMiniModal(false) & closeFunction()} className={'btn btn-danger'}>Ha</button>
-                            <button onClick={()=>setMiniModal(false)} className={'btn btn-success'}>Yo'q</button>
+                            <button onClick={()=>setMiniModal(false) & closeFunction()} className={'btn btn-danger'}>Yo'q</button>
+                            <button onClick={()=>setMiniModal(false)} className={'btn btn-success'}>Ha</button>
                         </div>
                     </div>
 
