@@ -1,15 +1,24 @@
 import React, {useEffect} from 'react';
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {clientsAction} from "../../Redux/reducers/clientsReducer";
+import {tableActions} from "../../Redux/reducers/tableReducer";
+import LoadingBackdrop from "../universal/Loading/loading";
 
 function ClientsOnTheMap(props) {
+
+    const dispatch = useDispatch()
     const {clients} = props
     useEffect(()=>{
         props.getAllClientsTerritories()
+        dispatch(tableActions.changeIsLoading(true))
+        setTimeout(() => {
+            dispatch(tableActions.changeIsLoading(false))
+        }, 1000)
     },[])
     return (
         <div style={{width:"100%", backgroundColor: "#dae2e3", padding:"20px 20px"}}>
+            <LoadingBackdrop></LoadingBackdrop>
             <div style={{overflow:"hidden",width:"100%", height:"100%", backgroundColor:"white", padding:"10px 20px", borderRadius:"10px"}}>
                 <p style={{fontSize: "30px", textAlign:"start"}}>Clients On The Map</p><hr/>
                 <YMaps
