@@ -6,7 +6,7 @@ const clientsReducer = createSlice({
         clients:[],
         openModal: false,
         template: "",
-        mapState: { center: ["",""], zoom: 10 },
+        mapState: "",
         defaultCenter: [39.7756, 64.4253],
         longitute: "",
         latitute: "",
@@ -46,6 +46,7 @@ const clientsReducer = createSlice({
             state.longitute = "";
             state.latitute = "";
             state.editeClient = "";
+            state.mapState = { center: ["",""], zoom: 10 };
             state.defaultCenter = [39.7756, 64.4253];
         },
         handleTemplate: (state, action) => {

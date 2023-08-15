@@ -40,6 +40,7 @@ import './modal.css'
 
 
 const UniversalModal = ({inpData = "", isOpen, closeFunction, modalTitle, width, functionforSaveBtn, JsxData = ""})=> {
+    const [miniModal, setMiniModal] = useState(false);
     const style = {
         position: "absolute",
         top: "48%",
@@ -53,11 +54,24 @@ const UniversalModal = ({inpData = "", isOpen, closeFunction, modalTitle, width,
         overflow: "auto",
         maxHeight: "655px"
     };
+    const style2 = {
+        position: "absolute",
+        top: "48%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        backgroundColor:"white",
+        border: "none",
+        boxShadow: 24,
+        borderRadius: "10px",
+        width: "30%",
+        overflow: "auto",
+        height:"110px"
+    };
     return (
         <div>
             <Modal
                 open={isOpen}
-                onClose={closeFunction}
+                onClose={()=>setMiniModal(true)}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description">
                 <Box sx={style}>
@@ -73,7 +87,7 @@ const UniversalModal = ({inpData = "", isOpen, closeFunction, modalTitle, width,
                     }}>
                         <div style={{width:"100%" ,display:"flex", justifyContent:"space-between"}}>
                             <b>{modalTitle}</b>
-                            <button style={{margin:"-4px 3% 5px 0px"}} className={'btn btn-danger'} onClick={closeFunction}>
+                            <button style={{margin:"-4px 3% 5px 0px"}} className={'btn btn-danger'} onClick={()=>setMiniModal(true)}>
                                 <i className="fa-regular fa-circle-xmark"></i></button>
                         </div>
                     </div>
@@ -147,6 +161,34 @@ const UniversalModal = ({inpData = "", isOpen, closeFunction, modalTitle, width,
                             }
                         </div>
                     </div>
+                </Box>
+            </Modal>
+
+            <Modal
+                open={miniModal}
+                onClose={()=>setMiniModal(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description">
+                <Box sx={style2}>
+                    <div style={{
+                        width: "100%",
+                        height: "50px",
+                        padding: "10px 0px 0px 45px",
+                        fontSize: "18px",
+                        color: "white",
+                        background: "rgba(64, 125, 178, 0.9)",
+                        borderTopLeftRadius: "10px",
+                        borderTopRightRadius: "10px"
+                    }}>
+                        <div style={{width:"100%" ,display:"flex", justifyContent:"space-between"}}>
+                            <b>O'zgarishlar saqlansinmi ?</b>
+                        </div>
+                        <div className={'d-flex justify-content-between'} style={{marginTop:"24px", paddingRight:"12%"}}>
+                            <button onClick={()=>setMiniModal(false) & closeFunction()} className={'btn btn-danger'}>Yo'q</button>
+                            <button onClick={()=>setMiniModal(false)} className={'btn btn-success'}>Ha</button>
+                        </div>
+                    </div>
+
                 </Box>
             </Modal>
         </div>

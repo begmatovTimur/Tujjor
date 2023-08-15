@@ -114,7 +114,7 @@ function Teritory(props) {
             />
 
             <UniversalModal
-                modalTitle={"Add teritory"}
+                modalTitle={teritory.itemForTeritoryEdite ===""?"Add teritory":"Edite teritory"}
                 isOpen={teritory.openModal}
                 closeFunction={() => props.handleClose()}
                 width={60}
