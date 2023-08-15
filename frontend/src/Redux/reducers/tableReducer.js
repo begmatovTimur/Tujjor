@@ -25,6 +25,10 @@ const tableReducer = createSlice({
             quickSearch: "",
             offset:""
         },
+        selectedForms:{
+            customerCategories:[],
+            city:[],
+        },
         totalPages: "",
     },
     reducers: {
@@ -120,6 +124,9 @@ const tableReducer = createSlice({
         getQuickSearchData: (state, action) => {
         },
         getActiveData: (state, action) => {
+        },
+        changeSelectedForms:(state, action)=>{
+            state.selectedForms = action.payload
         },
         changeInputForms: (state, action) => {
             state.formInputs = action.payload;

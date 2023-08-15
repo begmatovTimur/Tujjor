@@ -8,6 +8,10 @@ import Table from "../universal/Table/Table";
 import Filter from "../universal/Filter/Filter";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import {customerCategoryActions} from "../../Redux/reducers/customerCategoryReducer";
+import { MultiSelect } from 'primereact/multiselect';
+import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+
 
 function Clients(props) {
     const {clients} = props
@@ -144,17 +148,21 @@ function Clients(props) {
         const optionsCategory = []
         props.customerCategory.categories.map((item, index) => {
             optionsCategory.push({
-                value: item.id,
-                label: item.name
+                label: item.name,
+                value: item.id
             })
         })
         return optionsCategory
     }
 
+
     return (
         <div style={{width: "100%", backgroundColor: "#dae2e3"}}>
             <div id={'clientsFatherDiv'}>
                 <div>
+                    <div>
+
+                    </div>
                     <div style={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -189,7 +197,7 @@ function Clients(props) {
                                     options: generateOptionsOfCity(),
                                     defaultValue: {value: "", label: "All"},
                                     placeholder: "City",
-                                    selfEmployer: false
+                                    selfEmployer: false,
                                 },
                                 {
                                     name: "customerCategories",

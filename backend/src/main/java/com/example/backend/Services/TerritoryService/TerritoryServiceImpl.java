@@ -29,6 +29,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -120,6 +121,7 @@ public class TerritoryServiceImpl implements TerritoryService {
                 .active(territory.getActive())
                 .longitude(territory.getLongitude())
                 .latitude(territory.getLatitude())
+                .insertionTime(LocalDateTime.now())
                 .build();
     }
 

@@ -24,7 +24,7 @@ function* getAllClientsTerritories(action) {
 
 function* saveClients(action) {
     const currentState = yield select((state) => state.clients);
-    if (action.payload.name === "" || action.payload.territoryId === "" || action.payload.address === "" || action.payload.phone === "" || action.payload.tin === "" || action.payload.companyName === "" || action.payload.categoryId === "" || action.payload.longitude === "" || action.payload.latitude === "") {
+    if (action.payload.name === "" || action.payload.territoryId === "" || action.payload.address === "" || action.payload.phone === "" || action.payload.companyName === "" || action.payload.categoryId === "" || action.payload.longitude === "" || action.payload.latitude === "") {
         ErrorNotify("Please fill all fields!")
     } else {
         if (currentState.editeClient !== "") {
