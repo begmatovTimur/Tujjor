@@ -8,6 +8,7 @@ import customerCategory, {
 } from "../reducers/customerCategoryReducer";
 function* addCategory(action) {
   const currentState = yield select((state) => state.customerCategory);
+  yield put(customerCategoryActions.changeModal(false));
   if (
     action.payload.name === "" ||
     action.payload.region === "" ||
@@ -22,17 +23,14 @@ function* addCategory(action) {
         "PUT",
         action.payload
       );
-      yield getCategories();
-      yield put(customerCategoryActions.changeModal(false));
       yield put(teritoryAction.resetAllTeritoryData());
     } else {
       const res = yield apiCall("/customer-category", "POST", action.payload);
       SuccessNotify("Category added Successfully!");
-      yield getCategories();
-      yield put(customerCategoryActions.changeModal(false));
       yield put(customerCategoryActions.resetAllCategoryData());
     }
   }
+  yield getCategories();
 }
 function* getCategories(action) {
   try {
