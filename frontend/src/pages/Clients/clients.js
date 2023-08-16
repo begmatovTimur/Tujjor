@@ -24,6 +24,8 @@ function Clients(props) {
     }, [])
 
 
+
+
     function handleMapClick(event) {
         const coords = event.get("coords");
         const latitude = coords[0];
@@ -160,8 +162,7 @@ function Clients(props) {
         return optionsCategory
     }
     return (
-        <div style={{width: "100%", height: "90vh", backgroundColor: "#dae2e3"}}>
-            <LoadingBackdrop></LoadingBackdrop>
+        <div style={{width: "100%", backgroundColor: "#dae2e3"}}>
             <div id={'clientsFatherDiv'}>
                 <div style={{height: "100%"}}>
                     <div style={{
@@ -268,6 +269,7 @@ function Clients(props) {
                 closeFunction={() => props.closeModal()}
                 width={70}
                 functionforSaveBtn={() => props.saveClients()}
+                height={200}
                 JsxData={
                     <div style={{display: "flex", gap: "4%"}}>
                         <div className={'w-50'}>

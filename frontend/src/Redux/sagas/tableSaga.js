@@ -1,8 +1,8 @@
 import axios from "axios";
 import {saveAs} from 'file-saver';
+import apiCall, { domen } from '../../Config/apiCall';
+import {tableActions} from "../reducers/tableReducer"; // Make sure to import tableActions from the correct path
 import {call, put,delay, select, takeEvery} from "redux-saga/effects";
-import apiCall from '../../Config/apiCall';
-import {tableActions} from "../reducers/tableReducer";
 
 function* watchGetFilteredData(action) {
     const currentState = yield select((state) => state.table);
@@ -16,10 +16,9 @@ function* watchGetFilteredData(action) {
         customerCategories: x.customerCategories,
         quickSearch: x.quickSearch
     }
-
-    yield put(tableActions.changeIsLoading(true));
+    yield put(tableActions.changeLoadingActive(true));
     yield delay(400);
-    yield put(tableActions.changeIsLoading(false));
+    yield put(tableActions.changeLoadingActive(false));
     let api = currentState.paginationApi1
     api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
     const res = yield apiCall(
@@ -109,7 +108,7 @@ function* downloadExcelFile(action) {
     if (obj.active === undefined) obj.active = "ALL";
     if (action.payload.excelWithoutSearch) {
         axios
-            .get("http://localhost:8080/api" + action.payload.path, {
+            .get(domen + action.payload.path, {
                 responseType: 'blob',
                 headers: {
                     token: localStorage.getItem("access_token")
@@ -123,7 +122,7 @@ function* downloadExcelFile(action) {
             });
     } else {
         axios
-            .get("http://localhost:8080/api" + action.payload.path, {
+            .get(domen + action.payload.path, {
                 responseType: 'blob',
                 headers: {
                     active: obj.active,
@@ -154,9 +153,9 @@ function* watchGetActiveData(action) {
         tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
-    yield put(tableActions.changeIsLoading(true));
-    yield delay(300);
-    yield put(tableActions.changeIsLoading(false));
+    yield put(tableActions.changeLoadingActive(true));
+    yield delay(400);
+    yield put(tableActions.changeLoadingActive(false));
     let api = currentState.paginationApi1
     api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
     const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));

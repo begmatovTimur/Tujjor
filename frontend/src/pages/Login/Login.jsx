@@ -11,7 +11,7 @@ import axios from "axios";
 import gif from "../../images/loading.gif";
 import "react-phone-input-2/lib/style.css";
 import { ErrorNotify, SuccessNotify, WarningNotify } from "../../tools/Alerts";
-
+import { domen } from "../../Config/apiCall";
 function Login(props) {
   const { loginReducer } = props;
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function Login(props) {
       props.setLoading(true);
       setTimeout(() => {
         axios({
-          url: "http://localhost:8080/api/auth/login",
+          url: domen+"/auth/login",
           method: "POST",
           data: {
             phone: loginReducer.phone,

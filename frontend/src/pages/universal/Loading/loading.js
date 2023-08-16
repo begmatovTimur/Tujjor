@@ -9,7 +9,6 @@ import {clientsAction} from "../../../Redux/reducers/clientsReducer";
 function LoadingBackdrop(props) {
 
     const dispatch = useDispatch();
-
     const handleClose = () => {
         dispatch(tableActions.changeIsLoading())
     };

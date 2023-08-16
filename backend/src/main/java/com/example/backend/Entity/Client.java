@@ -20,7 +20,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Territory territory;
     private String name;
     private String address;

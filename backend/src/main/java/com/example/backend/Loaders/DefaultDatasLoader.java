@@ -27,8 +27,6 @@ public class DefaultDatasLoader implements CommandLineRunner {
     private final SettingsRepository settingsRepository;
 
 
-
-
     @Override
     public void run(String... args) {
 //        String roleSuperViser = "ROLE_SUPER_VISER";

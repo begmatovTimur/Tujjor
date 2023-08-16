@@ -29,10 +29,7 @@ function Teritory(props) {
 
     useEffect(() => {
         props.getTeritory();
-        dispatch(tableActions.changeIsLoading(true))
-        setTimeout(() => {
-            dispatch(tableActions.changeIsLoading(false))
-        }, 500)
+      
     }, [])
 
 
@@ -90,7 +87,6 @@ function Teritory(props) {
     ]);
     return (
         <div style={{width:"100%"}}>
-            <LoadingBackdrop></LoadingBackdrop>
             <div className="d-flex flex-column align-items-start">
                 <div className="title">Territory</div>
                 <div className="custom_add_btn" style={{cursor: "pointer"}} onClick={() => props.handleOpen()}>
