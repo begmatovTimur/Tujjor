@@ -27,10 +27,10 @@ const tableReducer = createSlice({
       offset: "",
     },
     totalPages: "",
-    selectedForms:{
-      customerCategories:[],
-      city:[],
-  },
+    selectedForms: {
+      customerCategories: [],
+      city: [],
+    },
   },
   reducers: {
     setCurrentDraggingColumn: (state, action) => {
@@ -123,9 +123,9 @@ const tableReducer = createSlice({
       state.columnOrderModalVisibility = false;
       state.columns = state.modalColumns;
     },
-  changeSelectedForms:(state, action)=>{
-    state.selectedForms = action.payload
-},
+    changeSelectedForms: (state, action) => {
+      state.selectedForms = action.payload;
+    },
     reorderColumns: (state, action) => {
       const { sourceIndex, destinationIndex } = action.payload;
 
@@ -134,17 +134,16 @@ const tableReducer = createSlice({
       updatedColumns.splice(destinationIndex, 0, draggedColumn);
 
       state.modalColumns = updatedColumns;
-
     },
     changeQuickSearch: (state, action) => {
       state.formInputs.quickSearch = action.payload;
     },
     getQuickSearchData: (state, action) => {},
     getActiveData: (state, action) => {},
-    changeLoadingActive: (state, action)=>{
-      state.isLoading = action.payload
-  },
-  changeInputForms: (state, action) => {
+    changeLoadingActive: (state, action) => {
+      state.isLoading = action.payload;
+    },
+    changeInputForms: (state, action) => {
       state.formInputs = action.payload;
     },
     getFilteredData: (state, action) => {},

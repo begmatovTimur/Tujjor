@@ -1,4 +1,4 @@
-import {takeEvery, select, put, call} from "redux-saga/effects"
+import {takeLatest,takeEvery, select, put, call} from "redux-saga/effects"
 import apiCall from "../../Config/apiCall";
 import {clientsAction} from "../reducers/clientsReducer";
 import {ErrorNotify, SuccessNotify} from "../../tools/Alerts";
@@ -48,6 +48,6 @@ function* saveClients(action) {
 
 export function* clientsSaga() {
     yield takeEvery("clients/getAllClientsTerritories", getAllClientsTerritories)
-    yield takeEvery("clients/saveClients", saveClients)
+    yield takeLatest("clients/saveClients", saveClients)
     yield takeEvery("clients/getClients", getClients)
 }
