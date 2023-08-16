@@ -46,7 +46,6 @@ const UniversalModal = ({
   width,
   functionforSaveBtn,
   JsxData = "",
-  height,
 }) => {
   const [miniModal, setMiniModal] = useState(false);
   const [loading, setLoading] = useState();
@@ -72,9 +71,8 @@ const UniversalModal = ({
     border: "none",
     boxShadow: 24,
     borderRadius: "10px",
-    width: "30%",
+    width: "27%",
     overflow: "auto",
-    height: height ?? "110px",
   };
   useEffect(() => {
     if (isOpen) {
@@ -378,7 +376,7 @@ const UniversalModal = ({
           <div
             style={{
               width: "100%",
-              padding: "10px 0px 0px 45px",
+              padding: "10px 0px 10px 45px",
               fontSize: "18px",
               color: "white",
               background: "rgba(64, 125, 178, 0.9)",
@@ -386,18 +384,11 @@ const UniversalModal = ({
               borderTopRightRadius: "10px",
             }}
           >
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <b>Are you sure you want to leave?</b>
-            </div>
+            <b>Are you sure you want to leave?</b>
+          </div>
             <div
               className={"d-flex justify-content-between"}
-              style={{ marginTop: "24px", paddingRight: "12%" }}
+              style={{ marginTop: "24px", padding: "1% 10% 3%" }}
             >
               <button
                 onClick={() => setMiniModal(false)}
@@ -407,14 +398,13 @@ const UniversalModal = ({
               </button>
               <button
                 onClick={() =>
-                  setMiniModal(false) & closeFunction() & functionforSaveBtn()
+                  setMiniModal(false) & closeFunction()
                 }
                 className={"btn btn-success"}
               >
                 Yes
               </button>
             </div>
-          </div>
         </Box>
       </Modal>
     </div>
