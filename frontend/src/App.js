@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import Clients from "./pages/Clients/clients";
 import ClientsOnTheMap from "./pages/Clients/clientsOnTheMap";
 import {domen} from './Config/apiCall'
+import {Home} from "@mui/icons-material";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -94,7 +95,8 @@ function App() {
     <div className="App">
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Login />}></Route>
+        <Route path="/" element={<Login k/>}></Route>
+        <Route path={"/login"} element={<Login />}/>
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/settings" element={<Settings />}>
             <Route
