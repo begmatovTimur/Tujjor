@@ -1,4 +1,4 @@
-import {takeEvery, select, put, call} from "redux-saga/effects"
+import {takeEvery, select, put, call, takeLatest} from "redux-saga/effects"
 import apiCall from "../../Config/apiCall";
 import {teritoryAction} from  "../reducers/teritoryReducer"
 import { ErrorNotify } from "../../tools/Alerts";
@@ -39,7 +39,7 @@ function* getCities(action){
     }
 }
 export function* territorySaga() {
-    yield takeEvery("teritory/saveTeritory", addTeritory)
+    yield takeLatest("teritory/saveTeritory", addTeritory)
     yield takeEvery("teritory/getTeritory", getTeritory)
     yield takeEvery("teritory/getCities", getCities)
 }
