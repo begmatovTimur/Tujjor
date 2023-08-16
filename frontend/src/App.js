@@ -13,6 +13,7 @@ import NotFound from "./pages/404/NotFound";
 import { ToastContainer } from "react-toastify";
 import Clients from "./pages/Clients/clients";
 import ClientsOnTheMap from "./pages/Clients/clientsOnTheMap";
+import {domen} from './Config/apiCall'
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ function App() {
     if (count === 1) {
       if (localStorage.getItem("access_token") !== null) {
         axios({
-          url: "http://localhost:8080/api/users/me",
+          url: domen+"/users/me",
           method: "GET",
           headers: {
             token: localStorage.getItem("access_token"),
@@ -67,7 +68,7 @@ function App() {
             if (err.response.status === 401) {
               axios({
                 url:
-                  "http://localhost:8080/api/auth/refresh?refreshToken=" +
+                  domen+"/auth/refresh?refreshToken=" +
                   localStorage.getItem("refresh_token"),
                 method: "POST",
               })

@@ -16,7 +16,7 @@ export default function apiCall(url, method, data, searchParam = "") {
     }).catch((err) => {
         if (err.response && err.response.status === 401) {
             return axiosInterceptor({
-                url: "http://localhost:8080/api/auth/refresh?refreshToken=" + localStorage.getItem("refresh_token"),
+                url: domen+"/auth/refresh?refreshToken=" + localStorage.getItem("refresh_token"),
                 method: "POST"
             }).then((res) => {
                 localStorage.setItem("access_token", res.data);

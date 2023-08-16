@@ -37,7 +37,7 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "        LEFT JOIN\n" +
             "    territory t ON c.territory_id = t.id\n" +
             "left join customer_category cc on cc.id = c.category_id\n" +
-            "WHERE\n" +
+            "WHERE c.active IS NOT NULL AND \n" +
             "(t.id IN :city OR :city IS NULL) and " +
             "(cc.id IN :category OR :category IS NULL) and " +
             "CASE WHEN :active = 'true' THEN c.active = true " +
@@ -50,7 +50,7 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "            LOWER(c.name) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
             "        OR LOWER(c.phone) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
             "        OR LOWER(c.company_name) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
-            "    )\n" +
+            "    ) \n" +
             "ORDER BY\n" +
             "    c.insertion_time DESC")
     Page<ClientProjection> getAllFilteredFields(List<UUID> city, List<Integer> category, String active, String tin, String search, Pageable pageable);

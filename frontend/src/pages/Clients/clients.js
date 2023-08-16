@@ -272,6 +272,7 @@ function Clients(props) {
                 closeFunction={() => props.closeModal()}
                 width={70}
                 functionforSaveBtn={() => props.saveClients()}
+                height={200}
                 JsxData={
                     <div style={{display: "flex", gap: "4%"}}>
                         <div className={'w-50'}>

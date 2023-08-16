@@ -1,8 +1,8 @@
 import axios from "axios";
 import {saveAs} from 'file-saver';
+import apiCall, { domen } from '../../Config/apiCall';
+import {tableActions} from "../reducers/tableReducer"; // Make sure to import tableActions from the correct path
 import {call, put,delay, select, takeEvery} from "redux-saga/effects";
-import apiCall from '../../Config/apiCall';
-import {tableActions} from "../reducers/tableReducer";
 
 function* watchGetFilteredData(action) {
     const currentState = yield select((state) => state.table);
@@ -108,7 +108,7 @@ function* downloadExcelFile(action) {
     if (obj.active === undefined) obj.active = "ALL";
     if (action.payload.excelWithoutSearch) {
         axios
-            .get("http://localhost:8080/api" + action.payload.path, {
+            .get(domen + action.payload.path, {
                 responseType: 'blob',
                 headers: {
                     token: localStorage.getItem("access_token")
@@ -122,7 +122,7 @@ function* downloadExcelFile(action) {
             });
     } else {
         axios
-            .get("http://localhost:8080/api" + action.payload.path, {
+            .get(domen + action.payload.path, {
                 responseType: 'blob',
                 headers: {
                     active: obj.active,

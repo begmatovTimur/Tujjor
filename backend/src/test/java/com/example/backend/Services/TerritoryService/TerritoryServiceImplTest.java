@@ -1,28 +1,26 @@
 package com.example.backend.Services.TerritoryService;
 
-import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Repository.TerritoryRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -58,7 +56,6 @@ class TerritoryServiceImplTest {
 
     @Test
     void testAddTerritory() {
-<<<<<<< HEAD
         TerritoryDTO mockTerritory = TerritoryDTO.builder()
                 .region("Bukhara")
                 .name("Kagan")
@@ -69,24 +66,11 @@ class TerritoryServiceImplTest {
                 .build();
         Territory territory = underTest.addTerritory(mockTerritory);
         System.out.println(territory);
-=======
-        // Prepare test data
-        TerritoryDTO mockTerritoryDTO = new TerritoryDTO();
-        mockTerritoryDTO.setRegion("Test Region");
-        mockTerritoryDTO.setTitle("Test Title");
-        mockTerritoryDTO.setCode("TEST001");
-        mockTerritoryDTO.setActive(true);
-        mockTerritoryDTO.setLongitude(10.12345);
-        mockTerritoryDTO.setLatitude(20.54321);
-        when(territoryRepository.save(any(Territory.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        Territory resultTerritory = territoryService.addTerritory(mockTerritoryDTO);
-        assertEquals("Test Region", resultTerritory.getRegion()); // Line 76: NullPointerException occurs here
->>>>>>> a465415d03b8004afc48154de9526a19f2a1f499
+
     }
 
     @Test
     void testUpdateTerritory() {
-<<<<<<< HEAD
 //        UUID id = UUID.randomUUID();
 //        TerritoryDTO territoryDTO = new TerritoryDTO();
 //        territoryDTO.setRegion("Sample Region");
@@ -193,75 +177,12 @@ class TerritoryServiceImplTest {
 
     @Test
     void getExcelFileTest() throws IOException {
-        // Mock the repository response
-        List<Territory> territories = Arrays.asList(
-                new Territory(UUID.randomUUID(), "Region1", "Territory1", "TERR-001", true, 10.123, 20.987),
-                new Territory(UUID.randomUUID(), "Region2", "Territory2", "TERR-002", false, 15.456, 25.789)
-                // Add more territories as needed...
-        );
-        when(territoryRepository.findAll()).thenReturn(territories);
 
-        // Call the getExcelFile method
-        ResponseEntity<Resource> response = underTest.getExcelFile(new SearchActiveDTO());
-
-        // Verify the response
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-
-        HttpHeaders headers = response.getHeaders();
-        assertEquals(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
-                headers.getContentType());
-        assertEquals("attachment; filename=CompanyInfo.xlsx", headers.getFirst(HttpHeaders.CONTENT_DISPOSITION));
-
-        ByteArrayResource resource = (ByteArrayResource) response.getBody();
-        assertNotNull(resource);
-
-        // Validate the content of the workbook
-        byte[] fileContent = resource.getByteArray();
-        try (XSSFWorkbook workbook = new XSSFWorkbook(new ByteArrayInputStream(fileContent))) {
-            // Verify the header row
-            assertNotNull(workbook);
-            assertEquals(1, workbook.getNumberOfSheets());
-            assertNotNull(workbook.getSheet("Company info"));
-
-            // TODO: Additional validation of the workbook content can be done if needed.
-        }
-    }
-    }
-
-
-=======
-        // Prepare test data
-        UUID mockTerritoryId = UUID.randomUUID();
-        TerritoryDTO mockTerritoryDTO = new TerritoryDTO();
-        mockTerritoryDTO.setRegion("Updated Region");
-        mockTerritoryDTO.setTitle("Updated Title");
-        mockTerritoryDTO.setCode("UPDATED001");
-        mockTerritoryDTO.setActive(false);
-        mockTerritoryDTO.setLongitude(50.12345);
-        mockTerritoryDTO.setLatitude(60.54321);
-
-        // Mock behavior of repository save method
-        when(territoryRepository.save(any(Territory.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // Save the territory first
-        Territory savedTerritory = territoryService.addTerritory(mockTerritoryDTO);
-        UUID savedTerritoryId = savedTerritory.getId();
 
-        // Perform the actual test
-        Territory resultTerritory = territoryService.updateTerritory(savedTerritoryId, mockTerritoryDTO);
 
-        // Assert the result
-        assertEquals(savedTerritoryId, resultTerritory.getId());
-        assertEquals("Updated Region", resultTerritory.getRegion());
-        assertEquals("Updated Title", resultTerritory.getTitle());
-        assertEquals("UPDATED001", resultTerritory.getCode());
-        assertEquals(false, resultTerritory.getActive());
-        assertEquals(50.12345, resultTerritory.getLongitude());
-        assertEquals(60.54321, resultTerritory.getLatitude());
-
-        // Verify that territoryRepository.save was called twice (once for setting id and once for updating)
-        verify(territoryRepository, times(2)).save(any(Territory.class));
     }
 
+
 }
->>>>>>> a465415d03b8004afc48154de9526a19f2a1f499
