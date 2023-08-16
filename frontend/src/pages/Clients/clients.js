@@ -8,14 +8,27 @@ import Table from "../universal/Table/Table";
 import Filter from "../universal/Filter/Filter";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import {customerCategoryActions} from "../../Redux/reducers/customerCategoryReducer";
+import PhoneInput from "react-phone-input-2";
+import LoadingBackdrop from "../universal/Loading/loading";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
+import {tableActions} from "../../Redux/reducers/tableReducer";
 
 function Clients(props) {
     const {clients} = props
+    const dispatch = useDispatch();
+
     useEffect(() => {
         props.getClients()
+        dispatch(tableActions.changeIsLoading(true))
+        setTimeout(() => {
+            dispatch(tableActions.changeIsLoading(false))
+        }, 400)
     }, [])
 
-    function handleMapClick(event){
+
+    function handleMapClick(event) {
         const coords = event.get("coords");
         const latitude = coords[0];
         const longitude = coords[1];
@@ -23,7 +36,6 @@ function Clients(props) {
         props.handleMapState({center: [latitude, longitude], zoom: 10});
     }
 
-    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(teritoryAction.getCities())
@@ -140,21 +152,22 @@ function Clients(props) {
         })
         return optionsCity
     }
+
     function generateOptionsOfCategory() {
         const optionsCategory = []
         props.customerCategory.categories.map((item, index) => {
             optionsCategory.push({
-                value: item.id,
-                label: item.name
+                label: item.name,
+                value: item.id
             })
         })
         return optionsCategory
     }
-
     return (
         <div style={{width: "100%", backgroundColor: "#dae2e3"}}>
+            <LoadingBackdrop></LoadingBackdrop>
             <div id={'clientsFatherDiv'}>
-                <div>
+                <div style={{height: "100%"}}>
                     <div style={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -168,7 +181,7 @@ function Clients(props) {
                             backgroundColor: "#4dce4d",
                             border: "none",
                             padding: "5px 15px",
-                            color:"white"
+                            color: "white"
                         }}>+ Add Client
                         </button>
                     </div>
@@ -189,7 +202,7 @@ function Clients(props) {
                                     options: generateOptionsOfCity(),
                                     defaultValue: {value: "", label: "All"},
                                     placeholder: "City",
-                                    selfEmployer: false
+                                    selfEmployer: false,
                                 },
                                 {
                                     name: "customerCategories",
@@ -245,7 +258,7 @@ function Clients(props) {
                             paginationApi={"/client/pagination?page={page}&limit={limit}"}
                             dataProps={clients.clients}
                             columnOrderMode={true}
-                            changeSizeModeOptions={[5,7,10,20]}
+                            changeSizeModeOptions={[5, 7, 10, 20]}
                             columnsProps={columns}
                             fileName={"clients"}
                             excelPath={"/client/excel"}
@@ -254,18 +267,20 @@ function Clients(props) {
                 </div>
             </div>
             <UniversalModal
-                modalTitle={clients.editeClient === ""? "Add Client" : "Edite Client"}
+                modalTitle={clients.editeClient === "" ? "Add Client" : "Edite Client"}
                 isOpen={clients.openModal}
                 closeFunction={() => props.closeModal()}
                 width={70}
                 functionforSaveBtn={() => props.saveClients()}
+                height={200}
                 JsxData={
                     <div style={{display: "flex", gap: "4%"}}>
                         <div className={'w-50'}>
                             <div className={'d-flex'}>
                                 <div style={{display: "flex", flexDirection: "column", gap: "20px", width: "48%"}}>
                                     <label><span className={'d-block'}>clients*</span>
-                                        <select defaultValue={""} onChange={(e) => props.changeTeritoryId(e.target.value)}
+                                        <select defaultValue={""}
+                                                onChange={(e) => props.changeTeritoryId(e.target.value)}
                                                 value={clients.teritoryId} className={'form-select'}>
                                             <option value="" disabled>Territory</option>
                                             {
@@ -285,9 +300,11 @@ function Clients(props) {
                                                name="" id=""/>
                                     </label>
                                     <label><span className={'d-block'}>Telephone*</span>
-                                        <input onChange={(e) => props.changeTelephone(e.target.value)}
-                                               value={clients.telephone} className={"form-control w-100"} type="text"
-                                               name="" id=""/>
+                                        <PhoneInput
+                                            inputStyle={{width: "100%"}}
+                                            value={clients.telephone}
+                                            onChange={(e) => props.changeTelephone(e)}
+                                        />
                                     </label>
                                     <label><span className={'d-block'}>TIN</span>
                                         <input onChange={(e) => props.changeTin(e.target.value)} value={clients.tin}
@@ -308,20 +325,40 @@ function Clients(props) {
                                     marginLeft: "4%"
                                 }}>
                                     <label><span className={'d-block'}>Category*</span>
-                                            <select defaultValue={""} onChange={(e) => props.changeCategoryId(e.target.value)}
-                                                    value={clients.categoryId} className={'form-select'}>
-                                                <option value="" disabled>Category</option>
-                                                {
-                                                    props.customerCategory.categories?.map((item) => {
-                                                        return <option value={item?.id}>{item?.name}</option>
-                                                    })
-                                                }
-                                            </select>
+                                        <select defaultValue={""}
+                                                onChange={(e) => props.changeCategoryId(e.target.value)}
+                                                value={clients.categoryId} className={'form-select'}>
+                                            <option value="" disabled>Category</option>
+                                            {
+                                                props.customerCategory.categories?.map((item) => {
+                                                    return <option value={item?.id}>{item?.name}</option>
+                                                })
+                                            }
+                                        </select>
                                     </label>
                                     <label><span className={'d-block'}>Company name</span>
                                         <input onChange={(e) => props.changeCompanyName(e.target.value)}
                                                value={clients.companyName} className={"form-control w-100"} type="text"
                                                name="" id=""/>
+                                    </label>
+                                    <label style={{marginTop: "87px"}}>
+                                        <span>
+                                            Longitude:
+                                        </span>
+                                        <input disabled={true}
+                                               type="text"
+                                               value={clients.longitute}
+                                        />
+                                    </label>
+                                    <label>
+                                        <span>
+                                            Latitude:
+                                        </span>
+                                        <input
+                                            disabled={true}
+                                            type="text"
+                                            value={clients.latitute}
+                                        />
                                     </label>
                                 </div>
                             </div>
@@ -340,7 +377,7 @@ function Clients(props) {
                                 }}>
                                 <Map
                                     width={430}
-                                    height={300}
+                                    height={400}
                                     defaultState={{
                                         center: clients.defaultCenter,
                                         zoom: 10,
@@ -354,29 +391,9 @@ function Clients(props) {
                                     />
                                 </Map>
                             </YMaps>
-                            <div className={"d-flex my-3 g-4"}>
-                                <label>
-                                    <p>
-                                        Long:
-                                    </p>
-                                    <input disabled={true}
-                                           type="text"
-                                           value={clients.longitute}
-                                    />
-                                </label>
-                                <label className={'mx-5'}>
-                                    <p>
-                                        Lat:
-                                    </p>
-                                    <input
-                                        disabled={true}
-                                        type="text"
-                                        value={clients.latitute}
-                                    />
-                                </label>
-                            </div>
+
                             <button
-                                className={"btn btn-danger"}
+                                className={"btn btn-danger my-2"}
                                 onClick={() => props.clearAllclients()}>
                                 Clear
                             </button>

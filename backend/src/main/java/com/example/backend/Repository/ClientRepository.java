@@ -16,6 +16,7 @@ import java.util.UUID;
 public interface ClientRepository extends JpaRepository<Client, UUID> {
 
     @Query(nativeQuery = true, value = "SELECT\n" +
+            " c.insertion_time, \n" +
             "    c.id," +
             " t.id as territoryId,  \n" +
             "  cc.id as categoryId,  " +
@@ -32,7 +33,7 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "    t.region AS city,\n" +
             "    cc.name as categoryName\n" +
             "FROM\n" +
-            "    client c\n" +
+            "    client c \n" +
             "        LEFT JOIN\n" +
             "    territory t ON c.territory_id = t.id\n" +
             "left join customer_category cc on cc.id = c.category_id\n" +
@@ -51,7 +52,10 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "        OR LOWER(c.company_name) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
             "    ) \n" +
             "ORDER BY\n" +
-            "    c.id")
+            "    c.insertion_time DESC")
     Page<ClientProjection> getAllFilteredFields(List<UUID> city, List<Integer> category, String active, String tin, String search, Pageable pageable);
+
+    @Query(nativeQuery = true,value = "select * from client order by insertion_time desc")
+    List<Client> findAllOrderedClient();
 
 }

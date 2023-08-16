@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
 import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
 import Filter from "../universal/Filter/Filter";
+import {tableActions} from "../../Redux/reducers/tableReducer";
+import LoadingBackdrop from "../universal/Loading/loading";
 
 const style = {
     position: "absolute",
@@ -23,8 +25,14 @@ const style = {
 function Teritory(props) {
     const {teritory} = props
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         props.getTeritory();
+        dispatch(tableActions.changeIsLoading(true))
+        setTimeout(() => {
+            dispatch(tableActions.changeIsLoading(false))
+        }, 500)
     }, [])
 
 
@@ -82,6 +90,7 @@ function Teritory(props) {
     ]);
     return (
         <div style={{width:"100%"}}>
+            <LoadingBackdrop></LoadingBackdrop>
             <div className="d-flex flex-column align-items-start">
                 <div className="title">Territory</div>
                 <div className="custom_add_btn" style={{cursor: "pointer"}} onClick={() => props.handleOpen()}>
@@ -114,7 +123,7 @@ function Teritory(props) {
             />
 
             <UniversalModal
-                modalTitle={"Add teritory"}
+                modalTitle={teritory.itemForTeritoryEdite ===""?"Add teritory":"Edite teritory"}
                 isOpen={teritory.openModal}
                 closeFunction={() => props.handleClose()}
                 width={60}

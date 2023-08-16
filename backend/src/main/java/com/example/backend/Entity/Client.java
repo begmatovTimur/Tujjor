@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -31,6 +32,7 @@ public class Client {
     private double latitude;
     private Boolean active;
     private LocalDate registrationDate;
+    private LocalDateTime insertionTime;
     @ManyToOne(fetch = FetchType.EAGER)
     private CustomerCategory category;
 }

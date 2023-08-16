@@ -69,7 +69,7 @@ function Login(props) {
         <div className="form">
           <PhoneInput
             inputStyle={{ width: "100%" }}
-            country={"us"}
+            country={"uz"}
             value={loginReducer.phone}
             onChange={(e) => props.changePhone(e)}
           />
