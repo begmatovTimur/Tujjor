@@ -8,6 +8,7 @@ const customerCategoryReducer = createSlice({
         code: "",
         active: false,
         region: "",
+        name:"",
         categories: [],
         error: "",
         description:"",
@@ -74,6 +75,8 @@ const customerCategoryReducer = createSlice({
             state.title = ""
             state.code = ""
             state.region = ""
+            state.name = "";
+            state.description = "";
             state.active = false
             state.mapState = {center: [[0], [1]], zoom: 10}
             state.itemForTeritoryEdite = ""

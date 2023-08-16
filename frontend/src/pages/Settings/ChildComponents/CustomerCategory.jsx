@@ -13,6 +13,7 @@ function CustomerCategory(props) {
     const dispatch = useDispatch()
 
     const {customerCategory} = props
+    console.log(customerCategory);
 
 
     function handleMapClick(event) {
