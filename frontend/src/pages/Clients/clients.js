@@ -390,6 +390,7 @@ function Clients(props) {
                             </YMaps>
 
                             <button
+                                type={"button"}
                                 className={"btn btn-danger my-2"}
                                 onClick={() => props.clearAllclients()}>
                                 Clear

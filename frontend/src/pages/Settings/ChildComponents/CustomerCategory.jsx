@@ -9,20 +9,7 @@ import {tableActions} from "../../../Redux/reducers/tableReducer";
 import LoadingBackdrop from "../../universal/Loading/loading";
 
 function CustomerCategory(props) {
-
-    const dispatch = useDispatch()
-
     const {customerCategory} = props
-
-
-    function handleMapClick(event) {
-        const coords = event.get("coords");
-        const latitude = coords[0];
-        const longitude = coords[1];
-        props.handleTemplate([longitude, latitude]);
-        props.handleMapState({center: [latitude, longitude], zoom: 10});
-    }
-
 
     const columns = [
         {
