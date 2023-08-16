@@ -5,6 +5,7 @@ import com.example.backend.DTO.ClientSearchDTO;
 import com.example.backend.Entity.Client;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Payload.Respons.ResClientsTerritories;
 import com.example.backend.Projection.ClientProjection;
 import com.example.backend.Projection.CompanyProjection;
 import com.example.backend.Projection.TerritoryClientProjection;
@@ -36,6 +37,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -61,14 +63,14 @@ public class ClientServiceImple implements ClientService {
     @Override
     public HttpEntity<?> getClient() {
         try {
-           return ResponseEntity.ok(clientRepository.findAll());
+            return ResponseEntity.ok(clientRepository.findAll());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("An error has occurred");
         }
     }
 
     @Override
-    public HttpEntity<?> getFilteredClients(Integer page, Integer limit,HttpServletRequest request) throws JsonProcessingException {
+    public HttpEntity<?> getFilteredClients(Integer page, Integer limit, HttpServletRequest request) throws JsonProcessingException {
         try {
             if (page == null || limit == null || page < 0 || limit < 1) {
                 return ResponseEntity.badRequest().body("Invalid page or limit value");
@@ -85,22 +87,13 @@ public class ClientServiceImple implements ClientService {
             for (JsonNode cityNode : categoryArray) {
                 customerCategoriesParam.add(cityNode.asInt());
             }
-            System.out.println(customerCategoriesParam);
-            Pageable pageable = PageRequest.of(page,limit);
-            Page<ClientProjection> clients;
-            if(jsonNode.get("active").asText().equals("")){
-                clients = clientRepository.filterWithoutActive(cities,customerCategoriesParam,jsonNode.get("quickSearch").asText(),pageable);
-            }else{
-                clients = clientRepository.getAllFilteredFields(cities,customerCategoriesParam,jsonNode.get("active").asBoolean(),jsonNode.get("quickSearch").asText(),pageable);
-            }
+            Pageable pageable = PageRequest.of(page, limit);
+            Page<ClientProjection> clients = clientRepository.getAllFilteredFields(cities, customerCategoriesParam, jsonNode.get("active").asText(), jsonNode.get("tin").asText(), jsonNode.get("quickSearch").asText(), pageable);
             if (clients.isEmpty()) {
                 return ResponseEntity.ok(new PageImpl<>(Collections.emptyList(), pageable, 0));
             }
-            for (ClientProjection client : clients.getContent()) {
-                System.out.println(client.getClientName()); // Print or log the client information
-            }
             return ResponseEntity.ok(clients);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("An error has occurred");
         }
@@ -125,7 +118,6 @@ public class ClientServiceImple implements ClientService {
             client.setName(clientDTO.getName());
             client.setAddress(clientDTO.getAddress());
             client.setTin(clientDTO.getTin());
-            client.setRegistrationDate(clientDTO.getRegistrationDate());
             client.setLatitude(clientDTO.getLatitude());
             client.setLongitude(clientDTO.getLongitude());
             client.setPhone(clientDTO.getPhone());
@@ -143,9 +135,9 @@ public class ClientServiceImple implements ClientService {
 
 
     private static ResponseEntity<String> ifExistInputs(ClientDTO clientDTO) {
-        if (clientDTO.getTerritoryId() == null || clientDTO.getAddress() == null || clientDTO.getPhone() == null || clientDTO.getTin() == null
-                || clientDTO.getTerritoryId().toString().isEmpty()
-                || clientDTO.getPhone().isEmpty() || clientDTO.getTin().isEmpty()) {
+        if (clientDTO.getTerritoryId() == null || clientDTO.getAddress() == null || clientDTO.getPhone() == null ||
+                clientDTO.getTerritoryId().toString().isEmpty()
+                || clientDTO.getPhone().isEmpty()) {
             return ResponseEntity.status(404).body("Fill the gaps!");
         }
         return null;
@@ -155,7 +147,7 @@ public class ClientServiceImple implements ClientService {
         UUID clientId = UUID.randomUUID();
         return Client.builder()
                 .id(clientId)
-                .registrationDate(clientDTO.getRegistrationDate())
+                .registrationDate(LocalDate.now())
                 .active(clientDTO.getActive())
                 .phone(clientDTO.getPhone())
                 .category(categoryRepository.findById(clientDTO.getCategoryId()).orElseThrow())
@@ -171,7 +163,6 @@ public class ClientServiceImple implements ClientService {
 
     @Override
     public HttpEntity<?> getTeritoriesForClients() {
-        System.out.println("kirdi");
         List<TerritoryClientProjection> allteritoryForCliens = territoryRepository.getAllteritoryForCliens();
         return ResponseEntity.ok(allteritoryForCliens);
     }
@@ -222,5 +213,18 @@ public class ClientServiceImple implements ClientService {
                 .status(HttpStatus.OK)
                 .headers(headers)
                 .body(resource);
+    }
+
+    @Override
+    public HttpEntity<?> getAllLocation() {
+        List<ResClientsTerritories> result = new ArrayList<>();
+        List<Client> clients = clientRepository.findAll();
+        for (Client client : clients) {
+            result.add(new ResClientsTerritories(
+                    client.getName(),
+                    List.of(client.getLatitude(), client.getLongitude())
+            ));
+        }
+        return ResponseEntity.ok(result);
     }
 }

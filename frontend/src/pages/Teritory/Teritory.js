@@ -133,21 +133,15 @@ function Teritory(props) {
                             width={400}
                             height={300}
                             defaultState={{
-                                center: [39.7756, 64.4253],
+                                center: teritory.defaultCenter,
                                 zoom: 10,
                             }}
                             onClick={handleMapClick}
                             modules={["templateLayoutFactory"]}
-                        >
-                            <ZoomControl options={{float: "right"}}/>
-                            {teritory.template &&
-                                teritory.longitute !== "" &&
-                                teritory.latitude !== "" && (
-                                    <Placemark
-                                        geometry={teritory.mapState.center}
-                                        modules={["geoObject.addon.balloon"]}
-                                    />
-                                )}
+                        ><ZoomControl options={{float: "right"}}/>
+                            <Placemark
+                                geometry={teritory.mapState.center}
+                                modules={["geoObject.addon.balloon"]}/>
                         </Map>
                     </YMaps>
                     <div className={"d-flex my-3 g-4"}>

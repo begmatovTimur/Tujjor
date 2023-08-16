@@ -122,6 +122,8 @@
     color: white;
     top: 325px;
     left: 88px;
+    overflow: hidden;
+    z-index: 10;
 }
 #clientDatasBox p{
     width: 100%;

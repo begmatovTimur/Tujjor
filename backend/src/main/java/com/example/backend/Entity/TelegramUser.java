@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
+import static jakarta.persistence.FetchType.EAGER;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -20,6 +22,6 @@ public class TelegramUser {
     private UUID id;
     private String step;
     private Long chatId;
-    @Transient
-    private Client client = new Client();
+    @ManyToOne(fetch = EAGER,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    private Client client;
 }

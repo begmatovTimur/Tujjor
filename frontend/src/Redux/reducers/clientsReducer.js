@@ -5,10 +5,11 @@ const clientsReducer = createSlice({
     initialState: {
         clients:[],
         openModal: false,
-        template: null,
-        mapState: {center: [0, 0], zoom: 0},
-        longitute: 0,
-        latitute: 0,
+        template: "",
+        mapState: { center: ["",""], zoom: 10 },
+        defaultCenter: [39.7756, 64.4253],
+        longitute: "",
+        latitute: "",
         regions:[],
         teritories: [],
         customCategories: [],
@@ -19,11 +20,12 @@ const clientsReducer = createSlice({
         telephone: "",
         tin: "",
         active: false,
-        categoryId: 0,
+        categoryId: "",
         companyName: "",
         referencePoint: "",
         error:"",
-        editeClient:""
+        editeClient:"",
+        allClientTerritoriesForMap:[]
     },
     reducers: {
         openModal: (state, action) => {
@@ -34,16 +36,17 @@ const clientsReducer = createSlice({
             state.teritoryId = "";
             state.name = "";
             state.address = "";
-            state.categoryId = 0;
+            state.categoryId = "";
             state.telephone = "";
             state.tin = "";
             state.active = false;
-            state.categoryId = 0;
+            state.categoryId = "";
             state.companyName = "";
             state.referencePoint = ""
             state.longitute = "";
             state.latitute = "";
             state.editeClient = "";
+            state.defaultCenter = [39.7756, 64.4253];
         },
         handleTemplate: (state, action) => {
             state.template = action.payload
@@ -55,9 +58,9 @@ const clientsReducer = createSlice({
             state.mapState = action.payload
         },
         clearAllclients: (state, action) => {
-            state.longitute = 0;
-            state.latitute = 0;
-            state.mapState = {center: [0, 1], zoom: 10}
+            state.longitute = "";
+            state.latitute = "";
+            state.mapState = { center: ["",""], zoom: 10 };
         },
         getClients: (state, action) => {
 
@@ -67,6 +70,15 @@ const clientsReducer = createSlice({
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload
+        },
+        getAllClientsTerritories: (state, action) => {
+
+        },
+        getAllClientsTerritoriesSuccess: (state, action) => {
+            state.allClientTerritoriesForMap = action.payload
+        },
+        getAllClientsTerritoriesError: (state, action) => {
+            state.errMessage = action.payload
         },
         yourActionFailureTeritories:(state, action)=>{
             state.errMessage = action.payload
@@ -114,12 +126,14 @@ const clientsReducer = createSlice({
             state.telephone = "";
             state.tin = "";
             state.active = false;
-            state.categoryId = 0;
+            state.categoryId = "";
             state.companyName = "";
             state.referencePoint = ""
             state.longitute = "";
             state.latitute = "";
             state.editeClient = "";
+            state.defaultCenter = [39.7756, 64.4253];
+            state.mapState = { center: ["",""], zoom: 10 };
         },
         saveClients:(state, action)=>{
             action.payload = {
@@ -149,6 +163,7 @@ const clientsReducer = createSlice({
             state.companyName = action.payload.companyName;
             state.longitute = action.payload.longitude;
             state.latitute = action.payload.latitude;
+            state.defaultCenter = [action.payload.latitude, action.payload.longitude]
             state.mapState = { center: [action.payload.latitude, action.payload.longitude], zoom: 10 }
         }
     }

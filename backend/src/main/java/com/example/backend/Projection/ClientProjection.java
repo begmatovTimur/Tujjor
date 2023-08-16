@@ -25,14 +25,12 @@ public interface ClientProjection {
      @Value("#{target.categoryId}")
      String getCategoryId();
 
-     String getTin();
-
-
      Double getLatitude();
 
      Double getLongitude();
      @Value("#{target.city}")
      String getRegion();
+
 
      String getAddress();
 
@@ -41,4 +39,6 @@ public interface ClientProjection {
 
      @Value("#{target.registrationDate}")
      LocalDate getRegistrationDate();
+     @Value("#{target.tin}")
+     String getTin();
 }

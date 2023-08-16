@@ -14,7 +14,7 @@ public class PaginationConfig {
     List<String> fields = new ArrayList<>();
     Integer previousMessageId;
     Integer page;
-    Long chatId;
+    String chatId;
     Boolean editing;
     String customTitle;
     Integer limit;
@@ -24,7 +24,7 @@ public class PaginationConfig {
             List<String> fields,
             Integer previousMessageId,
             Integer page,
-            Long chatId,
+            String chatId,
             Boolean editing,
             String customTitle,
             Integer limit
@@ -41,7 +41,7 @@ public class PaginationConfig {
         );
     }
 
-    public PaginationConfig(Page<?> dataList, List<String> fields, Integer previousMessageId, Integer page, Long chatId, Boolean editing, Integer limit) {
+    public PaginationConfig(Page<?> dataList, List<String> fields, Integer previousMessageId, Integer page, String chatId, Boolean editing, Integer limit) {
         this.dataList = dataList;
         this.fields = fields;
         this.previousMessageId = previousMessageId;
@@ -56,7 +56,7 @@ public class PaginationConfig {
             List<String> fields,
             Integer previousMessageId,
             Integer page,
-            Long chatId,
+            String chatId,
             Boolean editing,
             Integer limit
     ) {
@@ -72,7 +72,7 @@ public class PaginationConfig {
         );
     }
 
-    public PaginationConfig(Page<?> dataList, List<String> fields, Integer previousMessageId, Integer page, Long chatId, Boolean editing, String customTitle, Integer limit) {
+    public PaginationConfig(Page<?> dataList, List<String> fields, Integer previousMessageId, Integer page, String chatId, Boolean editing, String customTitle, Integer limit) {
         this.dataList = dataList;
         this.fields = fields;
         this.previousMessageId = previousMessageId;

@@ -1,6 +1,7 @@
 package com.example.backend.TelegramBotsApi.services.Pagination;
 
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -22,7 +23,7 @@ public class Pagination {
         Boolean editing = config.getEditing();
         Integer previousMessageId = config.getPreviousMessageId();
 
-        Long chatId = config.getChatId();
+        String chatId = config.getChatId().toString();
         Page<?> dataList = config.getDataList();
         Integer page = config.getPage();
 
@@ -33,8 +34,8 @@ public class Pagination {
         int PER_PAGE_SIZE = 1;
         page--;
 
-        sendMessage.setChatId(chatId);
-        editMessageText.setChatId(chatId);
+        sendMessage.setChatId(String.valueOf(chatId));
+        editMessageText.setChatId(String.valueOf(chatId));
         editMessageText.enableHtml(true);
         sendMessage.enableHtml(true);
 

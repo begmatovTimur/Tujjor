@@ -1,7 +1,7 @@
 import axios from "axios";
 import {saveAs} from 'file-saver';
 import {call, put, select, takeEvery} from "redux-saga/effects";
-import apiCall from '../../Config/apiCall';
+import apiCall, { domen } from '../../Config/apiCall';
 import {tableActions} from "../reducers/tableReducer"; // Make sure to import tableActions from the correct path
 
 function* watchGetFilteredData(action) {
@@ -12,7 +12,7 @@ function* watchGetFilteredData(action) {
         city: x.city,
         allWeeks: x.allWeeks.value,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
         quickSearch: x.quickSearch
     }
@@ -41,7 +41,7 @@ function* watchQuickSearchData(action) {
         quickSearch: x.quickSearch,
         city: x.city,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     let api = currentState.paginationApi1
@@ -72,7 +72,7 @@ function* changeSizeOfPage(action) {
         quickSearch: currentState.formInputs.quickSearch,
         city: "",
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     const res = yield call(
@@ -100,13 +100,13 @@ function* downloadExcelFile(action) {
         quickSearch: x.quickSearch,
         city: x.city,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     if (obj.active === undefined) obj.active = "ALL";
     if (action.payload.excelWithoutSearch) {
         axios
-            .get("http://localhost:8080/api" + action.payload.path, {
+            .get(domen + action.payload.path, {
                 responseType: 'blob',
                 headers: {
                     token: localStorage.getItem("access_token")
@@ -120,7 +120,7 @@ function* downloadExcelFile(action) {
             });
     } else {
         axios
-            .get("http://localhost:8080/api" + action.payload.path, {
+            .get(domen + action.payload.path, {
                 responseType: 'blob',
                 headers: {
                     active: obj.active,
@@ -148,7 +148,7 @@ function* watchGetActiveData(action) {
         quickSearch: x.quickSearch,
         city: x.city,
         weekDays: x.weekDays,
-        tin: x.tin.value,
+        tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
     let api = currentState.paginationApi1

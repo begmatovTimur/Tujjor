@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginModel } from "../../Redux/reducers/loginReducer";
 import { Button } from "reactstrap";
-import { ToastContainer } from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 import logo from "../../images/logo.png";
 import PhoneInput from "react-phone-input-2";
 import axios from "axios";
 import gif from "../../images/loading.gif";
 import "react-phone-input-2/lib/style.css";
 import { ErrorNotify, SuccessNotify, WarningNotify } from "../../tools/Alerts";
-
+import { domen } from "../../Config/apiCall";
 function Login(props) {
   const { loginReducer } = props;
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function Login(props) {
       props.setLoading(true);
       setTimeout(() => {
         axios({
-          url: "http://localhost:8080/api/auth/login",
+          url: domen+"/auth/login",
           method: "POST",
           data: {
             phone: loginReducer.phone,
@@ -35,9 +35,8 @@ function Login(props) {
           },
         })
           .then((res) => {
-            console.log("res");
             props.setLoading(false);
-            SuccessNotify("You logined successfully!");
+            SuccessNotify("You have successfully logged in");
             localStorage.setItem("access_token", res.data.access_token);
             if (res.data.refresh_token !== "") {
               localStorage.setItem("refresh_token", res.data.refresh_token);
@@ -54,6 +53,7 @@ function Login(props) {
           .catch((err) => {
             console.log(err);
             props.setLoading(false);
+              toast.dismiss();
             ErrorNotify("Password Or Username Is Wrong!");
             localStorage.clear();
           });
@@ -102,7 +102,7 @@ function Login(props) {
             )}
           </div>
           <div className={"d-flex justify-content-between"}>
-            <label className={"my-3"}>
+            <label className={"my-3 d-flex align-items-center gap-1"}>
               <input
                 value={loginReducer.remember}
                 onChange={(e) => props.rememberMe(e.target.checked)}

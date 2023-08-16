@@ -23,17 +23,15 @@ import java.util.UUID;
 public class ClientController {
 
     private final ClientService clientService;
-    private final ClientRepository repository;
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> saveClient(@RequestBody ClientDTO clientDTO){
-        System.out.println("Client keldi va ana: "+clientDTO);
         return clientService.saveClient(clientDTO);
     }
 
     @GetMapping
-//    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> getClient(){
         return clientService.getClient();
     }
@@ -41,14 +39,13 @@ public class ClientController {
     @PutMapping
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> updateClient(@RequestParam(defaultValue = "") UUID clientId, @RequestBody ClientDTO clientDTO){
-        System.out.println("client Yangilandi");
         return clientService.updateClient(clientId,clientDTO);
     }
 
     @GetMapping("/pagination")
-//    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> getFilteredClients(@RequestParam Integer page,@RequestParam Integer limit, HttpServletRequest request) throws JsonProcessingException {
-        return ResponseEntity.ok(repository.findAll(PageRequest.of(page,limit)));
+        return clientService.getFilteredClients(page,limit,request);
     }
     @GetMapping("/teritoriesForClients")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
@@ -57,7 +54,14 @@ public class ClientController {
     }
 
     @GetMapping("/excel")
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public ResponseEntity<Resource> excel() throws IOException {
         return clientService.getExcel();
     }
+    @GetMapping("/clientsLocation")
+    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    public HttpEntity<?> clientsLocation() {
+        return clientService.getAllLocation();
+    }
+
 }

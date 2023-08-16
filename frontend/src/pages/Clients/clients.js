@@ -75,32 +75,26 @@ function Clients(props) {
         },
         {
             id: 6,
-            title: "Longitude",
-            key: "longitude",
+            title: "Category",
+            key: "categoryName",
             type: "text",
             show: true,
         },
         {
             id: 7,
-            title: "Latitude",
-            key: "latitude",
-            type: "text",
-            show: true,
-        },
-        {
-            id: 8,
-            title: "Category",
-            key: "category.name",
-            type: "text",
-            show: true,
-        },
-        {
-            id: 9,
             title: "Activity",
             key: "active",
             type: "boolean",
             show: true,
-        },{
+        },
+        {
+            id: 8,
+            title: "Registration Date",
+            key: "registrationDate",
+            type: "boolean",
+            show: true,
+        },
+        {
             id: 9,
             title: "Update",
             key: "button",
@@ -111,6 +105,7 @@ function Clients(props) {
             }><i className="fa fa-edit"></i></button>
         }
     ];
+
     const [optionsActive] = useState([
         {value: "", label: "All"},
         {value: "true", label: "Active"},
@@ -124,9 +119,9 @@ function Clients(props) {
     ]);
 
     const [optionsTin] = useState([
-        {value: "1", label: "Tin"},
-        {value: "2", label: "With Tin"},
-        {value: "3", label: "Without Tin"},
+        {value: "", label: "Tin"},
+        {value: "true", label: "With Tin"},
+        {value: "false", label: "Without Tin"},
     ]);
 
     const [optionsLocation] = useState([
@@ -314,7 +309,7 @@ function Clients(props) {
                                 }}>
                                     <label><span className={'d-block'}>Category*</span>
                                             <select defaultValue={""} onChange={(e) => props.changeCategoryId(e.target.value)}
-                                                    value={props.customerCategory.categoryId} className={'form-select'}>
+                                                    value={clients.categoryId} className={'form-select'}>
                                                 <option value="" disabled>Category</option>
                                                 {
                                                     props.customerCategory.categories?.map((item) => {
@@ -347,21 +342,16 @@ function Clients(props) {
                                     width={430}
                                     height={300}
                                     defaultState={{
-                                        center: [39.7756, 64.4253],
+                                        center: clients.defaultCenter,
                                         zoom: 10,
                                     }}
                                     onClick={handleMapClick}
                                     modules={["templateLayoutFactory"]}
-                                >
-                                    <ZoomControl options={{float: "right"}}/>
-                                    {clients.template &&
-                                        clients.longitute !== "" &&
-                                        clients.latitude !== "" && (
-                                            <Placemark
-                                                geometry={clients.mapState.center}
-                                                modules={["geoObject.addon.balloon"]}
-                                            />
-                                        )}
+                                ><ZoomControl options={{float: "right"}}/>
+                                    <Placemark
+                                        geometry={clients.mapState.center}
+                                        modules={["geoObject.addon.balloon"]}
+                                    />
                                 </Map>
                             </YMaps>
                             <div className={"d-flex my-3 g-4"}>

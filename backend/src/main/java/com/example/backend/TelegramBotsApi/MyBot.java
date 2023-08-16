@@ -10,11 +10,16 @@ import com.example.backend.Repository.TelegramUserRepository;
 import com.example.backend.Repository.TerritoryRepository;
 import com.example.backend.TelegramBotsApi.contants.STEP;
 import com.example.backend.TelegramBotsApi.services.Pagination.PaginationConfig;
-import com.example.backend.TelegramBotsApi.services.TelegramBot.TelegramWebhookBot;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
+import jakarta.annotation.PostConstruct;
+import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -24,32 +29,52 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.example.backend.TelegramBotsApi.services.Pagination.Pagination.doPagination;
+@Component
 
-@Service
-@RequiredArgsConstructor
-public class MyBot implements TelegramWebhookBot {
+public class MyBot extends TelegramLongPollingBot {
     private final TelegramUserRepository repository;
     private final TerritoryRepository territoryRepository;
     private final CustomerCategoryRepository customerCategoryRepository;
     private final ClientRepository clientRepository;
     private Integer previousMessageId;
     private Integer previousPage = 0;
+    private String username = "@tujjor_original_bot";
+    private String TOKEN = "6306656986:AAH4qjSkX6bJDKYriR13XHqPo2ndCROXWns";
     private TelegramUser currentUser = null;
+    private static final Logger logger = LoggerFactory.getLogger(MyBot.class);
+
+    @Autowired
+    public MyBot(TelegramBotsApi api,TelegramUserRepository telegramUserRepository, TerritoryRepository territoryRepository,
+                         CustomerCategoryRepository customerCategoryRepository, ClientRepository clientRepository) throws TelegramApiException {
+        this.repository = telegramUserRepository;
+        this.territoryRepository = territoryRepository;
+        this.customerCategoryRepository = customerCategoryRepository;
+        this.clientRepository = clientRepository;
+        api.registerBot(this);
+    }
 
 
+    @PostConstruct
+    public void start() {
+        logger.info("username: {}, token: {}",username,TOKEN);
+    }
+
+    @SneakyThrows
     @Override
-    public void onUpdateReceived(Update update) throws InterruptedException {
+    public void onUpdateReceived(Update update)  {
 
         Message message = update.getMessage();
 
         this.currentUser = registerUser(update);
         Client newClient = currentUser.getClient();
-        Long chatId = currentUser.getChatId(); // Getting chatId Of Current User
+        String chatId = currentUser.getChatId().toString(); // Getting chatId Of Current User
         String step = currentUser.getStep();    //Getting STEP Of Current User
 
         if (update.hasMessage()) {
@@ -63,6 +88,7 @@ public class MyBot implements TelegramWebhookBot {
                     sendMessage.setChatId(chatId);
                     generateStartMenu(sendMessage, "Assalomu Alekum <b>" + message.getFrom().getFirstName() + "</b> Botimizga Xush kelibsiz \uD83D\uDC4B");
                     updateStep(STEP.START_MENU_WAITING);
+
                 } else if (step.equals(STEP.START_MENU_WAITING.name()) // Adding Client If
                         || step.equals(STEP.ADDING_FIO_WAITING.name()) || step.equals(STEP.ADDING_TERRITORY.name())
                         || step.equals(STEP.ADDING_ADDRESS.name()) || step.equals(STEP.ADDING_INN.name())
@@ -78,20 +104,20 @@ public class MyBot implements TelegramWebhookBot {
                         buttons.put("NO", "Yoq ❌");
 
                         sendMessage.setReplyMarkup(generateInlineKeyboardButtons(buttons, 2));
-                        execute.send(sendMessage);
+                       execute(sendMessage);
                     } else if (step.equals(STEP.ADDING_FIO_WAITING.name())) {
                         newClient.setName(text);
                         sendMessage.setChatId(chatId);
                         sendMessage.setText("\uD83D\uDCCD Mijoz addressini yozing:\n" +
                                 "<i>Namuna:Qayerdadir Qayer 47</i>");
-                        execute.send(sendMessage);
+                       execute(sendMessage);
                         updateStep(STEP.ADDING_ADDRESS);
                     } else if (step.equals(STEP.ADDING_ADDRESS.name())) {
                         newClient.setAddress(text);
                         sendMessage.setChatId(chatId);
                         sendMessage.setText("\uD83D\uDCDE Mijoz telefon raqamini kiriting:\n" +
                                 "<i>Namuna:+998997213466</i>");
-                        execute.send(sendMessage);
+                       execute(sendMessage);
                         updateStep(STEP.ADDING_PHONE_CONFIRMATION);
                     } else if (step.equals(STEP.ADDING_INN.name())) {
                         newClient.setTin(text);
@@ -106,14 +132,15 @@ public class MyBot implements TelegramWebhookBot {
                         Map<String, String> categoryMap = categories.stream()
                                 .collect(Collectors.toMap(category -> category.getId().toString(), CustomerCategory::getName));
                         sendMessage.setReplyMarkup(generateInlineKeyboardButtons(categoryMap,2));
-                        execute.send(sendMessage);
+                       execute(sendMessage);
                         updateStep(STEP.ADDING_CATEGORY);
-                    } else if (text.equals("\uD83D\uDCDD Mijoz ma’lumotlari")) {
-                        previousMessageId = doPagination(PaginationConfig.of(
-                                clientRepository.findAll(PageRequest.of(0,10)), List.of("name", "territory.name"), previousMessageId, 1, chatId, false, 1
-                        )).getResult().getMessageId();
-                        updateStep(STEP.PAGINATION_WAITING);
                     }
+//                    else if (text.equals("\uD83D\uDCDD Mijoz ma’lumotlari")) {
+//                        previousMessageId = doPagination(PaginationConfig.of(
+//                                clientRepository.findAll(PageRequest.of(0,10)), List.of("name", "territory.name"), previousMessageId, 1, chatId, false, 1
+//                        )).getResult().getMessageId();
+//                        updateStep(STEP.PAGINATION_WAITING);
+//                    }
                 }
                 ;
 
@@ -133,7 +160,7 @@ public class MyBot implements TelegramWebhookBot {
                     buttons.put("NO", "Yoq ❌");
 
                     sendMessage.setReplyMarkup(generateInlineKeyboardButtons(buttons, 2));
-                    execute.send(sendMessage);
+                   execute(sendMessage);
                 }
             }
 
@@ -157,10 +184,10 @@ public class MyBot implements TelegramWebhookBot {
                             .chatId(chatId)
                             .build();
                     sendMessage.enableHtml(true);
-                    execute.send(sendMessage);
+                   execute(sendMessage);
                     updateStep(STEP.ADDING_FIO_WAITING);
                 } else {
-                    execute.send(SendMessage.builder()
+                   execute(SendMessage.builder()
                             .text("Territory Topilmadi! ❌")
                             .chatId(chatId)
                             .build());
@@ -194,11 +221,11 @@ public class MyBot implements TelegramWebhookBot {
                                 .chatId(chatId)
                                 .build();
                         sendMessage.enableHtml(true);
-                        execute.send(sendMessage);
+                       execute(sendMessage);
                         updateStep(STEP.ADDING_TERRITORY);
 
                     } else {
-                        execute.send(SendMessage.builder()
+                       execute(SendMessage.builder()
                                 .text("Faoliyat Turi Topilmadi! ❌")
                                 .chatId(chatId)
                                 .build());
@@ -211,12 +238,12 @@ public class MyBot implements TelegramWebhookBot {
                     newClient.setLongitude(0);
                     requestLocationWithText("Iltimos Locationni Qayta Yuboring!", chatId);
                 } else {
-
+                    System.out.println(newClient);
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setChatId(chatId);
                     newClient.setActive(false);
                     newClient.setId(UUID.randomUUID());
-                    clientRepository.save(newClient);
+//                    clientRepository.save(newClient);
                     generateStartMenu(sendMessage, "✅ Mijoz muvaffaqiyatli ro'yxatga olindi!");
                     updateStep(STEP.START_MENU_WAITING);
                 }
@@ -226,22 +253,25 @@ public class MyBot implements TelegramWebhookBot {
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setText("Iltimos Telefon Raqamni Qayta Yuboring!");
                     sendMessage.setChatId(chatId);
-                    execute.send(sendMessage);
+                   execute(sendMessage);
                 } else {
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setChatId(chatId);
                     sendMessage.enableHtml(true);
                     sendMessage.setText("\uD83D\uDCC4 Mijoz INNsini kiriting:\n" +
                             "<i>Namuna:1234567</i>");
-                    execute.send(sendMessage);
+                   execute(sendMessage);
                     updateStep(STEP.ADDING_INN);
                 }
             } else if (step.equals(STEP.PAGINATION_WAITING.name())) {
-                if (data.equals("previous")) {
+                System.out.println(data);
+                if(data.equals("cancel")) {
+
+                }
+                else if (data.equals("previous")) {
                     doPagination(PaginationConfig.of(clientRepository.findAll(PageRequest.of(previousPage - 1, 10)), List.of("name", "territory.name"), previousMessageId, --previousPage, chatId, true, 1));
                 } else if (data.equals("next")) {
                     doPagination(PaginationConfig.of(clientRepository.findAll(PageRequest.of(previousPage + 1, 10)), List.of("name", "territory.name"), previousMessageId, ++previousPage, chatId, true, 1));
-                } else if (data.equals("cancel")) {
                 } else {
                     previousPage = Integer.parseInt(data);
                     doPagination(PaginationConfig.of(clientRepository.findAll(PageRequest.of(previousPage, 10)), List.of("name", "territory.name"), previousMessageId, previousPage, chatId, true, 1));
@@ -285,6 +315,7 @@ public class MyBot implements TelegramWebhookBot {
     }
 
 
+    @SneakyThrows
     private void generateStartMenu(SendMessage sendMessage, String text) {
         ReplyKeyboardMarkup markup = generateKeyboardButtons(
                 "➕Yangi mijoz qo’shish",
@@ -294,11 +325,12 @@ public class MyBot implements TelegramWebhookBot {
         sendMessage.setReplyMarkup(markup);
 
         sendMessage.setText(text);
-        execute.send(sendMessage);
+       execute(sendMessage);
     }
 
 
-    void requestLocationWithText(String text, Long chatId) {
+    @SneakyThrows
+    void requestLocationWithText(String text, String chatId) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText(text);
         sendMessage.setChatId(chatId);
@@ -317,12 +349,12 @@ public class MyBot implements TelegramWebhookBot {
         replyKeyboardMarkup.setKeyboard(List.of(row));
 
         sendMessage.setReplyMarkup(replyKeyboardMarkup);
-        execute.send(sendMessage);
+       execute(sendMessage);
     }
 
     private void updateStep(STEP updatingSTEP) {
         currentUser.setStep(updatingSTEP.name());
-        repository.save(currentUser);
+        TelegramUser save = repository.save(currentUser);
     }
 
 
@@ -335,11 +367,8 @@ public class MyBot implements TelegramWebhookBot {
         Long chatId;
 
         if (update.hasCallbackQuery()) {
-            System.out.println(callbackQuery.getMessage().getFrom().getFirstName());
-            System.out.println(callbackQuery.getMessage().getFrom().getIsBot());
             chatId = callbackQuery.getMessage().getChatId();
         } else {
-            System.out.println(message.getFrom().getFirstName());
             chatId = message.getChatId();
         }
 
@@ -348,6 +377,7 @@ public class MyBot implements TelegramWebhookBot {
                 .id(null)
                 .step(STEP.START.name())
                 .chatId(chatId)
+                        .client(new Client())
                 .build()));
     }
 
@@ -405,4 +435,13 @@ public class MyBot implements TelegramWebhookBot {
     }
 
 
+    @Override
+    public String getBotUsername() {
+        return username;
+    }
+
+    @Override
+    public String getBotToken() {
+        return TOKEN;
+    }
 }
