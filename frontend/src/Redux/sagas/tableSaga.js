@@ -16,6 +16,7 @@ function* watchGetFilteredData(action) {
         customerCategories: x.customerCategories,
         quickSearch: x.quickSearch
     }
+
     yield put(tableActions.changeIsLoading(true));
     yield delay(400);
     yield put(tableActions.changeIsLoading(false));

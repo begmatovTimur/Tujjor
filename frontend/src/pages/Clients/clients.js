@@ -21,10 +21,6 @@ function Clients(props) {
 
     useEffect(() => {
         props.getClients()
-        dispatch(tableActions.changeIsLoading(true))
-        setTimeout(() => {
-            dispatch(tableActions.changeIsLoading(false))
-        }, 400)
     }, [])
 
 
