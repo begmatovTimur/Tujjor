@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface CompanyRepository extends JpaRepository<Company,Integer> {
     Company findByCompanyName(String name);
-    @Query(value = "SELECT id, company_name, support_phone, email, region,address  FROM company", nativeQuery = true)
+    @Query(value = "SELECT id, company_name, support_phone, email, region,address  FROM company order by id desc", nativeQuery = true)
     List<CompanyProjection> findAllExcludingSupervisor();
 }

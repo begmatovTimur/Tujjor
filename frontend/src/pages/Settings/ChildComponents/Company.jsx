@@ -1,16 +1,25 @@
 import React, {useEffect, useState} from "react";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import Table from '../../universal/Table/Table'
 import UniversalModal from "../../universal/Modal/UniverModal";
 import {companyProfileActions} from "../../../Redux/reducers/companyProfile";
 import "./CustomerCategory.css";
 import Filter from "../../universal/Filter/Filter";
+import {tableActions} from "../../../Redux/reducers/tableReducer";
+import LoadingBackdrop from "../../universal/Loading/loading";
 
 function Company(props) {
+
+    const dispatch = useDispatch()
+
 
     const {companyProfile} = props
     useEffect(() => {
         props.getCompanies();
+        dispatch(tableActions.changeIsLoading(true))
+        setTimeout(() => {
+            dispatch(tableActions.changeIsLoading(false))
+        }, 400)
     }, [])
 
 
@@ -72,7 +81,7 @@ function Company(props) {
 
     return (
         <div style={{width: "100%"}}>
-
+            <LoadingBackdrop></LoadingBackdrop>
             <Table
                 excelWithoutSearch={true}
 

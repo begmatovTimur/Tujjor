@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -24,4 +25,5 @@ public class Territory {
     private Boolean active;
     private double longitude;
     private double latitude;
+    private LocalDateTime insertionTime;
 }

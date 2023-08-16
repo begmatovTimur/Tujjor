@@ -38,6 +38,7 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -158,6 +159,7 @@ public class ClientServiceImple implements ClientService {
                 .name(clientDTO.getName())
                 .longitude(clientDTO.getLongitude())
                 .latitude(clientDTO.getLatitude())
+                .insertionTime(LocalDateTime.now())
                 .build();
     }
 
@@ -171,7 +173,7 @@ public class ClientServiceImple implements ClientService {
     @SneakyThrows
     public ResponseEntity<Resource> getExcel() {
 //        Pageable pageable = PageRequest.of(dto.getPage(),dto.getLimit());
-        List<Client> all = clientRepository.findAll();
+        List<Client> all = clientRepository.findAllOrderedClient();
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Company info");
         Row row = sheet.createRow(0);

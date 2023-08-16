@@ -26,32 +26,32 @@ import java.util.UUID;
 public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
 
 
-    @Query(value = "select id,region,name,code,longitude,latitude,active,code from territory t where t.active = :status and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')  || ' ' || COALESCE(t.code, '')) like lower(concat('%',:search,'%')) order by id",nativeQuery = true)
+    @Query(value = "select id,region,name,code,longitude,latitude,active,code,insertion_time from territory t where t.active = :status and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')  || ' ' || COALESCE(t.code, '')) like lower(concat('%',:search,'%')) order by t.insertion_time desc",nativeQuery = true)
     Page<TerritoryProjection> findTerritoryByActiveAndRegionName(String search, Boolean status, Pageable pageable);
 
 
-    @Query(value = "select id,region,name,code,longitude,latitude,active,code from territory t where lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')  || ' ' || COALESCE(t.code, '')) like lower(concat('%',:search,'%')) order by id", nativeQuery = true)
+    @Query(value = "select id,region,name,code,longitude,latitude,active,code,insertion_time from territory t where lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')  || ' ' || COALESCE(t.code, '')) like lower(concat('%',:search,'%')) order by t.insertion_time desc", nativeQuery = true)
     Page<TerritoryProjection> findTerritoryByRegionAndName(String search, Pageable pageable);
     @Query(value = """
     SELECT * FROM territory t
     WHERE t.active = :active
       AND (LOWER(t.region) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
         OR LOWER(t.code) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
-        OR LOWER(t.name) LIKE LOWER(CONCAT('%', :quickSearch, '%')))
+        OR LOWER(t.name) LIKE LOWER(CONCAT('%', :quickSearch, '%'))) order by t.insertion_time desc
 """, nativeQuery = true)
     List<TerritoryProjection> findByQuickSearch(Boolean active, String quickSearch);
     @Query(value = """
     SELECT * FROM territory t
       where (LOWER(t.region) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
         OR LOWER(t.code) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
-        OR LOWER(t.name) LIKE LOWER(CONCAT('%', :quickSearch, '%')))
+        OR LOWER(t.name) LIKE LOWER(CONCAT('%', :quickSearch, '%'))) order by t.insertion_time desc
 """, nativeQuery = true)
     List<TerritoryProjection> findByQuickSearchWithoutActive(String quickSearch);
 
-    @Query(nativeQuery = true,value = "select id,region from territory")
+    @Query(nativeQuery = true,value = "select id,region,insertion_time from territory order by insertion_time desc")
     List<TerritoryRegionProjection> findAllRegion();
     @Query(nativeQuery = true, value = """
-            SELECT t.id, t.name, t.code, t.region, t.active FROM territory t LEFT JOIN client c ON t.id = c.territory_id WHERE c.id IS NULL
+            SELECT t.id, t.name, t.code, t.region, t.active FROM territory t LEFT JOIN client c ON t.id = c.territory_id WHERE c.id IS NULL order by t.insertion_time desc
             """)
     List<TerritoryClientProjection> getAllteritoryForCliens();
 }

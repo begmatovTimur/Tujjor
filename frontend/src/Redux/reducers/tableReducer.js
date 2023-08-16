@@ -25,11 +25,19 @@ const tableReducer = createSlice({
             quickSearch: "",
             offset:""
         },
+        selectedForms:{
+            customerCategories:[],
+            city:[],
+        },
         totalPages: "",
+        isLoading:false
     },
     reducers: {
         setLayer: (state, action) => {
             state.layer = action.payload;
+        },
+        changeIsLoading:(state, action)=>{
+            state.isLoading = action.payload
         },
         changeCurrentPage: (state, action) => {
             state.currentPage = action.payload;
@@ -120,6 +128,9 @@ const tableReducer = createSlice({
         getQuickSearchData: (state, action) => {
         },
         getActiveData: (state, action) => {
+        },
+        changeSelectedForms:(state, action)=>{
+            state.selectedForms = action.payload
         },
         changeInputForms: (state, action) => {
             state.formInputs = action.payload;

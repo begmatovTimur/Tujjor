@@ -1,15 +1,23 @@
 import React, {useEffect, useState} from "react";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import Table from '../../universal/Table/Table'
 import UniversalModal from "../../universal/Modal/UniverModal";
 import {customerCategoryActions} from "../../../Redux/reducers/customerCategoryReducer";
 import "./CustomerCategory.css";
 import Filter from "../../universal/Filter/Filter";
+import {tableActions} from "../../../Redux/reducers/tableReducer";
+import LoadingBackdrop from "../../universal/Loading/loading";
 
 function CustomerCategory(props) {
 
+    const dispatch = useDispatch()
+
     const {customerCategory} = props
     useEffect(() => {
+        dispatch(tableActions.changeIsLoading(true))
+        setTimeout(() => {
+            dispatch(tableActions.changeIsLoading(false))
+        }, 400)
     }, [])
 
 
@@ -70,6 +78,7 @@ function CustomerCategory(props) {
 
     return (
         <div style={{width: "100%"}}>
+            <LoadingBackdrop></LoadingBackdrop>
             <div className="d-flex flex-column align-items-start">
                 <div className="title">Customer Category</div>
                 <div className="custom_add_btn" style={{cursor: "pointer"}} onClick={() => props.handleOpen()}>
