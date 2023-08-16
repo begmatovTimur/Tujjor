@@ -16,9 +16,9 @@ function* watchGetFilteredData(action) {
         customerCategories: x.customerCategories,
         quickSearch: x.quickSearch
     }
-    yield put(tableActions.changeIsLoading(true));
+    yield put(tableActions.changeLoadingActive(true));
     yield delay(400);
-    yield put(tableActions.changeIsLoading(false));
+    yield put(tableActions.changeLoadingActive(false));
     let api = currentState.paginationApi1
     api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
     const res = yield apiCall(
@@ -153,9 +153,9 @@ function* watchGetActiveData(action) {
         tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
     }
-    yield put(tableActions.changeIsLoading(true));
-    yield delay(300);
-    yield put(tableActions.changeIsLoading(false));
+    yield put(tableActions.changeLoadingActive(true));
+    yield delay(400);
+    yield put(tableActions.changeLoadingActive(false));
     let api = currentState.paginationApi1
     api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
     const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));

@@ -13,12 +13,6 @@ function CustomerCategory(props) {
     const dispatch = useDispatch()
 
     const {customerCategory} = props
-    useEffect(() => {
-        dispatch(tableActions.changeIsLoading(true))
-        setTimeout(() => {
-            dispatch(tableActions.changeIsLoading(false))
-        }, 400)
-    }, [])
 
 
     function handleMapClick(event) {
@@ -78,7 +72,6 @@ function CustomerCategory(props) {
 
     return (
         <div style={{width: "100%"}}>
-            <LoadingBackdrop></LoadingBackdrop>
             <div className="d-flex flex-column align-items-start">
                 <div className="title">Customer Category</div>
                 <div className="custom_add_btn" style={{cursor: "pointer"}} onClick={() => props.handleOpen()}>

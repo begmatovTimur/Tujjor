@@ -1,7 +1,6 @@
 import "./App.css";
 import Login from "./pages/Login/Login";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import Home from "./pages/Home/Home";
 import { useEffect } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
@@ -95,8 +94,7 @@ function App() {
     <div className="App">
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/" element={<Login />}></Route>
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/settings" element={<Settings />}>
             <Route
