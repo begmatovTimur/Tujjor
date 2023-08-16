@@ -8,7 +8,6 @@ import customerCategory, {
 } from "../reducers/customerCategoryReducer";
 function* addCategory(action) {
   const currentState = yield select((state) => state.customerCategory);
-  yield put(customerCategoryActions.changeModal(false));
   if (
     action.payload.name === "" ||
     action.payload.region === "" ||
@@ -17,6 +16,7 @@ function* addCategory(action) {
   ) {
     ErrorNotify("Please fill all fields!");
   } else {
+    yield put(customerCategoryActions.changeModal(false));
     if (currentState.itemForTeritoryEdite !== "") {
       const res = yield apiCall(
         `/customer-category/${currentState.itemForTeritoryEdite.id}`,
@@ -29,8 +29,8 @@ function* addCategory(action) {
       SuccessNotify("Category added Successfully!");
       yield put(customerCategoryActions.resetAllCategoryData());
     }
-  }
   yield getCategories();
+  }
 }
 function* getCategories(action) {
   try {
