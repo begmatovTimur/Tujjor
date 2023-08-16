@@ -164,7 +164,7 @@ function Clients(props) {
         return optionsCategory
     }
     return (
-        <div style={{width: "100%", height: "90vh", backgroundColor: "#dae2e3"}}>
+        <div style={{width: "100%", backgroundColor: "#dae2e3"}}>
             <LoadingBackdrop></LoadingBackdrop>
             <div id={'clientsFatherDiv'}>
                 <div style={{height: "100%"}}>
