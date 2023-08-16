@@ -27,7 +27,6 @@ const tableReducer = createSlice({
       offset: "",
     },
     totalPages: "",
-    isLoading:false,
     selectedForms:{
       customerCategories:[],
       city:[],
@@ -124,9 +123,6 @@ const tableReducer = createSlice({
       state.columnOrderModalVisibility = false;
       state.columns = state.modalColumns;
     },
-    changeIsLoading:(state, action)=>{
-      state.isLoading = action.payload
-  },
   changeSelectedForms:(state, action)=>{
     state.selectedForms = action.payload
 },
@@ -145,7 +141,10 @@ const tableReducer = createSlice({
     },
     getQuickSearchData: (state, action) => {},
     getActiveData: (state, action) => {},
-    changeInputForms: (state, action) => {
+    changeLoadingActive: (state, action)=>{
+      state.isLoading = action.payload
+  },
+  changeInputForms: (state, action) => {
       state.formInputs = action.payload;
     },
     getFilteredData: (state, action) => {},

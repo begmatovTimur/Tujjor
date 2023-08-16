@@ -20,6 +20,8 @@ const clientsReducer = createSlice({
         telephone: "",
         tin: "",
         active: false,
+        isLoading:false,
+        categoriesId: 0,
         categoryId: "",
         companyName: "",
         referencePoint: "",
@@ -166,6 +168,9 @@ const clientsReducer = createSlice({
             state.latitute = action.payload.latitude;
             state.defaultCenter = [action.payload.latitude, action.payload.longitude]
             state.mapState = { center: [action.payload.latitude, action.payload.longitude], zoom: 10 }
+        },
+        changeLoadingActive: (state, action)=> {
+            state.isLoading = action.payload
         }
     }
 })

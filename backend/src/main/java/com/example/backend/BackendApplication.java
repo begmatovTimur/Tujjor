@@ -18,12 +18,9 @@ import org.telegram.telegrambots.meta.generics.BotSession;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {
-        "com.example.backend.TelegramBotsApi",
-        "com.example.backend"
-})
+
 public class BackendApplication {
-    public static void main(String[] args) throws TelegramApiException {
+    public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
     }
     @Bean

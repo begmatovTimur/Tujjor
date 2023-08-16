@@ -9,18 +9,30 @@ function ClientsOnTheMap(props) {
 
     const dispatch = useDispatch()
     const {clients} = props
-    useEffect(()=>{
-        props.getAllClientsTerritories()
-        dispatch(tableActions.changeIsLoading(true))
+    useEffect(() => {
+        props.changeLoadingActive(true)
         setTimeout(() => {
-            dispatch(tableActions.changeIsLoading(false))
+            props.changeLoadingActive(false)
         }, 1000)
+        props.getAllClientsTerritories()
     },[])
     return (
         <div style={{width:"100%", backgroundColor: "#dae2e3", padding:"20px 20px"}}>
-            <LoadingBackdrop></LoadingBackdrop>
-            <div style={{overflow:"hidden",width:"100%", height:"100%", backgroundColor:"white", padding:"10px 20px", borderRadius:"10px"}}>
-                <p style={{fontSize: "30px", textAlign:"start"}}>Clients On The Map</p><hr/>
+            <div style={{alignItems:"center",display:clients.isLoading?"flex":"block",justifyContent:"center",overflow:"hidden",width:"100%", height:"100%", backgroundColor:"white", padding:"10px 20px", borderRadius:"10px"}}>
+                {
+                    clients.isLoading ?
+                    <div className="bg-white d-flex justify-content-center align-items-center gap-2 p-2"
+                         style={{height: "50vh"}}>
+                        <div>
+                            <div id="loading-bar-spinner" className="spinner">
+                                <div className="spinner-icon"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    :
+                    <>
+                    <p style={{fontSize: "30px", textAlign:"start"}}>Clients On The Map</p><hr/>
                 <YMaps
                     query={{
                         apikey: "e24090ad-351e-4321-8071-40c04c55f144\n",
@@ -47,6 +59,9 @@ function ClientsOnTheMap(props) {
                         }
                     </Map>
                 </YMaps>
+                    </>
+                }
+                
             </div>
         </div>
     );

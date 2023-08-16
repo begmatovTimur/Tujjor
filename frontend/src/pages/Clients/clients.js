@@ -21,11 +21,9 @@ function Clients(props) {
 
     useEffect(() => {
         props.getClients()
-        dispatch(tableActions.changeIsLoading(true))
-        setTimeout(() => {
-            dispatch(tableActions.changeIsLoading(false))
-        }, 400)
     }, [])
+
+
 
 
     function handleMapClick(event) {
@@ -165,7 +163,6 @@ function Clients(props) {
     }
     return (
         <div style={{width: "100%", backgroundColor: "#dae2e3"}}>
-            <LoadingBackdrop></LoadingBackdrop>
             <div id={'clientsFatherDiv'}>
                 <div style={{height: "100%"}}>
                     <div style={{

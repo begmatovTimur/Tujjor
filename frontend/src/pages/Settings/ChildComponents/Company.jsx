@@ -16,10 +16,6 @@ function Company(props) {
     const {companyProfile} = props
     useEffect(() => {
         props.getCompanies();
-        dispatch(tableActions.changeIsLoading(true))
-        setTimeout(() => {
-            dispatch(tableActions.changeIsLoading(false))
-        }, 400)
     }, [])
 
 
@@ -81,7 +77,6 @@ function Company(props) {
 
     return (
         <div style={{width: "100%"}}>
-            <LoadingBackdrop></LoadingBackdrop>
             <Table
                 excelWithoutSearch={true}
 

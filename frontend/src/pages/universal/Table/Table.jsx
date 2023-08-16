@@ -48,9 +48,27 @@ const Table = (props) => {
     });
   };
 
+  useEffect(()=>{
+    props.changeLoadingActive(true)
+    setTimeout(()=>{
+      props.changeLoadingActive(false)
+    },1000)
+  },[])
   return (
     <div className="universal_table">
-      <div className="bg-white d-flex flex-column gap-2 p-2">
+      {
+         props.isLoading?
+         <div className="bg-white d-flex justify-content-center align-items-center gap-2 p-2" style={{height:"50vh"}}>
+           <div>
+             <div id="loading-bar-spinner" className="spinner">
+               <div className="spinner-icon"></div>
+             </div>
+           </div>
+
+         </div>
+         :
+         <>
+          <div className="bg-white d-flex flex-column gap-2 p-2">
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-end ">
@@ -221,7 +239,11 @@ const Table = (props) => {
           ""
         )}
       </div>
+         </>
+      }
+     
     </div>
+
   );
 };
 
