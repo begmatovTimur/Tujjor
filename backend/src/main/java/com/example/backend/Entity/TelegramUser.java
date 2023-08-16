@@ -22,6 +22,12 @@ public class TelegramUser {
     private UUID id;
     private String step;
     private Long chatId;
-    @ManyToOne(fetch = EAGER,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
-    private Client client;
+    private String phone;
+    private String name;
+    private String address;
+    private Integer category;
+    private UUID territory;
+    private String INN;
+    private double longitude;
+    private double latitude;
 }

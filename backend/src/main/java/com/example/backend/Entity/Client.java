@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -31,7 +33,8 @@ public class Client {
     private double longitude;
     private double latitude;
     private Boolean active;
-    private LocalDate registrationDate;
+    @CreationTimestamp
+    private Timestamp registrationDate;
     private LocalDateTime insertionTime;
     @ManyToOne(fetch = FetchType.EAGER)
     private CustomerCategory category;
