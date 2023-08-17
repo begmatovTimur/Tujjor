@@ -24,7 +24,7 @@ const Table = (props) => {
     try {
       props.claimData({
         columns: localStorage.getItem(props.localStoragePath)
-          ? JSON.parse(localStorage.getItem(props.localStoragePath)).map(
+          ? JSON.parse(localStorage.getItem(props.localStoragePath)).length?JSON.parse(localStorage.getItem(props.localStoragePath)).map(
               (item) => {
                 if (props.columnsProps[item.id] === undefined) {
                   localStorage.removeItem(props.localStoragePath);
@@ -32,7 +32,7 @@ const Table = (props) => {
                 }
                 return { ...props.columnsProps[item.id], show: item.show };
               }
-            )
+            ):props.columnsProps
           : props.columnsProps,
         data: props.dataProps,
         localPath: props.localStoragePath,
@@ -80,6 +80,9 @@ const Table = (props) => {
     }, 1000);
   }, []);
 
+  console.log(props.copyOfColumns);
+  console.log(props.columns);
+
   // console.log(props.data.length?(JSON.parse(localStorage.getItem(props.localStoragePath))).map(item=>{
   //   console.log(props.data[item].name);
   // }):[]);
@@ -125,7 +128,7 @@ const Table = (props) => {
                     customTitle="Table Setup"
                     multiSelect={true}
                     dropdownId="2"
-                    body={props.columns.map((item) => item.title)}
+                    body={props.columns.length!==0?props.columns.map(item=>item.title):props.copyOfColumns.map(item=>item.title)}
                     onItemClick={(item) => {
                       props.filterVisibility(item);
                     }}
