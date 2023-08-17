@@ -14,6 +14,8 @@ import Clients from "./pages/Clients/clients";
 import ClientsOnTheMap from "./pages/Clients/clientsOnTheMap";
 import {domen} from './Config/apiCall'
 import {Home} from "@mui/icons-material";
+import {tableActions} from "./Redux/reducers/tableReducer";
+import {useDispatch} from "react-redux";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -90,6 +92,15 @@ function App() {
   useEffect(() => {
     hasPermissions();
   }, []);
+
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    if(location.pathname){
+        dispatch(tableActions.resetFormInputs())
+    }
+  }, [location.pathname]);
 
   return (
     <div className="App">
