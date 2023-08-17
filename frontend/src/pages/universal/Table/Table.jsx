@@ -26,11 +26,11 @@ const Table = (props) => {
         columns: localStorage.getItem(props.localStoragePath)
           ? JSON.parse(localStorage.getItem(props.localStoragePath)).map(
               (item) => {
-                if (props.columnsProps[item] === undefined) {
+                if (props.columnsProps[item.id] === undefined) {
                   localStorage.removeItem(props.localStoragePath);
                   return;
                 }
-                return props.columnsProps[item];
+                return { ...props.columnsProps[item.id], show: item.show };
               }
             )
           : props.columnsProps,
@@ -38,6 +38,11 @@ const Table = (props) => {
         localPath: props.localStoragePath,
       });
     } catch (e) {
+       props.claimData({
+        columns: props.columnsProps,
+        data: props.dataProps,
+        localPath: props.localStoragePath,
+      });
       localStorage.removeItem(props.localStoragePath);
     }
     if (props.pagination === true && !props.paginationApi)
@@ -50,8 +55,6 @@ const Table = (props) => {
       });
     }
   }, [props.dataProps]);
-
-  console.log(props.columns);
 
   const getValueByKeys = (obj, keys) => {
     const keysArray = keys.split("+").map((key) => key.trim());
@@ -81,7 +84,6 @@ const Table = (props) => {
   //   console.log(props.data[item].name);
   // }):[]);
   // console.log(props.data.lenght?JSON.parse(localStorage.getItem(props.localStoragePath)).map(item=>props.data[item]):"");
-  console.log(localStorage.getItem(props.localStoragePath));  
   return (
     <div className="universal_table">
       {props.isLoading ? (
@@ -123,7 +125,7 @@ const Table = (props) => {
                     customTitle="Table Setup"
                     multiSelect={true}
                     dropdownId="2"
-                    body={props.columnsProps.map((item) => item.title)}
+                    body={props.columns.map((item) => item.title)}
                     onItemClick={(item) => {
                       props.filterVisibility(item);
                     }}
@@ -158,6 +160,7 @@ const Table = (props) => {
             </div>
             <UniversalModal
               modalTitle={"Columns order"}
+              height="300px"
               isOpen={props.columnOrderModalVisibility}
               closeFunction={() =>
                 props.setColumnModalVisibility(false) &
@@ -174,33 +177,37 @@ const Table = (props) => {
                           {...provided.droppableProps}
                           ref={provided.innerRef}
                         >
-                          {props.modalColumns.map((item, index) => (
-                            <Draggable
-                              key={item.id.toString()}
-                              draggableId={item.id.toString()}
-                              index={index}
-                            >
-                              {(provided, snapshot) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  className={
-                                    "w-100 d-flex bg-secondary text-white p-2" +
-                                    (item.show ? "" : " hidden")
-                                  }
-                                  style={{
-                                    ...provided.draggableProps.style,
-                                    left: 0,
-                                    top: 0,
-                                    position: "relative",
-                                  }}
-                                >
-                                  {item.title}
-                                </div>
-                              )}
-                            </Draggable>
-                          ))}
+                          {props.modalColumns.map((item, index) =>
+                            item.show ? (
+                              <Draggable
+                                key={item.id.toString()}
+                                draggableId={item.id.toString()}
+                                index={index}
+                              >
+                                {(provided, snapshot) => (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    className={
+                                      "w-100 d-flex bg-secondary text-white p-2" +
+                                      (item.show ? "" : " hidden")
+                                    }
+                                    style={{
+                                      ...provided.draggableProps.style,
+                                      left: 0,
+                                      top: 0,
+                                      position: "relative",
+                                    }}
+                                  >
+                                    {item.title}
+                                  </div>
+                                )}
+                              </Draggable>
+                            ) : (
+                              ""
+                            )
+                          )}
                           {provided.placeholder}
                         </div>
                       )}
@@ -213,43 +220,59 @@ const Table = (props) => {
               <table className="table mt-2 mytable">
                 <thead className={"table_thead"}>
                   <tr>
-                    {(props.columns.length===0?props.columnsProps:props.columns).map((item) => (
+                    {(props.columns.length === 0
+                      ? props.columnsProps
+                      : props.columns
+                    ).map((item) => (
                       <th className={item.show ? "" : "hidden"}>
                         {item.title}
                       </th>
                     ))}
-                    {props.additionalColumns ? (
-                      <th >More</th>
-                    ) : (
-                      ""
-                    )}
+                    {props.additionalColumns ? <th>More</th> : ""}
                   </tr>
                 </thead>
                 <tbody>
-                {props.columns.length===0?<tr><th colSpan={5} className="text-center">No Data</th></tr>:""}
-                  {props.columns.length!=0 && props.data.map((item, index) => (
-                    <tr key={item.id}>
-                      {props.columns.map((col) =>
-                        col.type === "jsx" ? (
-                          <td width="20" className={col.show ? "" : "hidden"}>
-                            {col.data(item)}
-                          </td>
-                        ) : col.type === "index" ? (
-                          <td className={col.show ? "" : "hidden"}>
-                            {index +
-                              1 +
-                              props.sizeOfPage * (props.currentPage - 1)}
-                          </td>
-                        ) : col.type==="boolean" && col.key==="active"?<td className={item[col.key]?"text-success":"text-danger"}>{item[col.key]?"active":"unactive "}</td>:col.type !== "jsx" ? (
-                          <td className={col.show ? "" : "hidden"}>
-                            {getValueByKeys(item, col.key)}
-                          </td>
-                        ) : (
-                          ""
-                        )
-                      )}
+                  {props.columns.length === 0 ? (
+                    <tr>
+                      <th colSpan={5} className="text-center">
+                        No Data
+                      </th>
                     </tr>
-                  ))}
+                  ) : (
+                    ""
+                  )}
+                  {props.columns.length != 0 &&
+                    props.data.map((item, index) => (
+                      <tr key={item.id}>
+                        {props.columns.map((col) =>
+                          col.type === "jsx" ? (
+                            <td width="20" className={col.show ? "" : "hidden"}>
+                              {col.data(item)}
+                            </td>
+                          ) : col.type === "index" ? (
+                            <td className={col.show ? "" : "hidden"}>
+                              {index +
+                                1 +
+                                props.sizeOfPage * (props.currentPage - 1)}
+                            </td>
+                          ) : col.type === "boolean" && col.key === "active" ? (
+                            <td
+                              className={
+                                item[col.key] ? "text-success" : "text-danger"
+                              }
+                            >
+                              {item[col.key] ? "active" : "unactive "}
+                            </td>
+                          ) : col.type !== "jsx" ? (
+                            <td className={col.show ? "" : "hidden"}>
+                              {getValueByKeys(item, col.key)}
+                            </td>
+                          ) : (
+                            ""
+                          )
+                        )}
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

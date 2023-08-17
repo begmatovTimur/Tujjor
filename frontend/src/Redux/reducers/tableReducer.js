@@ -56,6 +56,7 @@ const tableReducer = createSlice({
     claimData: (state, action) => {
       state.columns = action.payload.columns;
       state.data = action.payload.data;
+      console.log(action.payload.columns);
       state.modalColumns = action.payload.columns;
       state.localPath = action.payload.localPath;
     },
@@ -66,6 +67,7 @@ const tableReducer = createSlice({
       state.currentDraggingColumn = action.payload;
     },
     filterVisibility: (state, action) => {
+      console.log(state.columns);
       if (state.columns.length === 0) {
         state.columns = state.copyOfColumns;
       }
@@ -82,6 +84,10 @@ const tableReducer = createSlice({
         state.copyOfColumns = state.columns;
         state.columns = [];
       }
+      localStorage.setItem(
+        state.localPath,
+        JSON.stringify(state.columns.map((item, index) => ({id:item.id,show:item.show })))
+      );
       state.modalColumns = state.columns;
     },
     changePaginationTo: (state, action) => {
@@ -126,7 +132,7 @@ const tableReducer = createSlice({
       state.columns = state.modalColumns;
       localStorage.setItem(
         state.localPath,
-        JSON.stringify(state.columns.map((item, index) => item.id))
+        JSON.stringify(state.columns.map((item, index) => ({id:item.id,show:item.show })))
       );
     },
     changeSelectedForms: (state, action) => {

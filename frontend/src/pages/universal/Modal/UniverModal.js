@@ -40,6 +40,7 @@ import "./modal.css";
 
 const UniversalModal = ({
   inpData = "",
+  height,
   isOpen,
   closeFunction,
   modalTitle,
@@ -60,7 +61,7 @@ const UniversalModal = ({
     borderRadius: "10px",
     width: width + "%",
     overflow: "auto",
-    maxHeight: "655px",
+    maxHeight: height??"655px",
   };
   const style2 = {
     position: "absolute",
