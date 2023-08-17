@@ -58,4 +58,6 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
     @Query(nativeQuery = true,value = "select * from client order by insertion_time desc")
     List<Client> findAllOrderedClient();
 
+    List<Client> findAllByActiveIsTrue();
+
 }

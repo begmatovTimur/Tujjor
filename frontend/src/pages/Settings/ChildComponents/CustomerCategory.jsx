@@ -10,7 +10,6 @@ import LoadingBackdrop from "../../universal/Loading/loading";
 
 function CustomerCategory(props) {
   const { customerCategory } = props;
-  console.log(customerCategory);
 
   const columns = [
     {

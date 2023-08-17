@@ -54,7 +54,7 @@ function ClientsOnTheMap(props) {
                                     balloonContent: address.name,
                                     // hintContent: 'Bu yerda markaziy nuqta',
                                     // iconContent: "Salom",
-                                }} options={{iconColor: 'red',iconImageHref: logo}} key={index} geometry={address.territories} />
+                                }} options={{iconColor: 'lightgreen',iconImageHref: logo}} key={index} geometry={address.territories} />
                             })
                         }
                     </Map>
