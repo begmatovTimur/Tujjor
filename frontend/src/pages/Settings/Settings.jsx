@@ -8,7 +8,7 @@ const Settings = ({data, getData, activeButtonIndex, setCurrentIndex}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getData()
+        getData();  
     }, []);
     useEffect(() => {
         if (localStorage.getItem("selectedSettingsButton") && data.length) {
@@ -20,6 +20,7 @@ const Settings = ({data, getData, activeButtonIndex, setCurrentIndex}) => {
             }
         }
     }, [data]);
+
     return (
         <div className="settings">
             <div className="content">
@@ -30,7 +31,7 @@ const Settings = ({data, getData, activeButtonIndex, setCurrentIndex}) => {
                             key={item.id}
                             className={
                                 "settings_button" +
-                                (activeButtonIndex === index ? " active_button" : " ")
+                                (window.location.pathname.substring(window.location.pathname.lastIndexOf("/")) === item.path ? " active_button" : " ")
                             }
                             onClick={() => {
                                 navigate("/admin/settings" + item.path);

@@ -1,5 +1,6 @@
 .customer_category {
     background: #f2f2f2;
+    overflow: scroll;
     border-radius: 8px;
     display: flex;
     flex-direction: column;

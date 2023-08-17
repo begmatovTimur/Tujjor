@@ -345,8 +345,8 @@ const UniversalModal = ({
                           ""
                       )}
                       <button
-                          style={{ width: "13%", margin: "15px 0px 5px 0px" }}
-                          className={"btn btn-success"}
+                          style={{ margin: "15px 0px 5px 0px" }}
+                          className={"btn w-25 btn-success"}
                       >
                         Save
                       </button>

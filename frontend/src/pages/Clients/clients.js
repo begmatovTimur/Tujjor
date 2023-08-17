@@ -245,6 +245,7 @@ function Clients(props) {
                             filterButton={true}
                         />
                         <Table
+                        localStoragePath="clients"
                             pagination={true}
                             changeSizeMode={true}
                             paginationApi={"/client/pagination?page={page}&limit={limit}"}

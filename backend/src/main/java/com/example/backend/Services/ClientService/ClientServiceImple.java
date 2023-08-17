@@ -148,7 +148,6 @@ public class ClientServiceImple implements ClientService {
         UUID clientId = UUID.randomUUID();
         return Client.builder()
                 .id(clientId)
-                .registrationDate(LocalDate.now())
                 .active(clientDTO.getActive())
                 .phone(clientDTO.getPhone())
                 .category(categoryRepository.findById(clientDTO.getCategoryId()).orElseThrow())
