@@ -51,8 +51,6 @@ const Table = (props) => {
     }
   }, [props.dataProps]);
 
-  console.log(props.columns);
-
   const getValueByKeys = (obj, keys) => {
     const keysArray = keys.split("+").map((key) => key.trim());
     const values = keysArray.map((key) =>
@@ -77,11 +75,6 @@ const Table = (props) => {
     }, 1000);
   }, []);
 
-  // console.log(props.data.length?(JSON.parse(localStorage.getItem(props.localStoragePath))).map(item=>{
-  //   console.log(props.data[item].name);
-  // }):[]);
-  // console.log(props.data.lenght?JSON.parse(localStorage.getItem(props.localStoragePath)).map(item=>props.data[item]):"");
-  console.log(localStorage.getItem(props.localStoragePath));
   return (
       <div className="universal_table">
         {props.isLoading ? (
