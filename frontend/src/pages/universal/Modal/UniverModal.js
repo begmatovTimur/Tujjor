@@ -61,7 +61,7 @@ const UniversalModal = ({
     borderRadius: "10px",
     width: width + "%",
     overflow: "auto",
-    maxHeight: height??"655px",
+    maxHeight: '655px',
   };
   const style2 = {
     position: "absolute",
