@@ -27,10 +27,10 @@ function* getAllClientsTerritories(action) {
 
 function* saveClients(action) {
     const currentState = yield select((state) => state.clients);
-    yield put(clientsAction.closeModal())
     if (action.payload.name === "" || action.payload.territoryId === "" || action.payload.address === "" || action.payload.phone === "" || action.payload.companyName === "" || action.payload.categoryId === "" || action.payload.longitude === "" || action.payload.latitude === "") {
         ErrorNotify("Please fill all fields!")
     } else {
+        yield put(clientsAction.closeModal())
         if (currentState.editeClient !== "") {
             const res = yield apiCall("/client?clientId=" + currentState.editeClient.id, "PUT", action.payload)
                 yield put(clientsAction.resetAllClientsData())
@@ -42,8 +42,8 @@ function* saveClients(action) {
                   SuccessNotify("Client added Successfully!")
               }
         }
-    }
     yield call(getClients)
+    }
 }
 
 export function* clientsSaga() {

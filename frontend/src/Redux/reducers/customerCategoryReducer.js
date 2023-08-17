@@ -3,9 +3,8 @@ import {createSlice} from "@reduxjs/toolkit";
 const customerCategoryReducer = createSlice({
     initialState: {
         openModal: false,
-        template: null,
-        mapState: {center: [0, 0], zoom: 0},
         code: "",
+        name: "",
         active: false,
         region: "",
         categories: [],
@@ -26,13 +25,11 @@ const customerCategoryReducer = createSlice({
         },
         handleClose: (state, action) => {
             state.openModal = false
-            state.title = ""
             state.code = ""
             state.region = ""
             state.name = "";
             state.description = "";
             state.active = false
-            state.mapState = {center: [[0], [1]], zoom: 10}
             state.itemForTeritoryEdite = ""
         },
         getCategory: (state, action) => {
@@ -43,12 +40,6 @@ const customerCategoryReducer = createSlice({
         },
         yourActionFailureCategories: (state, action) => {
             state.error = action.payload
-        },
-        handleTemplate: (state, action) => {
-            state.template = action.payload
-        },
-        handleMapState: (state, action) => {
-            state.mapState = action.payload
         },
         handleTitle: (state, action) => {
             state.title = action.payload
@@ -62,11 +53,6 @@ const customerCategoryReducer = createSlice({
         handleRegion: (state, action) => {
             state.region = action.payload
         },
-        clearAllCategory: (state, action) => {
-            state.longitute = 0;
-            state.latitute = 0;
-            state.mapState = {center: [[0], [1]], zoom: 10}
-        },
         changeModal: (state, action) => {
             state.openModal = action.payload
         },
@@ -74,8 +60,9 @@ const customerCategoryReducer = createSlice({
             state.title = ""
             state.code = ""
             state.region = ""
+            state.name = ""
+            state.description = ""
             state.active = false
-            state.mapState = {center: [[0], [1]], zoom: 10}
             state.itemForTeritoryEdite = ""
         },
         saveCategory: (state, action) => {
@@ -89,7 +76,6 @@ const customerCategoryReducer = createSlice({
             }
         },
         editeCategory: (state, action) => {
-            console.log(action.payload)
             state.itemForTeritoryEdite = action.payload
             state.openModal = true
             state.name = action.payload.name
@@ -97,8 +83,6 @@ const customerCategoryReducer = createSlice({
             state.description = action.payload.description;
             state.region = action.payload.region
             state.active = action.payload.active
-            state.mapState = {center: [[action.payload.latitude], [action.payload.longitude]], zoom: 10}
-            console.log(state.itemForTeritoryEdite)
         }
     },
 });
