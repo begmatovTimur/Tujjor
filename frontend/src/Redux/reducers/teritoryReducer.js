@@ -4,7 +4,7 @@ const teritoryReducer = createSlice({
     initialState: {
         openModal:false,
         template:null,
-        mapState: { center: ["", ""], zoom: 10 },
+        mapState: { center: [ 0, 1], zoom: 10 },
         defaultCenter: [39.7756, 64.4253],
         longitute: "",
         latitute: "",
@@ -65,7 +65,7 @@ const teritoryReducer = createSlice({
         clearAllTeritory:(state, action)=>{
             state.longitute = "";
             state.latitute = "";
-            state.mapState = { center: ["", ""], zoom: 10 };
+            state.mapState = { center: [ 0, 1], zoom: 10 };
             state.defaultCenter = [39.7756, 64.4253];
         },
         changeModal:(state, action)=>{

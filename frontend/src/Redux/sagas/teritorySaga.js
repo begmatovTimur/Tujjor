@@ -8,7 +8,9 @@ function* addTeritory(action){
     if (action.payload.name === "" || action.payload.region === "" || action.payload.code === "" || action.payload.longitude === "" || action.payload.latitude === ""){
         ErrorNotify("Please fill all fields!")
     }else {
+        yield put(teritoryAction.changeModal(false))
         if (currentState.itemForTeritoryEdite !== ""){
+            SuccessNotify("Teritory update Successfully!")
             const res = yield apiCall(`/territory/${currentState.itemForTeritoryEdite.id}`, "PUT", action.payload)
             yield put(teritoryAction.resetAllTeritoryData())
         }else {
@@ -16,7 +18,6 @@ function* addTeritory(action){
             SuccessNotify("Teritory added Successfully!")
             yield put(teritoryAction.resetAllTeritoryData())
         }
-        yield put(teritoryAction.changeModal(false))
         yield call(getTeritory)
     }
 }
