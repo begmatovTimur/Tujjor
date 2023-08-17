@@ -9,11 +9,6 @@ import Filter from "../universal/Filter/Filter";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import {customerCategoryActions} from "../../Redux/reducers/customerCategoryReducer";
 import PhoneInput from "react-phone-input-2";
-import LoadingBackdrop from "../universal/Loading/loading";
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import Button from '@mui/material/Button';
-import {tableActions} from "../../Redux/reducers/tableReducer";
 
 function Clients(props) {
     const {clients} = props
@@ -382,10 +377,13 @@ function Clients(props) {
                                     onClick={handleMapClick}
                                     modules={["templateLayoutFactory"]}
                                 ><ZoomControl options={{float: "right"}}/>
-                                    <Placemark
-                                        geometry={clients.mapState.center}
-                                        modules={["geoObject.addon.balloon"]}
-                                    />
+                                    {
+                                        clients.mapState.center[0] === "" || clients.mapState.center[1] === ""?"":
+                                            <Placemark
+                                                geometry={clients.mapState.center}
+                                                modules={["geoObject.addon.balloon"]}
+                                            />
+                                    }
                                 </Map>
                             </YMaps>
 
