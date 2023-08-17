@@ -112,7 +112,7 @@ function* downloadExcelFile(action) {
     if (obj.active === undefined) obj.active = "ALL";
     if (action.payload.excelWithoutSearch) {
         axios
-            .get(domen + action.payload.path+"?columns="+JSON.stringify(columnsTitle), {
+            .get(domen + action.payload.path, {
                 responseType: 'blob',
                 headers: {
                     searchParam:JSON.stringify(obj),
@@ -127,7 +127,7 @@ function* downloadExcelFile(action) {
             });
     } else {
         axios
-            .get(domen + action.payload.path+"?columns="+JSON.stringify(columnsTitle), {
+            .get(domen + action.payload.path, {
                 responseType: 'blob',
                 headers: {
                     searchParam:JSON.stringify(obj),

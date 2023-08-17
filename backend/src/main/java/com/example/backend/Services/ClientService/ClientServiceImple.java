@@ -186,13 +186,9 @@ public class ClientServiceImple implements ClientService {
         }
         List<ClientProjection> all = clientRepository.getAllFilteredFieldsForExcel(cities, customerCategoriesParam, jsonNode.get("active").asText(), jsonNode.get("tin").asText(), jsonNode.get("quickSearch").asText());
         XSSFWorkbook workbook = new XSSFWorkbook();
+        int rowIdx = 0;
         Sheet sheet = workbook.createSheet("Company info");
-        Row row = sheet.createRow(0);
-        for (int i = 0; i < columns.size(); i++) {
-            if(columns.get(i).getShow()) {
-                row.createCell(i).setCellValue(columns.get(i).getTitle());
-            }
-        }
+        Row headerRow = sheet.createRow(rowIdx++);
         int counter = 1;
         for (ClientProjection client : all) {
             Row dataRow = sheet.createRow(counter);
