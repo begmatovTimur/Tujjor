@@ -1,6 +1,6 @@
 /* width */
 ::-webkit-scrollbar {
-    width: 0px;
+    width: 3px;
 }
 
 /* Track */
@@ -11,13 +11,13 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #1c4b78;
+    background: #636363;
     border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #1c4b78;
+    background: #393939;
 }
 #loading-bar-spinner.spinner {
     left: 50%;

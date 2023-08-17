@@ -6,6 +6,7 @@ const tableReducer = createSlice({
     columns: [],
     layer: false,
     sizeOfPage: 1,
+    localPath:"",
     copyOfColumns: [],
     currentDraggingColumn: 0,
     dragOverColumn: -1,
@@ -56,6 +57,7 @@ const tableReducer = createSlice({
       state.columns = action.payload.columns;
       state.data = action.payload.data;
       state.modalColumns = action.payload.columns;
+      state.localPath = action.payload.localPath;
     },
     setColumnModalVisibility: (state, action) => {
       state.columnOrderModalVisibility = action.payload;
@@ -122,6 +124,7 @@ const tableReducer = createSlice({
     saveColumnOrder: (state, action) => {
       state.columnOrderModalVisibility = false;
       state.columns = state.modalColumns;
+      localStorage.setItem(state.localPath, JSON.stringify(state.columns.map((item,index)=>item.id)));
     },
     changeSelectedForms: (state, action) => {
       state.selectedForms = action.payload;

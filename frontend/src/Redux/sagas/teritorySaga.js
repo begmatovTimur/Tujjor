@@ -4,11 +4,11 @@ import {teritoryAction} from  "../reducers/teritoryReducer"
 import { ErrorNotify } from "../../tools/Alerts";
 import { SuccessNotify } from "../../tools/Alerts";
 function* addTeritory(action){
-    yield put(teritoryAction.changeModal(false))
     const currentState = yield select((state) => state.teritory);
-    if (action.payload.name === "" || action.payload.region === "" || action.payload.code === "" || action.payload.longitude === 0 || action.payload.latitude === 0){
+    if (action.payload.name === "" || action.payload.region === "" || action.payload.code === "" || action.payload.longitude === "" || action.payload.latitude === ""){
         ErrorNotify("Please fill all fields!")
     }else {
+        yield put(teritoryAction.changeModal(false))
         if (currentState.itemForTeritoryEdite !== ""){
             const res = yield apiCall(`/territory/${currentState.itemForTeritoryEdite.id}`, "PUT", action.payload)
             yield put(teritoryAction.resetAllTeritoryData())
@@ -17,8 +17,9 @@ function* addTeritory(action){
             SuccessNotify("Teritory added Successfully!")
             yield put(teritoryAction.resetAllTeritoryData())
         }
+        
+        yield call(getTeritory)
     }
-    yield call(getTeritory)
 }
 function* getTeritory(action){
     try {

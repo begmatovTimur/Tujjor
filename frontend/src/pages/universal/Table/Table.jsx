@@ -6,6 +6,8 @@ import Filter from "../Filter/Filter";
 import Dropdown from "../Dropdown/Dropdown";
 import UniversalModal from "../Modal/UniverModal";
 import { tableActions } from "../../../Redux/reducers/tableReducer";
+import { jsxDEV } from "react/jsx-dev-runtime"; // Make sure you import jsxDEV
+
 import "./Table.css";
 
 const Table = (props) => {
@@ -19,7 +21,25 @@ const Table = (props) => {
   };
 
   useEffect(() => {
-    props.claimData({ columns: props.columnsProps, data: props.dataProps });
+    try{
+      props.claimData({
+        columns: localStorage.getItem(props.localStoragePath)
+          ? JSON.parse(localStorage.getItem(props.localStoragePath)).map (
+              (item) => {
+                if(props.columnsProps[item]===undefined) {
+                  localStorage.removeItem(props.localStoragePath);
+                  return;
+                }
+                return props.columnsProps[item];
+              }
+            )
+          : props.columnsProps,
+        data: props.dataProps,
+        localPath:props.localStoragePath
+      });
+    }catch(e) {
+      localStorage.removeItem(props.localStoragePath)
+    }
     if (props.pagination === true && !props.paginationApi)
       alert("Pagination API is required!");
     if (props.paginationApi) {
@@ -30,6 +50,8 @@ const Table = (props) => {
       });
     }
   }, [props.dataProps]);
+
+  console.log(props.columns);
 
   const getValueByKeys = (obj, keys) => {
     const keysArray = keys.split("+").map((key) => key.trim());
@@ -54,6 +76,12 @@ const Table = (props) => {
       props.changeLoadingActive(false);
     }, 1000);
   }, []);
+
+  // console.log(props.data.length?(JSON.parse(localStorage.getItem(props.localStoragePath))).map(item=>{
+  //   console.log(props.data[item].name);
+  // }):[]);
+  // console.log(props.data.lenght?JSON.parse(localStorage.getItem(props.localStoragePath)).map(item=>props.data[item]):"");
+  console.log(localStorage.getItem(props.localStoragePath));
 
   return (
     <div className="universal_table">
@@ -133,7 +161,10 @@ const Table = (props) => {
             <UniversalModal
               modalTitle={"Columns order"}
               isOpen={props.columnOrderModalVisibility}
-              closeFunction={() => props.setColumnModalVisibility(false)}
+              closeFunction={() =>
+                props.setColumnModalVisibility(false) &
+                props.setModalColumns(props.columns)
+              }
               width={33}
               functionforSaveBtn={() => props.saveColumnOrder()}
               JsxData={
@@ -186,47 +217,28 @@ const Table = (props) => {
                 <thead className={"table_thead"}>
                   <tr>
                     {props.columns.map((item) => (
-                      <th className={item.show ? "" : "hidden"} key={item.id}>
-                        {item.show ? item.title : ""}
-                      </th>
+                      <th >{item.title}</th>
                     ))}
                     {props.additionalColumns ? <th>More</th> : ""}
                   </tr>
                 </thead>
                 <tbody>
-                  {props.data?.map((item, index) => (
+                  {props.data.map((item, index) => (
                     <tr key={item.id}>
                       {props.columns.map((col) =>
                         col.type === "jsx" ? (
-                          <td width={50} className={col.show ? "" : "hidden"}>
-                            {col.data ? col.data(item) : ""}
-                          </td>
-                        ) : (
-                          <td className={col.show ? "" : "hidden"} key={col.id}>
-                            {col.key === "active" ? (
-                              col.type === "index" ? (
-                                index +
-                                1 +
-                                props.sizeOfPage * (props.currentPage - 1)
-                              ) : item[col.key] === true ? (
-                                <p className={"text-success"}>active</p>
-                              ) : (
-                                <p className={"text-danger"}>no active</p>
-                              )
-                            ) : col.type === "index" ? (
-                              index +
+                          <td width="20">{col.data(item)}</td>
+                        ) : col.type === "index" ? (
+                          <td>
+                            {index +
                               1 +
-                              props.sizeOfPage * (props.currentPage - 1)
-                            ) : (
-                              getValueByKeys(item, col.key)
-                            )}
+                              props.sizeOfPage * (props.currentPage - 1)}
                           </td>
+                        ) : col.type !== "jsx" ? (
+                          <td>{getValueByKeys(item, col.key)}</td>
+                        ) : (
+                          ""
                         )
-                      )}
-                      {props.additionalColumns ? (
-                        <td>{props.additionalColumns}</td>
-                      ) : (
-                        ""
                       )}
                     </tr>
                   ))}
@@ -234,18 +246,18 @@ const Table = (props) => {
               </table>
             </div>
             {props.pagination && props.data.length && props.columns.length ? (
-                <div className="d-flex justify-content-end pt-2">
-                  <Pagination
-                    onChange={(e, page) => handleChange(e, page)}
-                    page={props.currentPage}
-                    count={props.totalPages}
-                    variant="outlined"
-                    shape="rounded"
-                  />
-                </div>
-              ) : (
-                ""
-              )}
+              <div className="d-flex justify-content-end pt-2">
+                <Pagination
+                  onChange={(e, page) => handleChange(e, page)}
+                  page={props.currentPage}
+                  count={props.totalPages}
+                  variant="outlined"
+                  shape="rounded"
+                />
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </>
       )}

@@ -46,7 +46,7 @@ public class MyBot extends TelegramLongPollingBot {
     private Integer previousMessageId;
     private Integer previousPage = 0;
     private String username = "@tujjor_original_bot";
-    private String TOKEN = "6306656986:AAH4qjSkX6bJDKYriR13XHqPo2ndCROXWns";
+    private String TOKEN = "6306656986:AAHfpfVfSSDbG_EmjLEeTkdnlljXblEmAYg";
     private TelegramUser currentUser = null;
     private static final Logger logger = LoggerFactory.getLogger(MyBot.class);
 
