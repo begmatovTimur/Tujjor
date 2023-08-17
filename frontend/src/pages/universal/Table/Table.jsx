@@ -21,12 +21,12 @@ const Table = (props) => {
   };
 
   useEffect(() => {
-    try{
+    try {
       props.claimData({
         columns: localStorage.getItem(props.localStoragePath)
-          ? JSON.parse(localStorage.getItem(props.localStoragePath)).map (
+          ? JSON.parse(localStorage.getItem(props.localStoragePath)).map(
               (item) => {
-                if(props.columnsProps[item]===undefined) {
+                if (props.columnsProps[item] === undefined) {
                   localStorage.removeItem(props.localStoragePath);
                   return;
                 }
@@ -35,10 +35,10 @@ const Table = (props) => {
             )
           : props.columnsProps,
         data: props.dataProps,
-        localPath:props.localStoragePath
+        localPath: props.localStoragePath,
       });
-    }catch(e) {
-      localStorage.removeItem(props.localStoragePath)
+    } catch (e) {
+      localStorage.removeItem(props.localStoragePath);
     }
     if (props.pagination === true && !props.paginationApi)
       alert("Pagination API is required!");
@@ -217,9 +217,15 @@ const Table = (props) => {
                 <thead className={"table_thead"}>
                   <tr>
                     {props.columns.map((item) => (
-                      <th >{item.title}</th>
+                      <th className={item.show ? "" : "hidden"}>
+                        {item.title}
+                      </th>
                     ))}
-                    {props.additionalColumns ? <th>More</th> : ""}
+                    {props.additionalColumns ? (
+                      <th >More</th>
+                    ) : (
+                      ""
+                    )}
                   </tr>
                 </thead>
                 <tbody>
@@ -227,15 +233,19 @@ const Table = (props) => {
                     <tr key={item.id}>
                       {props.columns.map((col) =>
                         col.type === "jsx" ? (
-                          <td width="20">{col.data(item)}</td>
+                          <td width="20" className={col.show ? "" : "hidden"}>
+                            {col.data(item)}
+                          </td>
                         ) : col.type === "index" ? (
-                          <td>
+                          <td className={col.show ? "" : "hidden"}> 
                             {index +
                               1 +
                               props.sizeOfPage * (props.currentPage - 1)}
                           </td>
-                        ) : col.type !== "jsx" ? (
-                          <td>{getValueByKeys(item, col.key)}</td>
+                        ) : col.type==="boolean" && col.key==="active"?<td className={item[col.key]?"text-success":"text-danger"}>{item[col.key]?"active":"unactive "}</td>:col.type !== "jsx" ? (
+                          <td className={col.show ? "" : "hidden"}>
+                            {getValueByKeys(item, col.key)}
+                          </td>
                         ) : (
                           ""
                         )

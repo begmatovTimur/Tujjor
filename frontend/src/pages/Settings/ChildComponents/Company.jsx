@@ -63,13 +63,6 @@ function Company(props) {
             key: "email",
             type: "text",
             show: true,
-        },
-        {
-            id: 5,
-            title: "Address",
-            key: "address",
-            type: "text",
-            show: true,
         }
     ];
 
