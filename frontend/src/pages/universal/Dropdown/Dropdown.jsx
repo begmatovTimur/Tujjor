@@ -16,6 +16,7 @@ const Dropdown = (props) => {
     }
   }, [props.body, dropdownId]);
 
+
   useEffect(() => {
     // Initialize selected items for multi-select only on the first open
     if (multiSelect && isAnyDropdownOpen && !hasOpened) {
