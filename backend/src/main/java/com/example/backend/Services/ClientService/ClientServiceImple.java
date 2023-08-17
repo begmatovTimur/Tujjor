@@ -2,6 +2,7 @@ package com.example.backend.Services.ClientService;
 
 import com.example.backend.DTO.ClientDTO;
 import com.example.backend.DTO.ClientSearchDTO;
+import com.example.backend.DTO.ExcelDTO;
 import com.example.backend.Entity.Client;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Entity.Territory;
@@ -148,7 +149,6 @@ public class ClientServiceImple implements ClientService {
         UUID clientId = UUID.randomUUID();
         return Client.builder()
                 .id(clientId)
-                .registrationDate(LocalDate.now())
                 .active(clientDTO.getActive())
                 .phone(clientDTO.getPhone())
                 .category(categoryRepository.findById(clientDTO.getCategoryId()).orElseThrow())
@@ -188,15 +188,11 @@ public class ClientServiceImple implements ClientService {
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Company info");
         Row row = sheet.createRow(0);
-        row.createCell(0).setCellValue("Name");
-        row.createCell(1).setCellValue("Address");
-        row.createCell(2).setCellValue("Phone");
-        row.createCell(3).setCellValue("Tin");
-        row.createCell(4).setCellValue("Company Name");
-        row.createCell(5).setCellValue("Longitude");
-        row.createCell(6).setCellValue("Latitude");
-        row.createCell(7).setCellValue("Active");
-        row.createCell(8).setCellValue("Registration Date");
+        for (int i = 0; i < columns.size(); i++) {
+            if(columns.get(i).getShow()) {
+                row.createCell(i).setCellValue(columns.get(i).getTitle());
+            }
+        }
         int counter = 1;
         for (ClientProjection client : all) {
             Row dataRow = sheet.createRow(counter);
@@ -231,7 +227,7 @@ public class ClientServiceImple implements ClientService {
     @Override
     public HttpEntity<?> getAllLocation() {
         List<ResClientsTerritories> result = new ArrayList<>();
-        List<Client> clients = clientRepository.findAll();
+        List<Client> clients = clientRepository.findAllByActiveIsTrue();
         for (Client client : clients) {
             result.add(new ResClientsTerritories(
                     client.getName(),

@@ -2,12 +2,10 @@ import React, {useEffect} from 'react';
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
 import {connect, useDispatch} from "react-redux";
 import {clientsAction} from "../../Redux/reducers/clientsReducer";
-import {tableActions} from "../../Redux/reducers/tableReducer";
-import LoadingBackdrop from "../universal/Loading/loading";
+import logo from '../../images/logo.png'
 
 function ClientsOnTheMap(props) {
 
-    const dispatch = useDispatch()
     const {clients} = props
     useEffect(() => {
         props.changeLoadingActive(true)
@@ -53,8 +51,10 @@ function ClientsOnTheMap(props) {
                         {
                             clients.allClientTerritoriesForMap.map((address, index)=>{
                                 return <Placemark properties={{
-                                    balloonContent: address.name
-                                }} options={{iconColor: 'red'}} key={index} geometry={address.territories} />
+                                    balloonContent: address.name,
+                                    // hintContent: 'Bu yerda markaziy nuqta',
+                                    // iconContent: "Salom",
+                                }} options={{iconColor: 'lightgreen',iconImageHref: logo}} key={index} geometry={address.territories} />
                             })
                         }
                     </Map>

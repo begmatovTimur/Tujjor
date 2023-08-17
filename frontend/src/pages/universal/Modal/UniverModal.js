@@ -40,6 +40,7 @@ import "./modal.css";
 
 const UniversalModal = ({
   inpData = "",
+  height,
   isOpen,
   closeFunction,
   modalTitle,
@@ -60,7 +61,7 @@ const UniversalModal = ({
     borderRadius: "10px",
     width: width + "%",
     overflow: "auto",
-    maxHeight: "655px",
+    maxHeight: '655px',
   };
   const style2 = {
     position: "absolute",
@@ -79,7 +80,7 @@ const UniversalModal = ({
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-      }, 1000);
+      }, 500);
     }
   }, [isOpen]);
   return (
@@ -345,8 +346,8 @@ const UniversalModal = ({
                           ""
                       )}
                       <button
-                          style={{ width: "13%", margin: "15px 0px 5px 0px" }}
-                          className={"btn btn-success"}
+                          style={{ margin: "15px 0px 5px 0px" }}
+                          className={"btn w-25 btn-success"}
                       >
                         Save
                       </button>

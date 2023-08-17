@@ -40,7 +40,7 @@ public class SecurityConfig {
                                         "/api/client",
                                         "/api/client/pagination", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode", "/api/bot", "/api/territory/**", "/api/territory", "/api/customerCategory"
                                         , "/api/territory/excel").permitAll()
-                                .requestMatchers("/api/**").permitAll() // Paths starting from /api require authentication
+                                .requestMatchers("/api/**").permitAll()  // Paths starting from /api require authentication
                                 .anyRequest().permitAll() // Permit all other paths (before /api)
                 )
                 .addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);

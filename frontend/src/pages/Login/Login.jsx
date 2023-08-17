@@ -114,6 +114,7 @@ function Login(props) {
                       </label>
                       <Button
                           style={{
+                            border:'none',
                               backgroundColor: "#65b965",
                               marginTop: 20,
                               width: "30%",

@@ -96,6 +96,9 @@ function* changeSizeOfPage(action) {
 
 function* downloadExcelFile(action) {
     const currentState = yield select((state) => state.table);
+    const {columns} = yield select((state)=>state.table);
+    let columnsTitle = columns.map(item=>({title:item.key,show:item.show}));
+
     const x = currentState.formInputs
     let obj = {
         active: x.active.value ? x.active.value : x.active,
@@ -109,7 +112,7 @@ function* downloadExcelFile(action) {
     if (obj.active === undefined) obj.active = "ALL";
     if (action.payload.excelWithoutSearch) {
         axios
-            .get(domen + action.payload.path, {
+            .get(domen + action.payload.path+"?columns="+JSON.stringify(columnsTitle), {
                 responseType: 'blob',
                 headers: {
                     searchParam:JSON.stringify(obj),
@@ -124,7 +127,7 @@ function* downloadExcelFile(action) {
             });
     } else {
         axios
-            .get(domen + action.payload.path, {
+            .get(domen + action.payload.path+"?columns="+JSON.stringify(columnsTitle), {
                 responseType: 'blob',
                 headers: {
                     searchParam:JSON.stringify(obj),
@@ -138,8 +141,6 @@ function* downloadExcelFile(action) {
                 saveAs(file, action.payload.fileName + ".xlsx");
             });
     }
-
-    let firstname,lastname,age;
 
 }
 

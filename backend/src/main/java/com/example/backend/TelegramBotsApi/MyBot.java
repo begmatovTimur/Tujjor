@@ -15,7 +15,6 @@ import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -30,14 +29,14 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.example.backend.TelegramBotsApi.services.Pagination.Pagination.doPagination;
-//@Component
 
+//@Component
 public class MyBot extends TelegramLongPollingBot {
     private final TelegramUserRepository repository;
     private final TerritoryRepository territoryRepository;
@@ -46,13 +45,13 @@ public class MyBot extends TelegramLongPollingBot {
     private Integer previousMessageId;
     private Integer previousPage = 0;
     private String username = "@tujjor_original_bot";
-    private String TOKEN = "6306656986:AAH4qjSkX6bJDKYriR13XHqPo2ndCROXWns";
+    private String TOKEN = "6306656986:AAHfpfVfSSDbG_EmjLEeTkdnlljXblEmAYg";
     private TelegramUser currentUser = null;
     private static final Logger logger = LoggerFactory.getLogger(MyBot.class);
 
     @Autowired
-    public MyBot(TelegramBotsApi api,TelegramUserRepository telegramUserRepository, TerritoryRepository territoryRepository,
-                         CustomerCategoryRepository customerCategoryRepository, ClientRepository clientRepository) throws TelegramApiException {
+    public MyBot(TelegramBotsApi api, TelegramUserRepository telegramUserRepository, TerritoryRepository territoryRepository,
+                 CustomerCategoryRepository customerCategoryRepository, ClientRepository clientRepository) throws TelegramApiException {
         this.repository = telegramUserRepository;
         this.territoryRepository = territoryRepository;
         this.customerCategoryRepository = customerCategoryRepository;
@@ -63,17 +62,16 @@ public class MyBot extends TelegramLongPollingBot {
 
     @PostConstruct
     public void start() {
-        logger.info("username: {}, token: {}",username,TOKEN);
+        logger.info("username: {}, token: {}", username, TOKEN);
     }
 
     @SneakyThrows
     @Override
-    public void onUpdateReceived(Update update)  {
+    public void onUpdateReceived(Update update) {
 
         Message message = update.getMessage();
 
         this.currentUser = registerUser(update);
-        Client newClient = currentUser.getClient();
         String chatId = currentUser.getChatId().toString(); // Getting chatId Of Current User
         String step = currentUser.getStep();    //Getting STEP Of Current User
 
@@ -96,7 +94,7 @@ public class MyBot extends TelegramLongPollingBot {
 
 
                     if (step.equals(STEP.ADDING_PHONE_CONFIRMATION.name())) { // Phone Of Adding Client Typed
-                        newClient.setPhone(text);
+                        currentUser.setPhone(text);
                         sendMessage.setChatId(chatId);
                         sendMessage.setText("To'g'ri Telefon Raqam kiritdizmi❓❓");
                         Map<String, String> buttons = new HashMap<>();
@@ -104,23 +102,24 @@ public class MyBot extends TelegramLongPollingBot {
                         buttons.put("NO", "Yoq ❌");
 
                         sendMessage.setReplyMarkup(generateInlineKeyboardButtons(buttons, 2));
-                       execute(sendMessage);
+                        execute(sendMessage);
+                        repository.save(currentUser);
                     } else if (step.equals(STEP.ADDING_FIO_WAITING.name())) {
-                        newClient.setName(text);
+                        currentUser.setName(text);
                         sendMessage.setChatId(chatId);
                         sendMessage.setText("\uD83D\uDCCD Mijoz addressini yozing:\n" +
                                 "<i>Namuna:Qayerdadir Qayer 47</i>");
-                       execute(sendMessage);
+                        execute(sendMessage);
                         updateStep(STEP.ADDING_ADDRESS);
                     } else if (step.equals(STEP.ADDING_ADDRESS.name())) {
-                        newClient.setAddress(text);
+                        currentUser.setAddress(text);
                         sendMessage.setChatId(chatId);
                         sendMessage.setText("\uD83D\uDCDE Mijoz telefon raqamini kiriting:\n" +
                                 "<i>Namuna:+998997213466</i>");
-                       execute(sendMessage);
+                        execute(sendMessage);
                         updateStep(STEP.ADDING_PHONE_CONFIRMATION);
                     } else if (step.equals(STEP.ADDING_INN.name())) {
-                        newClient.setTin(text);
+                        currentUser.setINN(text);
                         requestLocationWithText("Mijoz locationini yuboring!", chatId);
                         updateStep(STEP.ADD_ADDRESS_CONFIRM);
                     } else if (text.equals("➕Yangi mijoz qo’shish")) { // Adding Client Button Clicked
@@ -131,8 +130,8 @@ public class MyBot extends TelegramLongPollingBot {
                         List<CustomerCategory> categories = customerCategoryRepository.findAll();
                         Map<String, String> categoryMap = categories.stream()
                                 .collect(Collectors.toMap(category -> category.getId().toString(), CustomerCategory::getName));
-                        sendMessage.setReplyMarkup(generateInlineKeyboardButtons(categoryMap,2));
-                       execute(sendMessage);
+                        sendMessage.setReplyMarkup(generateInlineKeyboardButtons(categoryMap, 2));
+                        execute(sendMessage);
                         updateStep(STEP.ADDING_CATEGORY);
                     }
 //                    else if (text.equals("\uD83D\uDCDD Mijoz ma’lumotlari")) {
@@ -149,8 +148,8 @@ public class MyBot extends TelegramLongPollingBot {
                 if (step.equals(STEP.ADD_ADDRESS_CONFIRM.name())) {
                     Double latitude = update.getMessage().getLocation().getLatitude();
                     Double longitude = update.getMessage().getLocation().getLongitude();
-                    newClient.setLongitude(longitude);
-                    newClient.setLatitude(latitude);
+                    currentUser.setLatitude(latitude);
+                    currentUser.setLongitude(longitude);
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setText("To'g'ri Location kiritdizmi❓❓");
                     sendMessage.setChatId(chatId);
@@ -160,7 +159,8 @@ public class MyBot extends TelegramLongPollingBot {
                     buttons.put("NO", "Yoq ❌");
 
                     sendMessage.setReplyMarkup(generateInlineKeyboardButtons(buttons, 2));
-                   execute(sendMessage);
+                    execute(sendMessage);
+                    repository.save(currentUser);
                 }
             }
 
@@ -177,17 +177,17 @@ public class MyBot extends TelegramLongPollingBot {
                 } catch (IllegalArgumentException e) {
                 }
                 if (byId.isPresent()) {
-                    newClient.setTerritory(byId.get());
+                    currentUser.setTerritory(byId.get().getId());
                     SendMessage sendMessage = SendMessage.builder()
                             .text("\uD83D\uDC64 Mijoz ism,familyasini kiriting:\n" +
                                     "<i>Namuna:Abdulla Abdullayev</i>")
                             .chatId(chatId)
                             .build();
                     sendMessage.enableHtml(true);
-                   execute(sendMessage);
+                    execute(sendMessage);
                     updateStep(STEP.ADDING_FIO_WAITING);
                 } else {
-                   execute(SendMessage.builder()
+                    execute(SendMessage.builder()
                             .text("Territory Topilmadi! ❌")
                             .chatId(chatId)
                             .build());
@@ -210,7 +210,7 @@ public class MyBot extends TelegramLongPollingBot {
                     ;
 
                     if (byId.isPresent()) {
-                        newClient.setCategory(byId.get());
+                        currentUser.setCategory(byId.get().getId());
                         List<Territory> territories = territoryRepository.findAll();
 
                         Map<String, String> territoryMap = territories.stream()
@@ -221,11 +221,11 @@ public class MyBot extends TelegramLongPollingBot {
                                 .chatId(chatId)
                                 .build();
                         sendMessage.enableHtml(true);
-                       execute(sendMessage);
+                        execute(sendMessage);
                         updateStep(STEP.ADDING_TERRITORY);
 
                     } else {
-                       execute(SendMessage.builder()
+                        execute(SendMessage.builder()
                                 .text("Faoliyat Turi Topilmadi! ❌")
                                 .chatId(chatId)
                                 .build());
@@ -234,41 +234,48 @@ public class MyBot extends TelegramLongPollingBot {
 
             } else if (step.equals(STEP.ADD_ADDRESS_CONFIRM.name())) {
                 if (data.equals("NO")) {
-                    newClient.setLatitude(0);
-                    newClient.setLongitude(0);
+                    currentUser.setLatitude(0.0);
+                    currentUser.setLongitude(0.0);
                     requestLocationWithText("Iltimos Locationni Qayta Yuboring!", chatId);
                 } else {
-                    System.out.println(newClient);
+
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setChatId(chatId);
-                    newClient.setActive(false);
-                    newClient.setId(UUID.randomUUID());
-//                    clientRepository.save(newClient);
+                    clientRepository.save(Client.builder()
+                                    .longitude(currentUser.getLongitude())
+                                    .latitude(currentUser.getLatitude())
+                                    .category(customerCategoryRepository.findById(currentUser.getCategory()).get())
+                                    .territory(territoryRepository.findById(currentUser.getTerritory()).get())
+                                    .insertionTime(LocalDateTime.now())
+                                    .phone(currentUser.getPhone())
+                                    .name(currentUser.getName())
+                                    .address(currentUser.getAddress())
+                                    .active(false)
+                                    .tin(currentUser.getINN())
+                            .build());
                     generateStartMenu(sendMessage, "✅ Mijoz muvaffaqiyatli ro'yxatga olindi!");
                     updateStep(STEP.START_MENU_WAITING);
                 }
             } else if (step.equals(STEP.ADDING_PHONE_CONFIRMATION.name())) {
                 if (data.equals("NO")) {
-                    newClient.setPhone(null);
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setText("Iltimos Telefon Raqamni Qayta Yuboring!");
                     sendMessage.setChatId(chatId);
-                   execute(sendMessage);
+                    execute(sendMessage);
                 } else {
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setChatId(chatId);
                     sendMessage.enableHtml(true);
                     sendMessage.setText("\uD83D\uDCC4 Mijoz INNsini kiriting:\n" +
                             "<i>Namuna:1234567</i>");
-                   execute(sendMessage);
+                    execute(sendMessage);
                     updateStep(STEP.ADDING_INN);
                 }
             } else if (step.equals(STEP.PAGINATION_WAITING.name())) {
                 System.out.println(data);
-                if(data.equals("cancel")) {
+                if (data.equals("cancel")) {
 
-                }
-                else if (data.equals("previous")) {
+                } else if (data.equals("previous")) {
                     doPagination(PaginationConfig.of(clientRepository.findAll(PageRequest.of(previousPage - 1, 10)), List.of("name", "territory.name"), previousMessageId, --previousPage, chatId, true, 1));
                 } else if (data.equals("next")) {
                     doPagination(PaginationConfig.of(clientRepository.findAll(PageRequest.of(previousPage + 1, 10)), List.of("name", "territory.name"), previousMessageId, ++previousPage, chatId, true, 1));
@@ -325,7 +332,7 @@ public class MyBot extends TelegramLongPollingBot {
         sendMessage.setReplyMarkup(markup);
 
         sendMessage.setText(text);
-       execute(sendMessage);
+        execute(sendMessage);
     }
 
 
@@ -349,7 +356,7 @@ public class MyBot extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(List.of(row));
 
         sendMessage.setReplyMarkup(replyKeyboardMarkup);
-       execute(sendMessage);
+        execute(sendMessage);
     }
 
     private void updateStep(STEP updatingSTEP) {
@@ -361,7 +368,6 @@ public class MyBot extends TelegramLongPollingBot {
     private TelegramUser registerUser(Update update) throws InterruptedException {
         Message message = update.getMessage();
         CallbackQuery callbackQuery = update.getCallbackQuery();
-
 
 
         Long chatId;
@@ -377,7 +383,6 @@ public class MyBot extends TelegramLongPollingBot {
                 .id(null)
                 .step(STEP.START.name())
                 .chatId(chatId)
-                        .client(new Client())
                 .build()));
     }
 

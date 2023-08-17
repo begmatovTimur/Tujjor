@@ -139,7 +139,7 @@ function Admin(props) {
                     </div>
                 </div>
             </div>
-            <div style={{height: "100vh", marginTop: 49}} className={"d-flex"}>
+            <div style={{height: "100vh"}} className={"d-flex"}>
                 <div
                     style={{
                         width: "90px",
