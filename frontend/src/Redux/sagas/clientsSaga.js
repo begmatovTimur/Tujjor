@@ -2,11 +2,14 @@ import {takeLatest,takeEvery, select, put, call} from "redux-saga/effects"
 import apiCall from "../../Config/apiCall";
 import {clientsAction} from "../reducers/clientsReducer";
 import {ErrorNotify, SuccessNotify} from "../../tools/Alerts";
+import {tableActions} from "../reducers/tableReducer";
 
 function* getClients(action) {
     try {
         const currentState = yield select((state) => state.table);
+        yield put(tableActions.changeIsLoading(true))
         const res = yield apiCall("/client", "GET", null)
+        yield put(tableActions.changeIsLoading(false))
         yield put(clientsAction.getClientsSuccess(res.data))
     } catch (err) {
         yield put(clientsAction.yourActionFailureClients(err.message));
