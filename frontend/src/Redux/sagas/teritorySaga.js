@@ -10,6 +10,7 @@ function* addTeritory(action){
     }else {
         yield put(teritoryAction.changeModal(false))
         if (currentState.itemForTeritoryEdite !== ""){
+            SuccessNotify("Teritory update Successfully!")
             const res = yield apiCall(`/territory/${currentState.itemForTeritoryEdite.id}`, "PUT", action.payload)
             yield put(teritoryAction.resetAllTeritoryData())
         }else {
@@ -17,7 +18,6 @@ function* addTeritory(action){
             SuccessNotify("Teritory added Successfully!")
             yield put(teritoryAction.resetAllTeritoryData())
         }
-        
         yield call(getTeritory)
     }
 }

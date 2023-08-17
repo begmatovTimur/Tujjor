@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Map, Placemark, YMaps, ZoomControl } from "react-yandex-maps";
+import {
+  Map,
+  Placemark,
+  YMaps,
+  ZoomControl,
+  SearchControl,
+} from "react-yandex-maps";
 import { connect, useDispatch } from "react-redux";
 import { teritoryAction } from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
 import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
 import Filter from "../universal/Filter/Filter";
-import { tableActions } from "../../Redux/reducers/tableReducer";
-import LoadingBackdrop from "../universal/Loading/loading";
 
 const style = {
   position: "absolute",
@@ -32,6 +36,7 @@ function Teritory(props) {
   }, []);
 
   function handleMapClick(event) {
+    console.log(event);
     const coords = event.get("coords");
     const latitude = coords[0];
     const longitude = coords[1];
@@ -117,7 +122,6 @@ function Teritory(props) {
         ]}
       />
       <Table
-        localStoragePath="territoryColumns"
         pagination={true}
         changeSizeMode={true}
         excelPath={"/territory/excel"}
@@ -129,7 +133,6 @@ function Teritory(props) {
         changeSizeModeOptions={[10, 20, 50, 100, 200]}
         columnsProps={columns}
       />
-
       <UniversalModal
         modalTitle={
           teritory.itemForTeritoryEdite === ""
@@ -161,10 +164,15 @@ function Teritory(props) {
                 modules={["templateLayoutFactory"]}
               >
                 <ZoomControl options={{ float: "right" }} />
-                <Placemark
-                  geometry={teritory.mapState.center}
-                  modules={["geoObject.addon.balloon"]}
-                />
+                {teritory.mapState.center[0] === "" ||
+                teritory.mapState.center[1] === "" ? (
+                  ""
+                ) : (
+                  <Placemark
+                    geometry={teritory.mapState.center}
+                    modules={["geoObject.addon.balloon"]}
+                  />
+                )}
               </Map>
             </YMaps>
             <div className={"d-flex my-3 g-4"}>

@@ -79,7 +79,7 @@ const UniversalModal = ({
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-      }, 1000);
+      }, 500);
     }
   }, [isOpen]);
   return (

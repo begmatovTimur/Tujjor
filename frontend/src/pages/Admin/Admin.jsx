@@ -53,8 +53,8 @@ function Admin(props) {
     }
 
     return (
-        <div style={{height: "93.5vh", width: "auto", backgroundColor: "#EEEEEE"}}>
-            <div style={{height: "7%", backgroundColor: "#405058"}} className="d-flex">
+        <div style={{height: "100vh", width: "auto", backgroundColor: "#EEEEEE"}}>
+            <div style={{height: "7%", backgroundColor: "#405058"}} className="d-flex header">
                 <div
                     className="ps-1 pt-2 d-flex justify-content-center"
                     style={{
@@ -73,10 +73,16 @@ function Admin(props) {
                         width: "100%",
                         height: "100%"
                     }}>
-                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Supervisor</button>
-                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Sales</button>
-                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Cash Register</button>
-                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Gps</button>
+                        <button style={{fontSize: "14px"}}
+                                className={"btn text-white custom_dashboard_button"}>Supervisor
+                        </button>
+                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Sales
+                        </button>
+                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Cash
+                            Register
+                        </button>
+                        <button style={{fontSize: "14px"}} className={"btn text-white custom_dashboard_button"}>Gps
+                        </button>
                         <button style={{fontSize: "14px"}}
                                 className="custom_btn_success text-white d-flex align-items-center h-100 ms-3">
                             {icons.onlineHelpIcon}
@@ -96,8 +102,8 @@ function Admin(props) {
                     <button className="btn text-white">{icons.notificationIcon}</button>
                     <div style={{position: "relative"}}>
                         <button
-                            onMouseLeave={()=>handleUserDropDown(false)}
-                            onMouseOverCapture={()=>handleUserDropDown(true)}
+                            onMouseLeave={() => handleUserDropDown(false)}
+                            onMouseOverCapture={() => handleUserDropDown(true)}
                             className="btn text-white"
                             ref={userBoxRef}
                         >
@@ -106,8 +112,8 @@ function Admin(props) {
                         </button>
                         {userBox ? (
                             <div
-                                onMouseLeave={()=>handleUserDropDown(false)}
-                                onMouseOverCapture={()=>handleUserDropDown(true)}
+                                onMouseLeave={() => handleUserDropDown(false)}
+                                onMouseOverCapture={() => handleUserDropDown(true)}
                                 style={{
                                     position: "absolute",
                                     top: 34,
@@ -133,7 +139,7 @@ function Admin(props) {
                     </div>
                 </div>
             </div>
-            <div className={"d-flex h-100"}>
+            <div style={{height: "100vh", marginTop: 49}} className={"d-flex"}>
                 <div
                     style={{
                         width: "90px",
@@ -162,7 +168,8 @@ function Admin(props) {
                         path={"/admin/stock"}
                         icon={icons.stockIcon}
                     />
-                    <button className={"dashboard_clients_button"} onMouseEnter={handleMouseEnterF} onMouseLeave={handleMouseLeaveF} style={{zIndex:"10000"}}>
+                    <button className={"dashboard_clients_button"} onMouseEnter={handleMouseEnterF}
+                            onMouseLeave={handleMouseLeaveF} style={{zIndex: "10000"}}>
                         {icons.clientsIcon}
                         <span>Clients</span>
                     </button>
@@ -184,9 +191,10 @@ function Admin(props) {
                 </div>
                 {isHovered &&
                     <div onMouseEnter={handleMouseEnterF} onMouseLeave={handleMouseLeaveF} id={"clientDatasBox"}>
-                        <p onClick={()=>navigate("/admin/clients") & setIsHovered(false)}>Clients</p>
-                        <p onClick={()=>navigate("/admin/clients_on_the_map") & setIsHovered(false)}>Clients on the map</p>
-                        <p style={{padding:"0px"}}></p>
+                        <p onClick={() => navigate("/admin/clients") & setIsHovered(false)}>Clients</p>
+                        <p onClick={() => navigate("/admin/clients_on_the_map") & setIsHovered(false)}>Clients on the
+                            map</p>
+                        <p style={{padding: "0px"}}></p>
                     </div>
                 }
                 <Outlet/>

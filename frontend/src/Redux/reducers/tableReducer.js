@@ -6,7 +6,7 @@ const tableReducer = createSlice({
     columns: [],
     layer: false,
     sizeOfPage: 1,
-    localPath:"",
+    localPath: "",
     copyOfColumns: [],
     currentDraggingColumn: 0,
     dragOverColumn: -1,
@@ -124,14 +124,16 @@ const tableReducer = createSlice({
     saveColumnOrder: (state, action) => {
       state.columnOrderModalVisibility = false;
       state.columns = state.modalColumns;
-      localStorage.setItem(state.localPath, JSON.stringify(state.columns.map((item,index)=>item.id)));
+      localStorage.setItem(
+        state.localPath,
+        JSON.stringify(state.columns.map((item, index) => item.id))
+      );
     },
     changeSelectedForms: (state, action) => {
       state.selectedForms = action.payload;
     },
     reorderColumns: (state, action) => {
       const { sourceIndex, destinationIndex } = action.payload;
-
       const updatedColumns = [...state.modalColumns];
       const [draggedColumn] = updatedColumns.splice(sourceIndex, 1);
       updatedColumns.splice(destinationIndex, 0, draggedColumn);
@@ -151,6 +153,16 @@ const tableReducer = createSlice({
     },
     getFilteredData: (state, action) => {},
     getExcelFile: (state, action) => {},
+    resetFormInputs: (state, action) => {
+      state.formInputs.active = "";
+      state.formInputs.city = [];
+      state.formInputs.allWeeks = "";
+      state.formInputs.weekDays = [];
+      state.formInputs.tin = "";
+      state.formInputs.customerCategories = [];
+      state.formInputs.quickSearch = "";
+      state.formInputs.offset = "";
+    },
   },
 });
 

@@ -169,3 +169,11 @@
 .custom_userbox_button:hover {
     background-color: #0a819c;
 }
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
