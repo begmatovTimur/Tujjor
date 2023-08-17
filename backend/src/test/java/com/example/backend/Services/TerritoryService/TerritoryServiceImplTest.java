@@ -119,7 +119,7 @@ class TerritoryServiceImplTest {
 
         // Add the TerritoryProjection object to the pageResult
         when(pageResult.getContent()).thenReturn(Collections.singletonList(territoryProjection));
-        when(territoryRepository.findTerritoryByActiveAndRegionName(any(), anyBoolean(), any()))
+        when(territoryRepository.getFilteredData(any(), anyString(), any()))
                 .thenReturn(pageResult);
 
         // Call the pagination method
@@ -127,8 +127,7 @@ class TerritoryServiceImplTest {
 
         // Verify that the repository method was called
         verify(territoryRepository, times(1))
-                .findTerritoryByActiveAndRegionName(eq("SearchTerm"), eq(true), any());
-
+                .getFilteredData(eq("SearchTerm"), eq(""), any());
         // Verify the response status code and content
         assertTrue(response.hasBody());
         assertTrue(response.getBody() instanceof Page<?>);

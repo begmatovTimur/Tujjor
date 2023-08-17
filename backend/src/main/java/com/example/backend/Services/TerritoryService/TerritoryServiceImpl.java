@@ -58,7 +58,6 @@ public class TerritoryServiceImpl implements TerritoryService {
     }
 
 
-
     public ResponseEntity<InputStreamResource> downloadExcel(List<?> data, List<String> headers) {
         try (Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("User Data");
@@ -137,14 +136,8 @@ public class TerritoryServiceImpl implements TerritoryService {
         try {
             Pageable pageable = PageRequest.of(page, limit);
             JsonNode jsonNode = WrapFromStringToObject(request);
-            Page<TerritoryProjection> territories;
-            if (!jsonNode.get("active").asText().equals("")) {
-                System.out.println(pageable);
-                territories = territoryRepository.findTerritoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(),
-                        jsonNode.get("active").asBoolean(), pageable);
-            } else {
-                territories = territoryRepository.findTerritoryByRegionAndName(jsonNode.get("quickSearch").asText(),pageable);
-            }
+            Page<TerritoryProjection> territories = territoryRepository.getFilteredData(jsonNode.get("quickSearch").asText(),
+                    jsonNode.get("active").asText(), pageable);
             return ResponseEntity.ok(territories);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("An error has occurred");
@@ -152,13 +145,9 @@ public class TerritoryServiceImpl implements TerritoryService {
     }
 
     @Override
-    public ResponseEntity<Resource> getExcelFile(SearchActiveDTO dto) throws IOException {
-        List<TerritoryProjection> territoryFilter = null;
-        if (dto.getActive().equals("ALL")) {
-            territoryFilter = territoryRepository.findByQuickSearchWithoutActive(dto.getQuickSearch());
-        } else {
-            territoryFilter = territoryRepository.findByQuickSearch(Boolean.valueOf(dto.getActive()),dto.getQuickSearch());
-        }
+    public ResponseEntity<Resource> getExcelFile(HttpServletRequest request) throws IOException {
+        JsonNode jsonNode = WrapFromStringToObject(request);
+        List<TerritoryProjection> territoryFilter = territoryRepository.getFilteredDataForExcel(jsonNode.get("quickSearch").asText(), jsonNode.get("active").asText());
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Company info");
         Row row = sheet.createRow(0);

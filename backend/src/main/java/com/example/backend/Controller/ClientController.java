@@ -57,8 +57,8 @@ public class ClientController {
 
     @GetMapping("/excel")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    public ResponseEntity<Resource> excel(@RequestParam List<ExcelDTO> columns) throws IOException {
-        return clientService.getExcel(columns);
+    public ResponseEntity<Resource> excel(HttpServletRequest request) throws IOException {
+        return clientService.getExcel(request);
     }
     @GetMapping("/clientsLocation")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
