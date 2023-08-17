@@ -98,12 +98,13 @@ function* downloadExcelFile(action) {
     const currentState = yield select((state) => state.table);
     const x = currentState.formInputs
     let obj = {
-        active: x.active.value,
-        quickSearch: x.quickSearch,
+        active: x.active.value ? x.active.value : x.active,
         city: x.city,
+        allWeeks: x.allWeeks.value,
         weekDays: x.weekDays,
         tin: x.tin.value? x.tin.value : x.tin,
         customerCategories: x.customerCategories,
+        quickSearch: x.quickSearch
     }
     if (obj.active === undefined) obj.active = "ALL";
     if (action.payload.excelWithoutSearch) {
@@ -111,6 +112,7 @@ function* downloadExcelFile(action) {
             .get(domen + action.payload.path, {
                 responseType: 'blob',
                 headers: {
+                    searchParam:JSON.stringify(obj),
                     token: localStorage.getItem("access_token")
                 }
             })
@@ -125,8 +127,7 @@ function* downloadExcelFile(action) {
             .get(domen + action.payload.path, {
                 responseType: 'blob',
                 headers: {
-                    active: obj.active,
-                    quickSearch: obj.quickSearch,
+                    searchParam:JSON.stringify(obj),
                     token: localStorage.getItem("access_token")
                 }
             })

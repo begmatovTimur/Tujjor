@@ -21,7 +21,7 @@ public interface ClientService {
 
     HttpEntity<?> getTeritoriesForClients();
 
-    ResponseEntity<Resource> getExcel() throws IOException;
+    ResponseEntity<Resource> getExcel(HttpServletRequest request) throws IOException;
 
     HttpEntity<?> getAllLocation();
 }

@@ -47,7 +47,6 @@ const Table = (props) => {
       page,
     });
   };
-
   useEffect(()=>{
     props.changeLoadingActive(true)
     setTimeout(()=>{

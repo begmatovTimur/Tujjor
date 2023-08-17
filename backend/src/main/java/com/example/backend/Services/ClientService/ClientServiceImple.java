@@ -171,9 +171,20 @@ public class ClientServiceImple implements ClientService {
 
     @Override
     @SneakyThrows
-    public ResponseEntity<Resource> getExcel() {
-//        Pageable pageable = PageRequest.of(dto.getPage(),dto.getLimit());
-        List<Client> all = clientRepository.findAllOrderedClient();
+    public ResponseEntity<Resource> getExcel(HttpServletRequest request) {
+        JsonNode jsonNode = wrapToObject(request);
+        JsonNode cityArrayNode = jsonNode.get("city");
+        List<UUID> cities = new ArrayList<>();
+        for (JsonNode cityNode : cityArrayNode) {
+            UUID cityId = UUID.fromString(cityNode.asText());
+            cities.add(cityId);
+        }
+        JsonNode categoryArray = jsonNode.get("customerCategories");
+        List<Integer> customerCategoriesParam = new ArrayList<>();
+        for (JsonNode cityNode : categoryArray) {
+            customerCategoriesParam.add(cityNode.asInt());
+        }
+        List<ClientProjection> all = clientRepository.getAllFilteredFieldsForExcel(cities, customerCategoriesParam, jsonNode.get("active").asText(), jsonNode.get("tin").asText(), jsonNode.get("quickSearch").asText());
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Company info");
         Row row = sheet.createRow(0);
@@ -187,12 +198,12 @@ public class ClientServiceImple implements ClientService {
         row.createCell(7).setCellValue("Active");
         row.createCell(8).setCellValue("Registration Date");
         int counter = 1;
-        for (Client client : all) {
+        for (ClientProjection client : all) {
             Row dataRow = sheet.createRow(counter);
             counter++;
-            dataRow.createCell(0).setCellValue(client.getName());
+            dataRow.createCell(0).setCellValue(client.getClientName());
             dataRow.createCell(1).setCellValue(client.getAddress());
-            dataRow.createCell(2).setCellValue(client.getPhone());
+            dataRow.createCell(2).setCellValue(client.getTelephone());
             dataRow.createCell(3).setCellValue(client.getTin());
             dataRow.createCell(4).setCellValue(client.getCompanyName());
             dataRow.createCell(5).setCellValue(client.getLongitude());

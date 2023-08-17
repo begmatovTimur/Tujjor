@@ -29,11 +29,7 @@ public class TerritoryController {
 
     @GetMapping("/excel")
     public ResponseEntity<Resource> excel(HttpServletRequest request) throws IOException {
-        String quickSearch = request.getHeader("quickSearch");
-        SearchActiveDTO searchActiveDTO = new SearchActiveDTO();
-        searchActiveDTO.setActive(request.getHeader("active"));
-        searchActiveDTO.setQuickSearch(quickSearch);
-        return territoryService.getExcelFile(searchActiveDTO);
+        return territoryService.getExcelFile(request);
     };
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
