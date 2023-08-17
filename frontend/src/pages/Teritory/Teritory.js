@@ -126,6 +126,7 @@ function Teritory(props) {
         changeSizeMode={true}
         excelPath={"/territory/excel"}
         fileName={"territories"}
+        localStoragePath="territoryColumns"
         excelWithoutSearch={false}
         paginationApi={"/territory/pagination?page={page}&limit={limit}"}
         dataProps={teritory.teritories}

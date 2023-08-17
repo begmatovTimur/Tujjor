@@ -81,8 +81,7 @@ const Table = (props) => {
   //   console.log(props.data[item].name);
   // }):[]);
   // console.log(props.data.lenght?JSON.parse(localStorage.getItem(props.localStoragePath)).map(item=>props.data[item]):"");
-  console.log(localStorage.getItem(props.localStoragePath));
-
+  console.log(localStorage.getItem(props.localStoragePath));  
   return (
     <div className="universal_table">
       {props.isLoading ? (
@@ -157,7 +156,6 @@ const Table = (props) => {
                 )}
               </div>
             </div>
-
             <UniversalModal
               modalTitle={"Columns order"}
               isOpen={props.columnOrderModalVisibility}
@@ -211,12 +209,11 @@ const Table = (props) => {
                 </div>
               }
             />
-
-            <div style={{ height: "300px", overflow: "auto" }}>
+            <div style={{ height: "380px", overflow: "auto" }}>
               <table className="table mt-2 mytable">
                 <thead className={"table_thead"}>
                   <tr>
-                    {props.columns.map((item) => (
+                    {(props.columns.length===0?props.columnsProps:props.columns).map((item) => (
                       <th className={item.show ? "" : "hidden"}>
                         {item.title}
                       </th>
@@ -229,7 +226,8 @@ const Table = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {props.data.map((item, index) => (
+                {props.columns.length===0?<tr><th colSpan={5} className="text-center">No Data</th></tr>:""}
+                  {props.columns.length!=0 && props.data.map((item, index) => (
                     <tr key={item.id}>
                       {props.columns.map((col) =>
                         col.type === "jsx" ? (
@@ -237,7 +235,7 @@ const Table = (props) => {
                             {col.data(item)}
                           </td>
                         ) : col.type === "index" ? (
-                          <td className={col.show ? "" : "hidden"}> 
+                          <td className={col.show ? "" : "hidden"}>
                             {index +
                               1 +
                               props.sizeOfPage * (props.currentPage - 1)}

@@ -6,7 +6,6 @@ import {tableActions} from "../reducers/tableReducer";
 
 function* getClients(action) {
     try {
-        const currentState = yield select((state) => state.table);
         yield put(tableActions.changeIsLoading(true))
         const res = yield apiCall("/client", "GET", null)
         yield put(tableActions.changeIsLoading(false))
@@ -33,8 +32,8 @@ function* saveClients(action) {
         yield put(clientsAction.closeModal())
         if (currentState.editeClient !== "") {
             const res = yield apiCall("/client?clientId=" + currentState.editeClient.id, "PUT", action.payload)
-                yield put(clientsAction.resetAllClientsData())
-                SuccessNotify("Client update Successfully!")
+            yield put(clientsAction.resetAllClientsData())
+            SuccessNotify("Client update Successfully!")
         } else {
             const res = yield apiCall("/client", "POST", action.payload)
               if(res){
@@ -42,7 +41,8 @@ function* saveClients(action) {
                   SuccessNotify("Client added Successfully!")
               }
         }
-    yield call(getClients)
+        const res = yield apiCall("/client", "GET", null)
+        yield put(clientsAction.getClientsSuccess(res.data))
     }
 }
 
