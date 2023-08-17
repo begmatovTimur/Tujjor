@@ -21,24 +21,24 @@ const Table = (props) => {
   };
 
   useEffect(() => {
-    try{
+    try {
       props.claimData({
         columns: localStorage.getItem(props.localStoragePath)
-          ? JSON.parse(localStorage.getItem(props.localStoragePath)).map (
-              (item) => {
-                if(props.columnsProps[item]===undefined) {
-                  localStorage.removeItem(props.localStoragePath);
-                  return;
+            ? JSON.parse(localStorage.getItem(props.localStoragePath)).map(
+                (item) => {
+                  if (props.columnsProps[item] === undefined) {
+                    localStorage.removeItem(props.localStoragePath);
+                    return;
+                  }
+                  return props.columnsProps[item];
                 }
-                return props.columnsProps[item];
-              }
             )
-          : props.columnsProps,
+            : props.columnsProps,
         data: props.dataProps,
-        localPath:props.localStoragePath
+        localPath: props.localStoragePath,
       });
-    }catch(e) {
-      localStorage.removeItem(props.localStoragePath)
+    } catch (e) {
+      localStorage.removeItem(props.localStoragePath);
     }
     if (props.pagination === true && !props.paginationApi)
       alert("Pagination API is required!");
@@ -51,12 +51,10 @@ const Table = (props) => {
     }
   }, [props.dataProps]);
 
-  console.log(props.columns);
-
   const getValueByKeys = (obj, keys) => {
     const keysArray = keys.split("+").map((key) => key.trim());
     const values = keysArray.map((key) =>
-      key.split(".").reduce((acc, k) => (acc && acc[k]) || "", obj)
+        key.split(".").reduce((acc, k) => (acc && acc[k]) || "", obj)
     );
     return values.join(" ");
   };
@@ -77,191 +75,193 @@ const Table = (props) => {
     }, 1000);
   }, []);
 
-  // console.log(props.data.length?(JSON.parse(localStorage.getItem(props.localStoragePath))).map(item=>{
-  //   console.log(props.data[item].name);
-  // }):[]);
-  // console.log(props.data.lenght?JSON.parse(localStorage.getItem(props.localStoragePath)).map(item=>props.data[item]):"");
-  console.log(localStorage.getItem(props.localStoragePath));
-
   return (
-    <div className="universal_table">
-      {props.isLoading ? (
-        <div
-          className="bg-white d-flex justify-content-center align-items-center gap-2 p-2"
-          style={{ height: "30vh" }}
-        >
-          <div>
-            <div id="loading-bar-spinner" className="spinner">
-              <div className="spinner-icon"></div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className="bg-white d-flex flex-column gap-2 p-2">
-            <div className="d-flex flex-column">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-end ">
-                  {props.changeSizeMode ? (
-                    <Dropdown
-                      multiSelect={false}
-                      customTitle={"By " + props.changeSizeModeOptions[0]}
-                      dropdownId="1"
-                      body={props.changeSizeModeOptions}
-                      onItemClick={(item) => {
-                        props.handlePageChange(1);
-                        props.changePaginationTo({
-                          api: props.paginationApi,
-                          size: item,
-                          page: 1,
-                        });
-                      }}
-                    />
-                  ) : (
-                    ""
-                  )}
-                  <Dropdown
-                    customTitle="Table Setup"
-                    multiSelect={true}
-                    dropdownId="2"
-                    body={props.columnsProps.map((item) => item.title)}
-                    onItemClick={(item) => {
-                      props.filterVisibility(item);
-                    }}
-                  />
-                  <button
-                    style={{ width: "100px" }}
-                    className="custom_btn"
-                    download
-                    onClick={() => {
-                      props.getExcelFile({
-                        excelWithoutSearch: props.excelWithoutSearch,
-                        path: props.excelPath,
-                        fileName: props.fileName,
-                      });
-                    }}
-                  >
-                    Excel
-                  </button>
-                  <button
-                    className="custom_btn"
-                    onClick={() => props.setColumnModalVisibility(true)}
-                  >
-                    Column Order
-                  </button>
+      <div className="universal_table">
+        {props.isLoading ? (
+            <div
+                className="bg-white d-flex justify-content-center align-items-center gap-2 p-2"
+                style={{ height: "30vh" }}
+            >
+              <div>
+                <div id="loading-bar-spinner" className="spinner">
+                  <div className="spinner-icon"></div>
                 </div>
-                {props.columnOrderMode && props.columns.length ? (
-                  <Filter quickSearch></Filter>
-                ) : (
-                  ""
-                )}
               </div>
             </div>
-
-            <UniversalModal
-              modalTitle={"Columns order"}
-              isOpen={props.columnOrderModalVisibility}
-              closeFunction={() =>
-                props.setColumnModalVisibility(false) &
-                props.setModalColumns(props.columns)
-              }
-              width={33}
-              functionforSaveBtn={() => props.saveColumnOrder()}
-              JsxData={
-                <div className="modal-body d-flex flex-column gap-1">
-                  <DragDropContext onDragEnd={handleDragEnd}>
-                    <Droppable droppableId="columnList" direction="vertical">
-                      {(provided) => (
-                        <div
-                          {...provided.droppableProps}
-                          ref={provided.innerRef}
-                        >
-                          {props.modalColumns.map((item, index) => (
-                            <Draggable
-                              key={item.id.toString()}
-                              draggableId={item.id.toString()}
-                              index={index}
-                            >
-                              {(provided, snapshot) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  className={
-                                    "w-100 d-flex bg-secondary text-white p-2" +
-                                    (item.show ? "" : " hidden")
-                                  }
-                                  style={{
-                                    ...provided.draggableProps.style,
-                                    left: 0,
-                                    top: 0,
-                                    position: "relative",
-                                  }}
-                                >
-                                  {item.title}
-                                </div>
-                              )}
-                            </Draggable>
-                          ))}
-                          {provided.placeholder}
-                        </div>
-                      )}
-                    </Droppable>
-                  </DragDropContext>
-                </div>
-              }
-            />
-
-            <div style={{ height: "300px", overflow: "auto" }}>
-              <table className="table mt-2 mytable">
-                <thead className={"table_thead"}>
-                  <tr>
-                    {props.columns.map((item) => (
-                      <th >{item.title}</th>
-                    ))}
-                    {props.additionalColumns ? <th>More</th> : ""}
-                  </tr>
-                </thead>
-                <tbody>
-                  {props.data.map((item, index) => (
-                    <tr key={item.id}>
-                      {props.columns.map((col) =>
-                        col.type === "jsx" ? (
-                          <td width="20">{col.data(item)}</td>
-                        ) : col.type === "index" ? (
-                          <td>
-                            {index +
-                              1 +
-                              props.sizeOfPage * (props.currentPage - 1)}
-                          </td>
-                        ) : col.type !== "jsx" ? (
-                          <td>{getValueByKeys(item, col.key)}</td>
-                        ) : (
+        ) : (
+            <>
+              <div className="bg-white d-flex flex-column gap-2 p-2">
+                <div className="d-flex flex-column">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div className="d-flex align-items-end ">
+                      {props.changeSizeMode ? (
+                          <Dropdown
+                              multiSelect={false}
+                              customTitle={"By " + props.changeSizeModeOptions[0]}
+                              dropdownId="1"
+                              body={props.changeSizeModeOptions}
+                              onItemClick={(item) => {
+                                props.handlePageChange(1);
+                                props.changePaginationTo({
+                                  api: props.paginationApi,
+                                  size: item,
+                                  page: 1,
+                                });
+                              }}
+                          />
+                      ) : (
                           ""
-                        )
+                      )}
+                      <Dropdown
+                          customTitle="Table Setup"
+                          multiSelect={true}
+                          dropdownId="2"
+                          body={props.columnsProps.map((item) => item.title)}
+                          onItemClick={(item) => {
+                            props.filterVisibility(item);
+                          }}
+                      />
+                      <button
+                          style={{ width: "100px" }}
+                          className="custom_btn"
+                          download
+                          onClick={() => {
+                            props.getExcelFile({
+                              excelWithoutSearch: props.excelWithoutSearch,
+                              path: props.excelPath,
+                              fileName: props.fileName,
+                            });
+                          }}
+                      >
+                        Excel
+                      </button>
+                      <button
+                          className="custom_btn"
+                          onClick={() => props.setColumnModalVisibility(true)}
+                      >
+                        Column Order
+                      </button>
+                    </div>
+                    {props.columnOrderMode && props.columns.length ? (
+                        <Filter quickSearch></Filter>
+                    ) : (
+                        ""
+                    )}
+                  </div>
+                </div>
+                <UniversalModal
+                    modalTitle={"Columns order"}
+                    isOpen={props.columnOrderModalVisibility}
+                    closeFunction={() =>
+                        props.setColumnModalVisibility(false) &
+                        props.setModalColumns(props.columns)
+                    }
+                    width={33}
+                    functionforSaveBtn={() => props.saveColumnOrder()}
+                    JsxData={
+                      <div className="modal-body d-flex flex-column gap-1">
+                        <DragDropContext onDragEnd={handleDragEnd}>
+                          <Droppable droppableId="columnList" direction="vertical">
+                            {(provided) => (
+                                <div
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                >
+                                  {props.modalColumns.map((item, index) => (
+                                      <Draggable
+                                          key={item.id.toString()}
+                                          draggableId={item.id.toString()}
+                                          index={index}
+                                      >
+                                        {(provided, snapshot) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                className={
+                                                    "w-100 d-flex bg-secondary text-white p-2" +
+                                                    (item.show ? "" : " hidden")
+                                                }
+                                                style={{
+                                                  ...provided.draggableProps.style,
+                                                  left: 0,
+                                                  top: 0,
+                                                  position: "relative",
+                                                }}
+                                            >
+                                              {item.title}
+                                            </div>
+                                        )}
+                                      </Draggable>
+                                  ))}
+                                  {provided.placeholder}
+                                </div>
+                            )}
+                          </Droppable>
+                        </DragDropContext>
+                      </div>
+                    }
+                />
+                <div style={{ height: "300px", overflow: "auto" }}>
+                  <table className="table mt-2 mytable">
+                    <thead className={"table_thead"}>
+                    <tr>
+                      {props.columns.map((item) => (
+                          <th className={item.show ? "" : "hidden"}>
+                            {item.title}
+                          </th>
+                      ))}
+                      {props.additionalColumns ? (
+                          <th >More</th>
+                      ) : (
+                          ""
                       )}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            {props.pagination && props.data.length && props.columns.length ? (
-              <div className="d-flex justify-content-end pt-2">
-                <Pagination
-                  onChange={(e, page) => handleChange(e, page)}
-                  page={props.currentPage}
-                  count={props.totalPages}
-                  variant="outlined"
-                  shape="rounded"
-                />
+                    </thead>
+                    <tbody>
+                    {props.data.map((item, index) => (
+                        <tr key={item.id}>
+                          {props.columns.map((col) =>
+                              col.type === "jsx" ? (
+                                  <td width="20" className={col.show ? "" : "hidden"}>
+                                    {col.data(item)}
+                                  </td>
+                              ) : col.type === "index" ? (
+                                  <td className={col.show ? "" : "hidden"}>
+                                    {index +
+                                        1 +
+                                        props.sizeOfPage * (props.currentPage - 1)}
+                                  </td>
+                              ) : col.type==="boolean" && col.key==="active"?<td className={item[col.key]?"text-success":"text-danger"}>{item[col.key]?"active":"unactive "}</td>:col.type !== "jsx" ? (
+                                  <td className={col.show ? "" : "hidden"}>
+                                    {getValueByKeys(item, col.key)}
+                                  </td>
+                              ) : (
+                                  ""
+                              )
+                          )}
+                        </tr>
+                    ))}
+                    </tbody>
+                  </table>
+                </div>
+                {props.pagination && props.data.length && props.columns.length ? (
+                    <div className="d-flex justify-content-end pt-2">
+                      <Pagination
+                          onChange={(e, page) => handleChange(e, page)}
+                          page={props.currentPage}
+                          count={props.totalPages}
+                          variant="outlined"
+                          shape="rounded"
+                      />
+                    </div>
+                ) : (
+                    ""
+                )}
               </div>
-            ) : (
-              ""
-            )}
-          </div>
-        </>
-      )}
-    </div>
+            </>
+        )}
+      </div>
   );
 };
 
