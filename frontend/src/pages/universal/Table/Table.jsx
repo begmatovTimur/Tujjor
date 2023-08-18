@@ -78,6 +78,9 @@ const Table = (props) => {
     setTimeout(() => {
       props.changeLoadingActive(false);
     }, 1000);
+    return ()=>{
+      props.emptyFilters()
+    }
   }, []);
 
   console.log(props.copyOfColumns);
@@ -128,7 +131,7 @@ const Table = (props) => {
                     customTitle="Table Setup"
                     multiSelect={true}
                     dropdownId="2"
-                    body={props.columns.length!==0?props.columns.map(item=>item.title):props.copyOfColumns.map(item=>item.title)}
+                    body={props.columns.length!==0?props.columns.map(item=>({title:item.title,show:item.show})):props.copyOfColumns.map(item=>({title:item.title,show:item.show}))}
                     onItemClick={(item) => {
                       props.filterVisibility(item);
                     }}
@@ -261,7 +264,7 @@ const Table = (props) => {
                           ) : col.type === "boolean" && col.key === "active" ? (
                             <td
                               className={
-                                item[col.key] ? "text-success" : "text-danger"
+                                item[col.key]  ? "text-success" + (col.show?"": " hidden") : "text-danger" + (col.show?"": " hidden")
                               }
                             >
                               {item[col.key] ? "active" : "unactive "}

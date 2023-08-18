@@ -55,7 +55,7 @@ const tableReducer = createSlice({
     },
     claimData: (state, action) => {
       let i = 0;
-      console.log(action.payload.columns.length);
+      
       action.payload.columns.map(item=>{
         if(item.show===false)i++;
       })
@@ -68,6 +68,22 @@ const tableReducer = createSlice({
       state.copyOfColumns = action.payload.columns;
       state.modalColumns = action.payload.columns;
       state.localPath = action.payload.localPath;
+    },
+    emptyFilters:(state,action)=>{
+      state.selectedForms = {
+        customerCategories: [],
+        city: [],
+      }
+      state.formInputs= {
+        active: "",
+        city: [],
+        allWeeks: "",
+        weekDays: [],
+        tin: "",
+        customerCategories: [],
+        quickSearch: "",
+        offset: "",
+      }
     },
     setColumnModalVisibility: (state, action) => {
       state.columnOrderModalVisibility = action.payload;
