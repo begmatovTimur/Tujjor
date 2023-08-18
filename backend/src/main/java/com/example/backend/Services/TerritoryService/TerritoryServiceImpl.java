@@ -1,25 +1,20 @@
 package com.example.backend.Services.TerritoryService;
 
-import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Projection.TerritoryProjection;
-import com.example.backend.Projection.TerritoryRegionProjection;
 import com.example.backend.Repository.TerritoryRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.*;
@@ -145,30 +140,57 @@ public class TerritoryServiceImpl implements TerritoryService {
     }
 
     @Override
-    public ResponseEntity<Resource> getExcelFile(HttpServletRequest request) throws IOException {
+    public ResponseEntity<Resource> getExcelFile(HttpServletRequest request, String columns) throws IOException {
+        String[] headersStr = columns.split("\\.");
         JsonNode jsonNode = WrapFromStringToObject(request);
         List<TerritoryProjection> territoryFilter = territoryRepository.getFilteredDataForExcel(jsonNode.get("quickSearch").asText(), jsonNode.get("active").asText());
         XSSFWorkbook workbook = new XSSFWorkbook();
+        int rowIdx = 0;
         Sheet sheet = workbook.createSheet("Company info");
-        Row row = sheet.createRow(0);
-        row.createCell(0).setCellValue("ID");
-        row.createCell(1).setCellValue("Region");
-        row.createCell(2).setCellValue("Name");
-        row.createCell(3).setCellValue("Code");
-        row.createCell(4).setCellValue("Active");
-        row.createCell(5).setCellValue("Longitude");
-        row.createCell(6).setCellValue("Latitude");
-        int counter = 1;
+        Row headerRow = sheet.createRow(rowIdx++);
+        for (int i = 0; i < headersStr.length; i++) {
+            headerRow.createCell(i).setCellValue(headersStr[i]);
+        }
+
         for (TerritoryProjection territory : territoryFilter) {
-            Row dataRow = sheet.createRow(counter);
-            counter++;
-            dataRow.createCell(0).setCellValue(territory.getId().toString());
-            dataRow.createCell(1).setCellValue(territory.getRegion());
-            dataRow.createCell(2).setCellValue(territory.getName());
-            dataRow.createCell(3).setCellValue(territory.getCode());
-            dataRow.createCell(4).setCellValue(territory.getActive().toString());
-            dataRow.createCell(5).setCellValue(territory.getLongitude());
-            dataRow.createCell(6).setCellValue(territory.getLatitude());
+            Row dataRow = sheet.createRow(rowIdx++);
+            int columnIndex = 0; // Introduce a separate variable for the column index
+            for (int i = 0; i < headersStr.length; i++) {
+                System.out.println(headersStr[i].replaceAll("\"", ""));
+                switch (headersStr[i].replaceAll("\"", "")) {
+                    case "Title":
+                        dataRow.createCell(columnIndex++).setCellValue(territory.getName().replaceAll("\"", ""));
+                        break;
+                    case "Region":
+                        dataRow.createCell(columnIndex++).setCellValue(territory.getRegion().replaceAll("\"", ""));
+                        break;
+                    case "Code":
+                        dataRow.createCell(columnIndex++).setCellValue(territory.getCode().replaceAll("\"", ""));
+                        break;
+                    // Add more cases for other fields as needed
+                }
+            }
+        }
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerCellStyle.setFont(headerFont);
+
+        CellStyle dataCellStyle = workbook.createCellStyle();
+        dataCellStyle.setWrapText(true);
+        for (Cell cell : headerRow) {
+            cell.setCellStyle(headerCellStyle);
+            int columnIndex = cell.getColumnIndex();
+            sheet.autoSizeColumn(columnIndex);
+        }
+
+// Apply styles to data rows and auto-size columns
+        for (Row row : sheet) {
+            for (Cell cell : row) {
+                cell.setCellStyle(dataCellStyle);
+                int columnIndex = cell.getColumnIndex();
+                sheet.autoSizeColumn(columnIndex);
+            }
         }
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

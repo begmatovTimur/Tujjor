@@ -1,5 +1,6 @@
 package com.example.backend.Controller;
 
+import com.example.backend.DTO.ExcelDTO;
 import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Services.TerritoryService.TerritoryService;
@@ -12,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -28,8 +30,8 @@ public class TerritoryController {
 
 
     @GetMapping("/excel")
-    public ResponseEntity<Resource> excel(HttpServletRequest request) throws IOException {
-        return territoryService.getExcelFile(request);
+    public ResponseEntity<Resource> excel(@RequestParam String columns, HttpServletRequest request) throws IOException {
+        return territoryService.getExcelFile(request,columns);
     };
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")

@@ -96,7 +96,7 @@ function Clients(props) {
             id: 8,
             title: "Registration Date",
             key: "registrationDate",
-            type: "boolean",
+            type: "text",
             show: true,
         },
         {
