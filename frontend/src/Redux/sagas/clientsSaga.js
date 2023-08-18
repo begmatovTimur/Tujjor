@@ -33,7 +33,7 @@ function* saveClients(action) {
         if (currentState.editeClient !== "") {
             const res = yield apiCall("/client?clientId=" + currentState.editeClient.id, "PUT", action.payload)
             yield put(clientsAction.resetAllClientsData())
-            SuccessNotify("Client update Successfully!")
+            SuccessNotify("Client updated Successfully!")
         } else {
             const res = yield apiCall("/client", "POST", action.payload)
               if(res){

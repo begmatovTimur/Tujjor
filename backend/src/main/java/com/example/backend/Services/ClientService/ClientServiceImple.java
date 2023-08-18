@@ -276,11 +276,12 @@ public class ClientServiceImple implements ClientService {
     @Override
     public HttpEntity<?> getAllLocation() {
         List<ResClientsTerritories> result = new ArrayList<>();
-        List<Client> clients = clientRepository.findAllByActiveIsTrue();
+        List<Client> clients = clientRepository.findAll();
         for (Client client : clients) {
             result.add(new ResClientsTerritories(
                     client.getName(),
-                    List.of(client.getLatitude(), client.getLongitude())
+                    List.of(client.getLatitude(), client.getLongitude()),
+                    client.getActive()
 ));
         }
         return ResponseEntity.ok(result);

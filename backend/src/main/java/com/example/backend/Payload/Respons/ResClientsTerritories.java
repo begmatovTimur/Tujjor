@@ -12,4 +12,5 @@ import java.util.List;
 public class ResClientsTerritories {
     private String name;
     private List<Double> territories;
+    private Boolean active;
 }

@@ -54,6 +54,7 @@ const Table = (props) => {
         page: props.currentPage,
       });
     }
+
   }, [props.dataProps]);
 
   const getValueByKeys = (obj, keys) => {
@@ -83,8 +84,8 @@ const Table = (props) => {
     }
   }, []);
 
-  console.log(props.copyOfColumns);
-  console.log(props.columns);
+
+
 
   // console.log(props.data.length?(JSON.parse(localStorage.getItem(props.localStoragePath))).map(item=>{
   //   console.log(props.data[item].name);
@@ -112,9 +113,9 @@ const Table = (props) => {
                   {props.changeSizeMode ? (
                     <Dropdown
                       multiSelect={false}
-                      customTitle={"By " + props.changeSizeModeOptions[0]}
+                      customTitle={"By "+props.changeSizeModeOptions[0]}
                       dropdownId="1"
-                      body={props.changeSizeModeOptions}
+                      body={props.changeSizeModeOptions.map(item=>({title:item}))}
                       onItemClick={(item) => {
                         props.handlePageChange(1);
                         props.changePaginationTo({

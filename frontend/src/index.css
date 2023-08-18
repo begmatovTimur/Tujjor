@@ -9,6 +9,27 @@
     border-radius: 10px;
 }
 
+.redlight {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red;
+}
+.greenlight {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: green;
+}
+.bluelight {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: blue;
+}
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #636363;
