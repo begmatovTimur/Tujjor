@@ -45,44 +45,44 @@ function App() {
             token: localStorage.getItem("access_token"),
           },
         })
-          .then((res) => {
-            let s = false;
-            permissions.map((item) => {
-              if (item.url === location.pathname) {
-                res.data.authorities.map((i1) => {
-                  if (item.roles.includes(i1.roleName)) {
-                    s = true;
-                  }
-                });
+            .then((res) => {
+              let s = false;
+              permissions.map((item) => {
+                if (item.url === location.pathname) {
+                  res.data.authorities.map((i1) => {
+                    if (item.roles.includes(i1.roleName)) {
+                      s = true;
+                    }
+                  });
+                }
+              });
+              if (!s) {
+                navigate("/404");
+              }
+            })
+            .catch((err) => {
+              if (localStorage.getItem("no_token") === "sorry") {
+                navigate("/login");
+                for (let i = 0; i < 1; i++) {
+                  window.location.reload();
+                }
+              }
+              if (err.response.status === 401) {
+                axios({
+                  url:
+                      domen+"/auth/refresh?refreshToken=" +
+                      localStorage.getItem("refresh_token"),
+                  method: "POST",
+                })
+                    .then((res) => {
+                      localStorage.setItem("access_token", res.data);
+                      window.location.reload();
+                    })
+                    .catch((err) => {
+                      navigate("/login");
+                    });
               }
             });
-            if (!s) {
-              navigate("/404");
-            }
-          })
-          .catch((err) => {
-            if (localStorage.getItem("no_token") === "sorry") {
-              navigate("/login");
-              for (let i = 0; i < 1; i++) {
-                window.location.reload();
-              }
-            }
-            if (err.response.status === 401) {
-              axios({
-                url:
-                  domen+"/auth/refresh?refreshToken=" +
-                  localStorage.getItem("refresh_token"),
-                method: "POST",
-              })
-                .then((res) => {
-                  localStorage.setItem("access_token", res.data);
-                  window.location.reload();
-                })
-                .catch((err) => {
-                  navigate("/login");
-                });
-            }
-          });
       } else {
         navigate("/404");
       }

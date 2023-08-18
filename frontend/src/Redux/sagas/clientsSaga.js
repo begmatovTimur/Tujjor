@@ -4,11 +4,11 @@ import {clientsAction} from "../reducers/clientsReducer";
 import {ErrorNotify, SuccessNotify} from "../../tools/Alerts";
 import {tableActions} from "../reducers/tableReducer";
 
-function* getClients(action) {
+function* getClients() {
     try {
-        const currentState = yield select((state) => state.table);
         yield put(tableActions.changeIsLoading(true))
-        const res = yield apiCall("/client", "GET", null)
+        const res = yield call(apiCall("/client", "GET", null))
+        console.log(res)
         yield put(tableActions.changeIsLoading(false))
         yield put(clientsAction.getClientsSuccess(res.data))
     } catch (err) {
@@ -17,7 +17,6 @@ function* getClients(action) {
 }
 function* getAllClientsTerritories(action) {
     try {
-        const currentState = yield select((state) => state.table);
         const res = yield apiCall("/client/clientsLocation", "GET", null)
         yield put(clientsAction.getAllClientsTerritoriesSuccess(res.data))
     } catch (err) {
