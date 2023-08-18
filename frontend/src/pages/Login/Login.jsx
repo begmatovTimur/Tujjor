@@ -38,11 +38,12 @@ function Login(props) {
             props.setLoading(false);
             SuccessNotify("You have successfully logged in");
             localStorage.setItem("access_token", res.data.access_token);
-            if (res.data.refresh_token !== "") {
+            if (res.data.refresh_token !== "" && loginReducer.remember === true) {
               localStorage.setItem("refresh_token", res.data.refresh_token);
               localStorage.setItem("no_token", "success");
             } else {
               localStorage.setItem("no_token", "sorry");
+              localStorage.removeItem("refresh_token");
             }
             props.changePhone("");
             props.changePassword("");
@@ -60,7 +61,6 @@ function Login(props) {
       }, 1000);
     }
   }
-
   return (
     <div>
       <img id={"logoForLogin"} src={logo} alt="#" />
@@ -114,7 +114,6 @@ function Login(props) {
                       </label>
                       <Button
                           style={{
-                            border:'none',
                               backgroundColor: "#65b965",
                               marginTop: 20,
                               width: "30%",
