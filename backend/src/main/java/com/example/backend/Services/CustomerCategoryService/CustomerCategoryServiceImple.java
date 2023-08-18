@@ -16,9 +16,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import lombok.SneakyThrows;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
@@ -111,30 +110,63 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
     }
 
     @Override
-    public ResponseEntity<Resource> getExcelFile(SearchActiveDTO dto) throws IOException {
+    @SneakyThrows
+    public ResponseEntity<Resource> getExcelFile(HttpServletRequest request,String columns) throws IOException {
+        System.out.println(columns);
+        String[] headersStr = columns.split("\\.");
         List<CustomerCategoryProjection> territoryFilter = null;
-        if (dto.getActive().equals("ALL")) {
-            territoryFilter = customerCategoryRepository.findByQuickSearchWithoutActive(dto.getQuickSearch());
-        } else {
-            territoryFilter = customerCategoryRepository.findByQuickSearch(Boolean.valueOf(dto.getActive()),dto.getQuickSearch());
-        }
+        JsonNode jsonNode = WrapFromStringToObject(request);
+        System.out.println(jsonNode.get("active"));
+        System.out.println(jsonNode.get("quickSearch"));
+        territoryFilter = customerCategoryRepository.getFilteredDataForExcel(jsonNode.get("active").asText(), jsonNode.get("quickSearch").asText());
         XSSFWorkbook workbook = new XSSFWorkbook();
+        int rowIdx = 0;
         Sheet sheet = workbook.createSheet("Company info");
-        Row row = sheet.createRow(0);
-        row.createCell(0).setCellValue("ID");
-        row.createCell(1).setCellValue("Name");
-        row.createCell(2).setCellValue("Email");
-        row.createCell(3).setCellValue("Region");
-        row.createCell(3).setCellValue("Support Phone");
-        row.createCell(3).setCellValue("Address");
-        int counter = 1;
+        Row headerRow = sheet.createRow(rowIdx++);
+        for (int i = 0; i < headersStr.length; i++) {
+            headerRow.createCell(i).setCellValue(headersStr[i]);
+        }
+
+        System.err.println(territoryFilter.size());
         for (CustomerCategoryProjection territory : territoryFilter) {
-            Row dataRow = sheet.createRow(counter);
-            counter++;
-            dataRow.createCell(0).setCellValue(territory.getId().toString());
-            dataRow.createCell(1).setCellValue(territory.getCode());
-            dataRow.createCell(2).setCellValue(territory.getName());
-            dataRow.createCell(3).setCellValue(territory.getDescription());
+            Row dataRow = sheet.createRow(rowIdx++);
+            int columnIndex = 0; // Introduce a separate variable for the column index
+            for (int i = 0; i < headersStr.length; i++) {
+                System.out.println(headersStr[i].replaceAll("\"", ""));
+                switch (headersStr[i].replaceAll("\"", "")) {
+                    case "Name":
+                        dataRow.createCell(columnIndex++).setCellValue(territory.getName().toString().replaceAll("\"", ""));
+                        break;
+                    case "Region":
+                        dataRow.createCell(columnIndex++).setCellValue(territory.getRegion().toString().replaceAll("\"", ""));
+                        break;
+                    case "Code":
+                        dataRow.createCell(columnIndex++).setCellValue(territory.getCode().toString().replaceAll("\"", ""));
+                        break;
+                    // Add more cases for other fields as needed
+                }
+            }
+        }
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerCellStyle.setFont(headerFont);
+
+        CellStyle dataCellStyle = workbook.createCellStyle();
+        dataCellStyle.setWrapText(true);
+        for (Cell cell : headerRow) {
+            cell.setCellStyle(headerCellStyle);
+            int columnIndex = cell.getColumnIndex();
+            sheet.autoSizeColumn(columnIndex);
+        }
+
+// Apply styles to data rows and auto-size columns
+        for (Row row : sheet) {
+            for (Cell cell : row) {
+                cell.setCellStyle(dataCellStyle);
+                int columnIndex = cell.getColumnIndex();
+                sheet.autoSizeColumn(columnIndex);
+            }
         }
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

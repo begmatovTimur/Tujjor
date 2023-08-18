@@ -63,13 +63,6 @@ function Company(props) {
             key: "email",
             type: "text",
             show: true,
-        },
-        {
-            id: 5,
-            title: "Address",
-            key: "address",
-            type: "text",
-            show: true,
         }
     ];
 
@@ -79,7 +72,7 @@ function Company(props) {
         <div style={{width: "100%"}}>
             <Table
                 excelWithoutSearch={true}
-
+                localStoragePath="companies"
                 columnOrderMode={false}
                 dataProps={companyProfile.companies}
                 changeSizeModeOptions={[10, 20, 50, 100, 200]}

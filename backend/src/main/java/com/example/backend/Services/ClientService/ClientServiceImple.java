@@ -1,13 +1,11 @@
 package com.example.backend.Services.ClientService;
 
 import com.example.backend.DTO.ClientDTO;
-import com.example.backend.DTO.ClientSearchDTO;
 import com.example.backend.Entity.Client;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Payload.Respons.ResClientsTerritories;
 import com.example.backend.Projection.ClientProjection;
-import com.example.backend.Projection.CompanyProjection;
 import com.example.backend.Projection.TerritoryClientProjection;
 import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Repository.CustomerCategoryRepository;
@@ -20,8 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -36,8 +33,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -170,36 +165,97 @@ public class ClientServiceImple implements ClientService {
 
     @Override
     @SneakyThrows
-    public ResponseEntity<Resource> getExcel() {
-//        Pageable pageable = PageRequest.of(dto.getPage(),dto.getLimit());
-        List<Client> all = clientRepository.findAllOrderedClient();
+    public ResponseEntity<Resource> getExcel(HttpServletRequest request, String[] headersStr) {
+        JsonNode jsonNode = wrapToObject(request);
+        JsonNode cityArrayNode = jsonNode.get("city");
+        List<UUID> cities = new ArrayList<>();
+        for (JsonNode cityNode : cityArrayNode) {
+            UUID cityId = UUID.fromString(cityNode.asText());
+            cities.add(cityId);
+        }
+        JsonNode categoryArray = jsonNode.get("customerCategories");
+        List<Integer> customerCategoriesParam = new ArrayList<>();
+        for (JsonNode cityNode : categoryArray) {
+            customerCategoriesParam.add(cityNode.asInt());
+        }
+        List<ClientProjection> all = clientRepository.getAllFilteredFieldsForExcel(cities, customerCategoriesParam, jsonNode.get("active").asText(), jsonNode.get("tin").asText(), jsonNode.get("quickSearch").asText());
         XSSFWorkbook workbook = new XSSFWorkbook();
+        int rowIdx = 0;
         Sheet sheet = workbook.createSheet("Company info");
-        Row row = sheet.createRow(0);
-        row.createCell(0).setCellValue("Name");
-        row.createCell(1).setCellValue("Address");
-        row.createCell(2).setCellValue("Phone");
-        row.createCell(3).setCellValue("Tin");
-        row.createCell(4).setCellValue("Company Name");
-        row.createCell(5).setCellValue("Longitude");
-        row.createCell(6).setCellValue("Latitude");
-        row.createCell(7).setCellValue("Active");
-        row.createCell(8).setCellValue("Registration Date");
-        int counter = 1;
-        for (Client client : all) {
-            Row dataRow = sheet.createRow(counter);
-            counter++;
-            dataRow.createCell(0).setCellValue(client.getName());
-            dataRow.createCell(1).setCellValue(client.getAddress());
-            dataRow.createCell(2).setCellValue(client.getPhone());
-            dataRow.createCell(3).setCellValue(client.getTin());
-            dataRow.createCell(4).setCellValue(client.getCompanyName());
-            dataRow.createCell(5).setCellValue(client.getLongitude());
-            dataRow.createCell(6).setCellValue(client.getLatitude());
-            dataRow.createCell(7).setCellValue(client.getActive().toString());
-            dataRow.createCell(8).setCellValue(client.getRegistrationDate());
+        Row headerRow = sheet.createRow(rowIdx++);
+        for (int i = 0; i < headersStr.length; i++) {
+            headerRow.createCell(i).setCellValue(headersStr[i]);
         }
 
+        for (ClientProjection client : all) {
+            Row dataRow = sheet.createRow(rowIdx++);
+            int columnIndex = 0; // Introduce a separate variable for the column index
+            for (int i = 0; i < headersStr.length; i++) {
+                System.out.println(headersStr[i].replaceAll("\"",""));
+                    switch (headersStr[i].replaceAll("\"","")) {
+                        case "Client name":
+                            dataRow.createCell(columnIndex++).setCellValue(client.getClientName().replaceAll("\"",""));
+                            break;
+                        case "Category":
+                            dataRow.createCell(columnIndex++).setCellValue(String.valueOf(categoryRepository.findById(Integer.parseInt(client.getCategoryId().replaceAll("\"",""))).get().getName()));
+                            break;
+                        case "Territory":
+                            dataRow.createCell(columnIndex++).setCellValue(String.valueOf(territoryRepository.findById(UUID.fromString(client.getTerritoryId().replaceAll("\"",""))).get().getName()));
+                            break;
+                        case "Address":
+                            dataRow.createCell(columnIndex++).setCellValue(client.getAddress().toString().replaceAll("\"",""));
+                            break;
+                        case "Telephone":
+                            dataRow.createCell(columnIndex++).setCellValue(client.getTelephone().toString().replaceAll("\"",""));
+                            break;
+                        case "TIN":
+                            dataRow.createCell(columnIndex++).setCellValue(client.getTin().toString().replaceAll("\"",""));
+                            break;
+                        case "Company name":
+                            String txt = "Bo'sh";
+                            if(client.getCompanyName()!=null) {
+                                txt = client.getCompanyName().toString().replaceAll("\"","");
+                            }
+                            dataRow.createCell(columnIndex++).setCellValue(txt);
+                            break;
+                        case "Longitude":
+                            dataRow.createCell(columnIndex++).setCellValue(client.getLongitude());
+                            break;
+                        case "Latitude":
+                            dataRow.createCell(columnIndex++).setCellValue(client.getLatitude());
+                            break;
+                        case "Activity":
+                            dataRow.createCell(columnIndex++).setCellValue(client.getActive().toString().replaceAll("\"",""));
+                            break;
+                        case "Registration Date":
+                            dataRow.createCell(columnIndex++).setCellValue(client.getRegistrationDate().toString().replaceAll("\"",""));
+                            break;
+                        // Add more cases for other fields as needed
+                    }
+            }
+        }
+
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerCellStyle.setFont(headerFont);
+
+        CellStyle dataCellStyle = workbook.createCellStyle();
+        dataCellStyle.setWrapText(true);
+        for (Cell cell : headerRow) {
+            cell.setCellStyle(headerCellStyle);
+            int columnIndex = cell.getColumnIndex();
+            sheet.autoSizeColumn(columnIndex);
+        }
+
+// Apply styles to data rows and auto-size columns
+        for (Row row : sheet) {
+            for (Cell cell : row) {
+                cell.setCellStyle(dataCellStyle);
+                int columnIndex = cell.getColumnIndex();
+                sheet.autoSizeColumn(columnIndex);
+            }
+        }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         workbook.write(outputStream);
         workbook.close();
@@ -216,6 +272,7 @@ public class ClientServiceImple implements ClientService {
                 .body(resource);
     }
 
+
     @Override
     public HttpEntity<?> getAllLocation() {
         List<ResClientsTerritories> result = new ArrayList<>();
@@ -223,8 +280,9 @@ public class ClientServiceImple implements ClientService {
         for (Client client : clients) {
             result.add(new ResClientsTerritories(
                     client.getName(),
-                    List.of(client.getLatitude(), client.getLongitude())
-            ));
+                    List.of(client.getLatitude(), client.getLongitude()),
+                    client.getActive()
+));
         }
         return ResponseEntity.ok(result);
     }

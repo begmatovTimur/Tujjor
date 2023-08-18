@@ -36,4 +36,20 @@ public interface CustomerCategoryRepository extends JpaRepository<CustomerCatego
                     OR LOWER(c.name) LIKE LOWER(CONCAT('%', :quickSearch, '%'))) order by id desc
             """, nativeQuery = true)
     List<CustomerCategoryProjection> findByQuickSearchWithoutActive(String quickSearch);
+    @Query(value = "SELECT ct.id,\n" +
+            "       ct.region,\n" +
+            "       ct.name,\n" +
+            "       ct.code,\n" +
+            "       ct.active,\n" +
+            "       ct.description\n" +
+            "FROM customer_category ct\n" +
+            "WHERE ct.active IS NOT NULL\n" +
+            "  AND CASE\n" +
+            "          WHEN :status = 'true' THEN ct.active = true\n" +
+            "          WHEN :status = 'false' THEN ct.active = false\n" +
+            "          ELSE true END\n" +
+            "  AND (LOWER(COALESCE(ct.region, '')) || ' ' || LOWER(COALESCE(ct.description, '')) || ' ' || LOWER(COALESCE(ct.name, '')) || ' ' || LOWER(COALESCE(ct.code, '')) LIKE\n" +
+            "      LOWER(CONCAT('%', :search, '%')))", nativeQuery = true)
+    List<CustomerCategoryProjection> getFilteredDataForExcel(String search, String status);
+
 }

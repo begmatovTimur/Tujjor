@@ -26,29 +26,49 @@ import java.util.UUID;
 public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
 
 
-    @Query(value = "select id,region,name,code,longitude,latitude,active,code,insertion_time from territory t where t.active = :status and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')  || ' ' || COALESCE(t.code, '')) like lower(concat('%',:search,'%')) order by t.insertion_time desc",nativeQuery = true)
-    Page<TerritoryProjection> findTerritoryByActiveAndRegionName(String search, Boolean status, Pageable pageable);
+    @Query(value = "select id,\n" +
+            "       region,\n" +
+            "       name,\n" +
+            "       code,\n" +
+            "       longitude,\n" +
+            "       latitude,\n" +
+            "       active,\n" +
+            "       code,\n" +
+            "       insertion_time\n" +
+            "from territory t\n" +
+            "where t.active IS NOT NULL\n" +
+            "  AND CASE\n" +
+            "          WHEN :status = 'true' THEN t.active = true\n" +
+            "          WHEN :status = 'false' THEN t.active = false\n" +
+            "          ELSE true END\n" +
+            "  and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '') || ' ' || COALESCE(t.code, '')) like\n" +
+            "      lower(concat('%', :search, '%'))\n" +
+            "order by t.insertion_time desc",nativeQuery = true)
+    Page<TerritoryProjection> getFilteredData(String search, String status, Pageable pageable);
 
 
-    @Query(value = "select id,region,name,code,longitude,latitude,active,code,insertion_time from territory t where lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '')  || ' ' || COALESCE(t.code, '')) like lower(concat('%',:search,'%')) order by t.insertion_time desc", nativeQuery = true)
-    Page<TerritoryProjection> findTerritoryByRegionAndName(String search, Pageable pageable);
-    @Query(value = """
-    SELECT * FROM territory t
-    WHERE t.active = :active
-      AND (LOWER(t.region) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
-        OR LOWER(t.code) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
-        OR LOWER(t.name) LIKE LOWER(CONCAT('%', :quickSearch, '%'))) order by t.insertion_time desc
-""", nativeQuery = true)
-    List<TerritoryProjection> findByQuickSearch(Boolean active, String quickSearch);
-    @Query(value = """
-    SELECT * FROM territory t
-      where (LOWER(t.region) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
-        OR LOWER(t.code) LIKE LOWER(CONCAT('%', :quickSearch, '%'))
-        OR LOWER(t.name) LIKE LOWER(CONCAT('%', :quickSearch, '%'))) order by t.insertion_time desc
-""", nativeQuery = true)
-    List<TerritoryProjection> findByQuickSearchWithoutActive(String quickSearch);
+    @Query(value = "select id,\n" +
+            "       region,\n" +
+            "       name,\n" +
+            "       code,\n" +
+            "       longitude,\n" +
+            "       latitude,\n" +
+            "       active,\n" +
+            "       code,\n" +
+            "       insertion_time\n" +
+            "from territory t\n" +
+            "where t.active IS NOT NULL\n" +
+            "  AND CASE\n" +
+            "          WHEN :status = 'true' THEN t.active = true\n" +
+            "          WHEN :status = 'false' THEN t.active = false\n" +
+            "          ELSE true END\n" +
+            "  and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '') || ' ' || COALESCE(t.code, '')) like\n" +
+            "      lower(concat('%', :search, '%'))\n" +
+            "order by t.insertion_time desc",nativeQuery = true)
+    List<TerritoryProjection> getFilteredDataForExcel(String search, String status);
 
     @Query(nativeQuery = true,value = "select id,region,insertion_time from territory order by insertion_time desc")
+
     List<TerritoryRegionProjection> findAllRegion();
     @Query(nativeQuery = true, value = """
             SELECT t.id, t.name, t.code, t.region, t.active FROM territory t LEFT JOIN client c ON t.id = c.territory_id WHERE c.id IS NULL order by t.insertion_time desc

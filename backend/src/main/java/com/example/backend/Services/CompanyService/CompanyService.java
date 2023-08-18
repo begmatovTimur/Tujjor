@@ -9,5 +9,5 @@ import java.util.List;
 public interface CompanyService {
     List<Company> getComapanies();
 
-    ResponseEntity<Resource> getExcel();
+    ResponseEntity<Resource> getExcel(String columns);
 }

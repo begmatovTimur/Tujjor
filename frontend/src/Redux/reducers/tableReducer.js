@@ -54,10 +54,36 @@ const tableReducer = createSlice({
       state.currentPage = action.payload;
     },
     claimData: (state, action) => {
-      state.columns = action.payload.columns;
+      let i = 0;
+      
+      action.payload.columns.map(item=>{
+        if(item.show===false)i++;
+      })
+      if(i===(action.payload.columns.length)) {
+        state.columns = [];
+        localStorage.removeItem(state.localPath)
+      }
+      else state.columns = action.payload.columns;
       state.data = action.payload.data;
+      state.copyOfColumns = action.payload.columns;
       state.modalColumns = action.payload.columns;
       state.localPath = action.payload.localPath;
+    },
+    emptyFilters:(state,action)=>{
+      state.selectedForms = {
+        customerCategories: [],
+        city: [],
+      }
+      state.formInputs= {
+        active: "",
+        city: [],
+        allWeeks: "",
+        weekDays: [],
+        tin: "",
+        customerCategories: [],
+        quickSearch: "",
+        offset: "",
+      }
     },
     setColumnModalVisibility: (state, action) => {
       state.columnOrderModalVisibility = action.payload;
@@ -81,6 +107,17 @@ const tableReducer = createSlice({
       if (i === state.columns.length) {
         state.copyOfColumns = state.columns;
         state.columns = [];
+        localStorage.removeItem(state.localPath);
+      } else {
+        localStorage.setItem(
+          state.localPath,
+          JSON.stringify(
+            state.columns.map((item, index) => ({
+              id: item.id,
+              show: item.show,
+            }))
+          )
+        );
       }
       state.modalColumns = state.columns;
     },
@@ -126,7 +163,9 @@ const tableReducer = createSlice({
       state.columns = state.modalColumns;
       localStorage.setItem(
         state.localPath,
-        JSON.stringify(state.columns.map((item, index) => item.id))
+        JSON.stringify(
+          state.columns.map((item, index) => ({ id: item.id, show: item.show }))
+        )
       );
     },
     changeSelectedForms: (state, action) => {

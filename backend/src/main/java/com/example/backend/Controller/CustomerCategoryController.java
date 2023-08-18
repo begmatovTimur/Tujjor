@@ -28,13 +28,8 @@ public class CustomerCategoryController {
     ;
 
     @GetMapping("/excel")
-    public ResponseEntity<Resource> excel(HttpServletRequest request) throws IOException {
-        String quickSearch = request.getHeader("quickSearch");
-        SearchActiveDTO searchActiveDTO = new SearchActiveDTO();
-        searchActiveDTO.setActive(request.getHeader("active"));
-        searchActiveDTO.setQuickSearch(quickSearch);
-        System.out.println(searchActiveDTO);
-        return categoryService.getExcelFile(searchActiveDTO);
+    public ResponseEntity<Resource> excel(HttpServletRequest request,@RequestParam String columns) throws IOException {
+        return categoryService.getExcelFile(request,columns);
     }
 
     ;

@@ -23,7 +23,7 @@ public interface TerritoryService {
 
     HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request);
 
-    ResponseEntity<Resource> getExcelFile(SearchActiveDTO dto) throws IOException;
+    ResponseEntity<Resource> getExcelFile(HttpServletRequest request,String columns) throws IOException;
 
     HttpEntity<?> getTerritoryRegion();
 

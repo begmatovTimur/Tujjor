@@ -23,6 +23,7 @@ function* addCategory(action) {
         "PUT",
         action.payload
       );
+      SuccessNotify("Category updated Successfully!");
       yield put(teritoryAction.resetAllTeritoryData());
     } else {
       const res = yield apiCall("/customer-category", "POST", action.payload);
