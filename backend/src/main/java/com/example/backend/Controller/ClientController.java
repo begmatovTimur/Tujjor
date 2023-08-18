@@ -23,9 +23,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/api/client")
 public class ClientController {
-
     private final ClientService clientService;
-
     @PostMapping
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> saveClient(@RequestBody ClientDTO clientDTO){

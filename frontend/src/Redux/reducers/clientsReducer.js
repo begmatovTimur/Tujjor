@@ -69,6 +69,7 @@ const clientsReducer = createSlice({
 
         },
         getClientsSuccess:(state,action)=>{
+            console.log("salom")
             state.clients = action.payload
         },
         yourActionFailureClients:(state, action)=>{

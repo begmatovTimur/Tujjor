@@ -54,7 +54,6 @@ const Table = (props) => {
         page: props.currentPage,
       });
     }
-
   }, [props.dataProps]);
 
   const getValueByKeys = (obj, keys) => {

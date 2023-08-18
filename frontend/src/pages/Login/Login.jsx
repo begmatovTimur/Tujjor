@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
@@ -15,6 +15,32 @@ import { domen } from "../../Config/apiCall";
 function Login(props) {
   const { loginReducer } = props;
   const navigate = useNavigate();
+  useEffect(()=>{
+      hasPermissionRoleSuperVisor()
+  },[])
+
+  function hasPermissionRoleSuperVisor() {
+      if (localStorage.getItem("access_token") !== null) {
+          axios({
+              url: domen+"/users/me",
+              method: "GET",
+              headers: {
+                  token: localStorage.getItem("access_token"),
+              },
+          }).then((res) => {
+              navigate(-1);
+          }).catch((err) => {
+              if (err.response.status === 401) {
+                  axios({
+                      url: domen+"/auth/refresh?refreshToken=" + localStorage.getItem("refresh_token"),
+                      method: "POST",
+                  }).then((res) => {
+                      navigate(-1);
+                  })
+              }
+          });
+      }
+  }
 
   function loginfunction(e) {e.preventDefault()
     if (!props.loginReducer.loading) {
