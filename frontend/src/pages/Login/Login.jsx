@@ -12,6 +12,7 @@ import gif from "../../images/loading.gif";
 import "react-phone-input-2/lib/style.css";
 import { ErrorNotify, SuccessNotify, WarningNotify } from "../../tools/Alerts";
 import { domen } from "../../Config/apiCall";
+import axiosInterceptor from "../../Config/axiosInterceptor";
 function Login(props) {
   const { loginReducer } = props;
   const navigate = useNavigate();
@@ -21,8 +22,8 @@ function Login(props) {
 
   function hasPermissionRoleSuperVisor() {
       if (localStorage.getItem("access_token") !== null) {
-          axios({
-              url: domen+"/users/me",
+          axiosInterceptor({
+            url: domen+"/users/me",
               method: "GET",
               headers: {
                   token: localStorage.getItem("access_token"),
@@ -31,12 +32,16 @@ function Login(props) {
               navigate(-1);
           }).catch((err) => {
               if (err.response.status === 401) {
+                if(localStorage.getItem("refresh_token")!==null){
                   axios({
-                      url: domen+"/auth/refresh?refreshToken=" + localStorage.getItem("refresh_token"),
-                      method: "POST",
+                    url: domen+"/auth/refresh?refreshToken=" + localStorage.getItem("refresh_token"),
+                    method: "POST",
                   }).then((res) => {
-                      navigate(-1);
-                  })
+                    navigate(-1);
+                  }).catch((err)=>{localStorage.clear()})
+                }  
+              }else{
+                localStorage.clear()
               }
           });
       }
@@ -167,3 +172,9 @@ function Login(props) {
 }
 
 export default connect((state) => state, loginModel)(Login);
+
+// url: domen+"/users/me",
+//               method: "GET",
+//               headers: {
+//                   token: localStorage.getItem("access_token"),
+//               },
