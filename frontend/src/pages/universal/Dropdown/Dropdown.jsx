@@ -18,7 +18,7 @@ const Dropdown = (props) => {
 
   useEffect(() => {
     return ()=>{
-      props.setCurrentItem({ dropdownId, currentItem: 0 });
+      props.setCurrentItem({ dropdownId, currentItem: -1 });
     }
   }, []);
 

@@ -11,6 +11,10 @@ import LoadingBackdrop from "../../universal/Loading/loading";
 function CustomerCategory(props) {
   const { customerCategory } = props;
 
+  useEffect(()=>{
+    console.log(props.getCategory());
+  },[])
+
   const columns = [
     {
       id: 0,
@@ -95,7 +99,7 @@ function CustomerCategory(props) {
         filterActive={true}
         columnOrderMode={true}
         dataProps={customerCategory.categories}
-        changeSizeModeOptions={[10, 20, 50, 100, 200]}
+        changeSizeModeOptions={["All",10, 20, 50, 100, 200]}
         pagination={true}
         paginationApi={
           "/customer-category/pagination?page={page}&limit={limit}"

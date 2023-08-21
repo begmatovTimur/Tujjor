@@ -21,7 +21,7 @@ public interface TerritoryService {
 
     HttpEntity<?> getTerritories();
 
-    HttpEntity<?> pagination(Integer page, Integer limit,HttpServletRequest request);
+    HttpEntity<?> pagination(Integer page, String limit,HttpServletRequest request);
 
     ResponseEntity<Resource> getExcelFile(HttpServletRequest request,String columns) throws IOException;
 

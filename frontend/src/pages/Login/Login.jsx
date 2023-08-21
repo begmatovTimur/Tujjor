@@ -31,6 +31,7 @@ function Login(props) {
           }).then((res) => {
               navigate("/admin");
           }).catch((err) => {
+            console.log(err);
               if (err.response.status === 401) {
                 if(localStorage.getItem("refresh_token")!==null){
                   axios({

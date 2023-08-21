@@ -127,15 +127,26 @@ public class TerritoryServiceImpl implements TerritoryService {
     }
 
     @Override
-    public HttpEntity<?> pagination(Integer page, Integer limit, HttpServletRequest request) {
-        try {
-            Pageable pageable = PageRequest.of(page, limit);
-            JsonNode jsonNode = WrapFromStringToObject(request);
-            Page<TerritoryProjection> territories = territoryRepository.getFilteredData(jsonNode.get("quickSearch").asText(),
-                    jsonNode.get("active").asText(), pageable);
-            return ResponseEntity.ok(territories);
-        } catch (Exception e) {
-            return ResponseEntity.status(404).body("An error has occurred");
+    public HttpEntity<?> pagination(Integer page, String limit, HttpServletRequest request) {
+        if (limit.equals("All")) {
+            try {
+                JsonNode jsonNode = WrapFromStringToObject(request);
+                List<TerritoryProjection> territories = territoryRepository.searchFromAll(jsonNode.get("quickSearch").asText(),
+                        jsonNode.get("active").asText());
+                return ResponseEntity.ok(territories);
+            } catch (Exception e) {
+                return ResponseEntity.status(404).body("An error has occurred");
+            }
+        } else {
+            try {
+                Pageable pageable = PageRequest.of(page, Integer.parseInt(limit));
+                JsonNode jsonNode = WrapFromStringToObject(request);
+                Page<TerritoryProjection> territories = territoryRepository.getFilteredData(jsonNode.get("quickSearch").asText(),
+                        jsonNode.get("active").asText(), pageable);
+                return ResponseEntity.ok(territories);
+            } catch (Exception e) {
+                return ResponseEntity.status(404).body("An error has occurred");
+            }
         }
     }
 

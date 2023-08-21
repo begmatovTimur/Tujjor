@@ -55,10 +55,7 @@
   height: 36px;
 }
 
-.page_size_body_item:hover {
-  background: #428bca !important;
-  color: #f2f2f2;
-}
+
 
 .active_page_size_item {
   background-color: #428bca;
@@ -72,15 +69,4 @@
 .multi_selected {
   background-color: #428bca;
   color: #fff;
-}
-
-.multi_select_item:hover {
-  background: #efefef !important;
-  color: black;
-}
-
-.multi_select_active .multi_select_item:hover {
-  /* Disable hover effect for multiselect items when multiselect is active */
-  background: none !important;
-  color: inherit;
 }
