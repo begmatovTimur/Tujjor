@@ -99,12 +99,13 @@ function ClientsOnTheMap(props) {
                   return address.active ? (
                     <Placemark
                       properties={{
-                        balloonContent: address.name,
+                        // balloonContent: address.name,
                         // hintContent: 'Bu yerda markaziy nuqta',
                         // iconContent: "Salom",
+                          iconCaption: address.name,
                       }}
                       options={{
-                        iconColor: "lightgreen",
+                        iconColor: "green",
                         iconImageHref: logo,
                       }}
                       key={index}
@@ -113,9 +114,9 @@ function ClientsOnTheMap(props) {
                   ) : (
                     <Placemark
                     properties={{
-                      balloonContent: address.name,
+                      // balloonContent: address.name,
                       // hintContent: 'Bu yerda markaziy nuqta',
-                      // iconContent: "Salom",
+                        iconCaption: address.name,
                     }}
                     options={{
                       iconColor: "red",
@@ -130,9 +131,10 @@ function ClientsOnTheMap(props) {
                   return (
                     <Placemark
                       properties={{
-                        balloonContent: item.name,
+                        // balloonContent: item.name,
                         // hintContent: 'Bu yerda markaziy nuqta',
                         // iconContent: "Salom",
+                          iconCaption: item.name,
                       }}
                       options={{ iconColor: "blue", iconImageHref: logo }}
                       key={index}
