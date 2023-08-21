@@ -5,7 +5,7 @@ const tableReducer = createSlice({
   initialState: {
     columns: [],
     layer: false,
-    sizeOfPage: 1,
+    sizeOfPage: "",
     localPath: "",
     copyOfColumns: [],
     currentDraggingColumn: 0,
@@ -27,7 +27,7 @@ const tableReducer = createSlice({
       quickSearch: "",
       offset: "",
     },
-    totalPages: "",
+    totalPages: -1,
     selectedForms: {
       customerCategories: [],
       city: [],
@@ -74,6 +74,8 @@ const tableReducer = createSlice({
         customerCategories: [],
         city: [],
       }
+      state.limit= "";
+      state.sizeOfPage = 1;
       state.formInputs= {
         active: "",
         city: [],
@@ -125,6 +127,9 @@ const tableReducer = createSlice({
       state.limit = action.payload.size;
       state.page = action.payload.page;
       state.paginationApi1 = action.payload.api;
+    },
+    changeSizeOfPage:(state,action)=>{
+      state.limit = action.payload;
     },
     changeData: (state, action) => {
       state.data = action.payload.data;

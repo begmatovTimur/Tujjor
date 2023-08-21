@@ -1,7 +1,7 @@
 import "./App.css";
 import Login from "./pages/Login/Login";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
 import Settings from "./pages/Settings/Settings";
@@ -12,13 +12,17 @@ import NotFound from "./pages/404/NotFound";
 import { ToastContainer } from "react-toastify";
 import Clients from "./pages/Clients/clients";
 import ClientsOnTheMap from "./pages/Clients/clientsOnTheMap";
-import {domen} from './Config/apiCall'
-import {Home} from "@mui/icons-material";
-import {tableActions} from "./Redux/reducers/tableReducer";
-import {useDispatch} from "react-redux";
+import { domen } from "./Config/apiCall";
+import { Home } from "@mui/icons-material";
+import { tableActions } from "./Redux/reducers/tableReducer";
+import { useDispatch } from "react-redux";
+import image from "./microphone-svgrepo-com.svg";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [modalVisibility, setModalVisibility] = useState(false);
+
   const permissions = [
     { url: "/admin", roles: ["ROLE_SUPER_VISOR"] },
     { url: "/admin/settings", roles: ["ROLE_SUPER_VISOR"] },
@@ -39,7 +43,7 @@ function App() {
     if (count === 1) {
       if (localStorage.getItem("access_token") !== null) {
         axios({
-          url: domen+"/users/me",
+          url: domen + "/users/me",
           method: "GET",
           headers: {
             token: localStorage.getItem("access_token"),
@@ -70,7 +74,8 @@ function App() {
             if (err.response.status === 401) {
               axios({
                 url:
-                  domen+"/auth/refresh?refreshToken=" +
+                  domen +
+                  "/auth/refresh?refreshToken=" +
                   localStorage.getItem("refresh_token"),
                 method: "POST",
               })
@@ -88,17 +93,16 @@ function App() {
       }
     }
   }
-
   useEffect(() => {
     hasPermissions();
   }, []);
 
+
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-    if(location.pathname){
-        dispatch(tableActions.resetFormInputs())
+    if (location.pathname) {
+      dispatch(tableActions.resetFormInputs());
     }
   }, [location.pathname]);
 
@@ -106,8 +110,8 @@ function App() {
     <div className="App">
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Login k/>}></Route>
-        <Route path={"/login"} element={<Login />}/>
+        <Route path="/" element={<Login k />}></Route>
+        <Route path={"/login"} element={<Login />} />
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/settings" element={<Settings />}>
             <Route
@@ -120,8 +124,11 @@ function App() {
             />
             <Route path="/admin/settings/territory" element={<Teritory />} />
           </Route>
-          <Route path="/admin/clients" element={<Clients/>}></Route>
-          <Route path="/admin/clients_on_the_map" element={<ClientsOnTheMap/>}></Route>
+          <Route path="/admin/clients" element={<Clients />}></Route>
+          <Route
+            path="/admin/clients_on_the_map"
+            element={<ClientsOnTheMap />}
+          ></Route>
         </Route>
 
         <Route path="*" element={<NotFound />} />

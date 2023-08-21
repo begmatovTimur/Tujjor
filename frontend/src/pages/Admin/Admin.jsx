@@ -110,6 +110,7 @@ function Admin(props) {
                             {icons.userIcon}
                             {icons.downTriangleIcon}
                         </button>
+                        
                         {userBox ? (
                             <div
                                 onMouseLeave={() => handleUserDropDown(false)}
@@ -126,8 +127,8 @@ function Admin(props) {
                                 <button className="custom_userbox_button">
                                     {icons.keyIcon} Change login & password
                                 </button>
-                                <button className="custom_userbox_button">
-                                    {icons.moneyIcon} Billing
+                                <button className="custom_userbox_button d-flex justify-content-between align-items-center" onClick={()=>navigate("/payment")}>
+                                    <span className="d-flex gap-2">{icons.moneyIcon} Billing</span>
                                 </button>
                                 <button className="custom_userbox_button" onClick={logOut}>
                                     {icons.exitIcon} Exit

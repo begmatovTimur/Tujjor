@@ -4,11 +4,9 @@ import {clientsAction} from "../reducers/clientsReducer";
 import {ErrorNotify, SuccessNotify} from "../../tools/Alerts";
 import {tableActions} from "../reducers/tableReducer";
 
-function* getClients(action) {
+function* getClients() {
     try {
-        yield put(tableActions.changeIsLoading(true))
         const res = yield apiCall("/client", "GET", null)
-        yield put(tableActions.changeIsLoading(false))
         yield put(clientsAction.getClientsSuccess(res.data))
     } catch (err) {
         yield put(clientsAction.yourActionFailureClients(err.message));
@@ -16,7 +14,6 @@ function* getClients(action) {
 }
 function* getAllClientsTerritories(action) {
     try {
-        const currentState = yield select((state) => state.table);
         const res = yield apiCall("/client/clientsLocation", "GET", null)
         yield put(clientsAction.getAllClientsTerritoriesSuccess(res.data))
     } catch (err) {
@@ -33,7 +30,7 @@ function* saveClients(action) {
         if (currentState.editeClient !== "") {
             const res = yield apiCall("/client?clientId=" + currentState.editeClient.id, "PUT", action.payload)
             yield put(clientsAction.resetAllClientsData())
-            SuccessNotify("Client update Successfully!")
+            SuccessNotify("Client updated Successfully!")
         } else {
             const res = yield apiCall("/client", "POST", action.payload)
               if(res){
@@ -41,8 +38,8 @@ function* saveClients(action) {
                   SuccessNotify("Client added Successfully!")
               }
         }
-        const res = yield apiCall("/client", "GET", null)
-        yield put(clientsAction.getClientsSuccess(res.data))
+    
+        yield call(getClients)
     }
 }
 

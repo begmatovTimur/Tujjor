@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
@@ -12,9 +12,41 @@ import gif from "../../images/loading.gif";
 import "react-phone-input-2/lib/style.css";
 import { ErrorNotify, SuccessNotify, WarningNotify } from "../../tools/Alerts";
 import { domen } from "../../Config/apiCall";
+import axiosInterceptor from "../../Config/axiosInterceptor";
 function Login(props) {
   const { loginReducer } = props;
   const navigate = useNavigate();
+  useEffect(()=>{
+      hasPermissionRoleSuperVisor()
+  },[])
+
+  function hasPermissionRoleSuperVisor() {
+      if (localStorage.getItem("access_token") !== null) {
+          axiosInterceptor({
+            url: domen+"/users/me",
+              method: "GET",
+              headers: {
+                  token: localStorage.getItem("access_token"),
+              },
+          }).then((res) => {
+              navigate("/admin");
+          }).catch((err) => {
+            console.log(err);
+              if (err.response.status === 401) {
+                if(localStorage.getItem("refresh_token")!==null){
+                  axios({
+                    url: domen+"/auth/refresh?refreshToken=" + localStorage.getItem("refresh_token"),
+                    method: "POST",
+                  }).then((res) => {
+                    navigate("/admin");
+                  }).catch((err)=>{localStorage.clear()})
+                }  
+              }else{
+                localStorage.clear()
+              }
+          });
+      }
+  }
 
   function loginfunction(e) {e.preventDefault()
     if (!props.loginReducer.loading) {
@@ -38,11 +70,12 @@ function Login(props) {
             props.setLoading(false);
             SuccessNotify("You have successfully logged in");
             localStorage.setItem("access_token", res.data.access_token);
-            if (res.data.refresh_token !== "") {
+            if (res.data.refresh_token !== "" && loginReducer.remember === true) {
               localStorage.setItem("refresh_token", res.data.refresh_token);
               localStorage.setItem("no_token", "success");
             } else {
               localStorage.setItem("no_token", "sorry");
+              localStorage.removeItem("refresh_token");
             }
             props.changePhone("");
             props.changePassword("");
@@ -60,7 +93,6 @@ function Login(props) {
       }, 1000);
     }
   }
-
   return (
     <div>
       <img id={"logoForLogin"} src={logo} alt="#" />
@@ -114,7 +146,6 @@ function Login(props) {
                       </label>
                       <Button
                           style={{
-                            border:'none',
                               backgroundColor: "#65b965",
                               marginTop: 20,
                               width: "30%",
@@ -142,3 +173,9 @@ function Login(props) {
 }
 
 export default connect((state) => state, loginModel)(Login);
+
+// url: domen+"/users/me",
+//               method: "GET",
+//               headers: {
+//                   token: localStorage.getItem("access_token"),
+//               },

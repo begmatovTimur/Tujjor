@@ -49,14 +49,14 @@ function* watchQuickSearchData(action) {
   let api = currentState.paginationApi1;
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
   const res = yield apiCall(api, "get", null, JSON.stringify(obj));
-  yield put(tableActions.changeTotalPages(res.data.totalPages));
-  yield put(tableActions.changeCurrentPage(1));
-  yield put(
-    tableActions.changeData({
-      data: res.data.content,
-      size: currentState.sizeOfPage === "" ? 1 : currentState.sizeOfPage,
-    })
-  );
+    yield put(tableActions.changeTotalPages(res.data.totalPages));
+    yield put(tableActions.changeCurrentPage(1));
+    yield put(
+      tableActions.changeData({
+        data: res.data.content,
+        size: currentState.sizeOfPage === "" ? 1 : currentState.sizeOfPage,
+      })
+    );
 }
 
 function* changeSizeOfPage(action) {
@@ -77,23 +77,26 @@ function* changeSizeOfPage(action) {
     tin: x.tin.value ? x.tin.value : x.tin,
     customerCategories: x.customerCategories,
   };
-  const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
-  yield put(tableActions.changeTotalPages(res.data.totalPages));
-  yield put({
-    type: "table/changeData",
-    payload: {
-      data: res.data.content,
-      size: LIMIT,
-    },
-  });
-}
+    const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
+    yield put(tableActions.changeTotalPages(res.data.totalPages));
+    yield put({
+      type: "table/changeData",
+      payload: {
+        data: res.data.content,
+        size: LIMIT,
+      },
+    });
+  }
 
 function* downloadExcelFile(action) {
   const currentState = yield select((state) => state.table);
   const { columns } = yield select((state) => state.table);
   let columnsTitle = columns
-    .filter((item) => item.show === true && item.type != "jsx" && item.type!="index")
-    .map((item) => item.title).join(".");
+    .filter(
+      (item) => item.show === true && item.type != "jsx" && item.type != "index"
+    )
+    .map((item) => item.title)
+    .join(".");
 
   const x = currentState.formInputs;
   let obj = {
@@ -168,15 +171,14 @@ function* watchGetActiveData(action) {
   let api = currentState.paginationApi1;
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
   const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
-
   yield put(tableActions.changeCurrentPage(1));
-  yield put(tableActions.changeTotalPages(res.data.totalPages));
-  yield put(
-    tableActions.changeData({
-      data: res.data.content,
-      size: currentState.sizeOfPage,
-    })
-  );
+    yield put(tableActions.changeTotalPages(res.data.totalPages));
+    yield put(
+      tableActions.changeData({
+        data: res.data.content,
+        size: currentState.sizeOfPage,
+      })
+    );
 }
 
 function* tableSaga() {

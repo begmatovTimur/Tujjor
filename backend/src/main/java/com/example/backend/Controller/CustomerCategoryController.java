@@ -21,7 +21,7 @@ public class CustomerCategoryController {
     private final CustomerCategoryService categoryService;
 
     @GetMapping("/pagination")
-    public HttpEntity<?> pagination(@RequestParam Integer page, @RequestParam Integer limit, HttpServletRequest request) {
+    public HttpEntity<?> pagination(@RequestParam Integer page, @RequestParam String limit, HttpServletRequest request) {
         return categoryService.pagination(page, limit, request);
     }
 

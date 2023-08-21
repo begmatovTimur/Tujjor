@@ -44,7 +44,7 @@ public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
             "  and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '') || ' ' || COALESCE(t.code, '')) like\n" +
             "      lower(concat('%', :search, '%'))\n" +
             "order by t.insertion_time desc",nativeQuery = true)
-    Page<TerritoryProjection> getFilteredData(String search, String status, Pageable pageable);
+    Page<TerritoryProjection> getFilteredData(String search, String status,Pageable pageable);
 
 
     @Query(value = "select id,\n" +
@@ -68,10 +68,9 @@ public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
     List<TerritoryProjection> getFilteredDataForExcel(String search, String status);
 
     @Query(nativeQuery = true,value = "select id,region,insertion_time from territory order by insertion_time desc")
-
     List<TerritoryRegionProjection> findAllRegion();
     @Query(nativeQuery = true, value = """
             SELECT t.id, t.name, t.code, t.region, t.active FROM territory t LEFT JOIN client c ON t.id = c.territory_id WHERE c.id IS NULL order by t.insertion_time desc
             """)
-    List<TerritoryClientProjection> getAllteritoryForCliens();
+    List<TerritoryClientProjection> getAllTerritoryForClients();
 }

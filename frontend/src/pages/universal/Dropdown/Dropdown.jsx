@@ -16,11 +16,20 @@ const Dropdown = (props) => {
     }
   }, [props.body, dropdownId]);
 
+  useEffect(() => {
+    return ()=>{
+      props.setCurrentItem({ dropdownId, currentItem: -1 });
+    }
+  }, []);
 
   useEffect(() => {
     // Initialize selected items for multi-select only on the first open
     if (multiSelect && isAnyDropdownOpen && !hasOpened) {
-      setSelectedItems(props.body.filter(item=>item.show===true).map(item=>item.title));
+      setSelectedItems(
+        props.body
+          .filter((item) => item.show === true)
+          .map((item) => item.title)
+      );
       setHasOpened(true); // Set hasOpened to true after initializing selected items
     }
   }, [multiSelect, isAnyDropdownOpen, props.body, hasOpened]);
@@ -40,6 +49,7 @@ const Dropdown = (props) => {
     props.setLayer({ dropdownId, layer: !dropdownState.layer });
     setIsAnyDropdownOpen(!dropdownState.layer && multiSelect);
   };
+
 
   const handleItemClick = (item, index) => {
     const isSelected = selectedItems.includes(item);
@@ -92,7 +102,10 @@ const Dropdown = (props) => {
           className="custom_btn"
           onClick={handleButtonClick}
         >
-          {dropdownState.currentItem!==-1 && props.body.length>dropdownState.currentItem?"By "+props.body[dropdownState.currentItem].title:props.customTitle}
+          {props.customTitle.startsWith("By") && dropdownState.currentItem !== -1 &&
+          props.body.length > dropdownState.currentItem
+            ? "By " + props.body[dropdownState.currentItem].title
+            : props.customTitle}
         </button>
         <div
           className={
@@ -100,7 +113,8 @@ const Dropdown = (props) => {
             (dropdownState.layer ? " active_page_size_body" : "")
           }
         >
-          {props.body.map((item, index) => (<div
+          {props.body.map((item, index) => (
+            <div
               key={index}
               className={
                 "page_size_body_item" +
