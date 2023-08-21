@@ -104,7 +104,7 @@ function ClientsOnTheMap(props) {
                         // iconContent: "Salom",
                       }}
                       options={{
-                        iconColor: "lightgreen",
+                        iconColor: "green",
                         iconImageHref: logo,
                       }}
                       key={index}

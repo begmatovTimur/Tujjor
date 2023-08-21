@@ -20,6 +20,8 @@ const Table = (props) => {
     props.reorderColumns({ sourceIndex, destinationIndex });
   };
 
+
+
   useEffect(() => {
     try {
       props.claimData({
@@ -47,14 +49,15 @@ const Table = (props) => {
     }
     if (props.pagination === true && !props.paginationApi)
       alert("Pagination API is required!");
-    if (props.paginationApi) {
+    if (props.paginationApi && props.limit!="All") {
       props.changePaginationTo({
         api: props.paginationApi,
-        size: props.changeSizeModeOptions[0],
-        page: props.currentPage,
+        size: props.changeSizeModeOptions[1],
+        page: 1,
       });
     }
   }, [props.dataProps]);
+
 
   const getValueByKeys = (obj, keys) => {
     const keysArray = keys.split("+").map((key) => key.trim());
@@ -86,10 +89,7 @@ const Table = (props) => {
 
 
 
-  // console.log(props.data.length?(JSON.parse(localStorage.getItem(props.localStoragePath))).map(item=>{
-  //   console.log(props.data[item].name);
-  // }):[]);
-  // console.log(props.data.lenght?JSON.parse(localStorage.getItem(props.localStoragePath)).map(item=>props.data[item]):"");
+
   return (
     <div className="universal_table">
       {props.isLoading ? (
@@ -112,16 +112,24 @@ const Table = (props) => {
                   {props.changeSizeMode ? (
                     <Dropdown
                       multiSelect={false}
-                      customTitle={"By "+props.changeSizeModeOptions[0]}
+                      customTitle={props.limit?"By "+props.limit:"By "+props.changeSizeModeOptions[1]}
                       dropdownId="1"
                       body={props.changeSizeModeOptions.map(item=>({title:item}))}
                       onItemClick={(item) => {
-                        props.handlePageChange(1);
-                        props.changePaginationTo({
-                          api: props.paginationApi,
-                          size: item,
-                          page: 1,
-                        });
+                        props.handlePageChange(1);  
+                        if(item!=="All") {
+                          props.changePaginationTo({
+                            api: props.paginationApi,
+                            size: item,
+                            page: 1,
+                          });
+                        }else {
+                          props.changePaginationTo({
+                            api: props.paginationApi,
+                            size: item,
+                            page: 1,
+                          }); 
+                        }
                       }}
                     />
                   ) : (
@@ -282,7 +290,7 @@ const Table = (props) => {
                 </tbody>
               </table>
             </div>
-            {props.pagination && props.data.length && props.columns.length ? (
+            {props.totalPages!=="" && props.pagination && props.data.length && props.columns.length ? (
               <div className="d-flex justify-content-end pt-2">
                 <Pagination
                   onChange={(e, page) => handleChange(e, page)}

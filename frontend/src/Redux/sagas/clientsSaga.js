@@ -6,10 +6,7 @@ import {tableActions} from "../reducers/tableReducer";
 
 function* getClients() {
     try {
-        yield put(tableActions.changeIsLoading(true))
-        const res = yield call(apiCall("/client", "GET", null))
-        console.log(res)
-        yield put(tableActions.changeIsLoading(false))
+        const res = yield apiCall("/client", "GET", null)
         yield put(clientsAction.getClientsSuccess(res.data))
     } catch (err) {
         yield put(clientsAction.yourActionFailureClients(err.message));
@@ -41,8 +38,8 @@ function* saveClients(action) {
                   SuccessNotify("Client added Successfully!")
               }
         }
-        const res = yield apiCall("/client", "GET", null)
-        yield put(clientsAction.getClientsSuccess(res.data))
+    
+        yield call(getClients)
     }
 }
 

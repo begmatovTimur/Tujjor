@@ -123,7 +123,7 @@ class TerritoryServiceImplTest {
                 .thenReturn(pageResult);
 
         // Call the pagination method
-        HttpEntity<?> response = underTest.pagination(0, 10, request);
+        HttpEntity<?> response = underTest.pagination(0, "10", request);
 
         // Verify that the repository method was called
         verify(territoryRepository, times(1))
