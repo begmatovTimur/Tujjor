@@ -38,7 +38,7 @@ function Login(props) {
                     url: domen+"/auth/refresh?refreshToken=" + localStorage.getItem("refresh_token"),
                     method: "POST",
                   }).then((res) => {
-                    navigate(-1);
+                    navigate("/admin");
                   }).catch((err)=>{localStorage.clear()})
                 }  
               }else{

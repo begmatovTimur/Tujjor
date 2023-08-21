@@ -23,7 +23,7 @@ function* watchGetFilteredData(action) {
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
   const res = yield apiCall(api, "get", null, JSON.stringify(obj));
   yield put(tableActions.changeCurrentPage(1));
-  yield put(tableActions.changeTotalPages(res.data.totalPages));
+  yield put(tableActions.changeTotalPages(currentState.limit==="All"?"":res.data.totalPages));
   yield put(
     tableActions.changeData({
       data: res.data.content,
@@ -49,8 +49,7 @@ function* watchQuickSearchData(action) {
   let api = currentState.paginationApi1;
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
   const res = yield apiCall(api, "get", null, JSON.stringify(obj));
-  if (currentState.limit !== "All") {
-    yield put(tableActions.changeTotalPages(res.data.totalPages));
+    yield put(tableActions.changeTotalPages(currentState.limit==="All"?"":res.data.totalPages));
     yield put(tableActions.changeCurrentPage(1));
     yield put(
       tableActions.changeData({
@@ -58,16 +57,6 @@ function* watchQuickSearchData(action) {
         size: currentState.sizeOfPage === "" ? 1 : currentState.sizeOfPage,
       })
     );
-  } else {
-    yield put(tableActions.changeTotalPages(""));
-    yield put(tableActions.changeCurrentPage(1));
-    yield put(
-      tableActions.changeData({
-        data: res.data,
-        size: currentState.sizeOfPage === "" ? 1 : currentState.sizeOfPage,
-      })
-    );
-  }
 }
 
 function* changeSizeOfPage(action) {
@@ -88,19 +77,8 @@ function* changeSizeOfPage(action) {
     tin: x.tin.value ? x.tin.value : x.tin,
     customerCategories: x.customerCategories,
   };
-  if (LIMIT === "All") {
     const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
-    yield put(tableActions.changeTotalPages(""));
-    yield put({
-      type: "table/changeData",
-      payload: {
-        data: res.data,
-        size: 0,
-      },
-    });
-  } else {
-    const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
-    yield put(tableActions.changeTotalPages(res.data.totalPages));
+    yield put(tableActions.changeTotalPages(LIMIT==="All"?"":res.data.totalPages));
     yield put({
       type: "table/changeData",
       payload: {
@@ -109,7 +87,6 @@ function* changeSizeOfPage(action) {
       },
     });
   }
-}
 
 function* downloadExcelFile(action) {
   const currentState = yield select((state) => state.table);
@@ -193,29 +170,15 @@ function* watchGetActiveData(action) {
   yield put(tableActions.changeLoadingActive(false));
   let api = currentState.paginationApi1;
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
-  if (currentState.limit !== "All") {
-    const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
-
-    yield put(tableActions.changeCurrentPage(1));
-    yield put(tableActions.changeTotalPages(res.data.totalPages));
+  const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
+  yield put(tableActions.changeCurrentPage(1));
+    yield put(tableActions.changeTotalPages(currentState.limit==='All'?"":res.data.totalPages));
     yield put(
       tableActions.changeData({
         data: res.data.content,
         size: currentState.sizeOfPage,
       })
     );
-  }else {
-    const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
-
-    yield put(tableActions.changeCurrentPage(1));
-    yield put(tableActions.changeTotalPages(""));
-    yield put(
-      tableActions.changeData({
-        data: res.data,
-        size: currentState.sizeOfPage,
-      })
-    );
-  }
 }
 
 function* tableSaga() {

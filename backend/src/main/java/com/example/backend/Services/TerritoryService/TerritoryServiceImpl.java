@@ -128,17 +128,12 @@ public class TerritoryServiceImpl implements TerritoryService {
 
     @Override
     public HttpEntity<?> pagination(Integer page, String limit, HttpServletRequest request) {
-        if (limit.equals("All")) {
+
             try {
-                JsonNode jsonNode = WrapFromStringToObject(request);
-                List<TerritoryProjection> territories = territoryRepository.searchFromAll(jsonNode.get("quickSearch").asText(),
-                        jsonNode.get("active").asText());
-                return ResponseEntity.ok(territories);
-            } catch (Exception e) {
-                return ResponseEntity.status(404).body("An error has occurred");
-            }
-        } else {
-            try {
+                if(limit.equals("All")){
+                    List<Territory> territoryRepositoryAll = territoryRepository.findAll();
+                    limit = String.valueOf(territoryRepositoryAll.size());
+                }
                 Pageable pageable = PageRequest.of(page, Integer.parseInt(limit));
                 JsonNode jsonNode = WrapFromStringToObject(request);
                 Page<TerritoryProjection> territories = territoryRepository.getFilteredData(jsonNode.get("quickSearch").asText(),
@@ -147,7 +142,6 @@ public class TerritoryServiceImpl implements TerritoryService {
             } catch (Exception e) {
                 return ResponseEntity.status(404).body("An error has occurred");
             }
-        }
     }
 
     @Override

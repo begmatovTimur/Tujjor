@@ -13,34 +13,32 @@ import "./Table.css";
 const Table = (props) => {
   const handleDragEnd = (result) => {
     if (!result.destination) return;
-
     const sourceIndex = result.source.index;
     const destinationIndex = result.destination.index;
-
     props.reorderColumns({ sourceIndex, destinationIndex });
   };
-
-
 
   useEffect(() => {
     try {
       props.claimData({
         columns: localStorage.getItem(props.localStoragePath)
-          ? JSON.parse(localStorage.getItem(props.localStoragePath)).length?JSON.parse(localStorage.getItem(props.localStoragePath)).map(
-              (item) => {
-                if (props.columnsProps[item.id] === undefined) {
-                  localStorage.removeItem(props.localStoragePath);
-                  return;
+          ? JSON.parse(localStorage.getItem(props.localStoragePath)).length
+            ? JSON.parse(localStorage.getItem(props.localStoragePath)).map(
+                (item) => {
+                  if (props.columnsProps[item.id] === undefined) {
+                    localStorage.removeItem(props.localStoragePath);
+                    return;
+                  }
+                  return { ...props.columnsProps[item.id], show: item.show };
                 }
-                return { ...props.columnsProps[item.id], show: item.show };
-              }
-            ):props.columnsProps
+              )
+            : props.columnsProps
           : props.columnsProps,
         data: props.dataProps,
         localPath: props.localStoragePath,
       });
     } catch (e) {
-       props.claimData({
+      props.claimData({
         columns: props.columnsProps,
         data: props.dataProps,
         localPath: props.localStoragePath,
@@ -49,7 +47,7 @@ const Table = (props) => {
     }
     if (props.pagination === true && !props.paginationApi)
       alert("Pagination API is required!");
-    if (props.paginationApi && props.limit!="All") {
+    if (props.paginationApi && props.limit != "All") {
       props.changePaginationTo({
         api: props.paginationApi,
         size: props.changeSizeModeOptions[1],
@@ -57,7 +55,6 @@ const Table = (props) => {
       });
     }
   }, [props.dataProps]);
-
 
   const getValueByKeys = (obj, keys) => {
     const keysArray = keys.split("+").map((key) => key.trim());
@@ -81,14 +78,12 @@ const Table = (props) => {
     setTimeout(() => {
       props.changeLoadingActive(false);
     }, 1000);
-    return ()=>{
-      props.emptyFilters()
-    }
+    return () => {
+      props.emptyFilters();
+    };
   }, []);
 
-
-
-
+  console.log(props.sizeOfPage,props.totalPages);
 
   return (
     <div className="universal_table">
@@ -112,23 +107,29 @@ const Table = (props) => {
                   {props.changeSizeMode ? (
                     <Dropdown
                       multiSelect={false}
-                      customTitle={props.limit?"By "+props.limit:"By "+props.changeSizeModeOptions[1]}
+                      customTitle={
+                        props.limit
+                          ? "By " + props.limit
+                          : "By " + props.changeSizeModeOptions[1]
+                      }
                       dropdownId="1"
-                      body={props.changeSizeModeOptions.map(item=>({title:item}))}
+                      body={props.changeSizeModeOptions.map((item) => ({
+                        title: item,
+                      }))}
                       onItemClick={(item) => {
-                        props.handlePageChange(1);  
-                        if(item!=="All") {
+                        props.handlePageChange(1);
+                        if (item !== "All") {
                           props.changePaginationTo({
                             api: props.paginationApi,
                             size: item,
                             page: 1,
                           });
-                        }else {
+                        } else {
                           props.changePaginationTo({
                             api: props.paginationApi,
                             size: item,
                             page: 1,
-                          }); 
+                          });
                         }
                       }}
                     />
@@ -139,7 +140,17 @@ const Table = (props) => {
                     customTitle="Table Setup"
                     multiSelect={true}
                     dropdownId="2"
-                    body={props.columns.length!==0?props.columns.map(item=>({title:item.title,show:item.show})):props.copyOfColumns.map(item=>({title:item.title,show:item.show}))}
+                    body={
+                      props.columns.length !== 0
+                        ? props.columns.map((item) => ({
+                            title: item.title,
+                            show: item.show,
+                          }))
+                        : props.copyOfColumns.map((item) => ({
+                            title: item.title,
+                            show: item.show,
+                          }))
+                    }
                     onItemClick={(item) => {
                       props.filterVisibility(item);
                     }}
@@ -265,14 +276,18 @@ const Table = (props) => {
                             </td>
                           ) : col.type === "index" ? (
                             <td className={col.show ? "" : "hidden"}>
-                              {index +
+                              {props.sizeOfPage==="All"?index +
+                                1 +
+                                0 * (props.currentPage - 1):index +
                                 1 +
                                 props.sizeOfPage * (props.currentPage - 1)}
                             </td>
                           ) : col.type === "boolean" && col.key === "active" ? (
                             <td
                               className={
-                                item[col.key]  ? "text-success" + (col.show?"": " hidden") : "text-danger" + (col.show?"": " hidden")
+                                item[col.key]
+                                  ? "text-success" + (col.show ? "" : " hidden")
+                                  : "text-danger" + (col.show ? "" : " hidden")
                               }
                             >
                               {item[col.key] ? "active" : "unactive "}
@@ -290,7 +305,10 @@ const Table = (props) => {
                 </tbody>
               </table>
             </div>
-            {props.totalPages!=="" && props.pagination && props.data.length && props.columns.length ? (
+            {props.totalPages !== "" &&
+            props.pagination &&
+            props.data.length &&
+            props.columns.length ? (
               <div className="d-flex justify-content-end pt-2">
                 <Pagination
                   onChange={(e, page) => handleChange(e, page)}
