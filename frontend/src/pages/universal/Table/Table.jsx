@@ -13,10 +13,8 @@ import "./Table.css";
 const Table = (props) => {
   const handleDragEnd = (result) => {
     if (!result.destination) return;
-
     const sourceIndex = result.source.index;
     const destinationIndex = result.destination.index;
-
     props.reorderColumns({ sourceIndex, destinationIndex });
   };
 
@@ -128,7 +126,7 @@ const Table = (props) => {
                             api: props.paginationApi,
                             size: item,
                             page: 1,
-                          }); 
+                          });
                         }
                       }}
                     />

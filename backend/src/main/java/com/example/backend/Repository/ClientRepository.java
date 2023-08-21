@@ -94,9 +94,4 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "ORDER BY\n" +
             "    c.insertion_time DESC")
     List<ClientProjection> getAllFilteredFieldsForExcel(List<UUID> city, List<Integer> category, String active, String tin, String search);
-
-    @Query(nativeQuery = true,value = "select * from client order by insertion_time desc")
-    List<Client> findAllOrderedClient();
-
-
 }

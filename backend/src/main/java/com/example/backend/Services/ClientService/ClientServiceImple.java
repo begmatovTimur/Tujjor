@@ -66,10 +66,16 @@ public class ClientServiceImple implements ClientService {
     }
 
     @Override
-    public HttpEntity<?> getFilteredClients(Integer page, Integer limit, HttpServletRequest request) throws JsonProcessingException {
+    public HttpEntity<?> getFilteredClients(Integer page, String limit, HttpServletRequest request) throws JsonProcessingException {
         try {
-            if (page == null || limit == null || page < 0 || limit < 1) {
-                return ResponseEntity.badRequest().body("Invalid page or limit value");
+            if(!(limit.equals("All"))){
+                if (page == null || limit == null || page < 0 || Integer.parseInt(limit) < 1) {
+                    return ResponseEntity.badRequest().body("Invalid page or limit value");
+                }
+            }
+            if(limit.equals("All")){
+                List<Client> clients = clientRepository.findAll();
+                limit = String.valueOf(clients.size());
             }
             JsonNode jsonNode = wrapToObject(request);
             JsonNode cityArrayNode = jsonNode.get("city");
@@ -83,7 +89,7 @@ public class ClientServiceImple implements ClientService {
             for (JsonNode cityNode : categoryArray) {
                 customerCategoriesParam.add(cityNode.asInt());
             }
-            Pageable pageable = PageRequest.of(page, limit);
+            Pageable pageable = PageRequest.of(page, Integer.parseInt(limit));
             Page<ClientProjection> clients = clientRepository.getAllFilteredFields(cities, customerCategoriesParam, jsonNode.get("active").asText(), jsonNode.get("tin").asText(), jsonNode.get("quickSearch").asText(), pageable);
             if (clients.isEmpty()) {
                 return ResponseEntity.ok(new PageImpl<>(Collections.emptyList(), pageable, 0));
@@ -159,7 +165,7 @@ public class ClientServiceImple implements ClientService {
 
     @Override
     public HttpEntity<?> getTeritoriesForClients() {
-        List<TerritoryClientProjection> allteritoryForCliens = territoryRepository.getAllteritoryForCliens();
+        List<TerritoryClientProjection> allteritoryForCliens = territoryRepository.getAllTerritoryForClients();
         return ResponseEntity.ok(allteritoryForCliens);
     }
 

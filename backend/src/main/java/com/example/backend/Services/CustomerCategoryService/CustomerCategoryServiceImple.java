@@ -2,6 +2,7 @@ package com.example.backend.Services.CustomerCategoryService;
 
 import com.example.backend.DTO.CustomerCategoryDTO;
 import com.example.backend.Entity.CustomerCategory;
+import com.example.backend.Entity.Territory;
 import com.example.backend.Projection.CustomerCategoryProjection;
 import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Repository.CustomerCategoryRepository;
@@ -84,18 +85,11 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
 
     @Override
     public HttpEntity<?> pagination(Integer page, String limit, HttpServletRequest request) {
-        if (limit.equals("All")) {
             try {
-                JsonNode jsonNode = WrapFromStringToObject(request);
-                List<CustomerCategoryProjection> territories = customerCategoryRepository.searchFromAll(jsonNode.get("quickSearch").asText(),
-                        jsonNode.get("active").asText());
-                return ResponseEntity.ok(territories);
-            } catch (Exception e) {
-                return ResponseEntity.status(404).body("An error has occurred");
-            }
-        } else {
-
-            try {
+                if(limit.equals("All")){
+                    List<CustomerCategory> customerCategories = customerCategoryRepository.findAll();
+                    limit = String.valueOf(customerCategories.size());
+                }
                 Pageable pageable = PageRequest.of(page, Integer.parseInt(limit));
                 JsonNode jsonNode = WrapFromStringToObject(request);
                 Page<CustomerCategoryProjection> territories;
@@ -109,8 +103,6 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
             } catch (Exception e) {
                 return ResponseEntity.status(404).body("An error has occurred");
             }
-        }
-
     }
 
     @Override
