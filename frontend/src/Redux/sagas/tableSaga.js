@@ -23,7 +23,7 @@ function* watchGetFilteredData(action) {
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
   const res = yield apiCall(api, "get", null, JSON.stringify(obj));
   yield put(tableActions.changeCurrentPage(1));
-  yield put(tableActions.changeTotalPages(res.data.totalPages));
+  yield put(tableActions.changeTotalPages(currentState.limit==="All"?"":res.data.totalPages));
   yield put(
     tableActions.changeData({
       data: res.data.content,
@@ -49,7 +49,7 @@ function* watchQuickSearchData(action) {
   let api = currentState.paginationApi1;
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
   const res = yield apiCall(api, "get", null, JSON.stringify(obj));
-    yield put(tableActions.changeTotalPages(res.data.totalPages));
+    yield put(tableActions.changeTotalPages(currentState.limit==="All"?"":res.data.totalPages));
     yield put(tableActions.changeCurrentPage(1));
     yield put(
       tableActions.changeData({
@@ -78,7 +78,7 @@ function* changeSizeOfPage(action) {
     customerCategories: x.customerCategories,
   };
     const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
-    yield put(tableActions.changeTotalPages(res.data.totalPages));
+    yield put(tableActions.changeTotalPages(LIMIT==="All"?"":res.data.totalPages));
     yield put({
       type: "table/changeData",
       payload: {
@@ -172,7 +172,7 @@ function* watchGetActiveData(action) {
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
   const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
   yield put(tableActions.changeCurrentPage(1));
-    yield put(tableActions.changeTotalPages(res.data.totalPages));
+    yield put(tableActions.changeTotalPages(currentState.limit==='All'?"":res.data.totalPages));
     yield put(
       tableActions.changeData({
         data: res.data.content,
