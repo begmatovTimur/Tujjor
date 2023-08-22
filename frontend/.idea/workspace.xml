@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,6 +46,19 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="frontend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="frontend" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -117,6 +126,7 @@
       <workItem from="1692340818179" duration="78000" />
       <workItem from="1692341147774" duration="33000" />
       <workItem from="1692607553930" duration="16000" />
+      <workItem from="1692607642200" duration="4879000" />
     </task>
     <servers />
   </component>
