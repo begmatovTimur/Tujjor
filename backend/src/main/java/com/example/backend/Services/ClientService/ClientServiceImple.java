@@ -125,6 +125,7 @@ public class ClientServiceImple implements ClientService {
             client.setPhone(clientDTO.getPhone());
             client.setTerritory(territory);
             client.setActive(clientDTO.getActive());
+            client.setInsertionTime(clientRepository.findById(clientId).orElseThrow().getInsertionTime());
             client.setCompanyName(clientDTO.getCompanyName());
             clientRepository.save(client);
             return ResponseEntity.ok("Client updated successfully");
