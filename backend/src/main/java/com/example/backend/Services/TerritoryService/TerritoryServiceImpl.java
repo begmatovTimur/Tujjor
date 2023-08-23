@@ -41,9 +41,22 @@ public class TerritoryServiceImpl implements TerritoryService {
 
     @Override
     public Territory updateTerritory(UUID id, TerritoryDTO territory) {
-        Territory territoryData = generateNewTerritory(territory);
+        Territory territoryData = generateUpdatedTerritory(territory,id);
+        assert territoryData != null;
         territoryData.setId(id);
         return territoryRepository.save(territoryData);
+    }
+
+    private Territory generateUpdatedTerritory(TerritoryDTO territory, UUID id) {
+        return Territory.builder()
+                .region(territory.getRegion())
+                .name(territory.getName())
+                .code(territory.getCode())
+                .active(territory.getActive())
+                .longitude(territory.getLongitude())
+                .latitude(territory.getLatitude())
+                .insertionTime(territoryRepository.findById(id).get().getInsertionTime())
+                .build();
     }
 
     private static JsonNode WrapFromStringToObject(HttpServletRequest request) throws JsonProcessingException {
@@ -177,6 +190,9 @@ public class TerritoryServiceImpl implements TerritoryService {
             }
         }
         CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex()); // Set your desired color
+        headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
         Font headerFont = workbook.createFont();
         headerFont.setBold(true);
         headerCellStyle.setFont(headerFont);

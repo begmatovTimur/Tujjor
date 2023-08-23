@@ -48,6 +48,7 @@ const Table = (props) => {
     if (props.pagination === true && !props.paginationApi)
       alert("Pagination API is required!");
     if (props.paginationApi && props.limit != "All") {
+      props.handlePageChange(1);
       props.changePaginationTo({
         api: props.paginationApi,
         size: props.changeSizeModeOptions[1],
@@ -83,7 +84,6 @@ const Table = (props) => {
     };
   }, []);
 
-  console.log(props.sizeOfPage,props.totalPages);
 
   return (
     <div className="universal_table">

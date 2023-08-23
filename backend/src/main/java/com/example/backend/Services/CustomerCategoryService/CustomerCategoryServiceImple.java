@@ -54,16 +54,6 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
     }
 
 
-    private Object getPropertyValue(Object obj, String propertyName) {
-        try {
-            Field field = obj.getClass().getDeclaredField(propertyName);
-            field.setAccessible(true);
-            return field.get(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     private CustomerCategory generateNewTerritory(CustomerCategoryDTO categoryDTO) {
         return CustomerCategory.builder()
@@ -108,13 +98,10 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
     @Override
     @SneakyThrows
     public ResponseEntity<Resource> getExcelFile(HttpServletRequest request, String columns) throws IOException {
-        System.out.println(columns);
         String[] headersStr = columns.split("\\.");
         List<CustomerCategoryProjection> territoryFilter = null;
         JsonNode jsonNode = WrapFromStringToObject(request);
-        System.out.println(jsonNode.get("active"));
-        System.out.println(jsonNode.get("quickSearch"));
-        territoryFilter = customerCategoryRepository.getFilteredDataForExcel(jsonNode.get("active").asText(), jsonNode.get("quickSearch").asText());
+        territoryFilter = customerCategoryRepository.getFilteredDataForExcel(jsonNode.get("quickSearch").asText(),jsonNode.get("active").asText());
         XSSFWorkbook workbook = new XSSFWorkbook();
         int rowIdx = 0;
         Sheet sheet = workbook.createSheet("Company info");
@@ -123,7 +110,6 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
             headerRow.createCell(i).setCellValue(headersStr[i]);
         }
 
-        System.err.println(territoryFilter.size());
         for (CustomerCategoryProjection territory : territoryFilter) {
             Row dataRow = sheet.createRow(rowIdx++);
             int columnIndex = 0; // Introduce a separate variable for the column index

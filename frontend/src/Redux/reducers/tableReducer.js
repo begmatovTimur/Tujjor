@@ -75,7 +75,7 @@ const tableReducer = createSlice({
         city: [],
       }
       state.limit= "";
-      state.sizeOfPage = 1;
+      state.sizeOfPage = "";
       state.formInputs= {
         active: "",
         city: [],

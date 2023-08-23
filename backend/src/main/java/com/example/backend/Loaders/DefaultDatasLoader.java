@@ -1,14 +1,8 @@
 package com.example.backend.Loaders;
 
-import com.example.backend.Entity.Company;
-import com.example.backend.Entity.Role;
-import com.example.backend.Entity.Settings;
-import com.example.backend.Entity.User;
+import com.example.backend.Entity.*;
 import com.example.backend.Enums.RoleEnum;
-import com.example.backend.Repository.CompanyRepository;
-import com.example.backend.Repository.RoleRepository;
-import com.example.backend.Repository.SettingsRepository;
-import com.example.backend.Repository.UsersRepository;
+import com.example.backend.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +18,9 @@ public class DefaultDatasLoader implements CommandLineRunner {
     private final UsersRepository usersRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final TerritoryRepository territoryRepository;
+    private final CustomerCategoryRepository customerCategoryRepository;
+    private final ClientRepository clientRepository;
     private final SettingsRepository settingsRepository;
 
 
@@ -37,7 +34,6 @@ public class DefaultDatasLoader implements CommandLineRunner {
                 && usersRepository.findByPhone(superVisorName).isEmpty()
                 && companyRepository.findByCompanyName(companyName)==null
         ){
-            System.out.println(usersRepository.findByPhone(superVisorName).isEmpty());;
             Role savedRole = roleRepository.save(
                     Role.builder()
                             .roleName(RoleEnum.ROLE_SUPER_VISOR.name())
@@ -68,7 +64,6 @@ public class DefaultDatasLoader implements CommandLineRunner {
 
         }
 
-
         if(settingsRepository.findAll().size()==0) {
             List<Settings> settings = new ArrayList<>();
             settings.add(new Settings(null,"Company Profile","/company-profile"));
@@ -83,6 +78,33 @@ public class DefaultDatasLoader implements CommandLineRunner {
             settings.add(new Settings(null,"Price Type","/price-type"));
             settingsRepository.saveAll(settings);
         }
+
+
+        if(territoryRepository.findAll().size()==0) {
+            List<Territory> territories = new ArrayList<>();
+
+            territories.add(new Territory(null,"Bukhara","Buxoro","MA0DP",true,64.39096772460934,39.737524678460645,null));
+            territories.add(new Territory(null,"Tashkent","Toshkent","DLA01",false,69.29798027332778,41.29861152419623,null));
+            territories.add(new Territory(null,"Farg'ona","Farg'ona","SODK05",true,71.74943286619715,40.350720394603776,null));
+            territories.add(new Territory(null,"Qo'qon","Qo'qon","AD01A",true,70.94743091307214,40.52700099193099,null));
+            territories.add(new Territory(null,"Namangan","Namangan","MLDM8",true,71.66154224119714,40.99480317106396,null));
+
+            territoryRepository.saveAll(territories);
+        }
+
+        if(customerCategoryRepository.findAll().size()==0) {
+            List<CustomerCategory> categories = new ArrayList<>();
+
+            categories.add(new CustomerCategory(null,"Bukhara","39184","Market","Super Market",true));
+            categories.add(new CustomerCategory(null,"Tashkent","28391","Tech Market","Tech Market",true));
+            categories.add(new CustomerCategory(null,"Farg'ona","92819","Restarant","Restaurant",true));
+            categories.add(new CustomerCategory(null,"Qo'qon","74810","Kanstavari","Kanstavari",false));
+            categories.add(new CustomerCategory(null,"Namangan","8193","ITPark","ITPark",true));
+
+
+            customerCategoryRepository.saveAll(categories);
+        }
+
     }
 
 }

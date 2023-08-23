@@ -1,6 +1,5 @@
 import { ErrorNotify } from "../tools/Alerts";
 import axiosInterceptor from "./axiosInterceptor";
-
 export const domen = "http://localhost:8080/api";
 export default function apiCall(url, method, data, searchParam = "") {
     let item = localStorage.getItem("access_token");

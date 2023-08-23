@@ -59,7 +59,7 @@ public class ClientServiceImple implements ClientService {
     @Override
     public HttpEntity<?> getClient() {
         try {
-            return ResponseEntity.ok(clientRepository.findAll());
+            return ResponseEntity.ok(clientRepository.findAllByOrderByInsertionTime());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("An error has occurred");
         }
@@ -125,6 +125,7 @@ public class ClientServiceImple implements ClientService {
             client.setPhone(clientDTO.getPhone());
             client.setTerritory(territory);
             client.setActive(clientDTO.getActive());
+            client.setInsertionTime(clientRepository.findById(clientId).orElseThrow().getInsertionTime());
             client.setCompanyName(clientDTO.getCompanyName());
             clientRepository.save(client);
             return ResponseEntity.ok("Client updated successfully");
