@@ -16,6 +16,7 @@ function Clients(props) {
 
   useEffect(() => {
     props.getClients();
+    localStorage.setItem("sidebar_button", "5")
   }, []);
 
   function handleMapClick(event) {
