@@ -173,9 +173,3 @@ function Login(props) {
 }
 
 export default connect((state) => state, loginModel)(Login);
-
-// url: domen+"/users/me",
-//               method: "GET",
-//               headers: {
-//                   token: localStorage.getItem("access_token"),
-//               },
