@@ -112,5 +112,5 @@ const teritoryReducer = createSlice({
     },
 });
 
-export const teritoryAction = { ...teritoryReducer.actions };
+export const teritoryAction = {...teritoryReducer.actions };
 export default teritoryReducer.reducer;
