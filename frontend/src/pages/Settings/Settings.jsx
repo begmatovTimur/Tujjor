@@ -8,7 +8,8 @@ const Settings = ({data, getData, activeButtonIndex, setCurrentIndex}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getData();  
+        getData();
+        localStorage.setItem("sidebar_button", "8")
     }, []);
     useEffect(() => {
         if (localStorage.getItem("selectedSettingsButton") && data.length) {

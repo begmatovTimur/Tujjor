@@ -120,7 +120,7 @@ const tableReducer = createSlice({
     },
     changePaginationTo: (state, action) => {
       state.limit = action.payload.size;
-      state.page = action.payload.page;
+      state.currentPage = action.payload.page;
     },
     changeSizeOfPage: (state, action) => {
       state.limit = action.payload;

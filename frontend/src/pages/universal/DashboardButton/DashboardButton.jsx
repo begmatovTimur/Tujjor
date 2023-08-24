@@ -3,8 +3,14 @@ import {useNavigate} from "react-router-dom";
 
 function DashboardButton(props) {
     const navigate = useNavigate();
+    function navigateButtonFunc() {
+        localStorage.setItem("sidebar_button", props.id)
+        navigate(props.path)
+    }
+
+
     return (
-        <div className={"dashboard_button"} onClick={()=>navigate(props.path)}>
+        <div className={props.class} onClick={()=> navigateButtonFunc()}>
             <button>
                 {props.icon}
                 <span>{props.title}</span>

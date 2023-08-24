@@ -16,7 +16,7 @@ import { domen } from "./Config/apiCall";
 import { Home } from "@mui/icons-material";
 import { tableActions } from "./Redux/reducers/tableReducer";
 import { useDispatch } from "react-redux";
-import image from "./microphone-svgrepo-com.svg";
+
 function App() {
   const navigate = useNavigate();
   const location = useLocation();

@@ -31,7 +31,7 @@ function* getTeritory(action){
 }
 function* getCities(action){
     try {
-        const res = yield apiCall("/territory/region", "GET")
+        const res = yield apiCall("/territory/region", "GET", null)
         yield put(teritoryAction.getCitiesSuccess({res: res.data}))
     } catch (err) {
         yield put(teritoryAction.yourActionFailureTeritories(err.message));

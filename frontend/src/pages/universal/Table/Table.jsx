@@ -11,6 +11,7 @@ import "./Table.css";
 
 const Table = (props) => {
   console.log("global", props.limit);
+  console.log("global", props.currentPage);
   useEffect(() => {
     // alert(props.limit);
     let storedColumns = JSON.parse(
@@ -58,14 +59,13 @@ const Table = (props) => {
       }else {
         props.changePaginationTo({
           size: props.limit,
-          page: props.page,
+          page: props.currentPage,
         });
+        console.log("local page",props.page);
       }
 
       if (props.limit === "All") {
         props.changeTotalPages(-1);
-      } else {
-        props.handlePageChange(1);
       }
     }
   }, [props.dataProps]);
@@ -96,9 +96,17 @@ const Table = (props) => {
     props.loading();
     return () => {
       props.emptyFilters();
-      alert("Empty " + props.limit);
     };
   }, []);
+
+  function getCheckPage() {
+    return !(JSON.stringify(props.columns)===JSON.stringify(props.modalColumns));
+  }
+
+
+
+
+
 
   return (
     <div className="universal_table">
@@ -189,6 +197,7 @@ const Table = (props) => {
               modalTitle={"Columns order"}
               height="300px"
               isOpen={props.columnOrderModalVisibility}
+              checkPage={getCheckPage()}
               closeFunction={() =>
                 props.setColumnModalVisibility(false) &
                 props.setModalColumns(props.columns)
