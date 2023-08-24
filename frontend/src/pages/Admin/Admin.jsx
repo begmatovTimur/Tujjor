@@ -142,12 +142,7 @@ function Admin(props) {
             </div>
             <div style={{height: "100vh"}} className={"d-flex"}>
                 <div
-                    style={{
-                        width: "90px",
-                        backgroundColor: "#4b5d67",
-                        display: "flex",
-                        flexDirection: "column",
-                    }}
+                    className="sideBar"
                 >
                     <DashboardButton
                         icon={<i className="fa fa-medkit"></i>}

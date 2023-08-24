@@ -1,39 +1,39 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { tableActions } from "../../../Redux/reducers/tableReducer";
 import Pagination from "@mui/material/Pagination";
 import Filter from "../Filter/Filter";
 import Dropdown from "../Dropdown/Dropdown";
 import UniversalModal from "../Modal/UniverModal";
-import { tableActions } from "../../../Redux/reducers/tableReducer";
-import { jsxDEV } from "react/jsx-dev-runtime"; // Make sure you import jsxDEV
 
 import "./Table.css";
 
 const Table = (props) => {
-  const handleDragEnd = (result) => {
-    if (!result.destination) return;
-    const sourceIndex = result.source.index;
-    const destinationIndex = result.destination.index;
-    props.reorderColumns({ sourceIndex, destinationIndex });
-  };
-
+  console.log("global", props.limit);
   useEffect(() => {
+    // alert(props.limit);
+    let storedColumns = JSON.parse(
+      localStorage.getItem(props.localStoragePath)
+    );
+    props.changePaginationApi(props.paginationApi);
+
+    if (storedColumns === null) storedColumns = props.columnsProps;
+    if (storedColumns !== null) {
+      if (storedColumns.length === 0) storedColumns = props.columnsProps;
+    }
+
+    const modifiedColumns = storedColumns.map((item) => {
+      if (props.columnsProps[item.id] === undefined) {
+        localStorage.removeItem(props.localStoragePath);
+        return;
+      }
+      return { ...props.columnsProps[item.id], show: item.show };
+    });
+
     try {
       props.claimData({
-        columns: localStorage.getItem(props.localStoragePath)
-          ? JSON.parse(localStorage.getItem(props.localStoragePath)).length
-            ? JSON.parse(localStorage.getItem(props.localStoragePath)).map(
-                (item) => {
-                  if (props.columnsProps[item.id] === undefined) {
-                    localStorage.removeItem(props.localStoragePath);
-                    return;
-                  }
-                  return { ...props.columnsProps[item.id], show: item.show };
-                }
-              )
-            : props.columnsProps
-          : props.columnsProps,
+        columns: modifiedColumns,
         data: props.dataProps,
         localPath: props.localStoragePath,
       });
@@ -46,14 +46,27 @@ const Table = (props) => {
       localStorage.removeItem(props.localStoragePath);
     }
     if (props.pagination === true && !props.paginationApi)
-      alert("Pagination API is required!");
-    if (props.paginationApi && props.limit != "All") {
-      props.handlePageChange(1);
-      props.changePaginationTo({
-        api: props.paginationApi,
-        size: props.changeSizeModeOptions[1],
-        page: 1,
-      });
+      alert("Pagination API is required!"); // Case When Pagination true Pagination Api Is null
+
+    if (props.changeSizeMode && props.paginationApi) {
+      if (!props.firstRequest) {
+        props.setFirstRequest(true);
+        props.changePaginationTo({
+          size: props.changeSizeModeOptions[1],
+          page: 1,
+        });
+      }else {
+        props.changePaginationTo({
+          size: props.limit,
+          page: props.page,
+        });
+      }
+
+      if (props.limit === "All") {
+        props.changeTotalPages(-1);
+      } else {
+        props.handlePageChange(1);
+      }
     }
   }, [props.dataProps]);
 
@@ -68,22 +81,24 @@ const Table = (props) => {
   const handleChange = (e, page) => {
     props.handlePageChange(page);
     props.changePaginationTo({
-      api: props.paginationApi,
-      size: props.sizeOfPage,
+      size: props.limit,
       page,
     });
   };
+  function handleDragEnd(result) {
+    if (!result.destination) return;
+    const sourceIndex = result.source.index;
+    const destinationIndex = result.destination.index;
+    props.reorderColumns({ sourceIndex, destinationIndex });
+  }
 
   useEffect(() => {
-    props.changeLoadingActive(true);
-    setTimeout(() => {
-      props.changeLoadingActive(false);
-    }, 1000);
+    props.loading();
     return () => {
       props.emptyFilters();
+      alert("Empty " + props.limit);
     };
   }, []);
-
 
   return (
     <div className="universal_table">
@@ -118,19 +133,10 @@ const Table = (props) => {
                       }))}
                       onItemClick={(item) => {
                         props.handlePageChange(1);
-                        if (item !== "All") {
-                          props.changePaginationTo({
-                            api: props.paginationApi,
-                            size: item,
-                            page: 1,
-                          });
-                        } else {
-                          props.changePaginationTo({
-                            api: props.paginationApi,
-                            size: item,
-                            page: 1,
-                          });
-                        }
+                        props.changePaginationTo({
+                          size: item,
+                          page: 1,
+                        });
                       }}
                     />
                   ) : (
@@ -140,17 +146,13 @@ const Table = (props) => {
                     customTitle="Table Setup"
                     multiSelect={true}
                     dropdownId="2"
-                    body={
-                      props.columns.length !== 0
-                        ? props.columns.map((item) => ({
-                            title: item.title,
-                            show: item.show,
-                          }))
-                        : props.copyOfColumns.map((item) => ({
-                            title: item.title,
-                            show: item.show,
-                          }))
-                    }
+                    body={(props.columns.length != 0
+                      ? props.columns
+                      : props.copyOfColumns
+                    ).map((item) => ({
+                      title: item.title,
+                      show: item.show,
+                    }))}
                     onItemClick={(item) => {
                       props.filterVisibility(item);
                     }}
@@ -276,11 +278,11 @@ const Table = (props) => {
                             </td>
                           ) : col.type === "index" ? (
                             <td className={col.show ? "" : "hidden"}>
-                              {props.sizeOfPage==="All"?index +
-                                1 +
-                                0 * (props.currentPage - 1):index +
-                                1 +
-                                props.sizeOfPage * (props.currentPage - 1)}
+                              {props.limit === "All"
+                                ? index + 1 + 0 * (props.currentPage - 1)
+                                : index +
+                                  1 +
+                                  props.limit * (props.currentPage - 1)}
                             </td>
                           ) : col.type === "boolean" && col.key === "active" ? (
                             <td

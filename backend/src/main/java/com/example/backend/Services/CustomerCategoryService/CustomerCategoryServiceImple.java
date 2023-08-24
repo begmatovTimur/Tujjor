@@ -101,20 +101,30 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
         String[] headersStr = columns.split("\\.");
         List<CustomerCategoryProjection> territoryFilter = null;
         JsonNode jsonNode = WrapFromStringToObject(request);
+        System.out.println(headersStr.toString());
+        System.out.println(jsonNode.get("quickSearch"));
         territoryFilter = customerCategoryRepository.getFilteredDataForExcel(jsonNode.get("quickSearch").asText(),jsonNode.get("active").asText());
         XSSFWorkbook workbook = new XSSFWorkbook();
         int rowIdx = 0;
         Sheet sheet = workbook.createSheet("Company info");
         Row headerRow = sheet.createRow(rowIdx++);
         for (int i = 0; i < headersStr.length; i++) {
-            headerRow.createCell(i).setCellValue(headersStr[i]);
+            Cell headerRowCell = headerRow.createCell(i);
+            headerRowCell.setCellValue(headersStr[i].replaceAll("\"",""));
+            CellStyle headerCellStyle = workbook.createCellStyle();
+            headerCellStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
+            headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            Font headerFont = workbook.createFont();
+            headerFont.setColor(IndexedColors.WHITE.getIndex());
+            headerFont.setBold(true);
+            headerCellStyle.setFont(headerFont);
+            headerRowCell.setCellStyle(headerCellStyle);
         }
 
         for (CustomerCategoryProjection territory : territoryFilter) {
             Row dataRow = sheet.createRow(rowIdx++);
             int columnIndex = 0; // Introduce a separate variable for the column index
             for (int i = 0; i < headersStr.length; i++) {
-                System.out.println(headersStr[i].replaceAll("\"", ""));
                 switch (headersStr[i].replaceAll("\"", "")) {
                     case "Name":
                         dataRow.createCell(columnIndex++).setCellValue(territory.getName().toString().replaceAll("\"", ""));
@@ -125,19 +135,15 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
                     case "Code":
                         dataRow.createCell(columnIndex++).setCellValue(territory.getCode().toString().replaceAll("\"", ""));
                         break;
+                    case "Description":
+                        dataRow.createCell(columnIndex++).setCellValue(territory.getDescription().toString().replaceAll("\"", ""));
+                        break;
                     // Add more cases for other fields as needed
                 }
             }
         }
-        CellStyle headerCellStyle = workbook.createCellStyle();
-        Font headerFont = workbook.createFont();
-        headerFont.setBold(true);
-        headerCellStyle.setFont(headerFont);
 
-        CellStyle dataCellStyle = workbook.createCellStyle();
-        dataCellStyle.setWrapText(true);
         for (Cell cell : headerRow) {
-            cell.setCellStyle(headerCellStyle);
             int columnIndex = cell.getColumnIndex();
             sheet.autoSizeColumn(columnIndex);
         }
@@ -145,7 +151,6 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
 // Apply styles to data rows and auto-size columns
         for (Row row : sheet) {
             for (Cell cell : row) {
-                cell.setCellStyle(dataCellStyle);
                 int columnIndex = cell.getColumnIndex();
                 sheet.autoSizeColumn(columnIndex);
             }

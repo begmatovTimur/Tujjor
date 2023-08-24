@@ -191,14 +191,14 @@ public class ClientServiceImple implements ClientService {
         Sheet sheet = workbook.createSheet("Company info");
         Row headerRow = sheet.createRow(rowIdx++);
         for (int i = 0; i < headersStr.length; i++) {
-            headerRow.createCell(i).setCellValue(headersStr[i]);
+            headerRow.createCell(i).setCellValue(headersStr[i].replaceAll("\"",""));
+
         }
 
         for (ClientProjection client : all) {
             Row dataRow = sheet.createRow(rowIdx++);
             int columnIndex = 0; // Introduce a separate variable for the column index
             for (int i = 0; i < headersStr.length; i++) {
-                System.out.println(headersStr[i].replaceAll("\"",""));
                     switch (headersStr[i].replaceAll("\"","")) {
                         case "Client name":
                             dataRow.createCell(columnIndex++).setCellValue(client.getClientName().replaceAll("\"",""));
@@ -252,17 +252,13 @@ public class ClientServiceImple implements ClientService {
         for (Cell cell : headerRow) {
             cell.setCellStyle(headerCellStyle);
             int columnIndex = cell.getColumnIndex();
+            headerFont.setColor(IndexedColors.WHITE.getIndex());
+            headerCellStyle.setFillBackgroundColor(IndexedColors.LIGHT_BLUE.getIndex());
+            headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
             sheet.autoSizeColumn(columnIndex);
         }
 
 // Apply styles to data rows and auto-size columns
-        for (Row row : sheet) {
-            for (Cell cell : row) {
-                cell.setCellStyle(dataCellStyle);
-                int columnIndex = cell.getColumnIndex();
-                sheet.autoSizeColumn(columnIndex);
-            }
-        }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         workbook.write(outputStream);
         workbook.close();

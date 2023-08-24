@@ -12,7 +12,7 @@ function CustomerCategory(props) {
   const { customerCategory } = props;
 
   useEffect(()=>{
-    console.log(props.getCategory());
+    props.getCategory()
   },[])
 
   const columns = [
@@ -46,6 +46,13 @@ function CustomerCategory(props) {
     },
     {
       id: 4,
+      title: "Description",
+      key: "description",
+      type: "text",
+      show: true,
+    },
+    {
+      id: 5,
       title: "Update",
       key: "button",
       type: "jsx",

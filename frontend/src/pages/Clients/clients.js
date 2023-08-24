@@ -288,7 +288,7 @@ function Clients(props) {
                   }}
                 >
                   <label>
-                    <span className={"d-block"}>clients*</span>
+                    <span className={"d-block"}>clients <b>*</b></span>
                     <select
                       defaultValue={""}
                       onChange={(e) => props.changeTeritoryId(e.target.value)}
@@ -304,7 +304,7 @@ function Clients(props) {
                     </select>
                   </label>
                   <label>
-                    <span className={"d-block"}>Name*</span>
+                    <span className={"d-block"}>Name<b>*</b></span>
                     <input
                       onChange={(e) => props.changeName(e.target.value)}
                       value={clients.name}
@@ -315,7 +315,7 @@ function Clients(props) {
                     />
                   </label>
                   <label>
-                    <span className={"d-block"}>Address*</span>
+                    <span className={"d-block"}>Address<b>*</b></span>
                     <input
                       onChange={(e) => props.changeAddress(e.target.value)}
                       value={clients.address}
@@ -326,7 +326,7 @@ function Clients(props) {
                     />
                   </label>
                   <label>
-                    <span className={"d-block"}>Telephone*</span>
+                    <span className={"d-block"}>Telephone<b>*</b></span>
                     <PhoneInput
                       inputStyle={{ width: "100%" }}
                       value={clients.telephone}
@@ -334,7 +334,7 @@ function Clients(props) {
                     />
                   </label>
                   <label>
-                    <span className={"d-block"}>TIN</span>
+                    <span className={"d-block"}>TIN (<i>Optional</i>)</span>
                     <input
                       onChange={(e) => props.changeTin(e.target.value)}
                       value={clients.tin}
@@ -345,7 +345,7 @@ function Clients(props) {
                     />
                   </label>
                   <label className={"d-flex"}>
-                    <span>Active:</span>
+                    <span>Active<b>*</b>:</span>
                     <input
                       onChange={(e) => props.changeActive(e.target.checked)}
                       checked={clients.active}
@@ -366,7 +366,7 @@ function Clients(props) {
                   }}
                 >
                   <label>
-                    <span className={"d-block"}>Category*</span>
+                    <span className={"d-block"}>Category<b>*</b></span>
                     <select
                       defaultValue={""}
                       onChange={(e) => props.changeCategoryId(e.target.value)}
@@ -382,7 +382,7 @@ function Clients(props) {
                     </select>
                   </label>
                   <label>
-                    <span className={"d-block"}>Company name</span>
+                    <span className={"d-block"}>Company name<b>*</b></span>
                     <input
                       onChange={(e) => props.changeCompanyName(e.target.value)}
                       value={clients.companyName}

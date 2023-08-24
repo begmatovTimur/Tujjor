@@ -105,6 +105,7 @@ public class DefaultDatasLoader implements CommandLineRunner {
             customerCategoryRepository.saveAll(categories);
         }
 
-    }
+        }
+
 
 }

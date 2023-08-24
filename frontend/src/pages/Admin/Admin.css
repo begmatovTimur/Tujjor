@@ -183,3 +183,12 @@
     width: 100%;
     z-index: 1000; /* Ensure it's above other elements */
 }
+
+.sideBar {
+    width: 90px;
+    background-color: #4b5d67;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    left: 0;
+}
