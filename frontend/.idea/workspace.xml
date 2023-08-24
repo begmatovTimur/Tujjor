@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/frontend.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clientsOnTheMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clientsOnTheMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Settings/Settings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/Settings.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/universal/DashboardButton/DashboardButton.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/DashboardButton/DashboardButton.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/universal/DashboardButton/DashboardButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/DashboardButton/DashboardButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/images/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/microphone-svgrepo-com.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +40,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/Programming/projects/Tujjor/backend",
+    "git-widget-placeholder": "Timur",
+    "last_opened_file_path": "D:/Programming/projects/Tujjor/frontend/src/images",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -149,7 +141,7 @@
       <workItem from="1692341147774" duration="33000" />
       <workItem from="1692607553930" duration="16000" />
       <workItem from="1692607642200" duration="4879000" />
-      <workItem from="1692853730463" duration="4345000" />
+      <workItem from="1692853730463" duration="5073000" />
     </task>
     <servers />
   </component>
