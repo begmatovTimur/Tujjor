@@ -25,3 +25,7 @@
 .dashboard_button:hover {
     background-color: #4295ab;
 }
+
+.checked_dashboard_button {
+    background-color: #4295ab;
+}
