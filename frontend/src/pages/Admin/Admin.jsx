@@ -59,7 +59,7 @@ function Admin(props) {
         <div style={{height: "100%", width: "auto", backgroundColor: "#EEEEEE"}}>
             <div style={{height: "7%", backgroundColor: "#405058"}} className="d-flex header">
                 <div
-                    className="ps-1 pt-2 d-flex justify-content-center"
+                    className="py-1 px-2 d-flex justify-content-center align-items-center"
                     style={{
                         width: "9.9%",
                         height: "100%",
