@@ -47,6 +47,7 @@ const UniversalModal = ({
   width,
   functionforSaveBtn,
   JsxData = "",
+  checkPage = true
 }) => {
   const [miniModal, setMiniModal] = useState(false);
   const [loading, setLoading] = useState();
@@ -83,6 +84,17 @@ const UniversalModal = ({
       }, 500);
     }
   }, [isOpen]);
+
+  function closeFunctionCheck() {
+    console.log(checkPage)
+    if(!checkPage) {
+      setMiniModal(false)
+      closeFunction()
+    } else {
+      setMiniModal(true)
+    }
+  }
+
   return (
     <div>
       <Modal
@@ -127,7 +139,7 @@ const UniversalModal = ({
                   <button
                     style={{ margin: "-4px 3% 5px 0px" }}
                     className={"btn btn-danger"}
-                    onClick={() => setMiniModal(true)}
+                    onClick={closeFunctionCheck}
                   >
                     <i className="fa-regular fa-circle-xmark"></i>
                   </button>

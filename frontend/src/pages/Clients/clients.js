@@ -159,6 +159,14 @@ function Clients(props) {
     });
     return optionsCategory;
   }
+
+  function checkInpValue() {
+    if (clients.teritoryId !== "" || clients.name !== "" || clients.address !== "" || clients.telephone !=="" || clients.tin !== "" || clients.active !== false || clients.categoryId !== "" || clients.companyName !== "" || clients.longitute !== "" || clients.latitute !== ""){
+      return true;
+    }
+    return false
+  }
+
   return (
     <div style={{ width: "100%", backgroundColor: "#dae2e3" }}>
       <div id={"clientsFatherDiv"}>
@@ -269,6 +277,7 @@ function Clients(props) {
         </div>
       </div>
       <UniversalModal
+          checkPage={checkInpValue()}
         modalTitle={clients.editeClient === "" ? "Add Client" : "Edite Client"}
         isOpen={clients.openModal}
         closeFunction={() => props.closeModal()}

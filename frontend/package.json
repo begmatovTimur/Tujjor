@@ -34,7 +34,8 @@
     "reactstrap": "^9.2.0",
     "redux-saga": "^1.2.3",
     "virtual-select-plugin": "^1.0.39",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",

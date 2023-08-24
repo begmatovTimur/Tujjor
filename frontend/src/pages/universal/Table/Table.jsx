@@ -83,7 +83,9 @@ const Table = (props) => {
     };
   }, []);
 
-  console.log(props.sizeOfPage,props.totalPages);
+  function getCheckPage() {
+    return !(JSON.stringify(props.columns)===JSON.stringify(props.modalColumns));
+  }
 
   return (
     <div className="universal_table">
@@ -187,6 +189,7 @@ const Table = (props) => {
               modalTitle={"Columns order"}
               height="300px"
               isOpen={props.columnOrderModalVisibility}
+              checkPage={getCheckPage()}
               closeFunction={() =>
                 props.setColumnModalVisibility(false) &
                 props.setModalColumns(props.columns)
