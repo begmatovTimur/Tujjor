@@ -7,8 +7,7 @@
     <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/images/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/microphone-svgrepo-com.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +52,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programming\projects\Tujjor\frontend\src\images" />
       <recent name="C:\Users\nano-tech\Desktop\DillerProject\Tujjor\frontend\src\pages\Clients" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -141,7 +141,7 @@
       <workItem from="1692341147774" duration="33000" />
       <workItem from="1692607553930" duration="16000" />
       <workItem from="1692607642200" duration="4879000" />
-      <workItem from="1692853730463" duration="5073000" />
+      <workItem from="1692853730463" duration="8001000" />
     </task>
     <servers />
   </component>

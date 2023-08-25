@@ -66,7 +66,7 @@ function Admin(props) {
                         backgroundColor: "#405065",
                     }}
                 >
-                    <img src={Logo} alt="logo" width={"38%"} height={"80%"}
+                    <img src={Logo} alt="logo" width={"30%"} height={"30%"}
                          style={{marginLeft: "-7%", objectFit: "contain"}} onClick={() => navigate("/admin")}/>
                 </div>
                 <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "47%"}}>
