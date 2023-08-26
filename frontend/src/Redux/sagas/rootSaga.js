@@ -6,6 +6,7 @@ import tableSaga from "./tableSaga";
 import {customerCategorySaga} from "./customerCategorySaga";
 import companyProfileSaga from "./companyProfileSaga";
 import {clientsSaga} from "./clientsSaga";
+import {loginSaga} from "./loginSaga";
 
 
 export function* rootSaga(){
@@ -18,6 +19,7 @@ export function* rootSaga(){
             fork(customerCategorySaga),
             fork(companyProfileSaga),
             fork(clientsSaga),
+            fork(loginSaga),
         ])
     }catch (error) {
         console.log(error)
