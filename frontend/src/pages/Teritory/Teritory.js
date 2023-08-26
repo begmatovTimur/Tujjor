@@ -96,6 +96,14 @@ function Teritory(props) {
     { value: "true", label: "Active" },
     { value: "false", label: "Inactive" },
   ]);
+
+  function checkInpValue() {
+    if (teritory.title !== "" || teritory.region !== "" || teritory.code !== "" || teritory.active !==false || teritory.longitute !== "" || teritory.latitute !==""){
+      return true;
+    }
+    return false;
+  }
+
   return (
     <div style={{ width: "100%" }}>
       <div className="d-flex flex-column align-items-start">
@@ -140,6 +148,7 @@ function Teritory(props) {
             ? "Add teritory"
             : "Edite teritory"
         }
+        checkPage={checkInpValue()}
         isOpen={teritory.openModal}
         closeFunction={() => props.handleClose()}
         width={60}

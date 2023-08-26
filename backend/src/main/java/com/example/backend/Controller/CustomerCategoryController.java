@@ -24,15 +24,12 @@ public class CustomerCategoryController {
     public HttpEntity<?> pagination(@RequestParam Integer page, @RequestParam String limit, HttpServletRequest request) {
         return categoryService.pagination(page, limit, request);
     }
-
-    ;
+    
 
     @GetMapping("/excel")
     public ResponseEntity<Resource> excel(HttpServletRequest request,@RequestParam String columns) throws IOException {
         return categoryService.getExcelFile(request,columns);
     }
-
-    ;
 
     @GetMapping()
     public HttpEntity<?> getCategories() {
@@ -40,7 +37,7 @@ public class CustomerCategoryController {
     }
 
     @PostMapping()
-    public HttpEntity<?> saveCustomerCategor(@RequestBody CustomerCategoryDTO categoryDTO) {
+    public HttpEntity<?> saveCustomerCategory(@RequestBody CustomerCategoryDTO categoryDTO) {
         return ResponseEntity.ok(categoryService.addCategory(categoryDTO));
     }
 

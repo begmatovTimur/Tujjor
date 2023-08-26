@@ -36,7 +36,6 @@ import java.util.stream.Collectors;
 
 import static com.example.backend.TelegramBotsApi.services.Pagination.Pagination.doPagination;
 
-//@Component
 public class MyBot extends TelegramLongPollingBot {
     private final TelegramUserRepository repository;
     private final TerritoryRepository territoryRepository;

@@ -92,7 +92,7 @@
 .custom_dashboard_button:hover::before {
     transform: scale(1);
 }
-.dashboard_clients_button{
+.dashboard_clients_button {
     height: 68px;
     font-size: 20px;
     display: flex;
@@ -104,6 +104,11 @@
     border-bottom: 1px solid #4b5d67;
     width: 100%;
 }
+
+.checked_clients_button {
+    background-color: #4295ab;
+}
+
 .dashboard_clients_button svg {
     color: #ffffff;
 }
@@ -182,4 +187,13 @@
     top: 0;
     width: 100%;
     z-index: 1000; /* Ensure it's above other elements */
+}
+
+.sideBar {
+    width: 90px;
+    background-color: #4b5d67;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    left: 0;
 }

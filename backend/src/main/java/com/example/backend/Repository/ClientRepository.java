@@ -55,6 +55,9 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "    c.insertion_time DESC")
     Page<ClientProjection> getAllFilteredFields(List<UUID> city, List<Integer> category, String active, String tin, String search, Pageable pageable);
 
+
+    List<Client> findAllByOrderByInsertionTime();
+
     @Query(nativeQuery = true, value = "SELECT\n" +
             " c.insertion_time, \n" +
             "    c.id," +
@@ -93,5 +96,5 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "    ) \n" +
             "ORDER BY\n" +
             "    c.insertion_time DESC")
-    List<ClientProjection> getAllFilteredFieldsForExcel(List<UUID> city, List<Integer> category, String active, String tin, String search);
+    List<ClientProjection> getAllFilteredFieldsForExcel(List<UUID> city, List<Integer> category, List<Boolean> active, String tin, String search);
 }

@@ -20,10 +20,7 @@ import java.util.UUID;
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(
-            unique = true,
-            nullable = false
-    )
+    @Column(nullable = false)
     private UUID id;
     @Column(
             unique = true,
