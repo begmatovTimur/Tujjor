@@ -38,7 +38,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class ClientServiceImple implements ClientService {
+public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
     private final CustomerCategoryRepository categoryRepository;

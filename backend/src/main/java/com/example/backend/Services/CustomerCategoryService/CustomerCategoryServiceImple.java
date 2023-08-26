@@ -32,7 +32,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerCategoryServiceImple implements CustomerCategoryService {
+public class CustomerCategoryServiceImpl implements CustomerCategoryService {
     private final CustomerCategoryRepository customerCategoryRepository;
 
     @Override
