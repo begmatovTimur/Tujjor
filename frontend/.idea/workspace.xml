@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f28343-53bb-47b2-9168-f6cfca5fdfaf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Redux/sagas/loginSaga.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Clients/forClientAddModal/JsxContentForAddClientModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/teritorySaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/sagas/teritorySaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/loginReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reducers/loginReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/teritoryReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reducers/teritoryReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/rootSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/sagas/rootSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/universal/Modal/UniverModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Modal/UniverModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/Teritory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Teritory/Teritory.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,11 +27,33 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2UR59UU7H04xGyj4vxCr6rj3UxA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "node.js.selected.package.tslint": "(autodetect)"
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients\forClientAddModal" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -40,7 +71,21 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e2f28343-53bb-47b2-9168-f6cfca5fdfaf" name="Changes" comment="" />
+      <created>1692889401184</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1692889401184</updated>
+      <workItem from="1692889404520" duration="1137000" />
+      <workItem from="1692944910505" duration="1783000" />
+      <workItem from="1693030264828" duration="10192000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
