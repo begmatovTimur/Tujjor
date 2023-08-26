@@ -16,7 +16,7 @@ public class FilterData {
     private List<UUID> cities;
     private List<Integer> customerCategories;
 
-    private String active;
+    private List<Boolean> active;
 
     private String tin;
 

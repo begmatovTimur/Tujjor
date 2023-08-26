@@ -32,6 +32,15 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
             cities.add(cityId);
         }
         filterData.setCities(cities);
+
+        List<Boolean> active = new ArrayList<>();
+        JsonNode activeNode = jsonNode.get("active");
+        for (JsonNode activeNodeArr : activeNode) {
+            Boolean x = activeNodeArr.asBoolean();
+            active.add(x);
+        }
+        System.out.println(active.get(0));
+        filterData.setCities(cities);
         JsonNode categoryArray = jsonNode.get("customerCategories");
         List<Integer> customerCategoriesParam = new ArrayList<>();
         for (JsonNode cityNode : categoryArray) {
@@ -39,7 +48,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
         }
         filterData.setCustomerCategories(customerCategoriesParam);
         filterData.setTin(jsonNode.get("tin").asText());
-        filterData.setActive(jsonNode.get("active").asText());
+        filterData.setActive(active);
         filterData.setQuickSearch(jsonNode.get("quickSearch").asText());
         return filterData;
     }

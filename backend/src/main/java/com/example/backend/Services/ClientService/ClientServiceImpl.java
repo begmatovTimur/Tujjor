@@ -54,7 +54,6 @@ public class ClientServiceImpl implements ClientService {
         Pageable pageable = limit.equals("All") ? Pageable.unpaged() :
                 PageRequest.of(page, Integer.parseInt(limit));
         FilterData params = serviceFilter.generateFilterDataFromRequest(request);
-        System.out.println(params);
         Page<ClientProjection> clients = clientRepository.getAllFilteredFields(params.getCities(), params.getCustomerCategories(), params.getActive(), params.getTin(), params.getQuickSearch(), pageable);
         return ResponseEntity.ok(clients);
     }

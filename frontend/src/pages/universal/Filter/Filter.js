@@ -53,7 +53,7 @@ function Filter(props) {
 
     function handleChangeActive(obj) {
         const {name, value} = obj;
-        props.changeInputForms({...formInputsProps, [name]: value});
+        props.changeInputForms({...formInputsProps, [name]: value.value});
         props.getActiveData(props.paginationApi);
     }
 
@@ -72,7 +72,7 @@ function Filter(props) {
             })
             props.changeInputForms({...formInputsProps, [name]: myArr});
         } else {
-            props.changeInputForms({...formInputsProps, [name]: value});
+            props.changeInputForms({...formInputsProps, [name]: value.value});
         }
     }
 
