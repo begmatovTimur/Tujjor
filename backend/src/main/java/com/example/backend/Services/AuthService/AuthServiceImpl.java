@@ -90,40 +90,27 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public HttpEntity<?> login(LoginReq dto) {
-        try {
-            ResponseEntity<String> body = ifInputValueExist(dto);
-            if (body != null) return body;
-            String phone = ValidatePhone(dto);
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
-            User users = userRepository.findByPhone(phone).orElseThrow(() -> new NoSuchElementException("User not found for phone number: " + phone));
-            List<Role> roles = roleRepo.findAll();
-            String access_token = jwtService.generateJWTToken(users);
+        String phone = dto.getPhone();
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
+        return generateTokenForUser(dto, phone);
+
+    }
+
+    private ResponseEntity<Map<String, Object>> generateTokenForUser(LoginReq dto, String phone) {
+        User users = userRepository.findByPhone(phone).orElseThrow(() -> new NoSuchElementException("User not found for phone number: " + phone));
+        List<Role> roles = roleRepo.findAll();
+        String access_token = jwtService.generateJWTToken(users);
+        Map<String, Object> map = new HashMap<>();
+        map.put("access_token", access_token);
+        map.put("refresh_token", "");
+        if (dto.getRememberMe()) {
             String refresh_token = jwtService.generateJWTRefreshToken(users);
-            Map<String, Object> map = new HashMap<>();
-            map.put("access_token", access_token);
-            if (dto.getRememberMe()) {
-                map.put("refresh_token", refresh_token);
-            }else {
-                map.put("refresh_token", "");
-            }
-            map.put("roles", roles);
-            return ResponseEntity.ok(map);
-        } catch (Exception e) {
-            return ResponseEntity.status(401).body("Login yoki Parol Xato!");
+            map.put("refresh_token", refresh_token);
         }
+        map.put("roles", roles);
+        return ResponseEntity.ok(map);
     }
 
-    private static ResponseEntity<String> ifInputValueExist(LoginReq dto) {
-        if(dto.getPhone().equals("") || dto.getPassword().equals("")){
-            return ResponseEntity.status(404).body("ma'lumotni birinchi to'ldiring");
-        }
-        return null;
-    }
-
-    private static String ValidatePhone(LoginReq dto) {
-        String phone = dto.getPhone().startsWith("+") ? dto.getPhone() : "+" + dto.getPhone();
-        return phone;
-    }
 
     @Override
     public HttpEntity<?> refreshToken(String refreshToken) {

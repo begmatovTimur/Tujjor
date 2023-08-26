@@ -22,9 +22,11 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @Column(nullable = false)
     private String username;
     @Column(unique = true, nullable = false)
     private String phone;
+    @Column(nullable = false)
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;

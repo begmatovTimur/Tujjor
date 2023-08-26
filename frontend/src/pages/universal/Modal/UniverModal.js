@@ -86,7 +86,7 @@ const UniversalModal = ({
   }, [isOpen]);
 
   function closeFunctionCheck() {
-    console.log(checkPage)
+    console.log(checkPage);
     if(!checkPage) {
       setMiniModal(false)
       closeFunction()
@@ -99,7 +99,7 @@ const UniversalModal = ({
     <div>
       <Modal
         open={isOpen}
-        onClose={() => setMiniModal(true)}
+        onClose={closeFunctionCheck}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

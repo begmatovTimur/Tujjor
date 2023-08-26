@@ -167,14 +167,24 @@ public class TerritoryServiceImpl implements TerritoryService {
         Sheet sheet = workbook.createSheet("Company info");
         Row headerRow = sheet.createRow(rowIdx++);
         for (int i = 0; i < headersStr.length; i++) {
-            headerRow.createCell(i).setCellValue(headersStr[i]);
+            Cell headerCell = headerRow.createCell(i);
+            headerCell.setCellValue(headersStr[i].replaceAll("\"",""));
+
+            // Apply background color to the header cell
+            CellStyle headerCellStyle = workbook.createCellStyle();
+            headerCellStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
+            headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            Font headerFont = workbook.createFont();
+            headerFont.setColor(IndexedColors.WHITE.getIndex());
+            headerFont.setBold(true);
+            headerCellStyle.setFont(headerFont);
+            headerCell.setCellStyle(headerCellStyle);
         }
 
         for (TerritoryProjection territory : territoryFilter) {
             Row dataRow = sheet.createRow(rowIdx++);
             int columnIndex = 0; // Introduce a separate variable for the column index
             for (int i = 0; i < headersStr.length; i++) {
-                System.out.println(headersStr[i].replaceAll("\"", ""));
                 switch (headersStr[i].replaceAll("\"", "")) {
                     case "Title":
                         dataRow.createCell(columnIndex++).setCellValue(territory.getName().replaceAll("\"", ""));
@@ -189,27 +199,12 @@ public class TerritoryServiceImpl implements TerritoryService {
                 }
             }
         }
-        CellStyle headerCellStyle = workbook.createCellStyle();
-        Font headerFont = workbook.createFont();
-        headerFont.setBold(true);
-        headerCellStyle.setFont(headerFont);
 
-        CellStyle dataCellStyle = workbook.createCellStyle();
-        dataCellStyle.setWrapText(true);
         for (Cell cell : headerRow) {
-            cell.setCellStyle(headerCellStyle);
             int columnIndex = cell.getColumnIndex();
             sheet.autoSizeColumn(columnIndex);
         }
 
-// Apply styles to data rows and auto-size columns
-        for (Row row : sheet) {
-            for (Cell cell : row) {
-                cell.setCellStyle(dataCellStyle);
-                int columnIndex = cell.getColumnIndex();
-                sheet.autoSizeColumn(columnIndex);
-            }
-        }
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         workbook.write(outputStream);
@@ -219,7 +214,6 @@ public class TerritoryServiceImpl implements TerritoryService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=CompanyInfo.xlsx");
 
         return ResponseEntity
                 .status(HttpStatus.OK)

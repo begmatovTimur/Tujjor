@@ -5,10 +5,10 @@ const tableReducer = createSlice({
   initialState: {
     columns: [],
     layer: false,
-    sizeOfPage: "",
     localPath: "",
     copyOfColumns: [],
     currentDraggingColumn: 0,
+    firstRequest:false,
     dragOverColumn: -1,
     data: [],
     currentPage: 1,
@@ -16,7 +16,7 @@ const tableReducer = createSlice({
     modalColumns: [],
     limit: "",
     page: "",
-    paginationApi1: "",
+    paginationApiState: "",
     formInputs: {
       active: "",
       city: [],
@@ -34,15 +34,11 @@ const tableReducer = createSlice({
     },
   },
   reducers: {
+    setFirstRequest:(state,action)=>{
+      state.firstRequest = action.payload;
+    },
     setCurrentDraggingColumn: (state, action) => {
       state.currentDraggingColumn = action.payload;
-    },
-    addPlace: (state, action) => {
-      state.dragOverColumn = action.payload;
-    },
-    removePlace: (state) => {
-      state.dragOverColumn = -1;
-      state.dragOverStable = false;
     },
     setDragOverStable: (state, action) => {
       state.dragOverStable = action.payload;
@@ -55,28 +51,27 @@ const tableReducer = createSlice({
     },
     claimData: (state, action) => {
       let i = 0;
-      
-      action.payload.columns.map(item=>{
-        if(item.show===false)i++;
-      })
-      if(i===(action.payload.columns.length)) {
+
+      action.payload.columns.map((item) => {
+        if (item.show === false) i++;
+      });
+      if (i === action.payload.columns.length) {
         state.columns = [];
-        localStorage.removeItem(state.localPath)
-      }
-      else state.columns = action.payload.columns;
+        localStorage.removeItem(state.localPath);
+      } else state.columns = action.payload.columns;
       state.data = action.payload.data;
       state.copyOfColumns = action.payload.columns;
       state.modalColumns = action.payload.columns;
       state.localPath = action.payload.localPath;
     },
-    emptyFilters:(state,action)=>{
+    emptyFilters: (state, action) => {
       state.selectedForms = {
         customerCategories: [],
         city: [],
-      }
-      state.limit= "";
-      state.sizeOfPage = 1;
-      state.formInputs= {
+      };
+      state.firstRequest = false;
+      state.limit = ""
+      state.formInputs = {
         active: "",
         city: [],
         allWeeks: "",
@@ -85,7 +80,7 @@ const tableReducer = createSlice({
         customerCategories: [],
         quickSearch: "",
         offset: "",
-      }
+      };
     },
     setColumnModalVisibility: (state, action) => {
       state.columnOrderModalVisibility = action.payload;
@@ -98,14 +93,16 @@ const tableReducer = createSlice({
         state.columns = state.copyOfColumns;
       }
       let i = 0;
-      state.columns.forEach((item) => {
+      for(i = 0;i < state.columns.length;i++) {
+
+        let item = state.columns[i];
+
         if (action.payload.includes(item.title)) {
           item.show = true;
         } else {
-          i++;
           item.show = false;
         }
-      });
+      }
       if (i === state.columns.length) {
         state.copyOfColumns = state.columns;
         state.columns = [];
@@ -125,21 +122,19 @@ const tableReducer = createSlice({
     },
     changePaginationTo: (state, action) => {
       state.limit = action.payload.size;
-      state.page = action.payload.page;
-      state.paginationApi1 = action.payload.api;
+      state.currentPage = action.payload.page;
     },
-    changeSizeOfPage:(state,action)=>{
+    changeSizeOfPage: (state, action) => {
       state.limit = action.payload;
+    },
+    changePaginationApi:(state,action)=>{
+      state.paginationApiState = action.payload
     },
     changeData: (state, action) => {
       state.data = action.payload.data;
-      state.sizeOfPage = action.payload.size;
     },
     changeTotalPages: (state, action) => {
       state.totalPages = action.payload;
-    },
-    changeSateOfData: (state, action) => {
-      state.data = action.payload;
     },
     handlePageChange: (state, action) => {
       state.currentPage = action.payload;
@@ -160,6 +155,7 @@ const tableReducer = createSlice({
         state.modalColumns[draggedElementIndex],
       ];
     },
+    loading:(state,action)=>{}, // used in saga
     setModalColumns: (state, action) => {
       state.modalColumns = action.payload;
     },
@@ -189,7 +185,7 @@ const tableReducer = createSlice({
     },
     getQuickSearchData: (state, action) => {},
     getActiveData: (state, action) => {},
-    changeLoadingActive: (state, action) => {
+    setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
     changeInputForms: (state, action) => {
@@ -206,6 +202,7 @@ const tableReducer = createSlice({
       state.formInputs.customerCategories = [];
       state.formInputs.quickSearch = "";
       state.formInputs.offset = "";
+
     },
   },
 });
