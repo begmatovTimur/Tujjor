@@ -27,7 +27,7 @@ function Filter(props) {
         {value: "3", label: "Odd weeks"},
     ]);
     const [optionsTin] = useState([
-        {value: "1", label: "TIN"},
+        {value: "1", label: "All"},
         {value: "2", label: "With TIN"},
         {value: "3", label: "Without TIN"},
     ]);

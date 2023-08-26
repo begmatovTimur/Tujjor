@@ -70,7 +70,7 @@ public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
     @Query(nativeQuery = true,value = "select id,region,insertion_time from territory order by insertion_time desc")
     List<TerritoryRegionProjection> findAllRegion();
     @Query(nativeQuery = true, value = """
-            SELECT t.id, t.name, t.code, t.region, t.active FROM territory t LEFT JOIN client c ON t.id = c.territory_id WHERE c.id IS NULL order by t.insertion_time desc
+            SELECT t.id, t.name, t.code, t.region, t.active FROM territory t INNER JOIN client c ON t.id = c.territory_id  order by t.insertion_time desc
             """)
     List<TerritoryClientProjection> getAllTerritoryForClients();
 }

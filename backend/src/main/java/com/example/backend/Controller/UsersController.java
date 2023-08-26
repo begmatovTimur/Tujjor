@@ -15,26 +15,22 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UsersController {
     private final UsersService service;
-    @PreAuthorize("isAuthenticated()")
     @PostMapping
     public HttpEntity<?> addUser(@RequestBody UserDTO dto) {
         return service.addUser(dto);
     }
 
     @GetMapping
-    @PreAuthorize("isAuthenticated()")
-    public HttpEntity<?> getStudents(@RequestParam String role) {
+     public HttpEntity<?> getStudents(@RequestParam String role) {
       return service.getStudents(role);
     };
 
     @GetMapping("/search")
-    @PreAuthorize("isAuthenticated()")
     public HttpEntity<?> getStudentByTitle(@RequestParam String username) {
         return service.getStudentByTitle(username);
     }
 
     @GetMapping("/me")
-    @PreAuthorize("isAuthenticated()")
     public HttpEntity<?> getMe(@CurrentUser User user){
         return service.getMe(user);
     }

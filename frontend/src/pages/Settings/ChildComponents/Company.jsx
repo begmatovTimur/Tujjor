@@ -66,6 +66,8 @@ function Company(props) {
         }
     ];
 
+    console.log(companyProfile.companies);
+
 
 
     return (

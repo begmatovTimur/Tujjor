@@ -13,11 +13,11 @@ import java.util.UUID;
 
 public interface CustomerCategoryRepository extends JpaRepository<CustomerCategory, Integer> {
 
-    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where c.active = :status and lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '')) like lower(concat('%',:search,'%')) order by id DESC", nativeQuery = true)
+    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where c.active = :status and lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '') || ' ' || COALESCE(c.description, '')) like lower(concat('%',:search,'%')) order by id DESC", nativeQuery = true)
     Page<CustomerCategoryProjection> findCustomerCategoryByActiveAndRegionName(String search, Boolean status, Pageable pageable);
 
 
-    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '')) like lower(concat('%',:search,'%')) order by id DESC", nativeQuery = true)
+    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '') || ' ' || COALESCE(c.description, '')  ) like lower(concat('%',:search,'%')) order by id DESC", nativeQuery = true)
     Page<CustomerCategoryProjection> findCustomerCategoryByRegionAndName(String search, Pageable pageable);
 
     @Query(value = "SELECT ct.id,\n" +
@@ -33,6 +33,6 @@ public interface CustomerCategoryRepository extends JpaRepository<CustomerCatego
             "          WHEN :status = 'false' THEN ct.active = false\n" +
             "          ELSE true END\n" +
             "  AND (LOWER(COALESCE(ct.region, '')) || ' ' || LOWER(COALESCE(ct.description, '')) || ' ' || LOWER(COALESCE(ct.name, '')) || ' ' || LOWER(COALESCE(ct.code, '')) LIKE\n" +
-            "      LOWER(CONCAT('%', :search, '%')))", nativeQuery = true)
+            "      LOWER(CONCAT('%', :search, '%'))) order by ct.id desc ", nativeQuery = true)
     List<CustomerCategoryProjection> getFilteredDataForExcel(String search, String status);
 }

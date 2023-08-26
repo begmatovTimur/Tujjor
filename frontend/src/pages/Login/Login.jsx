@@ -14,7 +14,6 @@ function Login(props) {
   useEffect(()=>{
       props.hasPermissionRoleSuperVisor()
   },[])
-
   return (
     <div>
       <img id={"logoForLogin"} src={logo} alt="#" />

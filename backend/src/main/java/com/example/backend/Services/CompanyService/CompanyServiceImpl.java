@@ -1,9 +1,6 @@
 package com.example.backend.Services.CompanyService;
 
 import com.example.backend.Entity.Company;
-import com.example.backend.Projection.CompanyProjection;
-import com.example.backend.Projection.CustomerCategoryProjection;
-import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -17,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -40,7 +36,16 @@ public class CompanyServiceImpl implements CompanyService {
         Sheet sheet = workbook.createSheet("Company info");
         Row headerRow = sheet.createRow(rowIdx++);
         for (int i = 0; i < headersStr.length; i++) {
-            headerRow.createCell(i).setCellValue(headersStr[i]);
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headersStr[i].replaceAll("\"", ""));
+            CellStyle headerCellStyle = workbook.createCellStyle();
+            headerCellStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
+            headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            Font headerFont = workbook.createFont();
+            headerFont.setColor(IndexedColors.WHITE.getIndex());
+            headerFont.setBold(true);
+            headerCellStyle.setFont(headerFont);
+            cell.setCellStyle(headerCellStyle);
         }
 
         for (Company territory : all) {
@@ -65,15 +70,10 @@ public class CompanyServiceImpl implements CompanyService {
                 }
             }
         }
-        CellStyle headerCellStyle = workbook.createCellStyle();
-        Font headerFont = workbook.createFont();
-        headerFont.setBold(true);
-        headerCellStyle.setFont(headerFont);
 
         CellStyle dataCellStyle = workbook.createCellStyle();
         dataCellStyle.setWrapText(true);
         for (Cell cell : headerRow) {
-            cell.setCellStyle(headerCellStyle);
             int columnIndex = cell.getColumnIndex();
             sheet.autoSizeColumn(columnIndex);
         }
@@ -81,7 +81,6 @@ public class CompanyServiceImpl implements CompanyService {
 // Apply styles to data rows and auto-size columns
         for (Row row : sheet) {
             for (Cell cell : row) {
-                cell.setCellStyle(dataCellStyle);
                 int columnIndex = cell.getColumnIndex();
                 sheet.autoSizeColumn(columnIndex);
             }
