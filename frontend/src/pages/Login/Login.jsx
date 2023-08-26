@@ -61,7 +61,7 @@ function Login(props) {
           url: domen+"/auth/login",
           method: "POST",
           data: {
-            phone: loginReducer.phone,
+            phone: "+"+loginReducer.phone,  
             password: loginReducer.password,
             rememberMe: loginReducer.remember,
           },

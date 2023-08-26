@@ -24,8 +24,7 @@ public class CustomerCategoryController {
     public HttpEntity<?> pagination(@RequestParam Integer page, @RequestParam String limit, HttpServletRequest request) {
         return categoryService.pagination(page, limit, request);
     }
-
-    ;
+    
 
     @GetMapping("/excel")
     public ResponseEntity<Resource> excel(HttpServletRequest request,@RequestParam String columns) throws IOException {

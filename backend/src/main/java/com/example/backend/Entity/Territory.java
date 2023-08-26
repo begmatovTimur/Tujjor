@@ -19,11 +19,18 @@ public class Territory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Column(nullable = false)
     private String region;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String code;
+    @Column(nullable = false)
     private Boolean active;
+    @Column(nullable = false)
     private double longitude;
+    @Column(nullable = false)
     private double latitude;
+    @Column(nullable = false)
     private LocalDateTime insertionTime;
 }

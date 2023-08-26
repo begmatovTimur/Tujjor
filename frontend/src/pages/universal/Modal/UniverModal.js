@@ -98,7 +98,7 @@ const UniversalModal = ({
     <div>
       <Modal
         open={isOpen}
-        onClose={() => setMiniModal(true)}
+        onClose={closeFunctionCheck}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
