@@ -93,14 +93,16 @@ const tableReducer = createSlice({
         state.columns = state.copyOfColumns;
       }
       let i = 0;
-      state.columns.forEach((item) => {
+      for(i = 0;i < state.columns.length;i++) {
+
+        let item = state.columns[i];
+
         if (action.payload.includes(item.title)) {
           item.show = true;
         } else {
-          i++;
           item.show = false;
         }
-      });
+      }
       if (i === state.columns.length) {
         state.copyOfColumns = state.columns;
         state.columns = [];
@@ -153,7 +155,7 @@ const tableReducer = createSlice({
         state.modalColumns[draggedElementIndex],
       ];
     },
-    loading:(state,action)=>{}, // used in saga 
+    loading:(state,action)=>{}, // used in saga
     setModalColumns: (state, action) => {
       state.modalColumns = action.payload;
     },
@@ -200,6 +202,7 @@ const tableReducer = createSlice({
       state.formInputs.customerCategories = [];
       state.formInputs.quickSearch = "";
       state.formInputs.offset = "";
+
     },
   },
 });

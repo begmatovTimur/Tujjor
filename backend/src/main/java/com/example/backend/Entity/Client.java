@@ -19,18 +19,25 @@ import java.util.UUID;
 @Builder
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Territory territory;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String address;
+    @Column(nullable = false)
     private String phone;
     private String tin;
+    @Column(nullable = false)
     private String companyName;
+    @Column(nullable = false)
     private String referencePoint;
+    @Column(nullable = false)
     private double longitude;
+    @Column(nullable = false)
     private double latitude;
     private Boolean active;
     @CreationTimestamp

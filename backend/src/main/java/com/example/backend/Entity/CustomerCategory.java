@@ -31,10 +31,15 @@ public class CustomerCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false)
     private String region;
+    @Column(nullable = false)
     private  String code;
+    @Column(nullable = false)
     private String  name;
+    @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
     private Boolean active;
     @CreationTimestamp
     private LocalDateTime insertion_time;

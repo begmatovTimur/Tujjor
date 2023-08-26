@@ -269,7 +269,7 @@ function Clients(props) {
               paginationApi={"/client/pagination?page={page}&limit={limit}"}
               dataProps={clients.clients}
               columnOrderMode={true}
-              changeSizeModeOptions={["All", 10, 20, 50, 100, 200]}
+              changeSizeModeOptions={["All", 5, 20, 50, 100, 200]}
               columnsProps={columns}
               fileName={"clients"}
               excelPath={"/client/excel"}

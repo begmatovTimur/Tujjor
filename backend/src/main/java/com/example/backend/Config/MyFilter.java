@@ -8,20 +8,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.UUID;
 
 @Component
-@CrossOrigin
-@Configuration
 @RequiredArgsConstructor
 public class MyFilter extends OncePerRequestFilter {
 
@@ -33,8 +29,7 @@ public class MyFilter extends OncePerRequestFilter {
         String token = request.getHeader("token");
         String requestPath = request.getRequestURI();
         if (requestPath.startsWith("/api")) {
-
-            if (requestPath.equals("/api/auth/login") || requestPath.equals("/api/auth/access") || requestPath.equals("/api/auth/refresh") || requestPath.equals("/api/bot")) {
+            if (isOpenUrl(requestPath)) {
                 try {
                     filterChain.doFilter(request, response);
                 } catch (Exception e) {
@@ -79,5 +74,12 @@ public class MyFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private static boolean isOpenUrl(String requestPath) {
+        return requestPath.equals("/api/auth/login")
+                || requestPath.equals("/api/auth/access")
+                || requestPath.equals("/api/auth/refresh")
+                || requestPath.equals("/api/bot");
     }
 }

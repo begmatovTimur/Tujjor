@@ -3,6 +3,7 @@ package com.example.backend.Controller;
 import com.example.backend.DTO.UserDTO;
 import com.example.backend.Payload.Reaquest.LoginReq;
 import com.example.backend.Services.AuthService.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class AuthController {
     private final AuthService service;
 
     @PostMapping("/login")
-    public HttpEntity<?> login(@RequestBody LoginReq loginReq) {
+    public HttpEntity<?> login(@Valid @RequestBody LoginReq loginReq) {
             return service.login(loginReq);
     }
 

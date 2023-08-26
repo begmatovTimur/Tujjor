@@ -10,17 +10,14 @@ import UniversalModal from "../Modal/UniverModal";
 import "./Table.css";
 
 const Table = (props) => {
-  console.log("global", props.limit);
-  console.log("global", props.currentPage);
   useEffect(() => {
-    // alert(props.limit);
     let storedColumns = JSON.parse(
       localStorage.getItem(props.localStoragePath)
     );
     props.changePaginationApi(props.paginationApi);
 
     if (storedColumns === null) storedColumns = props.columnsProps;
-    if (storedColumns !== null) {
+    else {
       if (storedColumns.length === 0) storedColumns = props.columnsProps;
     }
 
@@ -61,7 +58,6 @@ const Table = (props) => {
           size: props.limit,
           page: props.currentPage,
         });
-        console.log("local page",props.page);
       }
 
       if (props.limit === "All") {
@@ -78,13 +74,7 @@ const Table = (props) => {
     return values.join(" ");
   };
 
-  const handleChange = (e, page) => {
-    props.handlePageChange(page);
-    props.changePaginationTo({
-      size: props.limit,
-      page,
-    });
-  };
+
   function handleDragEnd(result) {
     if (!result.destination) return;
     const sourceIndex = result.source.index;
@@ -104,9 +94,13 @@ const Table = (props) => {
   }
 
 
-
-
-
+  function numbering(index) {
+    return props.limit === "All"
+        ? index + 1 + 0 * (props.currentPage - 1)
+        : index +
+        1 +
+        props.limit * (props.currentPage - 1);
+  }
 
   return (
     <div className="universal_table">
@@ -277,7 +271,7 @@ const Table = (props) => {
                   ) : (
                     ""
                   )}
-                  {props.columns.length != 0 &&
+                  {props.columns.length !== 0 &&
                     props.data.map((item, index) => (
                       <tr key={item.id}>
                         {props.columns.map((col) =>
@@ -287,11 +281,7 @@ const Table = (props) => {
                             </td>
                           ) : col.type === "index" ? (
                             <td className={col.show ? "" : "hidden"}>
-                              {props.limit === "All"
-                                ? index + 1 + 0 * (props.currentPage - 1)
-                                : index +
-                                  1 +
-                                  props.limit * (props.currentPage - 1)}
+                              {numbering(index)}
                             </td>
                           ) : col.type === "boolean" && col.key === "active" ? (
                             <td
@@ -318,11 +308,16 @@ const Table = (props) => {
             </div>
             {props.totalPages !== "" &&
             props.pagination &&
-            props.data.length &&
-            props.columns.length ? (
+            props.data.length  ? (
               <div className="d-flex justify-content-end pt-2">
                 <Pagination
-                  onChange={(e, page) => handleChange(e, page)}
+                  onChange={(e, page) => {
+                    props.handlePageChange(page);
+                    props.changePaginationTo({
+                      size: props.limit,
+                      page,
+                    });
+                  }}
                   page={props.currentPage}
                   count={props.totalPages}
                   variant="outlined"

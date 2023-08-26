@@ -20,8 +20,12 @@ public class Company {
     private String companyName;
     @OneToOne(fetch = FetchType.EAGER)
     private User superVisor;
+    @Column(nullable = false)
     private String supportPhone;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String region;
+    @Column(nullable = false)
     private String address;
 }
