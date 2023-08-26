@@ -14,9 +14,11 @@ import java.util.UUID;
 @Builder
 public class FilterData {
     private List<UUID> cities;
+    private Integer page;
+    private String limit;
     private List<Integer> customerCategories;
 
-    private Boolean active;
+    private String active;
 
     private String tin;
 

@@ -103,14 +103,14 @@ function CustomerCategory(props) {
                 filterActive={true}
                 columnOrderMode={true}
                 dataProps={customerCategory.categories}
-                changeSizeModeOptions={["All", 10, 20, 50, 100, 200]}
+                changeSizeModeOptions={["All", 1, 20, 50, 100, 200]}
                 pagination={true}
                 paginationApi={
                     "/customer-category/pagination?page={page}&limit={limit}"
                 }
                 changeSizeMode={true}
                 fileName={"categories"}
-                excelPath={"/customer-category/excel"}
+                excelPath={"/excel?component=customer-category&"}
                 columnsProps={columns}
             />
 

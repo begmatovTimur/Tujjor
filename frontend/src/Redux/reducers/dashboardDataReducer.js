@@ -3,13 +3,17 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
     dashboardData: {},
     showUserSettingsModal: false,
-    error: null
+    error: null,
+    userBox:false,
 }
 
 const dashboardDataSlice = createSlice({
     name: "dashboardData",
     initialState,
     reducers: {
+        setUserBox:(state)=>{
+            state.userBox = !state.userBox;
+        },
         getDashboardDataSuccess: (state, action) => {
             state.dashboardData = action.payload
         },
