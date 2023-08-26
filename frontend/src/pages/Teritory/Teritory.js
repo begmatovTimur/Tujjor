@@ -1,35 +1,14 @@
-import React, { useEffect, useState } from "react";
-import {
-  Map,
-  Placemark,
-  YMaps,
-  ZoomControl,
-  SearchControl,
-} from "react-yandex-maps";
-import { connect, useDispatch } from "react-redux";
-import { teritoryAction } from "../../Redux/reducers/teritoryReducer";
+import React, {useEffect} from "react";
+import {Map, Placemark, YMaps, ZoomControl,} from "react-yandex-maps";
+import {connect, useDispatch} from "react-redux";
+import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
 import "./Teritory.css";
 import UniversalModal from "../universal/Modal/UniverModal";
 import Filter from "../universal/Filter/Filter";
 
-const style = {
-  position: "absolute",
-  top: "47%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "65%",
-  backgroundColor: "white",
-  border: "none",
-  boxShadow: 24,
-  borderRadius: "10px",
-  overflow: "auto",
-};
-
 function Teritory(props) {
   const { teritory } = props;
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     props.getTeritory();
@@ -91,11 +70,6 @@ function Teritory(props) {
       ),
     },
   ];
-  const [optionsActive] = useState([
-    { value: "", label: "All" },
-    { value: "true", label: "Active" },
-    { value: "false", label: "Inactive" },
-  ]);
 
   function checkInpValue() {
     if (teritory.title !== "" || teritory.region !== "" || teritory.code !== "" || teritory.active !==false || teritory.longitute !== "" || teritory.latitute !==""){
@@ -122,7 +96,7 @@ function Teritory(props) {
           {
             name: "active",
             multi: false,
-            options: optionsActive,
+            options: teritory.optionsActive,
             defaultValue: { value: "", label: "All" },
             placeholder: "Active",
             selfEmployer: true,

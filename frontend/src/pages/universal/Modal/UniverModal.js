@@ -86,7 +86,6 @@ const UniversalModal = ({
   }, [isOpen]);
 
   function closeFunctionCheck() {
-    console.log(checkPage);
     if(!checkPage) {
       setMiniModal(false)
       closeFunction()

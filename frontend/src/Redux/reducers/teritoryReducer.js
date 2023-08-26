@@ -16,6 +16,11 @@ const teritoryReducer = createSlice({
         error: "",
         itemForTeritoryEdite: "",
         regions:[],
+        optionsActive: [
+            { value: "", label: "All" },
+            { value: "true", label: "Active" },
+            { value: "false", label: "Inactive" },
+        ],
     },
     name: "teritory",
     reducers: {

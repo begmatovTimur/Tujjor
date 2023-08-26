@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientServiceImple.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImple.java" afterDir="false" />
@@ -68,6 +69,9 @@
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
 >>>>>>> e909c7de9757b35f11fd05bb0109dd5f4bf58fd9
     </list>
+=======
+    <list default="true" id="e2f28343-53bb-47b2-9168-f6cfca5fdfaf" name="Changes" comment="" />
+>>>>>>> 501cc787c343782f10c963028b1f2b41a91a34ba
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +83,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2UQatbzKi9FVa8s8O0Eicx3Godg" />
+  <component name="ProjectId" id="2UR59UU7H04xGyj4vxCr6rj3UxA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -89,21 +93,19 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="ReactDesignerToolWindowState">
-    <option name="myId2Visible">
-      <map>
-        <entry key="com.haulmont.rcb.reactComponents" value="false" />
-        <entry key="com.haulmont.rcb.reactInspector" value="false" />
-      </map>
-    </option>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients\forClientAddModal" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -125,10 +127,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="" />
-      <created>1692874474178</created>
+      <changelist id="e2f28343-53bb-47b2-9168-f6cfca5fdfaf" name="Changes" comment="" />
+      <created>1692889401184</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
 <<<<<<< HEAD
       <updated>1690613832748</updated>
       <workItem from="1690613835620" duration="81000" />
@@ -186,6 +189,12 @@
       <workItem from="1693012972361" duration="748000" />
       <workItem from="1693019124720" duration="4126000" />
 >>>>>>> e909c7de9757b35f11fd05bb0109dd5f4bf58fd9
+=======
+      <updated>1692889401184</updated>
+      <workItem from="1692889404520" duration="1137000" />
+      <workItem from="1692944910505" duration="1783000" />
+      <workItem from="1693030264828" duration="10900000" />
+>>>>>>> 501cc787c343782f10c963028b1f2b41a91a34ba
     </task>
     <servers />
   </component>
