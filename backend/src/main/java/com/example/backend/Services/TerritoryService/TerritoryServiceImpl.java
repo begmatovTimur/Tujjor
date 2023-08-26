@@ -157,69 +157,6 @@ public class TerritoryServiceImpl implements TerritoryService {
             }
     }
 
-    @Override
-    public ResponseEntity<Resource> getExcelFile(HttpServletRequest request, String columns) throws IOException {
-        String[] headersStr = columns.split("\\.");
-        JsonNode jsonNode = WrapFromStringToObject(request);
-        List<TerritoryProjection> territoryFilter = territoryRepository.getFilteredDataForExcel(jsonNode.get("quickSearch").asText(), jsonNode.get("active").asText());
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        int rowIdx = 0;
-        Sheet sheet = workbook.createSheet("Company info");
-        Row headerRow = sheet.createRow(rowIdx++);
-        for (int i = 0; i < headersStr.length; i++) {
-            Cell headerCell = headerRow.createCell(i);
-            headerCell.setCellValue(headersStr[i].replaceAll("\"",""));
-
-            // Apply background color to the header cell
-            CellStyle headerCellStyle = workbook.createCellStyle();
-            headerCellStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-            headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            Font headerFont = workbook.createFont();
-            headerFont.setColor(IndexedColors.WHITE.getIndex());
-            headerFont.setBold(true);
-            headerCellStyle.setFont(headerFont);
-            headerCell.setCellStyle(headerCellStyle);
-        }
-
-        for (TerritoryProjection territory : territoryFilter) {
-            Row dataRow = sheet.createRow(rowIdx++);
-            int columnIndex = 0; // Introduce a separate variable for the column index
-            for (int i = 0; i < headersStr.length; i++) {
-                switch (headersStr[i].replaceAll("\"", "")) {
-                    case "Title":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getName().replaceAll("\"", ""));
-                        break;
-                    case "Region":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getRegion().replaceAll("\"", ""));
-                        break;
-                    case "Code":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getCode().replaceAll("\"", ""));
-                        break;
-                    // Add more cases for other fields as needed
-                }
-            }
-        }
-
-        for (Cell cell : headerRow) {
-            int columnIndex = cell.getColumnIndex();
-            sheet.autoSizeColumn(columnIndex);
-        }
-
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        workbook.write(outputStream);
-        workbook.close();
-
-        ByteArrayResource resource = new ByteArrayResource(outputStream.toByteArray());
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_TYPE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .headers(headers)
-                .body(resource);
-    }
 
 
     @Override

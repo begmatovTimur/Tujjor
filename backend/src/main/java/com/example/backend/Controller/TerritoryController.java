@@ -29,10 +29,6 @@ public class TerritoryController {
     };
 
 
-    @GetMapping("/excel")
-    public ResponseEntity<Resource> excel(@RequestParam String columns, HttpServletRequest request) throws IOException {
-        return territoryService.getExcelFile(request,columns);
-    };
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping()

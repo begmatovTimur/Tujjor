@@ -15,6 +15,7 @@ function* watchGetFilteredData(action) {
     tin: x.tin.value ? x.tin.value : x.tin,
     customerCategories: x.customerCategories,
     quickSearch: x.quickSearch,
+    page:currentState.currentPage,
   };
   yield put(tableActions.setLoading(true));
   yield delay(400);
@@ -47,6 +48,7 @@ function* watchQuickSearchData(action) {
     city: x.city,
     weekDays: x.weekDays,
     tin: x.tin.value ? x.tin.value : x.tin,
+    page:currentState.currentPage,
     customerCategories: x.customerCategories,
   };
   let api = currentState.paginationApiState;
@@ -78,6 +80,7 @@ function* changeSizeOfPage(action) {
         ? currentState.formInputs.active.value
         : currentState.formInputs.active,
     quickSearch: currentState.formInputs.quickSearch,
+    page:currentState.currentPage,
     city: "",
     weekDays: x.weekDays,
     tin: x.tin.value ? x.tin.value : x.tin,
@@ -105,9 +108,8 @@ function* downloadExcelFile(action) {
     .filter(
       (item) => item.show === true && item.type != "jsx" && item.type != "index"
     )
-    .map((item) => item.title)
-    .join(".");
-
+    .map((item) => item.key)
+      .join(".")
   const x = currentState.formInputs;
   let obj = {
     active: x.active.value ? x.active.value : x.active,
@@ -117,6 +119,8 @@ function* downloadExcelFile(action) {
     tin: x.tin.value ? x.tin.value : x.tin,
     customerCategories: x.customerCategories,
     quickSearch: x.quickSearch,
+    limit:currentState.limit,
+    page:currentState.currentPage-1
   };
   if (obj.active === null) obj.active = "ALL";
   if (action.payload.excelWithoutSearch) {
@@ -124,7 +128,7 @@ function* downloadExcelFile(action) {
       .get(
         domen +
           action.payload.path +
-          "?columns=" +
+          "columns=" +
           JSON.stringify(columnsTitle),
         {
           responseType: "blob",
@@ -145,7 +149,7 @@ function* downloadExcelFile(action) {
       .get(
         domen +
           action.payload.path +
-          "?columns=" +
+          "columns=" +
           JSON.stringify(columnsTitle),
         {
           responseType: "blob",
@@ -175,6 +179,7 @@ function* watchGetActiveData(action) {
     weekDays: x.weekDays,
     tin: x.tin.value ? x.tin.value : x.tin,
     customerCategories: x.customerCategories,
+    page:currentState.currentPage,
   };
   yield put(tableActions.setLoading(true));
   yield delay(400);

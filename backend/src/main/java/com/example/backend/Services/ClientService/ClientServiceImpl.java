@@ -128,10 +128,6 @@ public class ClientServiceImpl implements ClientService {
         return ResponseEntity.ok(territoryRepository.getAllTerritoryForClients());
     }
 
-    @Override
-    public ResponseEntity<Resource> getExcel(HttpServletRequest request, String[] headers) throws IOException {
-        return null;
-    }
 
 
     @Override

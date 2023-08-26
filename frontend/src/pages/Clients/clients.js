@@ -272,7 +272,7 @@ function Clients(props) {
               changeSizeModeOptions={["All", 5, 20, 50, 100, 200]}
               columnsProps={columns}
               fileName={"clients"}
-              excelPath={"/client/excel"}
+              excelPath={"/excel?component=clients&"}
             />
           </div>
         </div>

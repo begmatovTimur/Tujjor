@@ -86,7 +86,6 @@ function Login(props) {
           .catch((err) => {
             console.log(err);
             props.setLoading(false);
-              toast.dismiss();
             ErrorNotify("Password Or Username Is Wrong!");
             localStorage.clear();
           });

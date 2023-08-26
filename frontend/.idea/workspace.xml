@@ -5,60 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ExcelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Payload/Reaquest/FilterData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ExcelService/ExcelService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ExcelService/ExcelServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/UniversalService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/UniversalServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/handlers/MyAuthEntryPoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/handlers/MyControllerAdvice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/BackendApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Config/MyFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Config/MyFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Projection/ExcelExportable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/Logo/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/Menus/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/NavbarDropDown/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/CompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/CompanyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/CustomerCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/CustomerCategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/DTO/ClientSearchDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ExcelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ExcelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/TerritoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/TerritoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/Company.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/CustomerCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/CustomerCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/Territory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/Territory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Enums/CompanyEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Payload/Reaquest/LoginReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Payload/Reaquest/LoginReq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/ClientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/TerritoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/TerritoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/AuthService/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/AuthService/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientServiceImple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/MyBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/MyBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application-prod.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/apple-touch-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/static/apple-touch-icon 2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/static/asset-manifest 2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/favicon-16x16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/favicon-32x32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/site.webmanifest" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/static/site 2.webmanifest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/css/main.4c84a659.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/css/main.4c84a659.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/js/main.e8b21390.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/js/main.e8b21390.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/js/main.e8b21390.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/media/bg.7a33092395944a53393f.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/media/bootstrap-icons.4753c5ba57962b4d7bf8.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/media/bootstrap-icons.6d63d0501e5ed7b79dab.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/media/loading.a1a996746e5e48352c81.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/media/logo.71deccc4802d24fc25f4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/static/static/media/microphone-svgrepo-com.c39f1ceaab301ffde98f9ee7deb1e7e9.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Payload/Reaquest/FilterData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Payload/Reaquest/FilterData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Projection/ClientProjection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Projection/ClientProjection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Projection/CustomerCategoryProjection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Projection/CustomerCategoryProjection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Projection/TerritoryProjection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Projection/TerritoryProjection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CompanyService/CompanyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CompanyService/CompanyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CompanyService/CompanyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CompanyService/CompanyServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ExcelService/ExcelServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ExcelService/ExcelServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/TerritoryService/TerritoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/TerritoryService/TerritoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/TerritoryService/TerritoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/TerritoryService/TerritoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/UniversalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/UniversalServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/handlers/MyControllerAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/handlers/MyControllerAdvice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Config/apiCall.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Config/apiCall.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/tableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reducers/tableReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/dashboardDataReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reducers/dashboardDataReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/sagas/tableSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/sagas/tableSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/store/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/Teritory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Teritory/Teritory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +56,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
   <component name="ProjectId" id="2UQatbzKi9FVa8s8O0Eicx3Godg" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -90,6 +80,9 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="ReactBuddySettings">
+    <option name="extensionsIgnore" value="true" />
+  </component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -97,6 +90,11 @@
         <entry key="com.haulmont.rcb.reactInspector" value="false" />
       </map>
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/Admin/Components/Navbar" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -127,6 +125,9 @@
       <workItem from="1692964464341" duration="778000" />
       <workItem from="1693012972361" duration="748000" />
       <workItem from="1693019124720" duration="4126000" />
+      <workItem from="1693025883334" duration="6487000" />
+      <workItem from="1693040100172" duration="1399000" />
+      <workItem from="1693041535956" duration="4678000" />
     </task>
     <servers />
   </component>

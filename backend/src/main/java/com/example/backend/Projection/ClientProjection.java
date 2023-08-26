@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public interface ClientProjection {
+public interface ClientProjection extends ExcelExportable{
 
      UUID getId();
      

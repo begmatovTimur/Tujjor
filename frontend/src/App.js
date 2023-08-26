@@ -1,7 +1,7 @@
 import "./App.css";
 import Login from "./pages/Login/Login";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
 import Settings from "./pages/Settings/Settings";
@@ -9,13 +9,12 @@ import Teritory from "./pages/Teritory/Teritory";
 import Company from "./pages/Settings/ChildComponents/Company";
 import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
 import NotFound from "./pages/404/NotFound";
-import { ToastContainer } from "react-toastify";
+import {ToastContainer} from "react-toastify";
 import Clients from "./pages/Clients/clients";
 import ClientsOnTheMap from "./pages/Clients/clientsOnTheMap";
-import { domen } from "./Config/apiCall";
-import { Home } from "@mui/icons-material";
-import { tableActions } from "./Redux/reducers/tableReducer";
-import { useDispatch } from "react-redux";
+import {domen} from "./Config/apiCall";
+import {tableActions} from "./Redux/reducers/tableReducer";
+import {useDispatch} from "react-redux";
 
 function App() {
   const navigate = useNavigate();

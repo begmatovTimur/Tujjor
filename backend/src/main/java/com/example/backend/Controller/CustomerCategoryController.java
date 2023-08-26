@@ -26,10 +26,7 @@ public class CustomerCategoryController {
     }
     
 
-    @GetMapping("/excel")
-    public ResponseEntity<Resource> excel(HttpServletRequest request,@RequestParam String columns) throws IOException {
-        return categoryService.getExcelFile(request,columns);
-    }
+
 
     ;
 

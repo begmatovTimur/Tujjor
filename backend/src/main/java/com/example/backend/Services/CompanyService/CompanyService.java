@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface CompanyService {
-    List<Company> getComapanies();
+    List<Company> getCompanies();
 
-    ResponseEntity<Resource> getExcel(String columns);
 }
