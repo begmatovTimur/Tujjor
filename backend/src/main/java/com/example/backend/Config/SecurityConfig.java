@@ -1,7 +1,7 @@
 package com.example.backend.Config;
 
-import com.example.backend.Entity.User;
 import com.example.backend.Repository.UsersRepository;
+import com.example.backend.handlers.MyAuthEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +26,7 @@ public class SecurityConfig {
 
     private final UsersRepository usersRepository;
     private final MyFilter myFilter;
+    private final MyAuthEntryPoint myAuthEntryPoint;
 
 
     @Bean
@@ -35,13 +36,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/api/rooms",
-                                        "/api/bot",
-                                        "/api/client",
-                                        "/api/client/pagination", "/api/courses", "/api/auth/register", "/api/courses", "/api/auth/refresh", "/api/auth/login", "/api/users", "/api/auth/decode", "/api/bot", "/api/territory/**", "/api/territory", "/api/customerCategory"
+                                .requestMatchers(
+                                        "/api/auth/register", "/api/auth/refresh", "/api/auth/login"
                                         , "/api/territory/excel").permitAll()
                                 .requestMatchers("/api/**").authenticated()  // Paths starting from /api require authentication
                                 .anyRequest().permitAll() // Permit all other paths (before /api)
+                ).exceptionHandling(
+                        exception->exception.authenticationEntryPoint(myAuthEntryPoint)
                 )
                 .addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
@@ -50,10 +51,8 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> {
-            User users = usersRepository.findByPhone(username).orElseThrow();
-            return users;
-        };
+        return username ->
+                usersRepository.findByPhone(username).orElseThrow();
     }
 
     @Bean

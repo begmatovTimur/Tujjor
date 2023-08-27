@@ -3,7 +3,7 @@ import {connect, useDispatch} from "react-redux";
 import Table from '../../universal/Table/Table'
 import UniversalModal from "../../universal/Modal/UniverModal";
 import {companyProfileActions} from "../../../Redux/reducers/companyProfile";
-import "./CustomerCategory.css";
+import "./CustomerCategory/CustomerCategory.css";
 import Filter from "../../universal/Filter/Filter";
 import {tableActions} from "../../../Redux/reducers/tableReducer";
 import LoadingBackdrop from "../../universal/Loading/loading";
@@ -66,6 +66,8 @@ function Company(props) {
         }
     ];
 
+    console.log(companyProfile.companies);
+
 
 
     return (
@@ -79,7 +81,7 @@ function Company(props) {
                 pagination={false}
                 changeSizeMode={false}
                 fileName={"companies"}
-                excelPath={"/company/excel"}
+                excelPath={"/company/excel?component=company-profile&"}
                 columnsProps={columns}
             />
 

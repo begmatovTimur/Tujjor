@@ -15,19 +15,23 @@ function* watchGetFilteredData(action) {
     tin: x.tin.value ? x.tin.value : x.tin,
     customerCategories: x.customerCategories,
     quickSearch: x.quickSearch,
+    page:currentState.currentPage,
   };
-  yield put(tableActions.changeLoadingActive(true));
+  yield put(tableActions.setLoading(true));
   yield delay(400);
-  yield put(tableActions.changeLoadingActive(false));
-  let api = currentState.paginationApi1;
+  yield put(tableActions.setLoading(false));
+  let api = currentState.paginationApiState;
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
   const res = yield apiCall(api, "get", null, JSON.stringify(obj));
   yield put(tableActions.changeCurrentPage(1));
-  yield put(tableActions.changeTotalPages(currentState.limit==="All"?"":res.data.totalPages));
+  yield put(
+    tableActions.changeTotalPages(
+      currentState.limit === "All" ? "" : res.data.totalPages
+    )
+  );
   yield put(
     tableActions.changeData({
       data: res.data.content,
-      size: currentState.sizeOfPage === "" ? 1 : currentState.sizeOfPage,
     })
   );
 }
@@ -44,26 +48,30 @@ function* watchQuickSearchData(action) {
     city: x.city,
     weekDays: x.weekDays,
     tin: x.tin.value ? x.tin.value : x.tin,
+    page:currentState.currentPage,
     customerCategories: x.customerCategories,
   };
-  let api = currentState.paginationApi1;
+  let api = currentState.paginationApiState;
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
   const res = yield apiCall(api, "get", null, JSON.stringify(obj));
-    yield put(tableActions.changeTotalPages(currentState.limit==="All"?"":res.data.totalPages));
-    yield put(tableActions.changeCurrentPage(1));
-    yield put(
-      tableActions.changeData({
-        data: res.data.content,
-        size: currentState.sizeOfPage === "" ? 1 : currentState.sizeOfPage,
-      })
-    );
+  yield put(
+    tableActions.changeTotalPages(
+      currentState.limit === "All" ? "" : res.data.totalPages
+    )
+  );
+  yield put(tableActions.changeCurrentPage(1));
+  yield put(
+    tableActions.changeData({
+      data: res.data.content,
+    })
+  );
 }
 
 function* changeSizeOfPage(action) {
   const currentState = yield select((state) => state.table);
   const LIMIT = action.payload.size;
   const SIZE_OF_PAGE = action.payload.page;
-  let api = action.payload.api;
+  let api = currentState.paginationApiState;
   api = api.replace("{page}", SIZE_OF_PAGE - 1).replace("{limit}", LIMIT);
   const x = currentState.formInputs;
   let obj = {
@@ -72,32 +80,36 @@ function* changeSizeOfPage(action) {
         ? currentState.formInputs.active.value
         : currentState.formInputs.active,
     quickSearch: currentState.formInputs.quickSearch,
+    page:currentState.currentPage,
     city: "",
     weekDays: x.weekDays,
     tin: x.tin.value ? x.tin.value : x.tin,
     customerCategories: x.customerCategories,
   };
-    const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
-    yield put(tableActions.changeTotalPages(LIMIT==="All"?"":res.data.totalPages));
-    yield put({
-      type: "table/changeData",
-      payload: {
-        data: res.data.content,
-        size: LIMIT,
-      },
-    });
-  }
+  const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
+  yield put(
+    tableActions.changeTotalPages(LIMIT === "All" ? "" : res.data.totalPages)
+  );
+  yield put({
+    type: "table/changeData",
+    payload: {
+      data: res.data.content,
+    },
+  });
+}
 
 function* downloadExcelFile(action) {
+  yield put({ type: tableActions.setLoading.type, payload: true });
+  yield delay(1000);
+
   const currentState = yield select((state) => state.table);
   const { columns } = yield select((state) => state.table);
   let columnsTitle = columns
     .filter(
       (item) => item.show === true && item.type != "jsx" && item.type != "index"
     )
-    .map((item) => item.title)
-    .join(".");
-
+    .map((item) => item.key)
+      .join(".")
   const x = currentState.formInputs;
   let obj = {
     active: x.active.value ? x.active.value : x.active,
@@ -107,6 +119,8 @@ function* downloadExcelFile(action) {
     tin: x.tin.value ? x.tin.value : x.tin,
     customerCategories: x.customerCategories,
     quickSearch: x.quickSearch,
+    limit:currentState.limit,
+    page:currentState.currentPage-1
   };
   if (obj.active === null) obj.active = "ALL";
   if (action.payload.excelWithoutSearch) {
@@ -114,7 +128,7 @@ function* downloadExcelFile(action) {
       .get(
         domen +
           action.payload.path +
-          "?columns=" +
+          "columns=" +
           JSON.stringify(columnsTitle),
         {
           responseType: "blob",
@@ -135,7 +149,7 @@ function* downloadExcelFile(action) {
       .get(
         domen +
           action.payload.path +
-          "?columns=" +
+          "columns=" +
           JSON.stringify(columnsTitle),
         {
           responseType: "blob",
@@ -152,6 +166,7 @@ function* downloadExcelFile(action) {
         saveAs(file, action.payload.fileName + ".xlsx");
       });
   }
+  yield put({ type: tableActions.setLoading.type, payload: false });
 }
 
 function* watchGetActiveData(action) {
@@ -164,29 +179,39 @@ function* watchGetActiveData(action) {
     weekDays: x.weekDays,
     tin: x.tin.value ? x.tin.value : x.tin,
     customerCategories: x.customerCategories,
+    page:currentState.currentPage,
   };
-  yield put(tableActions.changeLoadingActive(true));
+  yield put(tableActions.setLoading(true));
   yield delay(400);
-  yield put(tableActions.changeLoadingActive(false));
-  let api = currentState.paginationApi1;
+  yield put(tableActions.setLoading(false));
+  let api = currentState.paginationApiState;
   api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
   const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
   yield put(tableActions.changeCurrentPage(1));
-    yield put(tableActions.changeTotalPages(currentState.limit==='All'?"":res.data.totalPages));
-    yield put(
-      tableActions.changeData({
-        data: res.data.content,
-        size: currentState.sizeOfPage,
-      })
-    );
+  yield put(
+    tableActions.changeTotalPages(
+      currentState.limit === "All" ? "" : res.data.totalPages
+    )
+  );
+  yield put(
+    tableActions.changeData({
+      data: res.data.content,
+    })
+  );
+}
+function* watchloading() {
+  yield put({ type: tableActions.setLoading.type, payload: true });
+  yield delay(1000);
+  yield put({ type: tableActions.setLoading.type, payload: false });
 }
 
 function* tableSaga() {
   yield takeEvery(tableActions.changePaginationTo.type, changeSizeOfPage);
   yield takeEvery(tableActions.getExcelFile.type, downloadExcelFile);
-  yield takeEvery("table/getQuickSearchData", watchQuickSearchData);
-  yield takeEvery("table/getFilteredData", watchGetFilteredData);
-  yield takeEvery("table/getActiveData", watchGetActiveData);
+  yield takeEvery(tableActions.getQuickSearchData.type, watchQuickSearchData);
+  yield takeEvery(tableActions.getFilteredData.type, watchGetFilteredData);
+  yield takeEvery(tableActions.getActiveData.type, watchGetActiveData);
+  yield takeEvery(tableActions.loading.type, watchloading);
 }
 
 export default tableSaga;

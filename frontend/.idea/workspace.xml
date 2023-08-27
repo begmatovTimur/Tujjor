@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="" />
+=======
+    <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,18 +19,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="JsbtTreeLayoutManager">
-    <layout place="tools.popupGrunt">
-      <scroll-view-position x="0" y="0" />
-    </layout>
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-  <component name="ProjectId" id="2TEgowjJfMt700hesK3z0t6hWyr" />
+  <component name="ProjectId" id="2UQatbzKi9FVa8s8O0Eicx3Godg" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -33,6 +37,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+<<<<<<< HEAD
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Timur&quot;,
@@ -51,8 +56,32 @@
       <recent name="D:\Programming\projects\Tujjor\frontend\src\images" />
       <recent name="C:\Users\nano-tech\Desktop\DillerProject\Tujjor\frontend\src\pages\Clients" />
     </key>
+=======
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="ReactBuddySettings">
+    <option name="extensionsIgnore" value="true" />
+  </component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.rcb.reactComponents" value="false" />
+        <entry key="com.haulmont.rcb.reactInspector" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\nano-tech\Desktop\DillerProject\Tujjor\frontend\src\pages\universal\Loading" />
+      <recent name="$PROJECT_DIR$/src/pages/Admin/Components/Navbar" />
     </key>
   </component>
   <component name="RunManager">
@@ -75,10 +104,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="" />
-      <created>1690613832748</created>
+      <changelist id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="" />
+      <created>1692889401184</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
       <updated>1690613832748</updated>
       <workItem from="1690613835620" duration="81000" />
       <workItem from="1690613926855" duration="1317000" />
@@ -126,6 +156,17 @@
       <workItem from="1692607642200" duration="4879000" />
       <workItem from="1692853730463" duration="8001000" />
       <workItem from="1692945649418" duration="1733000" />
+=======
+      <updated>1692874474178</updated>
+      <workItem from="1692874476306" duration="1042000" />
+      <workItem from="1692964464341" duration="778000" />
+      <workItem from="1693012972361" duration="748000" />
+      <workItem from="1693019124720" duration="4126000" />
+      <workItem from="1693025883334" duration="6487000" />
+      <workItem from="1693040100172" duration="1399000" />
+      <workItem from="1693041535956" duration="4678000" />
+      <workItem from="1693116573841" duration="1157000" />
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
     </task>
     <servers />
   </component>

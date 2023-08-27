@@ -54,16 +54,6 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
     }
 
 
-    private Object getPropertyValue(Object obj, String propertyName) {
-        try {
-            Field field = obj.getClass().getDeclaredField(propertyName);
-            field.setAccessible(true);
-            return field.get(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     private CustomerCategory generateNewTerritory(CustomerCategoryDTO categoryDTO) {
         return CustomerCategory.builder()
@@ -105,79 +95,4 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
             }
     }
 
-    @Override
-    @SneakyThrows
-    public ResponseEntity<Resource> getExcelFile(HttpServletRequest request, String columns) throws IOException {
-        System.out.println(columns);
-        String[] headersStr = columns.split("\\.");
-        List<CustomerCategoryProjection> territoryFilter = null;
-        JsonNode jsonNode = WrapFromStringToObject(request);
-        System.out.println(jsonNode.get("active"));
-        System.out.println(jsonNode.get("quickSearch"));
-        territoryFilter = customerCategoryRepository.getFilteredDataForExcel(jsonNode.get("active").asText(), jsonNode.get("quickSearch").asText());
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        int rowIdx = 0;
-        Sheet sheet = workbook.createSheet("Company info");
-        Row headerRow = sheet.createRow(rowIdx++);
-        for (int i = 0; i < headersStr.length; i++) {
-            headerRow.createCell(i).setCellValue(headersStr[i]);
-        }
-
-        System.err.println(territoryFilter.size());
-        for (CustomerCategoryProjection territory : territoryFilter) {
-            Row dataRow = sheet.createRow(rowIdx++);
-            int columnIndex = 0; // Introduce a separate variable for the column index
-            for (int i = 0; i < headersStr.length; i++) {
-                System.out.println(headersStr[i].replaceAll("\"", ""));
-                switch (headersStr[i].replaceAll("\"", "")) {
-                    case "Name":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getName().toString().replaceAll("\"", ""));
-                        break;
-                    case "Region":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getRegion().toString().replaceAll("\"", ""));
-                        break;
-                    case "Code":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getCode().toString().replaceAll("\"", ""));
-                        break;
-                    // Add more cases for other fields as needed
-                }
-            }
-        }
-        CellStyle headerCellStyle = workbook.createCellStyle();
-        Font headerFont = workbook.createFont();
-        headerFont.setBold(true);
-        headerCellStyle.setFont(headerFont);
-
-        CellStyle dataCellStyle = workbook.createCellStyle();
-        dataCellStyle.setWrapText(true);
-        for (Cell cell : headerRow) {
-            cell.setCellStyle(headerCellStyle);
-            int columnIndex = cell.getColumnIndex();
-            sheet.autoSizeColumn(columnIndex);
-        }
-
-// Apply styles to data rows and auto-size columns
-        for (Row row : sheet) {
-            for (Cell cell : row) {
-                cell.setCellStyle(dataCellStyle);
-                int columnIndex = cell.getColumnIndex();
-                sheet.autoSizeColumn(columnIndex);
-            }
-        }
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        workbook.write(outputStream);
-        workbook.close();
-
-        ByteArrayResource resource = new ByteArrayResource(outputStream.toByteArray());
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_TYPE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=CompanyInfo.xlsx");
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .headers(headers)
-                .body(resource);
-    }
 }

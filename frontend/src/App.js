@@ -7,13 +7,12 @@ import axios from "axios";
 import Settings from "./pages/Settings/Settings";
 import Teritory from "./pages/Teritory/Teritory";
 import Company from "./pages/Settings/ChildComponents/Company";
-import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
+import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory/CustomerCategory";
 import NotFound from "./pages/404/NotFound";
 import {ToastContainer} from "react-toastify";
 import Clients from "./pages/Clients/clients";
 import ClientsOnTheMap from "./pages/Clients/clientsOnTheMap";
 import {domen} from "./Config/apiCall";
-import {Home} from "@mui/icons-material";
 import {tableActions} from "./Redux/reducers/tableReducer";
 import {useDispatch} from "react-redux";
 

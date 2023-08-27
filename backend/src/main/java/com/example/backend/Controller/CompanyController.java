@@ -22,13 +22,10 @@ public class CompanyController {
 
     private final CompanyService companyService;
     @GetMapping
-    HttpEntity<?> getCompanies() {
-      return ResponseEntity.ok(companyService.getComapanies());
+    public HttpEntity<?> getCompanies() {
+      return ResponseEntity.ok(companyService.getCompanies());
     };
 
-    @GetMapping("/excel")
-    public ResponseEntity<Resource> excel(@RequestParam String columns) throws IOException {
-        return companyService.getExcel(columns);
-    };
+
 
 }

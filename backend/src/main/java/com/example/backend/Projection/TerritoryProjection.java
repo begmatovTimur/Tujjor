@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
 
-public interface TerritoryProjection {
+public interface TerritoryProjection extends ExcelExportable{
 
      UUID getId();
 

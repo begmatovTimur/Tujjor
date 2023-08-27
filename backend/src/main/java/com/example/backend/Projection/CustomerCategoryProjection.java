@@ -1,6 +1,6 @@
 package com.example.backend.Projection;
 
-public interface CustomerCategoryProjection {
+public interface CustomerCategoryProjection extends ExcelExportable{
 
 Integer getId();
 String getCode();
