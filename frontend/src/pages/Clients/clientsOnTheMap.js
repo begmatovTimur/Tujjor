@@ -109,7 +109,7 @@ function ClientsOnTheMap(props) {
                         >
                             <Map
                                 width={"100%"}
-                                height={"80%"}
+                                height={"70%"}
                                 defaultState={{
                                     center: [39.7756, 64.4253],
                                     zoom: 10,

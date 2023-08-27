@@ -34,7 +34,7 @@ const slice = createSlice({
             console.log("hello")
             if (!state.loading){
                 action.payload = {
-                    phone: state.phone,
+                    phone: "+"+state.phone,
                     password: state.password,
                     rememberMe: state.remember,
                 }

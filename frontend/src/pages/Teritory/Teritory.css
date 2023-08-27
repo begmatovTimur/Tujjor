@@ -10,7 +10,7 @@
     font-size: 38px;
     color:#333333;
     font-weight: 300;
-    margin: 0px 0px 20px;
+    margin: 0 0 20px;
     width: 100%;
     text-align: start;
     border-bottom:2px solid #e5e5e5;
@@ -29,9 +29,26 @@
     background: #5cb85c;
     border: none;
     padding: 6px 12px;
-    margin: 0px 0px 5px;
+    margin: 0 0 5px;
     color: white;
     display: flex;
     align-items:center;
     gap: 5px;
+    cursor: pointer;
+}
+#fatherDivForTerritory{
+    width: 100%;
+    background-color: #eee;
+}
+#topChildForTerritory{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+#titleForTerritory{
+    font-size: 20px;
+}
+#forTable{
+    height: 75%;
 }
