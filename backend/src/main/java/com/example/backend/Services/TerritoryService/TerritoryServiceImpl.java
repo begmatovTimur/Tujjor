@@ -2,8 +2,10 @@ package com.example.backend.Services.TerritoryService;
 
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Payload.Reaquest.FilterData;
 import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Repository.TerritoryRepository;
+import com.example.backend.Services.Universal.UniversalServiceFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +34,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TerritoryServiceImpl implements TerritoryService {
     private final TerritoryRepository territoryRepository;
+    private final UniversalServiceFilter serviceFilter;
+
 
 
     @Override
@@ -141,85 +145,14 @@ public class TerritoryServiceImpl implements TerritoryService {
 
     @Override
     public HttpEntity<?> pagination(Integer page, String limit, HttpServletRequest request) {
-
-            try {
-                if(limit.equals("All")){
-                    List<Territory> territoryRepositoryAll = territoryRepository.findAll();
-                    limit = String.valueOf(territoryRepositoryAll.size());
-                }
-                Pageable pageable = PageRequest.of(page, Integer.parseInt(limit));
-                JsonNode jsonNode = WrapFromStringToObject(request);
-                Page<TerritoryProjection> territories = territoryRepository.getFilteredData(jsonNode.get("quickSearch").asText(),
-                        jsonNode.get("active").asText(), pageable);
+                Pageable pageable = limit.equals("All") ? Pageable.unpaged() :
+                        PageRequest.of(page, Integer.parseInt(limit));
+                FilterData params = serviceFilter.generateFilterDataFromRequest(request);
+                Page<TerritoryProjection> territories = territoryRepository.getFilteredData(params.getQuickSearch(),
+                        params.getActive() , pageable);
                 return ResponseEntity.ok(territories);
-            } catch (Exception e) {
-                return ResponseEntity.status(404).body("An error has occurred");
-            }
     }
 
-    @Override
-    public ResponseEntity<Resource> getExcelFile(HttpServletRequest request, String columns) throws IOException {
-        String[] headersStr = columns.split("\\.");
-        JsonNode jsonNode = WrapFromStringToObject(request);
-        List<TerritoryProjection> territoryFilter = territoryRepository.getFilteredDataForExcel(jsonNode.get("quickSearch").asText(), jsonNode.get("active").asText());
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        int rowIdx = 0;
-        Sheet sheet = workbook.createSheet("Company info");
-        Row headerRow = sheet.createRow(rowIdx++);
-        for (int i = 0; i < headersStr.length; i++) {
-            Cell headerCell = headerRow.createCell(i);
-            headerCell.setCellValue(headersStr[i].replaceAll("\"",""));
-
-            // Apply background color to the header cell
-            CellStyle headerCellStyle = workbook.createCellStyle();
-            headerCellStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-            headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            Font headerFont = workbook.createFont();
-            headerFont.setColor(IndexedColors.WHITE.getIndex());
-            headerFont.setBold(true);
-            headerCellStyle.setFont(headerFont);
-            headerCell.setCellStyle(headerCellStyle);
-        }
-
-        for (TerritoryProjection territory : territoryFilter) {
-            Row dataRow = sheet.createRow(rowIdx++);
-            int columnIndex = 0; // Introduce a separate variable for the column index
-            for (int i = 0; i < headersStr.length; i++) {
-                switch (headersStr[i].replaceAll("\"", "")) {
-                    case "Title":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getName().replaceAll("\"", ""));
-                        break;
-                    case "Region":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getRegion().replaceAll("\"", ""));
-                        break;
-                    case "Code":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getCode().replaceAll("\"", ""));
-                        break;
-                    // Add more cases for other fields as needed
-                }
-            }
-        }
-
-        for (Cell cell : headerRow) {
-            int columnIndex = cell.getColumnIndex();
-            sheet.autoSizeColumn(columnIndex);
-        }
-
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        workbook.write(outputStream);
-        workbook.close();
-
-        ByteArrayResource resource = new ByteArrayResource(outputStream.toByteArray());
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_TYPE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .headers(headers)
-                .body(resource);
-    }
 
 
     @Override

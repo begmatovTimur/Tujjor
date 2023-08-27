@@ -3,9 +3,11 @@ package com.example.backend.Services.CustomerCategoryService;
 import com.example.backend.DTO.CustomerCategoryDTO;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Payload.Reaquest.FilterData;
 import com.example.backend.Projection.CustomerCategoryProjection;
 import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Repository.CustomerCategoryRepository;
+import com.example.backend.Services.Universal.UniversalServiceFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +36,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerCategoryServiceImpl implements CustomerCategoryService {
     private final CustomerCategoryRepository customerCategoryRepository;
+    private final UniversalServiceFilter serviceFilter;
 
     @Override
     public CustomerCategory addCategory(CustomerCategoryDTO categoryDTO) {
@@ -52,7 +55,6 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readTree(value);
     }
-
 
 
     private CustomerCategory generateNewTerritory(CustomerCategoryDTO categoryDTO) {
@@ -75,100 +77,11 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
 
     @Override
     public HttpEntity<?> pagination(Integer page, String limit, HttpServletRequest request) {
-            try {
-                if(limit.equals("All")){
-                    List<CustomerCategory> customerCategories = customerCategoryRepository.findAll();
-                    limit = String.valueOf(customerCategories.size());
-                }
-                Pageable pageable = PageRequest.of(page, Integer.parseInt(limit));
-                JsonNode jsonNode = WrapFromStringToObject(request);
-                Page<CustomerCategoryProjection> territories;
-                if (!jsonNode.get("active").asText().equals("")) {
-                    territories = customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(),
-                            jsonNode.get("active").asBoolean(), pageable);
-                } else {
-                    territories = customerCategoryRepository.findCustomerCategoryByRegionAndName(jsonNode.get("quickSearch").asText(), pageable);
-                }
-                return ResponseEntity.ok(territories);
-            } catch (Exception e) {
-                return ResponseEntity.status(404).body("An error has occurred");
-            }
-    }
-
-    @Override
-    @SneakyThrows
-    public ResponseEntity<Resource> getExcelFile(HttpServletRequest request, String columns) throws IOException {
-        String[] headersStr = columns.split("\\.");
-        List<CustomerCategoryProjection> territoryFilter = null;
-        JsonNode jsonNode = WrapFromStringToObject(request);
-        System.out.println(headersStr.toString());
-        System.out.println(jsonNode.get("quickSearch"));
-        territoryFilter = customerCategoryRepository.getFilteredDataForExcel(jsonNode.get("quickSearch").asText(),jsonNode.get("active").asText());
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        int rowIdx = 0;
-        Sheet sheet = workbook.createSheet("Company info");
-        Row headerRow = sheet.createRow(rowIdx++);
-        for (int i = 0; i < headersStr.length; i++) {
-            Cell headerRowCell = headerRow.createCell(i);
-            headerRowCell.setCellValue(headersStr[i].replaceAll("\"",""));
-            CellStyle headerCellStyle = workbook.createCellStyle();
-            headerCellStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-            headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            Font headerFont = workbook.createFont();
-            headerFont.setColor(IndexedColors.WHITE.getIndex());
-            headerFont.setBold(true);
-            headerCellStyle.setFont(headerFont);
-            headerRowCell.setCellStyle(headerCellStyle);
-        }
-
-        for (CustomerCategoryProjection territory : territoryFilter) {
-            Row dataRow = sheet.createRow(rowIdx++);
-            int columnIndex = 0; // Introduce a separate variable for the column index
-            for (int i = 0; i < headersStr.length; i++) {
-                switch (headersStr[i].replaceAll("\"", "")) {
-                    case "Name":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getName().toString().replaceAll("\"", ""));
-                        break;
-                    case "Region":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getRegion().toString().replaceAll("\"", ""));
-                        break;
-                    case "Code":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getCode().toString().replaceAll("\"", ""));
-                        break;
-                    case "Description":
-                        dataRow.createCell(columnIndex++).setCellValue(territory.getDescription().toString().replaceAll("\"", ""));
-                        break;
-                    // Add more cases for other fields as needed
-                }
-            }
-        }
-
-        for (Cell cell : headerRow) {
-            int columnIndex = cell.getColumnIndex();
-            sheet.autoSizeColumn(columnIndex);
-        }
-
-// Apply styles to data rows and auto-size columns
-        for (Row row : sheet) {
-            for (Cell cell : row) {
-                int columnIndex = cell.getColumnIndex();
-                sheet.autoSizeColumn(columnIndex);
-            }
-        }
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        workbook.write(outputStream);
-        workbook.close();
-
-        ByteArrayResource resource = new ByteArrayResource(outputStream.toByteArray());
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_TYPE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=CompanyInfo.xlsx");
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .headers(headers)
-                .body(resource);
+            Pageable pageable = limit.equals("All") ? Pageable.unpaged() :
+                    PageRequest.of(page, Integer.parseInt(limit));
+            FilterData params = serviceFilter.generateFilterDataFromRequest(request);
+            Page<CustomerCategoryProjection> territories = customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(params.getQuickSearch(),
+                    params.getActive(), pageable);
+            return ResponseEntity.ok(territories);
     }
 }

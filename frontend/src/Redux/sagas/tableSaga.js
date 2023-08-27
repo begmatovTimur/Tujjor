@@ -21,6 +21,7 @@ function* watchGetFilteredData(action) {
     yield put(tableActions.setLoading(false));
     let api = currentState.paginationApiState;
     api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
+    console.log(api)
     const res = yield apiCall(api, "get", null, JSON.stringify(obj));
     yield put(tableActions.changeCurrentPage(1));
     yield put(
@@ -39,6 +40,7 @@ function getActiveArray(value) {
     let myArr = []
     myArr.push(value)
     if (myArr[0] === "") {
+        myArr = []
         myArr.push(true, false)
     }
     return myArr
@@ -101,7 +103,6 @@ function* changeSizeOfPage(action) {
 function* downloadExcelFile(action) {
     yield put({type: tableActions.setLoading.type, payload: true});
     yield delay(1000);
-
     const currentState = yield select((state) => state.table);
     const {columns} = yield select((state) => state.table);
     let columnsTitle = columns

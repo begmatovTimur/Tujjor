@@ -81,7 +81,7 @@ function Company(props) {
                 pagination={false}
                 changeSizeMode={false}
                 fileName={"companies"}
-                excelPath={"/company/excel"}
+                excelPath={"/company/excel?component=company-profile&"}
                 columnsProps={columns}
             />
 

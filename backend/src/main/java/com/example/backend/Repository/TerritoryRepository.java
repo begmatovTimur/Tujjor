@@ -37,14 +37,12 @@ public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
             "       insertion_time\n" +
             "from territory t\n" +
             "where t.active IS NOT NULL\n" +
-            "  AND CASE\n" +
-            "          WHEN :status = 'true' THEN t.active = true\n" +
-            "          WHEN :status = 'false' THEN t.active = false\n" +
-            "          ELSE true END\n" +
+            "  AND " +
+            " t.active IN :status OR :status IS NULL " +
             "  and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '') || ' ' || COALESCE(t.code, '')) like\n" +
             "      lower(concat('%', :search, '%'))\n" +
             "order by t.insertion_time desc",nativeQuery = true)
-    Page<TerritoryProjection> getFilteredData(String search, String status,Pageable pageable);
+    Page<TerritoryProjection> getFilteredData(String search,List<Boolean> status,Pageable pageable);
 
 
     @Query(value = "select id,\n" +

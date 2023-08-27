@@ -106,14 +106,14 @@ function Teritory(props) {
       <Table
         pagination={true}
         changeSizeMode={true}
-        excelPath={"/territory/excel"}
+        excelPath={"/excel?component=territory&"}
         fileName={"territories"}
         localStoragePath="territoryColumns"
         excelWithoutSearch={false}
         paginationApi={"/territory/pagination?page={page}&limit={limit}"}
         dataProps={teritory.teritories}
         columnOrderMode={true}
-        changeSizeModeOptions={["All",10,20,30,40,50]}
+        changeSizeModeOptions={["All",1,20,30,40,50]}
         columnsProps={columns}
       />
       <UniversalModal

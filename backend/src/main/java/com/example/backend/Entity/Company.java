@@ -1,5 +1,6 @@
 package com.example.backend.Entity;
 
+import com.example.backend.Projection.ExcelExportable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +14,7 @@ import org.springframework.context.annotation.EnableMBeanExport;
 @Data
 @Table(name = "company")
 @Builder
-public class Company {
+public class Company implements ExcelExportable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

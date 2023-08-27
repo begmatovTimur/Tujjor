@@ -27,7 +27,7 @@ const clientsReducer = createSlice({
         referencePoint: "",
         error:"",
         editeClient:"",
-        allClientTerritoriesForMap:[]
+        allDataForClientOnTheMap:[]
     },
     reducers: {
         openModal: (state, action) => {
@@ -73,15 +73,6 @@ const clientsReducer = createSlice({
         },
         yourActionFailureClients:(state, action)=>{
             state.error = action.payload
-        },
-        getAllClientsTerritories: (state, action) => {
-
-        },
-        getAllClientsTerritoriesSuccess: (state, action) => {
-            state.allClientTerritoriesForMap = action.payload
-        },
-        getAllClientsTerritoriesError: (state, action) => {
-            state.errMessage = action.payload
         },
         yourActionFailureTeritories:(state, action)=>{
             state.errMessage = action.payload
@@ -171,7 +162,7 @@ const clientsReducer = createSlice({
         },
         changeLoadingActive: (state, action)=> {
             state.isLoading = action.payload
-        }
+        },
     }
 })
 export const clientsAction = {...clientsReducer.actions};

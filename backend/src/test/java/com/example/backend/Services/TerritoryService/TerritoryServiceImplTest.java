@@ -4,6 +4,7 @@ import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
 import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Repository.TerritoryRepository;
+import com.example.backend.Services.Universal.UniversalServiceFilterImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,9 @@ class TerritoryServiceImplTest {
     @Mock
     private TerritoryRepository territoryRepository;
 
+    @Mock
+    private UniversalServiceFilterImpl universalServiceFilter;
+
     private TerritoryServiceImpl underTest;
 
     @Mock
@@ -38,7 +42,7 @@ class TerritoryServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        underTest = new TerritoryServiceImpl(territoryRepository);
+        underTest = new TerritoryServiceImpl(territoryRepository,universalServiceFilter);
     }
 
     @Test
@@ -119,7 +123,7 @@ class TerritoryServiceImplTest {
 
         // Add the TerritoryProjection object to the pageResult
         when(pageResult.getContent()).thenReturn(Collections.singletonList(territoryProjection));
-        when(territoryRepository.getFilteredData(any(), anyString(), any()))
+        when(territoryRepository.getFilteredData(any(), any(), any()))
                 .thenReturn(pageResult);
 
         // Call the pagination method
@@ -127,7 +131,7 @@ class TerritoryServiceImplTest {
 
         // Verify that the repository method was called
         verify(territoryRepository, times(1))
-                .getFilteredData(eq("SearchTerm"), eq(""), any());
+                .getFilteredData(any(), any(), any());
         // Verify the response status code and content
         assertTrue(response.hasBody());
         assertTrue(response.getBody() instanceof Page<?>);

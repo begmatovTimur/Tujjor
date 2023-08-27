@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientServiceImple.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImple.java" afterDir="false" />
@@ -72,6 +73,11 @@
 =======
     <list default="true" id="e2f28343-53bb-47b2-9168-f6cfca5fdfaf" name="Changes" comment="" />
 >>>>>>> 501cc787c343782f10c963028b1f2b41a91a34ba
+=======
+    <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +89,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2UR59UU7H04xGyj4vxCr6rj3UxA" />
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectId" id="2UQatbzKi9FVa8s8O0Eicx3Godg" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -102,9 +114,20 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="ReactBuddySettings">
+    <option name="extensionsIgnore" value="true" />
+  </component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.rcb.reactComponents" value="false" />
+        <entry key="com.haulmont.rcb.reactInspector" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients\forClientAddModal" />
+      <recent name="$PROJECT_DIR$/src/pages/Admin/Components/Navbar" />
     </key>
   </component>
   <component name="RunManager">
@@ -127,10 +150,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e2f28343-53bb-47b2-9168-f6cfca5fdfaf" name="Changes" comment="" />
+      <changelist id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="" />
       <created>1692889401184</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       <updated>1690613832748</updated>
@@ -183,11 +207,14 @@
       <workItem from="1692945001957" duration="1013000" />
       <workItem from="1693025910095" duration="317000" />
 =======
+=======
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
       <updated>1692874474178</updated>
       <workItem from="1692874476306" duration="1042000" />
       <workItem from="1692964464341" duration="778000" />
       <workItem from="1693012972361" duration="748000" />
       <workItem from="1693019124720" duration="4126000" />
+<<<<<<< HEAD
 >>>>>>> e909c7de9757b35f11fd05bb0109dd5f4bf58fd9
 =======
       <updated>1692889401184</updated>
@@ -195,6 +222,12 @@
       <workItem from="1692944910505" duration="1783000" />
       <workItem from="1693030264828" duration="10900000" />
 >>>>>>> 501cc787c343782f10c963028b1f2b41a91a34ba
+=======
+      <workItem from="1693025883334" duration="6487000" />
+      <workItem from="1693040100172" duration="1399000" />
+      <workItem from="1693041535956" duration="4678000" />
+      <workItem from="1693116573841" duration="1157000" />
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
     </task>
     <servers />
   </component>

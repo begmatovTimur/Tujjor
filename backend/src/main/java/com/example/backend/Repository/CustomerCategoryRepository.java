@@ -13,12 +13,8 @@ import java.util.UUID;
 
 public interface CustomerCategoryRepository extends JpaRepository<CustomerCategory, Integer> {
 
-    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where c.active = :status and lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '') || ' ' || COALESCE(c.description, '')) like lower(concat('%',:search,'%')) order by id DESC", nativeQuery = true)
-    Page<CustomerCategoryProjection> findCustomerCategoryByActiveAndRegionName(String search, Boolean status, Pageable pageable);
-
-
-    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '') || ' ' || COALESCE(c.description, '')  ) like lower(concat('%',:search,'%')) order by id DESC", nativeQuery = true)
-    Page<CustomerCategoryProjection> findCustomerCategoryByRegionAndName(String search, Pageable pageable);
+    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where c.active IN :status OR :status IS NULL and lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '') || ' ' || COALESCE(c.description, '')) like lower(concat('%',:search,'%')) order by id DESC", nativeQuery = true)
+    Page<CustomerCategoryProjection> findCustomerCategoryByActiveAndRegionName(String search, List<Boolean> status, Pageable pageable);
 
     @Query(value = "SELECT ct.id,\n" +
             "       ct.region,\n" +
