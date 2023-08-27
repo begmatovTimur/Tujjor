@@ -119,26 +119,26 @@
 .dashboard_clients_button:hover {
     background-color: #4295ab;
 }
-#clientDatasBox{
-    width: 15%;
+#clientDataBox{
+    width: 200px;
     height: auto;
     position: absolute;
     background-color: #465860;
     color: white;
-    top: 325px;
+    top: 0px;
     left: 88px;
     overflow: hidden;
-    z-index: 10;
+    z-index: 100;
 }
-#clientDatasBox p{
+#clientDataBox p{
     width: 100%;
     border-bottom: 1px solid #688190;
     padding: 7px 10px;
     text-align: start;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     cursor: pointer;
 }
-#clientDatasBox p:hover{
+#clientDataBox p:hover{
     background-color: #4295ab;
 }
 .custom_layer_admin {
@@ -196,4 +196,19 @@
     flex-direction: column;
     position: sticky;
     left: 0;
+}
+#bigFather{
+    height: 100%;
+    width: auto;
+    background-color: #EEEEEE;
+}
+#bottomDiv{
+    height: 92vh;
+    display: flex;
+}
+#lefBar{
+    width: 90px;
+    background-color: #4b5d67;
+    display: flex;
+    flex-direction: column;
 }

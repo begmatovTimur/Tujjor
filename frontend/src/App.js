@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
 import Settings from "./pages/Settings/Settings";
-import Teritory from "./pages/Teritory/Teritory";
+import Teritory from "./pages/Teritory/Territory";
 import Company from "./pages/Settings/ChildComponents/Company";
 import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
 import NotFound from "./pages/404/NotFound";

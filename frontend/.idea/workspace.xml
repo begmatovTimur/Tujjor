@@ -7,6 +7,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
     <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/PaginationConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/CompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/CompanyController.java" afterDir="false" />
@@ -27,6 +28,29 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/reducers/tableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reducers/tableReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/pages/Admin/Components/LeftBar/LeftBar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Clients/FilterForClient/FilterForClient.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Clients/HeaderForClient/HeaderForClient.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Clients/ModalForClient/ModalForClient.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Clients/TableForClient/TableForClient.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Teritory/FilterForTerritory/TerritoryFilter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Teritory/HeaderForTerritory/TerritoryHeader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Teritory/ModalForTerritory/ModalForTerritory.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Teritory/TableForTerritory/TableForTerritory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/dashboardDataReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reducers/dashboardDataReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/loginReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reducers/loginReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clientsOnTheMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clientsOnTheMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/forClientAddModal/JsxContentForAddClientModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/ModalForClient/JsxContentForClientModal/JsxContentForAddClientModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/Teritory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Teritory/Teritory.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/Teritory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Teritory/Territory.js" afterDir="false" />
+>>>>>>> ca572466f0586611cf0a03f07d4d8282066e7792
     </list>
 
 =======
@@ -131,20 +155,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactBuddySettings">
     <option name="extensionsIgnore" value="true" />
   </component>
@@ -158,6 +182,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients\Componets" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients\ModalForClient\JsxContentForClientModal" />
       <recent name="$PROJECT_DIR$/src/pages/Admin/Components/Navbar" />
     </key>
   </component>
@@ -280,9 +307,16 @@
       <workItem from="1693025883334" duration="6487000" />
       <workItem from="1693040100172" duration="1399000" />
       <workItem from="1693041535956" duration="4678000" />
+<<<<<<< HEAD
       <workItem from="1693116573841" duration="1157000" />
 >>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
 >>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
+=======
+      <workItem from="1693116573841" duration="2277000" />
+      <workItem from="1693121932328" duration="2404000" />
+      <workItem from="1693129375206" duration="1319000" />
+      <workItem from="1693141707516" duration="13729000" />
+>>>>>>> ca572466f0586611cf0a03f07d4d8282066e7792
     </task>
     <servers />
   </component>
