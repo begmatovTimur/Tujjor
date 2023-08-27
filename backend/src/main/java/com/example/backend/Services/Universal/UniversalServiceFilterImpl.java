@@ -24,7 +24,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class UniversalServiceImpl implements UniversalServiceFilter {
+public class UniversalServiceFilterImpl implements UniversalServiceFilter {
     private final ClientRepository clientRepository;
     private final TerritoryRepository territoryRepository;
     private final CustomerCategoryRepository customerCategoryRepository;
@@ -43,22 +43,25 @@ public class UniversalServiceImpl implements UniversalServiceFilter {
     }
 
     @SneakyThrows
-    public FilterData generateFilterDataFromRequest(HttpServletRequest request) {
-        List<Boolean> active = new ArrayList<>();
-        JsonNode jsonNode = wrapToObject(request);
-        JsonNode activeNode = jsonNode.get("active");
-        for (JsonNode activeNodeArr : activeNode) {
-            Boolean x = activeNodeArr.asBoolean();
-            active.add(x);
-        }
+    public FilterData generateFilterDataFromRequest(HttpServletRequest request)  {
         FilterData filterData = new FilterData();
+        JsonNode jsonNode = wrapToObject(request);
         JsonNode cityArrayNode = jsonNode.get("city");
         JsonNode jsonNodeLimit = jsonNode.get("limit");
         JsonNode jsonNodeCurrentPage = jsonNode.get("page");
+        int currentPageValue = (jsonNodeCurrentPage != null && !jsonNodeCurrentPage.isNull()) ? jsonNodeCurrentPage.asInt() : 0;
         List<UUID> cities = new ArrayList<>();
         for (JsonNode cityNode : cityArrayNode) {
             UUID cityId = UUID.fromString(cityNode.asText());
             cities.add(cityId);
+        }
+        filterData.setCities(cities);
+
+        List<Boolean> active = new ArrayList<>();
+        JsonNode activeNode = jsonNode.get("active");
+        for (JsonNode activeNodeArr : activeNode) {
+            Boolean x = activeNodeArr.asBoolean();
+            active.add(x);
         }
         filterData.setCities(cities);
         JsonNode categoryArray = jsonNode.get("customerCategories");
@@ -66,7 +69,6 @@ public class UniversalServiceImpl implements UniversalServiceFilter {
         for (JsonNode cityNode : categoryArray) {
             customerCategoriesParam.add(cityNode.asInt());
         }
-
         JsonNode jsonNodeTin = jsonNode.get("tin");
         JsonNode jsonNodeQuickSearch = jsonNode.get("quickSearch");
         return FilterData.builder()
@@ -74,12 +76,11 @@ public class UniversalServiceImpl implements UniversalServiceFilter {
                 .active(active)
                 .cities(cities)
                 .quickSearch(jsonNodeQuickSearch.asText())
-                .page(jsonNodeCurrentPage==null?0:jsonNodeCurrentPage.asInt())
+                .page(currentPageValue)
                 .customerCategories(customerCategoriesParam)
-                .limit(jsonNodeLimit==null?"All":jsonNodeLimit.asText())
+                .limit(jsonNodeLimit==null?"":jsonNodeLimit.asText())
                 .build();
     }
-
 
 
     public HttpEntity<?> pagination(Integer page, String limit, HttpServletRequest request, String component) {
@@ -114,17 +115,10 @@ public class UniversalServiceImpl implements UniversalServiceFilter {
         if (config.getComponent().equals("clients")) {
             config.setPagination(clientRepository.getAllFilteredFields(params.getCities(), params.getCustomerCategories(), params.getActive(), params.getTin(), params.getQuickSearch(), pageable));
         } else if (config.getComponent().equals("territory")) {
-                Page<TerritoryProjection> filteredData = territoryRepository.getFilteredData(params.getQuickSearch(), String.valueOf(params.getActive().get(0)), pageable);
+            Page<TerritoryProjection> filteredData = territoryRepository.getFilteredData(params.getQuickSearch(), params.getActive(), pageable);
             config.setPagination(filteredData);
         } else if (config.getComponent().equals("customer_category")) {
-
-            Boolean active = params.getActive().get(0);
-
-            if (active.equals("")) {
-                config.setPagination(customerCategoryRepository.findCustomerCategoryByRegionAndName(params.getQuickSearch(), pageable));
-            } else {
-                config.setPagination(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(params.getQuickSearch(), active, pageable));
-            }
+            config.setPagination(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(params.getQuickSearch(), params.getActive(), pageable));
 
         }
     }

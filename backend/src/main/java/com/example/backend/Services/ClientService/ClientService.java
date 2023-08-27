@@ -17,7 +17,6 @@ public interface ClientService {
 
     HttpEntity<?> updateClient(UUID clientId, ClientDTO clientDTO);
 
-    HttpEntity<?> getTerritoriesForClients();
 
-    HttpEntity<?> getAllLocation();
+
 }

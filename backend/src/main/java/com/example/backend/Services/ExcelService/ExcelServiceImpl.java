@@ -54,7 +54,6 @@ public class ExcelServiceImpl implements ExcelService {
 
         getFilteredContentData(component, dataOfExcel, filters, pageable);
 
-
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Sheet");
 
@@ -96,21 +95,23 @@ public class ExcelServiceImpl implements ExcelService {
             if (filters.getLimit().equals("All")) {
                 filters.setLimit(String.valueOf(territoryRepository.count()));
             }
+
+            System.out.println(filters.getQuickSearch());
+
             pageable = PageRequest.of(filters.getPage(), Integer.parseInt(filters.getLimit()));
             Page<TerritoryProjection> territories = territoryRepository.getFilteredData(filters.getQuickSearch(),
-                    String.valueOf(filters.getActive().get(0)), pageable);
+                    filters.getActive(), pageable);
+
+
+            System.out.println(territories);
 
             dataOfExcel.addAll(territories.getContent());
         } else if (component.equals("customer-category")) {
 
             Page<CustomerCategoryProjection> categories;
 
-            if (!filters.getActive().equals("")) {
                 categories = categoryRepository.findCustomerCategoryByActiveAndRegionName(filters.getQuickSearch(),
-                        Boolean.valueOf(filters.getActive().get(0)), pageable);
-            } else {
-                categories = categoryRepository.findCustomerCategoryByRegionAndName(filters.getQuickSearch(), pageable);
-            }
+                        filters.getActive(), pageable);
 
             dataOfExcel.addAll(categories.getContent());
         } else if (component.equals("company-profile")) {

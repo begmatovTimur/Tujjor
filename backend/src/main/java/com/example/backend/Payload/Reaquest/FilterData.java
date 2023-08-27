@@ -18,8 +18,6 @@ public class FilterData {
     private String limit;
     private List<Integer> customerCategories;
     private List<Boolean> active;
-
     private String tin;
-
     private String quickSearch;
 }

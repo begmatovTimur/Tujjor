@@ -6,13 +6,10 @@ import com.example.backend.Services.Universal.UniversalServiceFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.UUID;
 
 @RestController
@@ -44,17 +41,4 @@ public class ClientController {
     public HttpEntity<?> pagination(@RequestParam Integer page,@RequestParam String limit, HttpServletRequest request) throws JsonProcessingException {
         return universalService.pagination(page,limit,request,"clients");
     }
-    @GetMapping("/teritoriesForClients")
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    public HttpEntity<?> getTerritoryForClients() {
-        return clientService.getTerritoriesForClients();
-    }
-
-
-    @GetMapping("/clientsLocation")
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    public HttpEntity<?> clientsLocation() {
-        return clientService.getAllLocation();
-    }
-
 }

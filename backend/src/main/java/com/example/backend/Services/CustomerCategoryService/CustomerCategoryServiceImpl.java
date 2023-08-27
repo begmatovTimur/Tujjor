@@ -3,9 +3,11 @@ package com.example.backend.Services.CustomerCategoryService;
 import com.example.backend.DTO.CustomerCategoryDTO;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Payload.Reaquest.FilterData;
 import com.example.backend.Projection.CustomerCategoryProjection;
 import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Repository.CustomerCategoryRepository;
+import com.example.backend.Services.Universal.UniversalServiceFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +36,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerCategoryServiceImpl implements CustomerCategoryService {
     private final CustomerCategoryRepository customerCategoryRepository;
+    private final UniversalServiceFilter serviceFilter;
 
     @Override
     public CustomerCategory addCategory(CustomerCategoryDTO categoryDTO) {
@@ -54,7 +57,6 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
     }
 
 
-
     private CustomerCategory generateNewTerritory(CustomerCategoryDTO categoryDTO) {
         return CustomerCategory.builder()
                 .id(null)
@@ -72,5 +74,6 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
         List<CustomerCategory> categories = customerCategoryRepository.findAll();
         return ResponseEntity.ok(categories);
     }
+
 
 }

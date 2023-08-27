@@ -2,8 +2,11 @@ package com.example.backend.Services.TerritoryService;
 
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Payload.Reaquest.FilterData;
+import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Repository.TerritoryRepository;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TerritoryServiceImpl implements TerritoryService {
     private final TerritoryRepository territoryRepository;
-    private final UniversalServiceFilter universalService;
+    private final UniversalServiceFilter serviceFilter;
+
 
 
     @Override

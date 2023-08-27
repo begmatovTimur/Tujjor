@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/PaginationConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ClientController.java" afterDir="false" />
@@ -29,6 +30,8 @@
     </list>
 
 =======
+=======
+>>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
 <<<<<<< HEAD
 <<<<<<< HEAD
     <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="">
@@ -97,7 +100,15 @@
 =======
     <list default="true" id="e2f28343-53bb-47b2-9168-f6cfca5fdfaf" name="Changes" comment="" />
 >>>>>>> 501cc787c343782f10c963028b1f2b41a91a34ba
+<<<<<<< HEAD
 >>>>>>> 476eebd6b24a3fad1e07f73c5a4faf3e83b82658
+=======
+=======
+    <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
+>>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -144,7 +155,6 @@
         <entry key="com.haulmont.rcb.reactInspector" value="false" />
       </map>
     </option>
-
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -171,12 +181,15 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e2f28343-53bb-47b2-9168-f6cfca5fdfaf" name="Changes" comment="" />
+      <changelist id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="" />
       <created>1692889401184</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
 <<<<<<< HEAD
 <<<<<<< HEAD
       <updated>1690613832748</updated>
@@ -229,12 +242,18 @@
       <workItem from="1692945001957" duration="1013000" />
       <workItem from="1693025910095" duration="317000" />
 =======
+<<<<<<< HEAD
 >>>>>>> 476eebd6b24a3fad1e07f73c5a4faf3e83b82658
+=======
+=======
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
+>>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
       <updated>1692874474178</updated>
       <workItem from="1692874476306" duration="1042000" />
       <workItem from="1692964464341" duration="778000" />
       <workItem from="1693012972361" duration="748000" />
       <workItem from="1693019124720" duration="4126000" />
+<<<<<<< HEAD
 <<<<<<< HEAD
       <workItem from="1693025883334" duration="6487000" />
       <workItem from="1693040100172" duration="1399000" />
@@ -245,6 +264,8 @@
 
 >>>>>>> 60621d7efcb60dd35a67077c96c5358df38a8ef0
 =======
+=======
+>>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
 >>>>>>> e909c7de9757b35f11fd05bb0109dd5f4bf58fd9
 =======
       <updated>1692889401184</updated>
@@ -252,7 +273,16 @@
       <workItem from="1692944910505" duration="1783000" />
       <workItem from="1693030264828" duration="10900000" />
 >>>>>>> 501cc787c343782f10c963028b1f2b41a91a34ba
+<<<<<<< HEAD
 >>>>>>> 476eebd6b24a3fad1e07f73c5a4faf3e83b82658
+=======
+=======
+      <workItem from="1693025883334" duration="6487000" />
+      <workItem from="1693040100172" duration="1399000" />
+      <workItem from="1693041535956" duration="4678000" />
+      <workItem from="1693116573841" duration="1157000" />
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
+>>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
     </task>
     <servers />
   </component>

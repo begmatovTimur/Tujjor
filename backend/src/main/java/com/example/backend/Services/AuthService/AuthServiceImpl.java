@@ -90,10 +90,15 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public HttpEntity<?> login(LoginReq dto) {
-        String phone = dto.getPhone();
+        String phone = validatePhoneNumber(dto);
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
         return generateTokenForUser(dto, phone);
 
+    }
+
+    private static String validatePhoneNumber(LoginReq dto) {
+        String phone  = dto.getPhone().startsWith("+")? dto.getPhone():"+" + dto.getPhone();
+        return phone;
     }
 
     private ResponseEntity<Map<String, Object>> generateTokenForUser(LoginReq dto, String phone) {
