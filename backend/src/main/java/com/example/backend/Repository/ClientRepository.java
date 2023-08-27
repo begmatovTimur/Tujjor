@@ -40,9 +40,7 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "WHERE c.active IS NOT NULL AND \n" +
             "(t.id IN :city OR :city IS NULL) and " +
             "(cc.id IN :category OR :category IS NULL) and " +
-            "CASE WHEN :active = 'true' THEN c.active = true " +
-            "     WHEN :active = 'false' THEN c.active = false " +
-            "     ELSE true END AND " +
+            " c.active IN :active OR :active IS NULL AND " +
             "CASE WHEN :tin = 'true' THEN c.tin <> '' " +
             "     WHEN :tin = 'false' THEN c.tin IS NULL " +
             "     ELSE true END " +
@@ -53,7 +51,7 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "    ) \n" +
             "ORDER BY\n" +
             "    c.insertion_time DESC")
-    Page<ClientProjection> getAllFilteredFields(List<UUID> city, List<Integer> category, String active, String tin, String search, Pageable pageable);
+    Page<ClientProjection> getAllFilteredFields(List<UUID> city, List<Integer> category, List<Boolean> active, String tin, String search, Pageable pageable);
 
 
     List<Client> findAllByOrderByInsertionTime();

@@ -2,15 +2,9 @@ package com.example.backend.Services.TerritoryService;
 
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
-import com.example.backend.Payload.Reaquest.FilterData;
-import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Repository.TerritoryRepository;
-import com.example.backend.Services.Universal.UniversalService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.example.backend.Services.Universal.UniversalServiceFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,7 +17,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TerritoryServiceImpl implements TerritoryService {
     private final TerritoryRepository territoryRepository;
-    private final UniversalService universalService;
+    private final UniversalServiceFilter universalService;
 
 
     @Override

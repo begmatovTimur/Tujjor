@@ -1,6 +1,5 @@
 package com.example.backend.handlers;
 
-import jakarta.ws.rs.InternalServerErrorException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.validation.BindingResult;
@@ -11,10 +10,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class MyControllerAdvice {
+
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> backendError(Exception e) {
         return ResponseEntity.status(500).body("Serverda xatolik");
     }
+
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> validation(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();

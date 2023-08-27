@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -21,11 +22,12 @@ public class ClientDTO {
     private Integer categoryId;
     private String name;
     private String companyName;
-    private String referencePoint;;
-    @NotNull(message = "Address Should Not Be Null!")
+    private String referencePoint;
+    @NotBlank(message = "address is empty!")
+    @NotNull(message = "address should not be null")
     private String address;
-    @NotNull(message = "Phone Should Not Be Null!")
-    @NotBlank(message = "Phone Should Not Be Empty!")
+    @NotBlank(message = "phone is empty!")
+    @NotNull(message = "phone should not be null")
     private String phone;
     private Boolean active;
     private LocalDate registrationDate;

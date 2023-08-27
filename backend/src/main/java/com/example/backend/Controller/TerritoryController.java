@@ -4,7 +4,7 @@ import com.example.backend.DTO.ExcelDTO;
 import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Services.TerritoryService.TerritoryService;
-import com.example.backend.Services.Universal.UniversalService;
+import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -22,7 +22,7 @@ import java.util.UUID;
 @RequestMapping("/api/territory")
 public class TerritoryController {
     private final TerritoryService territoryService;
-    private final UniversalService universalService;
+    private final UniversalServiceFilter universalService;
 
     @GetMapping("/pagination")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")

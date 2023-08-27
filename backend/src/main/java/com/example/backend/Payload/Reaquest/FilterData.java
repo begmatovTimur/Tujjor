@@ -17,8 +17,7 @@ public class FilterData {
     private Integer page;
     private String limit;
     private List<Integer> customerCategories;
-
-    private String active;
+    private List<Boolean> active;
 
     private String tin;
 

@@ -1,6 +1,5 @@
 package com.example.backend.Services.ExcelService;
 
-import com.example.backend.Entity.Territory;
 import com.example.backend.Payload.Reaquest.FilterData;
 import com.example.backend.Projection.ClientProjection;
 import com.example.backend.Projection.CustomerCategoryProjection;
@@ -10,19 +9,16 @@ import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Repository.CompanyRepository;
 import com.example.backend.Repository.CustomerCategoryRepository;
 import com.example.backend.Repository.TerritoryRepository;
-import com.example.backend.Services.Universal.UniversalService;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -32,59 +28,31 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ExcelServiceImpl implements ExcelService {
-    private final UniversalService universalService;
+    private final UniversalServiceFilter universalServiceFilter;
     private final TerritoryRepository territoryRepository;
     private final CustomerCategoryRepository categoryRepository;
     private final CompanyRepository companyRepository;
     private final ClientRepository clientRepository;
 
+    @SneakyThrows
     @Override
     public ResponseEntity<Resource> getExcel(HttpServletRequest request, String[] headers, String component, HttpServletResponse response) {
 
         List<ExcelExportable> dataOfExcel = new ArrayList<>();
 
-        FilterData filters = universalService.generateFilterDataFromRequest(request);
+        FilterData filters = universalServiceFilter.generateFilterDataFromRequest(request);
 
         Pageable pageable = filters.getLimit().equals("All") ? Pageable.unpaged() :
                 PageRequest.of(filters.getPage(), Integer.parseInt(filters.getLimit()));
 
-        if (component.equals("territory")) {
-            if(filters.getLimit().equals("All")){
-                filters.setLimit(String.valueOf(territoryRepository.count()));
-            }
-            pageable = PageRequest.of(filters.getPage(), Integer.parseInt(filters.getLimit()));
-            Page<TerritoryProjection> territories = territoryRepository.getFilteredData(filters.getQuickSearch(),
-                    filters.getActive(), pageable);
-
-            dataOfExcel.addAll(territories.getContent());
-        }else if(component.equals("customer-category")) {
-
-            Page<CustomerCategoryProjection> categories;
-
-            if (!filters.getActive().equals("")) {
-                 categories = categoryRepository.findCustomerCategoryByActiveAndRegionName(filters.getQuickSearch(),
-                        Boolean.valueOf(filters.getActive()), pageable);
-            } else {
-                categories = categoryRepository.findCustomerCategoryByRegionAndName(filters.getQuickSearch(), pageable);
-            }
-
-            dataOfExcel.addAll(categories.getContent());
-        } else if(component.equals("company-profile")) {
-            dataOfExcel.addAll(companyRepository.findAll());
-        }else if(component.equals("clients")) {
-            Page<ClientProjection> filteredData = clientRepository.getAllFilteredFields(filters.getCities(), filters.getCustomerCategories(), filters.getActive(), filters.getTin(), filters.getQuickSearch(), pageable);
-            dataOfExcel.addAll(filteredData.getContent());
-        }
-
+        getFilteredContentData(component, dataOfExcel, filters, pageable);
 
 
         Workbook workbook = new XSSFWorkbook();
@@ -94,15 +62,9 @@ public class ExcelServiceImpl implements ExcelService {
         int rowNum = 0;
         Row headerRow = sheet.createRow(rowNum);
 
-        generateHeaders(headerRow, headers,workbook); // generating headers
+        generateHeaders(headerRow, headers, workbook); // generating headers
 
-        try {
-            generateBody(dataOfExcel, headers, ++rowNum, sheet);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        generateBody(dataOfExcel, headers, ++rowNum, sheet);
 
         // Define header values
 
@@ -129,6 +91,36 @@ public class ExcelServiceImpl implements ExcelService {
                 .body(resource);
     }
 
+    private void getFilteredContentData(String component, List<ExcelExportable> dataOfExcel, FilterData filters, Pageable pageable) {
+        if (component.equals("territory")) {
+            if (filters.getLimit().equals("All")) {
+                filters.setLimit(String.valueOf(territoryRepository.count()));
+            }
+            pageable = PageRequest.of(filters.getPage(), Integer.parseInt(filters.getLimit()));
+            Page<TerritoryProjection> territories = territoryRepository.getFilteredData(filters.getQuickSearch(),
+                    String.valueOf(filters.getActive().get(0)), pageable);
+
+            dataOfExcel.addAll(territories.getContent());
+        } else if (component.equals("customer-category")) {
+
+            Page<CustomerCategoryProjection> categories;
+
+            if (!filters.getActive().equals("")) {
+                categories = categoryRepository.findCustomerCategoryByActiveAndRegionName(filters.getQuickSearch(),
+                        Boolean.valueOf(filters.getActive().get(0)), pageable);
+            } else {
+                categories = categoryRepository.findCustomerCategoryByRegionAndName(filters.getQuickSearch(), pageable);
+            }
+
+            dataOfExcel.addAll(categories.getContent());
+        } else if (component.equals("company-profile")) {
+            dataOfExcel.addAll(companyRepository.findAll());
+        } else if (component.equals("clients")) {
+            Page<ClientProjection> filteredData = clientRepository.getAllFilteredFields(filters.getCities(), filters.getCustomerCategories(), filters.getActive(), filters.getTin(), filters.getQuickSearch(), pageable);
+            dataOfExcel.addAll(filteredData.getContent());
+        }
+    }
+
     public void generateBody(List<?> objects, String[] columns, int rowNum, Sheet sheet) throws NoSuchFieldException, IllegalAccessException {
         for (int i = 0; i < objects.size(); i++) {
             Row row = sheet.createRow(rowNum++);
@@ -146,9 +138,6 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
 
-
-
-
     public static Object getFieldValue(Object obj, String fieldName) {
         try {
             Method method = obj.getClass().getMethod("get" + capitalizeFirstLetter(fieldName));
@@ -164,7 +153,7 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
 
-    private void generateHeaders(Row headerRow, String[] headers,Workbook workbook) {
+    private void generateHeaders(Row headerRow, String[] headers, Workbook workbook) {
         for (int i = 0; i < headers.length; i++) {
             Cell cell = headerRow.createCell(i);
             CellStyle cellStyle = workbook.createCellStyle();
@@ -174,7 +163,7 @@ public class ExcelServiceImpl implements ExcelService {
             font.setColor(IndexedColors.WHITE.getIndex());
             cell.setCellStyle(cellStyle);
             cellStyle.setFont(font);
-            cell.setCellValue(headers[i].replaceAll("\"","")); // Set header value to "a"
+            cell.setCellValue(headers[i].replaceAll("\"", "")); // Set header value to "a"
         }
     }
 

@@ -3,7 +3,7 @@ package com.example.backend.Controller;
 import com.example.backend.DTO.CustomerCategoryDTO;
 import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.Services.CustomerCategoryService.CustomerCategoryService;
-import com.example.backend.Services.Universal.UniversalService;
+import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -20,12 +20,14 @@ import java.io.IOException;
 public class CustomerCategoryController {
 
     private final CustomerCategoryService categoryService;
-    private final UniversalService universalService;
+    private final UniversalServiceFilter universalService;
 
     @GetMapping("/pagination")
     public HttpEntity<?> pagination(@RequestParam Integer page, @RequestParam String limit, HttpServletRequest request) {
         return universalService.pagination(page, limit, request,"customer_category");
-    };
+    }
+    
+
 
     @GetMapping()
     public HttpEntity<?> getCategories() {

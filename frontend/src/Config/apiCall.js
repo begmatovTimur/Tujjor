@@ -1,4 +1,4 @@
-import { ErrorNotify } from "../tools/Alerts";
+import {ErrorNotify} from "../tools/Alerts";
 import axiosInterceptor from "./axiosInterceptor";
 
 export const domen = "http://localhost:8080/api";

@@ -2,36 +2,24 @@ package com.example.backend.Services.ClientService;
 
 import com.example.backend.DTO.ClientDTO;
 import com.example.backend.Entity.Client;
-import com.example.backend.Entity.CustomerCategory;
-import com.example.backend.Entity.Territory;
 import com.example.backend.Payload.Reaquest.FilterData;
 import com.example.backend.Payload.Respons.ResClientsTerritories;
 import com.example.backend.Projection.ClientProjection;
 import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Repository.CustomerCategoryRepository;
 import com.example.backend.Repository.TerritoryRepository;
-import com.example.backend.Services.Universal.UniversalService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.EntityNotFoundException;
+import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
-import lombok.*;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.core.io.ByteArrayResource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -45,7 +33,7 @@ public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final CustomerCategoryRepository categoryRepository;
     private final TerritoryRepository territoryRepository;
-    private final UniversalService service;
+    private final UniversalServiceFilter serviceFilter;
 
     @Override
     public HttpEntity<?> saveClient(ClientDTO clientDTO) {
@@ -55,25 +43,18 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public HttpEntity<?> getClient() {
-        try {
             return ResponseEntity.ok(clientRepository.findAllByOrderByInsertionTime());
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("An error has occurred");
-        }
     }
+
+
+
 
     @Override
     @Transactional
     public ResponseEntity<?> updateClient(UUID clientId, ClientDTO clientDTO) {
-
-        Client generatedClient = generateClient(clientDTO);
-
-        clientRepository.save(generatedClient);
+        clientRepository.save(generateClient(clientDTO));
         return ResponseEntity.ok("Client updated successfully");
     }
-
-
-
 
     private Client generateClient(ClientDTO clientDTO) {
         return Client.builder()

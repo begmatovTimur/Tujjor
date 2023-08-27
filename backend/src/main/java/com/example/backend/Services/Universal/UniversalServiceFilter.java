@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpEntity;
 
-public interface UniversalService {
+public interface UniversalServiceFilter {
     FilterData generateFilterDataFromRequest(HttpServletRequest request);
 
     JsonNode wrapToObject(HttpServletRequest request);
