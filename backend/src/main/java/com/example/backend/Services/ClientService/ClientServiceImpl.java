@@ -35,7 +35,7 @@ public class ClientServiceImpl implements ClientService {
     public HttpEntity<?> saveClient(ClientDTO clientDTO) {
         ResponseEntity<String> body = ifExistInputs(clientDTO);
         if (body != null) return body;
-        Client save = clientRepository.save(generateClient(clientDTO));
+        Client save = clientRepository.save(generateClient(null, clientDTO));
         return ResponseEntity.ok(save);
     }
 
@@ -75,7 +75,7 @@ public class ClientServiceImpl implements ClientService {
     @Transactional
     public ResponseEntity<?> updateClient(UUID clientId, ClientDTO clientDTO) {
 
-        Client generatedClient = generateClient(clientDTO);
+        Client generatedClient = generateClient(clientId, clientDTO);
 
         clientRepository.save(generatedClient);
         return ResponseEntity.ok("Client updated successfully");
@@ -91,8 +91,10 @@ public class ClientServiceImpl implements ClientService {
         return null;
     }
 
-    private Client generateClient(ClientDTO clientDTO) {
+    private Client generateClient(UUID id, ClientDTO clientDTO) {
+        System.out.println(id);
         return Client.builder()
+                .id(id)
                 .active(clientDTO.getActive())
                 .phone(clientDTO.getPhone())
                 .category(categoryRepository.findById(clientDTO.getCategoryId()).orElseThrow())
