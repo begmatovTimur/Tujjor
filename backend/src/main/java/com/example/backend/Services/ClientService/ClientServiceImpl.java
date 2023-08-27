@@ -2,40 +2,24 @@ package com.example.backend.Services.ClientService;
 
 import com.example.backend.DTO.ClientDTO;
 import com.example.backend.Entity.Client;
-import com.example.backend.Entity.CustomerCategory;
-import com.example.backend.Entity.Territory;
 import com.example.backend.Payload.Reaquest.FilterData;
-import com.example.backend.Payload.Respons.ResClientsTerritories;
 import com.example.backend.Projection.ClientProjection;
 import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Repository.CustomerCategoryRepository;
 import com.example.backend.Repository.TerritoryRepository;
 import com.example.backend.Services.Universal.UniversalService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
-import lombok.*;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -121,27 +105,5 @@ public class ClientServiceImpl implements ClientService {
                 .latitude(clientDTO.getLatitude())
                 .insertionTime(LocalDateTime.now())
                 .build();
-    }
-
-    @Override
-    public HttpEntity<?> getTeritoriesForClients() {
-        return ResponseEntity.ok(territoryRepository.getAllTerritoryForClients());
-    }
-
-
-
-    @Override
-    public HttpEntity<?> getAllLocation() {
-        //buni bitta qilish kerak va territory bo'yicha filter bo'lishi kerak
-        List<ResClientsTerritories> result = new ArrayList<>();
-        List<Client> clients = clientRepository.findAll();
-        for (Client client : clients) {
-            result.add(new ResClientsTerritories(
-                    client.getName(),
-                    List.of(client.getLatitude(), client.getLongitude()),
-                    client.getActive()
-            ));
-        }
-        return ResponseEntity.ok(result);
     }
 }

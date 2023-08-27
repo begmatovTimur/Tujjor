@@ -47,17 +47,4 @@ public class ClientController {
     public HttpEntity<?> getFilteredClients(@RequestParam Integer page,@RequestParam String limit, HttpServletRequest request) throws JsonProcessingException {
         return clientService.getFilteredClients(page,limit,request);
     }
-    @GetMapping("/teritoriesForClients")
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    public HttpEntity<?> getTeritoryForClients() {
-        return clientService.getTeritoriesForClients();
-    }
-
-
-    @GetMapping("/clientsLocation")
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    public HttpEntity<?> clientsLocation() {
-        return clientService.getAllLocation();
-    }
-
 }

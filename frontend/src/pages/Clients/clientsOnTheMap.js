@@ -4,7 +4,7 @@ import {connect, useDispatch} from "react-redux";
 import {clientsAction} from "../../Redux/reducers/clientsReducer";
 import logo from "../../images/logo.png";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
-import {useState} from "react";
+import Filter from "../universal/Filter/Filter";
 
 function ClientsOnTheMap(props) {
     const dispatch = useDispatch();
@@ -18,11 +18,18 @@ function ClientsOnTheMap(props) {
         setTimeout(() => {
             props.changeLoadingActive(false);
         }, 1000);
-        props.getAllClientsTerritories();
+        props.getClients();
     }, []);
-
-    console.log(clients.clients);
-
+    function generateOptionsOfCity() {
+        const optionsCity = [];
+        teritory?.teritories?.map((item) => {
+            optionsCity.push({
+                value: item.id,
+                label: item.region,
+            });
+        });
+        return optionsCity;
+    }
     return (
         <div
             style={{
@@ -65,18 +72,32 @@ function ClientsOnTheMap(props) {
                             <label className="d-flex gap-2 align-items-center">
                                 <span className="greenlight"></span>
                                 <span>Active Clients:</span>
-                                {clients.allClientTerritoriesForMap.filter(item => item.active === true).length}
+                                {clients.clients.filter(item => item.active === true).length}
                             </label>
                             <label className="d-flex gap-2 align-items-center">
                                 <span className="redlight"></span>
                                 <span>No Active Clients:</span>
-                                {clients.allClientTerritoriesForMap.filter(item => item.active === false).length}
+                                {clients.clients.filter(item => item.active === false).length}
                             </label>
                             <label className="d-flex gap-2 align-items-center">
                                 <span className="bluelight"></span>
                                 <span>Territory:</span>
                                 {teritory.teritories.length}
                             </label>
+                            <Filter
+                                search={[
+                                    {
+                                        name: "city",
+                                        multi: true,
+                                        options: generateOptionsOfCity(),
+                                        defaultValue: { value: "", label: "All" },
+                                        placeholder: "search by territory",
+                                        selfEmployer: false,
+                                    }
+                                ]}
+                                paginationApi={"/client/pagination"}
+                                filterButton={true}
+                            />
                         </div>
                         <YMaps
                             query={{
@@ -96,7 +117,7 @@ function ClientsOnTheMap(props) {
                                 modules={["templateLayoutFactory"]}
                             >
                                 <ZoomControl options={{float: "right"}}/>
-                                {clients.allClientTerritoriesForMap.map((address, index) => {
+                                {clients?.clients?.map((address, index) => {
                                     return address.active ? (
                                         <Placemark
                                             properties={{
@@ -110,7 +131,7 @@ function ClientsOnTheMap(props) {
                                                 iconImageHref: logo,
                                             }}
                                             key={index}
-                                            geometry={address.territories}
+                                            geometry={[address.latitude, address.longitude]}
                                         />
                                     ) : (
                                         <Placemark
@@ -124,11 +145,11 @@ function ClientsOnTheMap(props) {
                                                 iconImageHref: logo,
                                             }}
                                             key={index}
-                                            geometry={address.territories}
+                                            geometry={[address.latitude, address.longitude]}
                                         />
                                     );
                                 })}
-                                {teritory.teritories.map((item, index) => {
+                                {teritory?.teritories?.map((item, index) => {
                                     return (
                                         <Placemark
                                             properties={{

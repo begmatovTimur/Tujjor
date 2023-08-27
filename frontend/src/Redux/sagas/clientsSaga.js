@@ -1,8 +1,7 @@
-import { takeLatest, takeEvery, select, put, call } from "redux-saga/effects";
+import {call, put, select, takeEvery, takeLatest} from "redux-saga/effects";
 import apiCall from "../../Config/apiCall";
-import { clientsAction } from "../reducers/clientsReducer";
-import { ErrorNotify, SuccessNotify } from "../../tools/Alerts";
-import { tableActions } from "../reducers/tableReducer";
+import {clientsAction} from "../reducers/clientsReducer";
+import {ErrorNotify, SuccessNotify} from "../../tools/Alerts";
 
 function* getClients() {
   try {
@@ -10,14 +9,6 @@ function* getClients() {
     yield put(clientsAction.getClientsSuccess(res.data));
   } catch (err) {
     yield put(clientsAction.yourActionFailureClients(err.message));
-  }
-}
-function* getAllClientsTerritories(action) {
-  try {
-    const res = yield apiCall("/client/clientsLocation", "GET", null);
-    yield put(clientsAction.getAllClientsTerritoriesSuccess(res.data));
-  } catch (err) {
-    yield put(clientsAction.getAllClientsTerritoriesError(err.message));
   }
 }
 
@@ -56,13 +47,11 @@ function* saveClients(action) {
         SuccessNotify("Client added Successfully!");
       }
     }
-
     yield call(getClients);
   }
 }
 
 export function* clientsSaga() {
-  yield takeEvery("clients/getAllClientsTerritories", getAllClientsTerritories);
   yield takeLatest("clients/saveClients", saveClients);
   yield takeEvery("clients/getClients", getClients);
 }
