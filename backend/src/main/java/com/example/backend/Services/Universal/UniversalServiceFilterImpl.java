@@ -39,7 +39,6 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
             Boolean x = activeNodeArr.asBoolean();
             active.add(x);
         }
-        System.out.println(active.get(0));
         filterData.setCities(cities);
         JsonNode categoryArray = jsonNode.get("customerCategories");
         List<Integer> customerCategoriesParam = new ArrayList<>();
