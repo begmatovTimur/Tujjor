@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {Map, Placemark, YMaps, ZoomControl,} from "react-yandex-maps";
-import {connect, useDispatch} from "react-redux";
+import {connect} from "react-redux";
 import {teritoryAction} from "../../Redux/reducers/teritoryReducer";
 import Table from "../universal/Table/Table";
 import "./Teritory.css";
@@ -79,9 +79,9 @@ function Teritory(props) {
   }
 
   return (
-    <div style={{ width: "100%" }}>
-      <div className="d-flex flex-column align-items-start">
-        <div className="title">Territory</div>
+    <div  style={{ width: "100%", backgroundColor: "#eee"}}>
+      <div style={{overflow:"hidden"}} className="d-flex flex-column align-items-start">
+        <b className="title">Territory</b>
         <div
           className="custom_add_btn"
           style={{ cursor: "pointer" }}
@@ -103,19 +103,21 @@ function Teritory(props) {
           },
         ]}
       />
-      <Table
-        pagination={true}
-        changeSizeMode={true}
-        excelPath={"/excel?component=territory&"}
-        fileName={"territories"}
-        localStoragePath="territoryColumns"
-        excelWithoutSearch={false}
-        paginationApi={"/territory/pagination?page={page}&limit={limit}"}
-        dataProps={teritory.teritories}
-        columnOrderMode={true}
-        changeSizeModeOptions={["All",1,20,30,40,50]}
-        columnsProps={columns}
-      />
+      <div style={{height:"75%"}}>
+        <Table
+            pagination={true}
+            changeSizeMode={true}
+            excelPath={"/excel?component=territory&"}
+            fileName={"territories"}
+            localStoragePath="territoryColumns"
+            excelWithoutSearch={false}
+            paginationApi={"/territory/pagination?page={page}&limit={limit}"}
+            dataProps={teritory.teritories}
+            columnOrderMode={true}
+            changeSizeModeOptions={["All",1,20,30,40,50]}
+            columnsProps={columns}
+        />
+      </div>
       <UniversalModal
         modalTitle={
           teritory.itemForTeritoryEdite === ""

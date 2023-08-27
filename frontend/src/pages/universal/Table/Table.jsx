@@ -246,7 +246,7 @@ const Table = (props) => {
               }
             />
             <div style={{ height: "380px", overflow: "auto" }}>
-              <table className="table mt-2 mytable">
+              <table className="table mytable">
                 <thead className={"table_thead"}>
                   <tr>
                     {(props.columns.length === 0
