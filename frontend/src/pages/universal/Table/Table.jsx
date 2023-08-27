@@ -75,6 +75,7 @@ const Table = (props) => {
   };
 
 
+
   function handleDragEnd(result) {
     if (!result.destination) return;
     const sourceIndex = result.source.index;
@@ -260,7 +261,7 @@ const Table = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {props.columns.length === 0 ? (
+                  {props.columns.length === 0  ? (
                     <tr>
                       <th colSpan={5} className="text-center">
                         No Data
