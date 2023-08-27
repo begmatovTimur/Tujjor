@@ -25,7 +25,22 @@ const slice = createSlice({
         },
         rememberMe:(state, action)=>{
             state.remember = action.payload
-        }
+        },
+        changeLoading:(state, action)=>{
+            state.loading = action.payload
+        },
+        loginHere:(state, action)=>{
+            action.payload.preventDefault();
+            console.log("hello")
+            if (!state.loading){
+                action.payload = {
+                    phone: state.phone,
+                    password: state.password,
+                    rememberMe: state.remember,
+                }
+            }
+        },
+        hasPermissionRoleSuperVisor:(state, action)=>{}
     }
 })
 
