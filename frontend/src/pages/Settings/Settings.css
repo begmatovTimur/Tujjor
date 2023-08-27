@@ -47,6 +47,7 @@
   padding: 20px;
   background-color: #eee;
   border-radius: 8px;
+  overflow: auto;
 }
 .btn_panel {
   width: 228px;

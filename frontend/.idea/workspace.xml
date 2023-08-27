@@ -6,6 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/Settings.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/Settings.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/Teritory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Teritory/Teritory.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/Teritory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Teritory/Teritory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,20 +39,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactBuddySettings">
     <option name="extensionsIgnore" value="true" />
   </component>
@@ -91,7 +101,10 @@
       <workItem from="1693025883334" duration="6487000" />
       <workItem from="1693040100172" duration="1399000" />
       <workItem from="1693041535956" duration="4678000" />
-      <workItem from="1693116573841" duration="1157000" />
+      <workItem from="1693116573841" duration="2277000" />
+      <workItem from="1693121932328" duration="2404000" />
+      <workItem from="1693129375206" duration="1319000" />
+      <workItem from="1693141707516" duration="2930000" />
     </task>
     <servers />
   </component>
