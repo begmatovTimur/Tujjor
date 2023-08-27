@@ -170,9 +170,9 @@ function Clients(props) {
   }
 
   return (
-    <div style={{ width: "100%", backgroundColor: "#dae2e3" }}>
+    <div style={{border:"1px solid", width: "100%", height:"100%", backgroundColor: "#dae2e3"}}>
       <div id={"clientsFatherDiv"}>
-        <div style={{ height: "100%" }}>
+        <div style={{ height: "100%"}}>
           <div
             style={{
               display: "flex",

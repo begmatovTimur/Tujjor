@@ -197,3 +197,18 @@
     position: sticky;
     left: 0;
 }
+#bigFather{
+    height: 100%;
+    width: auto;
+    background-color: #EEEEEE;
+}
+#bottomDiv{
+    height: 92vh;
+    display: flex;
+}
+#lefBar{
+    width: 90px;
+    background-color: #4b5d67;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,17 +1,14 @@
-import React, {useEffect, useRef, useState} from "react";
-import {connect, useDispatch} from "react-redux";
+import React, {useEffect, useState} from "react";
+import {connect} from "react-redux";
 import {dashboardDataModel} from "../../Redux/reducers/dashboardDataReducer";
-import Logo from "../../images/logo.png";
 import {icons} from "../../Config/icons";
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import DashboardButton from "../universal/DashboardButton/DashboardButton";
-import "./Admin.css";
+import "./Index.css";
 import Navbar from "./Components/Navbar";
 
 function Admin(props) {
-    const location = useLocation();
     const [isHovered, setIsHovered] = useState(false);
-    const {dashboardData} = props.dashboardDataReducer;
     const navigate = useNavigate();
     const unCheckedButtonClass = "dashboard_button"
     const checkedButtonClass = "checked_dashboard_button " + unCheckedButtonClass
@@ -47,17 +44,10 @@ function Admin(props) {
     }
 
     return (
-        <div style={{height: "100%", width: "auto", backgroundColor: "#EEEEEE"}}>
+        <div id={"bigFather"}>
             <Navbar/>
-            <div style={{height: "100vh"}} className={"d-flex"}>
-                <div
-                    style={{
-                        width: "90px",
-                        backgroundColor: "#4b5d67",
-                        display: "flex",
-                        flexDirection: "column",
-                    }}
-                >
+            <div id={"bottomDiv"}>
+                <div id={"lefBar"}>
                     <DashboardButton
                         id={1}
                         icon={<i className="fa fa-medkit"></i>}

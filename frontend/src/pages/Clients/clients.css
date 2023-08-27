@@ -7,5 +7,6 @@
     border: none;
     border-radius: 5px;
     padding: 10px;
-    height: 98vh;
+    height: 95%;
+    overflow-y: auto;
 }
