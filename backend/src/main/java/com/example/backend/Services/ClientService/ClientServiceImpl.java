@@ -49,8 +49,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public HttpEntity<?> saveClient(ClientDTO clientDTO) {
-        ResponseEntity<String> body = ifExistInputs(clientDTO);
-        if (body != null) return body;
         Client save = clientRepository.save(generateClient(clientDTO));
         return ResponseEntity.ok(save);
     }
@@ -65,29 +63,6 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public HttpEntity<?> getFilteredClients(Integer page, String limit, HttpServletRequest request) throws JsonProcessingException {
-        if (validateParams(page, limit)) {
-            return ResponseEntity.badRequest().body("Invalid page or limit value");
-        }
-
-        Pageable pageable = limit.equals("All") ? Pageable.unpaged() :
-                PageRequest.of(page, Integer.parseInt(limit));
-
-        FilterData params = service.generateFilterDataFromRequest(request);
-
-        Page<ClientProjection> clients = clientRepository.getAllFilteredFields(params.getCities(), params.getCustomerCategories(), params.getActive().toString(), params.getTin(), params.getQuickSearch(), pageable);
-        return ResponseEntity.ok(clients);
-    }
-
-
-
-    private static boolean validateParams(Integer page, String limit) {
-        return !(limit.equals("All")) && (page == null || limit == null || page < 0 || Integer.parseInt(limit) < 1);
-    }
-
-
-
-    @Override
     @Transactional
     public ResponseEntity<?> updateClient(UUID clientId, ClientDTO clientDTO) {
 
@@ -98,14 +73,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
 
-    private static ResponseEntity<String> ifExistInputs(ClientDTO clientDTO) {
-        if (clientDTO.getTerritoryId() == null || clientDTO.getAddress() == null || clientDTO.getPhone() == null ||
-                clientDTO.getTerritoryId().toString().isEmpty()
-                || clientDTO.getPhone().isEmpty()) {
-            return ResponseEntity.status(404).body("Fill the gaps!");
-        }
-        return null;
-    }
+
 
     private Client generateClient(ClientDTO clientDTO) {
         return Client.builder()
@@ -124,7 +92,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public HttpEntity<?> getTeritoriesForClients() {
+    public HttpEntity<?> getTerritoriesForClients() {
         return ResponseEntity.ok(territoryRepository.getAllTerritoryForClients());
     }
 

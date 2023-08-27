@@ -57,27 +57,6 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
         return ResponseEntity.ok(categories);
     }
 
-    @Override
-    public HttpEntity<?> pagination(Integer page, String limit, HttpServletRequest request) {
-        if (universalService.validateParams(page, limit)) {
-            return ResponseEntity.badRequest().body("Invalid page or limit value");
-        }
 
-        Pageable pageable = limit.equals("All") ? Pageable.unpaged() :
-                PageRequest.of(page, Integer.parseInt(limit));
-
-        FilterData filterData = universalService.generateFilterDataFromRequest(request);
-
-        Page<CustomerCategoryProjection> territories;
-
-        if (!filterData.getActive().equals("")) {
-            territories = customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(filterData.getQuickSearch(),
-                    Boolean.valueOf(filterData.getActive()), pageable);
-        } else {
-            territories = customerCategoryRepository.findCustomerCategoryByRegionAndName(filterData.getQuickSearch(), pageable);
-        }
-
-        return ResponseEntity.ok(territories);
-    }
 
 }

@@ -3,6 +3,7 @@ package com.example.backend.Controller;
 import com.example.backend.DTO.CustomerCategoryDTO;
 import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.Services.CustomerCategoryService.CustomerCategoryService;
+import com.example.backend.Services.Universal.UniversalService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -19,16 +20,12 @@ import java.io.IOException;
 public class CustomerCategoryController {
 
     private final CustomerCategoryService categoryService;
+    private final UniversalService universalService;
 
     @GetMapping("/pagination")
     public HttpEntity<?> pagination(@RequestParam Integer page, @RequestParam String limit, HttpServletRequest request) {
-        return categoryService.pagination(page, limit, request);
-    }
-    
-
-
-
-    ;
+        return universalService.pagination(page, limit, request,"customer_category");
+    };
 
     @GetMapping()
     public HttpEntity<?> getCategories() {
@@ -36,13 +33,12 @@ public class CustomerCategoryController {
     }
 
     @PostMapping()
-    public HttpEntity<?> saveCustomerCategor(@RequestBody CustomerCategoryDTO categoryDTO) {
+    public HttpEntity<?> saveCustomerCategory(@RequestBody CustomerCategoryDTO categoryDTO) {
         return ResponseEntity.ok(categoryService.addCategory(categoryDTO));
     }
 
     @PutMapping("{id}")
     public HttpEntity<?> updateCategory(@PathVariable Integer id, @RequestBody CustomerCategoryDTO categoryDTO) {
         return ResponseEntity.ok(categoryService.updateCategory(id, categoryDTO));
-
     }
 }

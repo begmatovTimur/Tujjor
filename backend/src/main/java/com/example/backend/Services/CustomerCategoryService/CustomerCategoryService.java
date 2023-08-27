@@ -23,6 +23,6 @@ public interface CustomerCategoryService {
 
     HttpEntity<?> getCategories();
 
-    HttpEntity<?> pagination(Integer page, String limit, HttpServletRequest request);
+
 
 }

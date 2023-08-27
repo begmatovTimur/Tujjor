@@ -23,9 +23,7 @@ public class CompanyController {
     private final CompanyService companyService;
     @GetMapping
     HttpEntity<?> getCompanies() {
-      return ResponseEntity.ok(companyService.getComapanies());
+      return ResponseEntity.ok(companyService.getCompanies());
     };
-
-
 
 }

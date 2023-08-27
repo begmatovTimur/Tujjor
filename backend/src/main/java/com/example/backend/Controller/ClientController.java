@@ -4,6 +4,7 @@ import com.example.backend.DTO.ClientDTO;
 import com.example.backend.DTO.ExcelDTO;
 import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Services.ClientService.ClientService;
+import com.example.backend.Services.Universal.UniversalService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ import java.util.UUID;
 @RequestMapping("/api/client")
 public class ClientController {
     private final ClientService clientService;
+    private final UniversalService universalService;
     @PostMapping
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> saveClient(@RequestBody ClientDTO clientDTO){
@@ -44,13 +46,13 @@ public class ClientController {
 
     @GetMapping("/pagination")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    public HttpEntity<?> getFilteredClients(@RequestParam Integer page,@RequestParam String limit, HttpServletRequest request) throws JsonProcessingException {
-        return clientService.getFilteredClients(page,limit,request);
+    public HttpEntity<?> pagination(@RequestParam Integer page,@RequestParam String limit, HttpServletRequest request) throws JsonProcessingException {
+        return universalService.pagination(page,limit,request,"clients");
     }
     @GetMapping("/teritoriesForClients")
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    public HttpEntity<?> getTeritoryForClients() {
-        return clientService.getTeritoriesForClients();
+    public HttpEntity<?> getTerritoryForClients() {
+        return clientService.getTerritoriesForClients();
     }
 
 
