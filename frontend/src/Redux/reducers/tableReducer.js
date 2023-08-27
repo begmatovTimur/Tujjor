@@ -89,20 +89,18 @@ const tableReducer = createSlice({
       state.currentDraggingColumn = action.payload;
     },
     filterVisibility: (state, action) => {
+
       if (state.columns.length === 0) {
         state.columns = state.copyOfColumns;
       }
       let i = 0;
-      for(i = 0;i < state.columns.length;i++) {
-
-        let item = state.columns[i];
-
+      state.columns.forEach(item=>{
         if (action.payload.includes(item.title)) {
           item.show = true;
         } else {
           item.show = false;
         }
-      }
+      })
       if (i === state.columns.length) {
         state.copyOfColumns = state.columns;
         state.columns = [];

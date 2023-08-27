@@ -92,7 +92,6 @@ function ClientsOnTheMap(props) {
                                         options: generateOptionsOfCity(),
                                         defaultValue: { value: "", label: "All" },
                                         placeholder: "search by territory",
-                                        selfEmployer: false,
                                     }
                                 ]}
                                 paginationApi={"/client/pagination"}

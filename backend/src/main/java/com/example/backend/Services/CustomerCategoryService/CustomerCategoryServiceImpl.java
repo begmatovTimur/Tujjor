@@ -3,9 +3,11 @@ package com.example.backend.Services.CustomerCategoryService;
 import com.example.backend.DTO.CustomerCategoryDTO;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Payload.Reaquest.FilterData;
 import com.example.backend.Projection.CustomerCategoryProjection;
 import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Repository.CustomerCategoryRepository;
+import com.example.backend.Services.Universal.UniversalServiceFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,8 +34,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerCategoryServiceImple implements CustomerCategoryService {
+public class CustomerCategoryServiceImpl implements CustomerCategoryService {
     private final CustomerCategoryRepository customerCategoryRepository;
+    private final UniversalServiceFilter serviceFilter;
 
     @Override
     public CustomerCategory addCategory(CustomerCategoryDTO categoryDTO) {
@@ -54,7 +57,6 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
     }
 
 
-
     private CustomerCategory generateNewTerritory(CustomerCategoryDTO categoryDTO) {
         return CustomerCategory.builder()
                 .id(null)
@@ -73,26 +75,5 @@ public class CustomerCategoryServiceImple implements CustomerCategoryService {
         return ResponseEntity.ok(categories);
     }
 
-    @Override
-    public HttpEntity<?> pagination(Integer page, String limit, HttpServletRequest request) {
-            try {
-                if(limit.equals("All")){
-                    List<CustomerCategory> customerCategories = customerCategoryRepository.findAll();
-                    limit = String.valueOf(customerCategories.size());
-                }
-                Pageable pageable = PageRequest.of(page, Integer.parseInt(limit));
-                JsonNode jsonNode = WrapFromStringToObject(request);
-                Page<CustomerCategoryProjection> territories;
-                if (!jsonNode.get("active").asText().equals("")) {
-                    territories = customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(jsonNode.get("quickSearch").asText(),
-                            jsonNode.get("active").asBoolean(), pageable);
-                } else {
-                    territories = customerCategoryRepository.findCustomerCategoryByRegionAndName(jsonNode.get("quickSearch").asText(), pageable);
-                }
-                return ResponseEntity.ok(territories);
-            } catch (Exception e) {
-                return ResponseEntity.status(404).body("An error has occurred");
-            }
-    }
 
 }

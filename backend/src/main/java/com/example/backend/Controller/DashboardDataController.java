@@ -3,6 +3,7 @@ package com.example.backend.Controller;
 import com.example.backend.Entity.User;
 import com.example.backend.Services.DashboardDataService.DashboardDataService;
 import com.example.backend.Services.UsersService.CurrentUser;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/dashboard-data")
+@RequiredArgsConstructor
 public class DashboardDataController {
     private final DashboardDataService dashboardDataService;
 
-    public DashboardDataController(DashboardDataService dashboardDataService) {
-        this.dashboardDataService = dashboardDataService;
-    }
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @GetMapping

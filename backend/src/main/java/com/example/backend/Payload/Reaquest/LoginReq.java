@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @NoArgsConstructor
 public class LoginReq {
     private String username;
-    @NotBlank(message = "qano password")
+    @NotBlank(message = "qani password")
     private String password;
     @NotBlank(message = "qani phone")
     private String phone;

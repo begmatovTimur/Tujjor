@@ -7,8 +7,7 @@ import com.example.backend.Projection.ClientProjection;
 import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Repository.CustomerCategoryRepository;
 import com.example.backend.Repository.TerritoryRepository;
-import com.example.backend.Services.Universal.UniversalService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -29,70 +28,31 @@ public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final CustomerCategoryRepository categoryRepository;
     private final TerritoryRepository territoryRepository;
-    private final UniversalService service;
+    private final UniversalServiceFilter serviceFilter;
 
     @Override
     public HttpEntity<?> saveClient(ClientDTO clientDTO) {
-        ResponseEntity<String> body = ifExistInputs(clientDTO);
-        if (body != null) return body;
-        Client save = clientRepository.save(generateClient(null, clientDTO));
+        Client save = clientRepository.save(generateClient(UUID.randomUUID(),clientDTO));
         return ResponseEntity.ok(save);
     }
 
     @Override
     public HttpEntity<?> getClient() {
-        try {
             return ResponseEntity.ok(clientRepository.findAllByOrderByInsertionTime());
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("An error has occurred");
-        }
     }
 
-    @Override
-    public HttpEntity<?> getFilteredClients(Integer page, String limit, HttpServletRequest request) throws JsonProcessingException {
-        if (validateParams(page, limit)) {
-            return ResponseEntity.badRequest().body("Invalid page or limit value");
-        }
-
-        Pageable pageable = limit.equals("All") ? Pageable.unpaged() :
-                PageRequest.of(page, Integer.parseInt(limit));
-
-        FilterData params = service.generateFilterDataFromRequest(request);
-
-        Page<ClientProjection> clients = clientRepository.getAllFilteredFields(params.getCities(), params.getCustomerCategories(), params.getActive().toString(), params.getTin(), params.getQuickSearch(), pageable);
-        return ResponseEntity.ok(clients);
-    }
-
-
-
-    private static boolean validateParams(Integer page, String limit) {
-        return !(limit.equals("All")) && (page == null || limit == null || page < 0 || Integer.parseInt(limit) < 1);
-    }
 
 
 
     @Override
     @Transactional
     public ResponseEntity<?> updateClient(UUID clientId, ClientDTO clientDTO) {
-
         Client generatedClient = generateClient(clientId, clientDTO);
-
         clientRepository.save(generatedClient);
         return ResponseEntity.ok("Client updated successfully");
     }
 
-
-    private static ResponseEntity<String> ifExistInputs(ClientDTO clientDTO) {
-        if (clientDTO.getTerritoryId() == null || clientDTO.getAddress() == null || clientDTO.getPhone() == null ||
-                clientDTO.getTerritoryId().toString().isEmpty()
-                || clientDTO.getPhone().isEmpty()) {
-            return ResponseEntity.status(404).body("Fill the gaps!");
-        }
-        return null;
-    }
-
     private Client generateClient(UUID id, ClientDTO clientDTO) {
-        System.out.println(id);
         return Client.builder()
                 .id(id)
                 .active(clientDTO.getActive())
