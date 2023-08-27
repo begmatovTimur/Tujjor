@@ -20,8 +20,4 @@ public interface ClientService {
     HttpEntity<?> updateClient(UUID clientId, ClientDTO clientDTO);
 
     HttpEntity<?> getFilteredClients(Integer page, String limit, HttpServletRequest request) throws JsonProcessingException;
-
-    HttpEntity<?> getTeritoriesForClients();
-
-    HttpEntity<?> getAllLocation();
 }
