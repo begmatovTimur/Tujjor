@@ -49,7 +49,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
         JsonNode cityArrayNode = jsonNode.get("city");
         JsonNode jsonNodeLimit = jsonNode.get("limit");
         JsonNode jsonNodeCurrentPage = jsonNode.get("page");
-        int currentPageValue = (jsonNodeCurrentPage != null && !jsonNodeCurrentPage.isNull()) ? jsonNodeCurrentPage.asInt() : 0;
+        int currentPageValue = (jsonNodeCurrentPage != null && !jsonNodeCurrentPage.isNull()) ? jsonNodeCurrentPage.asInt()-1 : 0;
         List<UUID> cities = new ArrayList<>();
         for (JsonNode cityNode : cityArrayNode) {
             UUID cityId = UUID.fromString(cityNode.asText());
@@ -79,7 +79,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
                 .quickSearch(jsonNodeQuickSearch.asText())
                 .page(currentPageValue)
                 .customerCategories(customerCategoriesParam)
-                .limit(jsonNodeLimit==null?"q":jsonNodeLimit.asText())
+                .limit(jsonNodeLimit==null?"All":jsonNodeLimit.asText())
                 .build();
     }
 

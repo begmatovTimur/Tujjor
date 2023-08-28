@@ -41,15 +41,16 @@ public class ExcelServiceImpl implements ExcelService {
     private final CompanyRepository companyRepository;
     private final ClientRepository clientRepository;
 
+
     @SneakyThrows
     @Override
     public ResponseEntity<Resource> getExcel(HttpServletRequest request, String[] headers, String component, HttpServletResponse response) {
 
-        List<ExcelExportable> dataOfExcel = new ArrayList<>();
+            List<ExcelExportable> dataOfExcel = new ArrayList<>();
 
         FilterData filters = universalServiceFilter.generateFilterDataFromRequest(request);
 
-        Pageable pageable = filters.getLimit().equals("All") ? Pageable.unpaged() :
+        Pageable pageable = filters.getLimit().equals("All") || filters.getLimit().equals("") ? Pageable.unpaged() :
                 PageRequest.of(filters.getPage(), Integer.parseInt(filters.getLimit()));
 
         getFilteredContentData(component, dataOfExcel, filters, pageable);
@@ -61,7 +62,7 @@ public class ExcelServiceImpl implements ExcelService {
         int rowNum = 0;
         Row headerRow = sheet.createRow(rowNum);
 
-        generateHeaders(headerRow, headers, workbook); // generating headers
+        generateHeaders(headerRow, headers, workbook,sheet); // generating headers
 
         generateBody(dataOfExcel, headers, ++rowNum, sheet);
 
@@ -124,6 +125,9 @@ public class ExcelServiceImpl implements ExcelService {
         for (int i = 0; i < objects.size(); i++) {
             Row row = sheet.createRow(rowNum++);
 
+
+            sheet.autoSizeColumn(rowNum);
+
             Object item = objects.get(i);
 
             for (int l = 0; l < columns.length; l++) {
@@ -131,7 +135,7 @@ public class ExcelServiceImpl implements ExcelService {
 
                 Cell cell = row.createCell(l); // Create cell at the current column index
                 Object o = getFieldValue(item, capitalizeFirstLetter(col));
-                cell.setCellValue(o.toString());
+                    cell.setCellValue(o.toString());
             }
         }
     }
@@ -152,7 +156,7 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
 
-    private void generateHeaders(Row headerRow, String[] headers, Workbook workbook) {
+    private void generateHeaders(Row headerRow, String[] headers, Workbook workbook,Sheet sheet) {
         for (int i = 0; i < headers.length; i++) {
             Cell cell = headerRow.createCell(i);
             CellStyle cellStyle = workbook.createCellStyle();
@@ -162,7 +166,8 @@ public class ExcelServiceImpl implements ExcelService {
             font.setColor(IndexedColors.WHITE.getIndex());
             cell.setCellStyle(cellStyle);
             cellStyle.setFont(font);
-            cell.setCellValue(headers[i].replaceAll("\"", "")); // Set header value to "a"
+            cell.setCellValue(headers[i].replaceAll("\"", "")); // Set header value to value
+            sheet.autoSizeColumn(0);
         }
     }
 

@@ -34,7 +34,8 @@ function FilterForClient(props) {
 
     function generateOptionsOfCategory() {
         const optionsCategory = [];
-        props.customerCategory.categories.map((item) => {
+        console.log(props.customerCategories)
+        props.customerCategories?.categories.map((item) => {
             optionsCategory.push({
                 label: item.name,
                 value: item.id,
