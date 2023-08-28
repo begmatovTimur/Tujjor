@@ -46,31 +46,6 @@ public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
             "order by t.insertion_time desc",nativeQuery = true)
     Page<TerritoryProjection> getFilteredData(String search, String status,Pageable pageable);
 
-
-    @Query(value = "select id,\n" +
-            "       region,\n" +
-            "       name,\n" +
-            "       code,\n" +
-            "       longitude,\n" +
-            "       latitude,\n" +
-            "       active,\n" +
-            "       code,\n" +
-            "       insertion_time\n" +
-            "from territory t\n" +
-            "where t.active IS NOT NULL\n" +
-            "  AND CASE\n" +
-            "          WHEN :status = 'true' THEN t.active = true\n" +
-            "          WHEN :status = 'false' THEN t.active = false\n" +
-            "          ELSE true END\n" +
-            "  and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '') || ' ' || COALESCE(t.code, '')) like\n" +
-            "      lower(concat('%', :search, '%'))\n" +
-            "order by t.insertion_time desc",nativeQuery = true)
-    List<TerritoryProjection> getFilteredDataForExcel(String search, String status);
-
     @Query(nativeQuery = true,value = "select id,region,insertion_time from territory order by insertion_time desc")
     List<TerritoryRegionProjection> findAllRegion();
-    @Query(nativeQuery = true, value = """
-            SELECT t.id, t.name, t.code, t.region, t.active FROM territory t INNER JOIN client c ON t.id = c.territory_id  order by t.insertion_time desc
-            """)
-    List<TerritoryClientProjection> getAllTerritoryForClients();
 }

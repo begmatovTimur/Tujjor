@@ -13,8 +13,8 @@ import java.util.UUID;
 public interface UsersRepository extends JpaRepository<User, UUID> {
     Optional<User> findByPhone(String phone);
     @Query(value = """
-            select u.created_at, u.updated_at, u.id,  username from users u
-            inner join users_roles ur on u.id = ur.users_id
+            select r.created_at, r.updated_at, u.id,  username from users u
+            inner join users_roles ur on u.id = ur.user_id
             inner join role r on r.id = ur.roles_id
             where role_name=:role
             """,nativeQuery = true)
