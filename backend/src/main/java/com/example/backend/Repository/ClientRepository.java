@@ -14,7 +14,6 @@ import java.util.UUID;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, UUID> {
-
     @Query(nativeQuery = true, value = "SELECT\n" +
             " c.insertion_time, \n" +
             "    c.id," +
@@ -37,7 +36,7 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "        LEFT JOIN\n" +
             "    territory t ON c.territory_id = t.id\n" +
             "left join customer_category cc on cc.id = c.category_id\n" +
-            "WHERE c.active IS NOT NULL AND \n" +
+            "WHERE " +
             "(t.id IN :city OR :city IS NULL) and " +
             "(cc.id IN :category OR :category IS NULL) and " +
             " c.active IN :active OR :active IS NULL AND " +

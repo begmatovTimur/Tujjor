@@ -13,13 +13,22 @@ import java.util.UUID;
 
 public interface CustomerCategoryRepository extends JpaRepository<CustomerCategory, Integer> {
 
-<<<<<<< HEAD
-    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where c.active IN :status OR :status IS NULL and lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '') || ' ' || COALESCE(c.description, '')) like lower(concat('%',:search,'%')) order by id DESC", nativeQuery = true)
+
+    @Query(value = "SELECT\n" +
+            "    c.id,\n" +
+            "    c.region,\n" +
+            "    c.code,\n" +
+            "    c.name,\n" +
+            "    c.description,\n" +
+            "    c.active\n" +
+            "FROM\n" +
+            "    customer_category c\n" +
+            "WHERE\n" +
+            "        c.active IN :status OR :status IS NULL\n" +
+            "    AND LOWER(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '') || ' ' || COALESCE(c.description, '')) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
+            "ORDER BY\n" +
+            "    id DESC", nativeQuery = true)
     Page<CustomerCategoryProjection> findCustomerCategoryByActiveAndRegionName(String search, List<Boolean> status, Pageable pageable);
 
 
-    @Query(value = "select c.id,c.region,c.code,c.name,c.description,c.active from customer_category c where lower(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '') || ' ' || COALESCE(c.description, '')  ) like lower(concat('%',:search,'%')) order by id DESC", nativeQuery = true)
-    Page<CustomerCategoryProjection> findCustomerCategoryByRegionAndName(String search, Pageable pageable);
-
->>>>>>> 85d94df00daf3ebe2d137bcfa3a0358db63c9a2f
 }
