@@ -5,6 +5,7 @@ const initialState = {
     showUserSettingsModal: false,
     error: null,
     userBox:false,
+    isHovered: false,
 }
 
 const dashboardDataSlice = createSlice({
@@ -30,6 +31,17 @@ const dashboardDataSlice = createSlice({
         },
         setShowUserSettingsModal: (state, action) => {
             state.showUserSettingsModal = !state.showUserSettingsModal
+        },
+        changeIsHovered: (state, action) => {
+            state.isHovered = action.payload
+        },
+        nextPermission: (state, action) => {
+            if (
+                localStorage.getItem("no_token") === null ||
+                localStorage.getItem("access_token") === null
+            ) {
+                window.location = "/login"
+            }
         }
     }
 })

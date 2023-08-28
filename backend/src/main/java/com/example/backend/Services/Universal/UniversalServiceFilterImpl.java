@@ -78,7 +78,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
                 .quickSearch(jsonNodeQuickSearch.asText())
                 .page(currentPageValue)
                 .customerCategories(customerCategoriesParam)
-                .limit(jsonNodeLimit==null?"":jsonNodeLimit.asText())
+                .limit(jsonNodeLimit==null?"q":jsonNodeLimit.asText())
                 .build();
     }
 
