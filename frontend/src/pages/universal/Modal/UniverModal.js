@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import "./modal.css";
+import Loading from "../../Loading/Loading";
 
 // ishlatish uchun namuna👇
 
@@ -105,11 +106,7 @@ const UniversalModal = ({
         <Box sx={style}>
           {loading ? (
    <div className="bg-white d-flex justify-content-center align-items-center gap-2 p-2" style={{height:"50vh"}}>
-   <div>
-     <div id="loading-bar-spinner" className="spinner">
-       <div className="spinner-icon"></div>
-     </div>
-   </div>
+   <Loading />
 
  </div>
            

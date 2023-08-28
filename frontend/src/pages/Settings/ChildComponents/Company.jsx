@@ -1,12 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {connect, useDispatch} from "react-redux";
 import Table from '../../universal/Table/Table'
-import UniversalModal from "../../universal/Modal/UniverModal";
 import {companyProfileActions} from "../../../Redux/reducers/companyProfile";
 import "./CustomerCategory/CustomerCategory.css";
-import Filter from "../../universal/Filter/Filter";
-import {tableActions} from "../../../Redux/reducers/tableReducer";
-import LoadingBackdrop from "../../universal/Loading/loading";
 
 function Company(props) {
 
@@ -81,7 +77,7 @@ function Company(props) {
                 pagination={false}
                 changeSizeMode={false}
                 fileName={"companies"}
-                excelPath={"/company/excel?component=company-profile&"}
+                excelPath={"/excel?component=company-profile&"}
                 columnsProps={columns}
             />
 

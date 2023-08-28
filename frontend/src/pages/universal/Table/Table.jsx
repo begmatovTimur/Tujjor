@@ -8,6 +8,8 @@ import Dropdown from "../Dropdown/Dropdown";
 import UniversalModal from "../Modal/UniverModal";
 
 import "./Table.css";
+import Loading from "../../Loading/Loading";
+
 
 const Table = (props) => {
   useEffect(() => {
@@ -106,14 +108,7 @@ const Table = (props) => {
   return (
     <div className="universal_table">
       {props.isLoading ? (
-        <div
-          className="bg-white d-flex justify-content-center align-items-center gap-2 p-2">
-          <div>
-            <div id="loading-bar-spinner" className="spinner">
-              <div className="spinner-icon"></div>
-            </div>
-          </div>
-        </div>
+      <Loading />
       ) : (
         <>
           <div className="bg-white d-flex flex-column gap-2 p-2">
