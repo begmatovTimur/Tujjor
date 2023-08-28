@@ -10,6 +10,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
@@ -28,10 +31,11 @@ public class CustomerCategoryRepositoryTest {
         entityManager.persist(customerCategory1);
 
         String search = "search text";
-        Boolean status = true;
+        List<Boolean> active = new ArrayList<>();
+        active.add(true);
         PageRequest pageable = PageRequest.of(0, 10);
 
-        Page<CustomerCategoryProjection> result = customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(search, status, pageable);
+        Page<CustomerCategoryProjection> result = customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(search, active, pageable);
 
         assertEquals(10, result.getSize());
     }
@@ -44,7 +48,11 @@ public class CustomerCategoryRepositoryTest {
         String search = "search text";
         PageRequest pageable = PageRequest.of(0, 10);
 
-        Page<CustomerCategoryProjection> result = customerCategoryRepository.findCustomerCategoryByRegionAndName(search, pageable);
+        List<Boolean> active = new ArrayList<>();
+        active.add(true);
+        active.add(false);
+
+        Page<CustomerCategoryProjection> result = customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(search, active,pageable);
 
         assertEquals(10, result.getSize());
     }
