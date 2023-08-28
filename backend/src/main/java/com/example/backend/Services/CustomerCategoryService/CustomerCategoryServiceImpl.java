@@ -69,7 +69,7 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
         List<Boolean> active = new ArrayList<>();
         active.add(true);
         active.add(false);
-        return ResponseEntity.ok(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName("",active,Pageable.unpaged()));
+        return ResponseEntity.ok(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName("",active,Pageable.unpaged()).getContent());
     }
 
 

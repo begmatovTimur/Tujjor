@@ -135,3 +135,9 @@
 .active_modal {
     display: block !important;
 }
+.whitelight {
+    width: 15px;
+    height: 15px;
+    border: 2px solid black;
+    border-radius:50%;
+}

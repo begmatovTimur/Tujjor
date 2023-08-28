@@ -68,3 +68,18 @@
 .custom_btn_success svg {
   width: 30px !important;
 }
+
+#headerForSetting{
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 0 10px;
+}
+#titleForSetting{
+  /*font-size: 30px;*/
+  text-align: start;
+  display: flex;
+  justify-content: space-between;
+}
+#titleForSetting p{
+  font-size: 25px;
+}

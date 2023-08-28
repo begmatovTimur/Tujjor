@@ -1,7 +1,7 @@
 import React from 'react';
-import "./header.css"
 import {connect} from "react-redux";
-import {customerCategoryActions} from "../../../../../Redux/reducers/customerCategoryReducer";
+import {customerCategoryActions} from "../Redux/Reducers/customerCategoryReducer";
+import "./header.css"
 
 function Header(props) {
     return (

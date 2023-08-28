@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import "./login.css";
 import {connect} from "react-redux";
-import {loginModel} from "../../Redux/reducers/loginReducer";
+import {loginModel} from "./Redux/Reducers/loginReducer";
 import {Button} from "reactstrap";
 import {ToastContainer} from "react-toastify";
 import logo from "../../images/logo.png";
@@ -10,9 +10,10 @@ import gif from "../../images/loading.gif";
 import "react-phone-input-2/lib/style.css";
 
 function Login(props) {
-  const { loginReducer } = props;
+    const { loginReducer } = props;
   useEffect(()=>{
-      props.hasPermissionRoleSuperVisor()
+      document.getElementsByClassName("phoneInp")[0].focus()
+      props.hasPermissionRoleSuperVisor();
   },[])
   return (
     <div>
@@ -22,10 +23,11 @@ function Login(props) {
           <form onSubmit={(e)=>props.loginHere(e)}>
               <div className="form">
                   <PhoneInput
-                      inputStyle={{ width: "100%" }}
+                      inputStyle={{ width: "100%"}}
                       country={"uz"}
                       value={loginReducer.phone}
                       onChange={(e) => props.changePhone(e)}
+                      className={"phoneInp"}
                   />
                   <div className={"d-flex"}>
                       <input
