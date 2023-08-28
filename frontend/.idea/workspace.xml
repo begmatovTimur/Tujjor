@@ -1,24 +1,11 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 61bfcd069350335d4f847841a71a894a9503dfdd
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="" />
-=======
->>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
     <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
-<<<<<<< HEAD
-<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/PaginationConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/CompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/CompanyController.java" afterDir="false" />
@@ -39,7 +26,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/reducers/tableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reducers/tableReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
-=======
       <change afterPath="$PROJECT_DIR$/src/pages/Admin/Components/LeftBar/LeftBar.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/pages/Clients/FilterForClient/FilterForClient.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/pages/Clients/HeaderForClient/HeaderForClient.js" afterDir="false" />
@@ -49,7 +35,6 @@
       <change afterPath="$PROJECT_DIR$/src/pages/Teritory/HeaderForTerritory/TerritoryHeader.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/pages/Teritory/ModalForTerritory/ModalForTerritory.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/pages/Teritory/TableForTerritory/TableForTerritory.js" afterDir="false" />
-=======
       <change afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/HeaderForMap/HeaderForMap.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/MapForClientOnTheMap/MapForMap.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/clientsOnTheMap.js" afterDir="false" />
@@ -58,7 +43,6 @@
       <change afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Components/ModalForCustomerCategory/ModalForCustomerCategory.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Components/TableForCustomerCategory/TableForCustomerCategory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/AuthService/AuthServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/AuthService/AuthServiceImplTest.java" afterDir="false" />
->>>>>>> 575f5945f4e8d989a18d0b20c066e17d511e98d2
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/constants/dashboardDataConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Redux/constants/dashboardDataConstants.js" afterDir="false" />
@@ -94,24 +78,16 @@
       <change beforePath="$PROJECT_DIR$/src/pages/Clients/TableForClient/TableForClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/TableForClient/TableForClient.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.js" afterDir="false" />
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/pages/Clients/clientsOnTheMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clientsOnTheMap.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Clients/forClientAddModal/JsxContentForAddClientModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/ModalForClient/JsxContentForClientModal/JsxContentForAddClientModal.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Teritory/Teritory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Teritory/Teritory.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Teritory/Teritory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Teritory/Territory.js" afterDir="false" />
->>>>>>> ca572466f0586611cf0a03f07d4d8282066e7792
     </list>
-
-=======
-=======
->>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
-<<<<<<< HEAD
-<<<<<<< HEAD
     <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientServiceImple.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImple.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
+    </list>
     <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/ExcelController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Payload/Reaquest/FilterData.java" afterDir="false" />
@@ -168,25 +144,11 @@
       <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
->>>>>>> e909c7de9757b35f11fd05bb0109dd5f4bf58fd9
     </list>
-<<<<<<< HEAD
-=======
     <list default="true" id="e2f28343-53bb-47b2-9168-f6cfca5fdfaf" name="Changes" comment="" />
->>>>>>> 501cc787c343782f10c963028b1f2b41a91a34ba
-<<<<<<< HEAD
->>>>>>> 476eebd6b24a3fad1e07f73c5a4faf3e83b82658
-=======
-=======
     <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
->>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
->>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
-=======
->>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
->>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
-=======
     <list default="true" id="3e74d53e-1006-4d8f-bf3e-e69478453ba9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/ClientRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/CustomerCategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/CustomerCategoryRepository.java" afterDir="false" />
@@ -195,7 +157,6 @@
       <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application-prod.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/src/pages/Clients/clientsOnTheMap.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company/Company.css" afterDir="false" />
@@ -214,9 +175,7 @@
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Filter/Filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Filter/Filter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Loading/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Loading/loading.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
->>>>>>> 575f5945f4e8d989a18d0b20c066e17d511e98d2
     </list>
->>>>>>> 61bfcd069350335d4f847841a71a894a9503dfdd
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -225,70 +184,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-<<<<<<< HEAD
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-  <component name="ProjectId" id="2UQatbzKi9FVa8s8O0Eicx3Godg" />
+  <component name="ProjectId" id="2UZm07XYO6UzcKKRK79Naz6d2Fk" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-=======
-  <component name="ProjectId" id="2UZm07XYO6UzcKKRK79Naz6d2Fk" />
->>>>>>> 61bfcd069350335d4f847841a71a894a9503dfdd
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
-=======
-=======
->>>>>>> 61bfcd069350335d4f847841a71a894a9503dfdd
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-<<<<<<< HEAD
-<<<<<<< HEAD
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Timur&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Programming/projects/Tujjor/frontend/src/images&quot;,
-=======
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
->>>>>>> 61bfcd069350335d4f847841a71a894a9503dfdd
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-<<<<<<< HEAD
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Programming\projects\Tujjor\frontend\src\images" />
-      <recent name="C:\Users\nano-tech\Desktop\DillerProject\Tujjor\frontend\src\pages\Clients" />
-    </key>
-=======
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -297,9 +210,34 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
->>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
+  &lt;component name=&quot;PropertiesComponent&quot;&gt;{
+  &amp;quot;keyToString&amp;quot;: {
+    &amp;quot;RunOnceActivity.OpenProjectViewOnStart&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;RunOnceActivity.ShowReadmeOnStart&amp;quot;: &amp;quot;true&amp;quot;,
+
+
+    &amp;quot;SHARE_PROJECT_CONFIGURATION_FILES&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;WebServerToolWindowFactoryState&amp;quot;: &amp;quot;false&amp;quot;,
+    &amp;quot;git-widget-placeholder&amp;quot;: &amp;quot;Timur&amp;quot;,
+    &amp;quot;last_opened_file_path&amp;quot;: &amp;quot;D:/Programming/projects/Tujjor/frontend/src/images&amp;quot;,
+    &amp;quot;WebServerToolWindowFactoryState&amp;quot;: &amp;quot;false&amp;quot;,
+    &amp;quot;node.js.detected.package.eslint&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;node.js.detected.package.tslint&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;node.js.selected.package.eslint&amp;quot;: &amp;quot;(autodetect)&amp;quot;,
+    &amp;quot;node.js.selected.package.tslint&amp;quot;: &amp;quot;(autodetect)&amp;quot;,
+    &amp;quot;nodejs_package_manager_path&amp;quot;: &amp;quot;npm&amp;quot;,
+
+    &amp;quot;ts.external.directory.path&amp;quot;: &amp;quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&amp;quot;,
+    &amp;quot;vue.rearranger.settings.migration&amp;quot;: &amp;quot;true&amp;quot;
   }
-}]]></component>
+}&lt;/component&gt;
+  &lt;component name=&quot;RecentsManager&quot;&gt;
+    &lt;key name=&quot;CopyFile.RECENT_KEYS&quot;&gt;
+      &lt;recent name=&quot;D:\Programming\projects\Tujjor\frontend\src\images&quot; /&gt;
+      &lt;recent name=&quot;C:\Users\nano-tech\Desktop\DillerProject\Tujjor\frontend\src\pages\Clients&quot; /&gt;
+    &lt;/key&gt;
+  }
+}</component>
   <component name="ReactBuddySettings">
     <option name="extensionsIgnore" value="true" />
   </component>
@@ -312,9 +250,6 @@
     </option>
   </component>
   <component name="RecentsManager">
-<<<<<<< HEAD
->>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
-=======
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Login" />
       <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\universal\Table" />
@@ -322,7 +257,6 @@
       <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\Teritory" />
       <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\CustomerCategory" />
     </key>
->>>>>>> 575f5945f4e8d989a18d0b20c066e17d511e98d2
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\CustomerCategory\Components" />
       <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Admin\Redux" />
@@ -330,12 +264,8 @@
       <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Login\Redux\Reducers" />
       <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Login\Redux\Sagas" />
     </key>
+    }
   </component>
-=======
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
->>>>>>> 61bfcd069350335d4f847841a71a894a9503dfdd
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -356,21 +286,10 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-<<<<<<< HEAD
       <changelist id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="" />
       <created>1692889401184</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
       <updated>1690613832748</updated>
       <workItem from="1690613835620" duration="81000" />
       <workItem from="1690613926855" duration="1317000" />
@@ -416,92 +335,46 @@
       <workItem from="1692341147774" duration="33000" />
       <workItem from="1692607553930" duration="16000" />
       <workItem from="1692607642200" duration="4879000" />
-<<<<<<< HEAD
       <workItem from="1692715834031" duration="632000" />
       <workItem from="1692927491078" duration="15000" />
       <workItem from="1692945001957" duration="1013000" />
       <workItem from="1693025910095" duration="317000" />
-=======
-<<<<<<< HEAD
->>>>>>> 476eebd6b24a3fad1e07f73c5a4faf3e83b82658
-=======
-=======
->>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
->>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
-=======
       <workItem from="1692853730463" duration="8001000" />
       <workItem from="1692945649418" duration="1733000" />
-=======
->>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
       <updated>1692874474178</updated>
       <workItem from="1692874476306" duration="1042000" />
       <workItem from="1692964464341" duration="778000" />
       <workItem from="1693012972361" duration="748000" />
       <workItem from="1693019124720" duration="4126000" />
-<<<<<<< HEAD
-<<<<<<< HEAD
       <workItem from="1693025883334" duration="6487000" />
       <workItem from="1693040100172" duration="1399000" />
-<<<<<<< HEAD
       <workItem from="1693041535956" duration="6828000" />
-=======
       <workItem from="1693041535956" duration="4678000" />
-
->>>>>>> 60621d7efcb60dd35a67077c96c5358df38a8ef0
-=======
-=======
->>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
->>>>>>> e909c7de9757b35f11fd05bb0109dd5f4bf58fd9
-=======
       <updated>1692889401184</updated>
       <workItem from="1692889404520" duration="1137000" />
       <workItem from="1692944910505" duration="1783000" />
       <workItem from="1693030264828" duration="10900000" />
->>>>>>> 501cc787c343782f10c963028b1f2b41a91a34ba
-<<<<<<< HEAD
->>>>>>> 476eebd6b24a3fad1e07f73c5a4faf3e83b82658
-=======
-=======
       <workItem from="1693025883334" duration="6487000" />
       <workItem from="1693040100172" duration="1399000" />
       <workItem from="1693041535956" duration="4678000" />
-<<<<<<< HEAD
       <workItem from="1693116573841" duration="1157000" />
->>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
-<<<<<<< HEAD
->>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
-=======
       <workItem from="1693116573841" duration="2277000" />
       <workItem from="1693121932328" duration="2404000" />
       <workItem from="1693129375206" duration="1319000" />
-<<<<<<< HEAD
       <workItem from="1693141707516" duration="13729000" />
->>>>>>> ca572466f0586611cf0a03f07d4d8282066e7792
-=======
->>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
-=======
       <changelist id="3e74d53e-1006-4d8f-bf3e-e69478453ba9" name="Changes" comment="" />
       <created>1693155262586</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1693155262586</updated>
       <workItem from="1693155264011" duration="670000" />
->>>>>>> 61bfcd069350335d4f847841a71a894a9503dfdd
-=======
       <workItem from="1693141707516" duration="15284000" />
       <workItem from="1693204874559" duration="12830000" />
       <workItem from="1693224321999" duration="3359000" />
->>>>>>> 575f5945f4e8d989a18d0b20c066e17d511e98d2
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-<<<<<<< HEAD
 </project>
-=======
->>>>>>> 30c89eaa697c7e0ba38b6e703459a031fb0a9db2
-=======
-</project>
->>>>>>> 61bfcd069350335d4f847841a71a894a9503dfdd
