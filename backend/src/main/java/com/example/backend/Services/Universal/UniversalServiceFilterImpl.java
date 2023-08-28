@@ -120,7 +120,6 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
             config.setPagination(filteredData);
         } else if (config.getComponent().equals("customer_category")) {
             config.setPagination(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(params.getQuickSearch(), params.getActive(), pageable));
-
         }
     }
 

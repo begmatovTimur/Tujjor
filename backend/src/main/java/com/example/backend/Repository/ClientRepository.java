@@ -39,14 +39,14 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "WHERE " +
             "(t.id IN :city OR :city IS NULL) and " +
             "(cc.id IN :category OR :category IS NULL) and " +
-            " c.active IN :active OR :active IS NULL AND " +
+            " (c.active IN :active OR :active IS NULL) AND " +
             "CASE WHEN :tin = 'true' THEN c.tin <> '' " +
             "     WHEN :tin = 'false' THEN c.tin IS NULL " +
             "     ELSE true END " +
             "  AND (\n" +
             "            LOWER(c.name) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
             "        OR LOWER(c.phone) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
-            "        OR LOWER(c.company_name) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
+            "        OR LOWER(c.company_name) LIKE LOWER(concat('%', :search, '%'))\n" +
             "    ) \n" +
             "ORDER BY\n" +
             "    c.insertion_time DESC")
