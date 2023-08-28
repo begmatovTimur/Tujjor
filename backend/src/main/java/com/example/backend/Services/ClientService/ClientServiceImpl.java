@@ -41,7 +41,6 @@ public class ClientServiceImpl implements ClientService {
 
 
     @Override
-    @Transactional
     public ResponseEntity<?> updateClient(UUID clientId, ClientDTO clientDTO) {
         Client generatedClient = generateClient(clientId, clientDTO);
         clientRepository.save(generatedClient);

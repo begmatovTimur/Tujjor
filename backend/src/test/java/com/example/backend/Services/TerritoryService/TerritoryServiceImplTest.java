@@ -2,20 +2,23 @@ package com.example.backend.Services.TerritoryService;
 
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Projection.TerritoryRegionProjection;
 import com.example.backend.Repository.TerritoryRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static org.mockito.Mockito.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -34,7 +37,7 @@ class TerritoryServiceImplTest {
     }
 
     @Test
-    void testAddTerritory() {
+    void itShouldAddTerritory() {
         TerritoryDTO territoryDTO = new TerritoryDTO();
         // Set DTO properties here
 
@@ -48,7 +51,7 @@ class TerritoryServiceImplTest {
     }
 
     @Test
-    void testUpdateTerritory() {
+    void itShouldUpdateTerritory() {
         UUID id = UUID.randomUUID();
         TerritoryDTO territoryDTO = new TerritoryDTO();
         // Set DTO properties here
@@ -64,7 +67,7 @@ class TerritoryServiceImplTest {
         assertEquals(territoryData, result);
     }
     @Test
-    void testGetTerritoryRegion() {
+    void itShouldGetTerritoryRegion() {
         TerritoryRegionProjection region = mock(TerritoryRegionProjection.class);
         when(region.getRegion()).thenReturn("Region1"); // Mocking method behavior
 
@@ -76,15 +79,36 @@ class TerritoryServiceImplTest {
         assertEquals(ResponseEntity.ok(regionList), httpEntity);
     }
 
+
+
+
     @Test
-    void testGetTerritories() {
-        List<Territory> territories = Collections.singletonList(new Territory());
-        when(territoryRepository.findAll()).thenReturn(territories);
+    void itShouldGetTerritories() {
+        List<Boolean> active = new ArrayList<>();
+        active.add(true);
+        active.add(false);
+
+        List<TerritoryProjection> mockTerritories = new ArrayList<>();
+        // Create some mock TerritoryProjection instances and add them to the list
+
+        Page<TerritoryProjection> mockPage = new PageImpl<>(mockTerritories);
+
+        // Mock the behavior of territoryRepository.getFilteredData
+        when(territoryRepository.getFilteredData(eq(""), eq(active), any(Pageable.class)))
+                .thenReturn(mockPage);
 
         HttpEntity<?> httpEntity = underTest.getTerritories();
 
-        assertEquals(ResponseEntity.ok(territories), httpEntity);
+        int statusCodeValue = ((ResponseEntity<?>) httpEntity).getStatusCodeValue();
+
+        int expectedStatusCode = HttpStatus.OK.value();  // Change this to your expected status code
+
+        Assertions.assertEquals(expectedStatusCode, statusCodeValue);
+
+        // Verify that the necessary methods were called
+        verify(territoryRepository).getFilteredData(eq(""), eq(active), any(Pageable.class));
     }
+
 
 
 

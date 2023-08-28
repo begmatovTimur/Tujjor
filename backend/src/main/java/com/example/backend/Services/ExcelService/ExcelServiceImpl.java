@@ -46,7 +46,7 @@ public class ExcelServiceImpl implements ExcelService {
     @Override
     public ResponseEntity<Resource> getExcel(HttpServletRequest request, String[] headers, String component, HttpServletResponse response) {
 
-            List<ExcelExportable> dataOfExcel = new ArrayList<>();
+        List<ExcelExportable> dataOfExcel = new ArrayList<>();
 
         FilterData filters = universalServiceFilter.generateFilterDataFromRequest(request);
 
