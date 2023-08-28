@@ -26,22 +26,21 @@ import java.util.UUID;
 public interface TerritoryRepository extends JpaRepository<Territory, UUID> {
 
 
-    @Query(value = "select id,\n" +
-            "       region,\n" +
-            "       name,\n" +
-            "       code,\n" +
-            "       longitude,\n" +
-            "       latitude,\n" +
-            "       active,\n" +
-            "       code,\n" +
-            "       insertion_time\n" +
-            "from territory t\n" +
-            "where t.active IS NOT NULL\n" +
-            "  AND " +
-            " t.active IN :status OR :status IS NULL " +
-            "  and lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '') || ' ' || COALESCE(t.code, '')) like\n" +
-            "      lower(concat('%', :search, '%'))\n" +
-            "order by t.insertion_time desc",nativeQuery = true)
+    @Query(value = "SELECT\n" +
+            "    id,\n" +
+            "    region,\n" +
+            "    name,\n" +
+            "    code,\n" +
+            "    longitude,\n" +
+            "    latitude,\n" +
+            "    active,\n" +
+            "    insertion_time\n" +
+            "FROM\n" +
+            "    territory t\n" +
+            "WHERE (t.active IN :status OR :status IS NULL)\n" +
+            "  AND lower(COALESCE(t.region, '') || ' ' || COALESCE(t.name, '') || ' ' || COALESCE(t.code, '')) LIKE lower(concat('%', :search, '%'))\n" +
+            "ORDER BY\n" +
+            "    t.insertion_time DESC",nativeQuery = true)
     Page<TerritoryProjection> getFilteredData(String search,List<Boolean> status,Pageable pageable);
 
 
