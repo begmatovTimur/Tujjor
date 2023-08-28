@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <list default="true" id="709c0a05-02c7-4877-8c76-e24b767eed0e" name="Changes" comment="" />
+=======
+>>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
     <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
 <<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/PaginationConfig.java" afterDir="false" />
@@ -121,6 +126,7 @@
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
 >>>>>>> e909c7de9757b35f11fd05bb0109dd5f4bf58fd9
     </list>
+<<<<<<< HEAD
 =======
     <list default="true" id="e2f28343-53bb-47b2-9168-f6cfca5fdfaf" name="Changes" comment="" />
 >>>>>>> 501cc787c343782f10c963028b1f2b41a91a34ba
@@ -133,6 +139,9 @@
     </list>
 >>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
 >>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
+=======
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
+>>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,6 +164,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -167,6 +177,40 @@
     "nodejs_package_manager_path": "npm",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+<<<<<<< HEAD
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Timur&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Programming/projects/Tujjor/frontend/src/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programming\projects\Tujjor\frontend\src\images" />
+      <recent name="C:\Users\nano-tech\Desktop\DillerProject\Tujjor\frontend\src\pages\Clients" />
+    </key>
+=======
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+>>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
   }
 }]]></component>
   <component name="ReactBuddySettings">
@@ -181,6 +225,7 @@
     </option>
   </component>
   <component name="RecentsManager">
+>>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients" />
       <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients\Componets" />
@@ -214,11 +259,14 @@
       <option name="presentableId" value="Default" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+>>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
       <updated>1690613832748</updated>
       <workItem from="1690613835620" duration="81000" />
       <workItem from="1690613926855" duration="1317000" />
@@ -264,6 +312,7 @@
       <workItem from="1692341147774" duration="33000" />
       <workItem from="1692607553930" duration="16000" />
       <workItem from="1692607642200" duration="4879000" />
+<<<<<<< HEAD
       <workItem from="1692715834031" duration="632000" />
       <workItem from="1692927491078" duration="15000" />
       <workItem from="1692945001957" duration="1013000" />
@@ -275,6 +324,11 @@
 =======
 >>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
 >>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
+=======
+      <workItem from="1692853730463" duration="8001000" />
+      <workItem from="1692945649418" duration="1733000" />
+=======
+>>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
       <updated>1692874474178</updated>
       <workItem from="1692874476306" duration="1042000" />
       <workItem from="1692964464341" duration="778000" />
@@ -310,6 +364,7 @@
 <<<<<<< HEAD
       <workItem from="1693116573841" duration="1157000" />
 >>>>>>> c05a1b9e894aced26fc8f7be74ee730d81185c74
+<<<<<<< HEAD
 >>>>>>> 5209391ee3297ada593e38049a18b3a5c8d71b12
 =======
       <workItem from="1693116573841" duration="2277000" />
@@ -317,6 +372,8 @@
       <workItem from="1693129375206" duration="1319000" />
       <workItem from="1693141707516" duration="13729000" />
 >>>>>>> ca572466f0586611cf0a03f07d4d8282066e7792
+=======
+>>>>>>> 9a7852b217a06c9a94e24b15e83f70fd4eb3415e
     </task>
     <servers />
   </component>

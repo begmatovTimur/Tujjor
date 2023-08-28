@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
-import Table from "../../universal/Table/Table";
-import UniversalModal from "../../universal/Modal/UniverModal";
-import {customerCategoryActions} from "../../../Redux/reducers/customerCategoryReducer";
+import Table from "../../../universal/Table/Table";
+import UniversalModal from "../../../universal/Modal/UniverModal";
+import {customerCategoryActions} from "../../../../Redux/reducers/customerCategoryReducer";
 import "./CustomerCategory.css";
-import Filter from "../../universal/Filter/Filter";
+import Filter from "../../../universal/Filter/Filter";
+import Header from "./Header/Header";
 
 function CustomerCategory(props) {
     const {customerCategory} = props;
@@ -74,17 +75,7 @@ function CustomerCategory(props) {
 
     return (
         <div style={{width: "100%"}}>
-            <div className="d-flex flex-column align-items-start">
-                <div className="title">Customer Category</div>
-                <div
-                    className="custom_add_btn"
-                    style={{cursor: "pointer"}}
-                    onClick={() => props.handleOpen()}
-                >
-                    <i style={{fontSize: "20px"}} className="fa fa-plus"></i>Add
-                    Category
-                </div>
-            </div>
+           <Header/>
             <Filter
                 search={[
                     {
@@ -97,7 +88,6 @@ function CustomerCategory(props) {
                     },
                 ]}
             />
-
             <Table
                 localStoragePath="customer_category"
                 filterActive={true}
@@ -113,7 +103,6 @@ function CustomerCategory(props) {
                 excelPath={"/excel?component=customer-category&"}
                 columnsProps={columns}
             />
-
             <UniversalModal
                 modalTitle={"Add Category"}
                 isOpen={customerCategory.openModal}
