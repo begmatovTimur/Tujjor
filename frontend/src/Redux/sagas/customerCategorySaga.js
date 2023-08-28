@@ -36,7 +36,7 @@ function* addCategory(action) {
 function* getCategories(action) {
   try {
     const res = yield apiCall("/customer-category", "GET", null);
-    yield put(customerCategoryActions.getCategoriesSuccess({ res: res.data }));
+    yield put(customerCategoryActions.getCategoriesSuccess({ res: res.data.content }));
   } catch (err) {
     yield put(customerCategoryActions.yourActionFailureCategories(err.message));
   }
