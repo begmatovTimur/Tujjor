@@ -7,11 +7,11 @@ import Navbar from "./Components/Navbar";
 import LeftBar from "./Components/LeftBar/LeftBar";
 
 function Admin(props) {
-
     useEffect(() => {
         props.nextPermission();
         props.getDashboardData();
     }, []);
+
     return (
         <div id={"bigFather"}>
             <Navbar/>
