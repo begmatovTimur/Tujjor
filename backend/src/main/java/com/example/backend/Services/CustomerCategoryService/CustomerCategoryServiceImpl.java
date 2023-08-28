@@ -30,13 +30,13 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CustomerCategoryServiceImpl implements CustomerCategoryService {
     private final CustomerCategoryRepository customerCategoryRepository;
-    private final UniversalServiceFilter serviceFilter;
 
     @Override
     public CustomerCategory addCategory(CustomerCategoryDTO categoryDTO) {
@@ -71,8 +71,10 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
 
     @Override
     public HttpEntity<?> getCategories() {
-        List<CustomerCategory> categories = customerCategoryRepository.findAll();
-        return ResponseEntity.ok(categories);
+        List<Boolean> active = new ArrayList<>();
+        active.add(true);
+        active.add(false);
+        return ResponseEntity.ok(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName("",active,Pageable.unpaged()));
     }
 
 

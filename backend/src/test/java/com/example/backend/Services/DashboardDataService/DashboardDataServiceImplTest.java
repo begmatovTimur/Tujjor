@@ -4,16 +4,16 @@ import com.example.backend.DTO.DashboardDataDTO;
 import com.example.backend.Entity.User;
 import com.example.backend.Repository.UsersRepository;
 import com.example.backend.Services.UsersService.UsersService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DashboardDataServiceImplTest {
     @Mock
@@ -31,11 +31,17 @@ class DashboardDataServiceImplTest {
     @Test
     void itShouldGetDashboardData() {
         String mockPhone = "+998973002027";
-       User mockUser = new User();
-       mockUser.setPhone(mockPhone);
-       LocalDate localDate = LocalDate.of(2023, 8, 1);
+        User mockUser = new User();
+        mockUser.setPhone(mockPhone);
         DashboardDataDTO dashboardDataDTO = dashboardDataService.getDashboardData(mockUser);
-        assertEquals("AUGUST, 5.", dashboardDataDTO.getCurrentDate());
+
+        LocalDate now = LocalDate.now();
+        Month month = now.getMonth();
+
+        String currentDate = month+", "+now.getDayOfMonth()+".";
+
+
+        assertEquals(currentDate, dashboardDataDTO.getCurrentDate());
         assertEquals("+998973002027", dashboardDataDTO.getCurrentSuperVisorPhoneNumber());
     }
 }

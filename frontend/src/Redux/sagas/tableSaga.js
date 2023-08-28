@@ -109,7 +109,7 @@ function* downloadExcelFile(action) {
         .filter(
             (item) => item.show === true && item.type != "jsx" && item.type != "index"
         )
-        .map((item) => item.title)
+        .map((item) => item.key)
         .join(".");
 
     const x = currentState.formInputs;
@@ -203,7 +203,7 @@ function* watchGetActiveData(action) {
 
 function* watchloading() {
     yield put({type: tableActions.setLoading.type, payload: true});
-    yield delay(1000);
+    yield delay(800);
     yield put({type: tableActions.setLoading.type, payload: false});
 }
 

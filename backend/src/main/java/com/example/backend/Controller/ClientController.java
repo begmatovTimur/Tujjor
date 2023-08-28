@@ -5,6 +5,7 @@ import com.example.backend.Services.ClientService.ClientService;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +21,7 @@ public class ClientController {
     private final UniversalServiceFilter universalService;
     @PostMapping
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
-    public HttpEntity<?> saveClient(@RequestBody ClientDTO clientDTO){
+    public HttpEntity<?> saveClient(@Valid @RequestBody ClientDTO clientDTO){
         return clientService.saveClient(clientDTO);
     }
 

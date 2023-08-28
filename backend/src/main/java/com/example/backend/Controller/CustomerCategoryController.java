@@ -5,6 +5,7 @@ import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.Services.CustomerCategoryService.CustomerCategoryService;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
@@ -35,7 +36,7 @@ public class CustomerCategoryController {
     }
 
     @PostMapping()
-    public HttpEntity<?> saveCustomerCategory(@RequestBody CustomerCategoryDTO categoryDTO) {
+    public HttpEntity<?> saveCustomerCategory(@Valid @RequestBody CustomerCategoryDTO categoryDTO) {
         return ResponseEntity.ok(categoryService.addCategory(categoryDTO));
     }
 

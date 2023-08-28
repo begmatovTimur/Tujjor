@@ -1,11 +1,11 @@
 package com.example.backend.Controller;
 
-import com.example.backend.DTO.ExcelDTO;
 import com.example.backend.DTO.SearchActiveDTO;
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Services.TerritoryService.TerritoryService;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
@@ -44,7 +44,7 @@ public class TerritoryController {
 
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     @PostMapping()
-    public HttpEntity<?> saveTerritory(@RequestBody TerritoryDTO territoryDTO){
+    public HttpEntity<?> saveTerritory(@Valid @RequestBody TerritoryDTO territoryDTO){
         return ResponseEntity.ok(territoryService.addTerritory(territoryDTO));
     }
 

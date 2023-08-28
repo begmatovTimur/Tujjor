@@ -2,7 +2,8 @@ import React from 'react';
 import PhoneInput from "react-phone-input-2";
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
 import {connect} from "react-redux";
-import {clientsAction} from "../../../Redux/reducers/clientsReducer";
+import {clientsAction} from "../../../../Redux/reducers/clientsReducer";
+import "../../clients.css";
 
 function JsxContentForAddClientModal(props) {
     const { clients } = props;

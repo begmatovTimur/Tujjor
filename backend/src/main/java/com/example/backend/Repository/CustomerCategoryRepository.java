@@ -13,6 +13,7 @@ import java.util.UUID;
 
 public interface CustomerCategoryRepository extends JpaRepository<CustomerCategory, Integer> {
 
+
     @Query(value = "SELECT\n" +
             "    c.id,\n" +
             "    c.region,\n" +
@@ -28,4 +29,6 @@ public interface CustomerCategoryRepository extends JpaRepository<CustomerCatego
             "ORDER BY\n" +
             "    id DESC", nativeQuery = true)
     Page<CustomerCategoryProjection> findCustomerCategoryByActiveAndRegionName(String search, List<Boolean> status, Pageable pageable);
+
+
 }
