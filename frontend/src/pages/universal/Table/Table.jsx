@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { tableActions } from "../../../Redux/reducers/tableReducer";
+import { tableActions } from "./Redux/Reducers/tableReducer";
 import Pagination from "@mui/material/Pagination";
 import Filter from "../Filter/Filter";
 import Dropdown from "../Dropdown/Dropdown";

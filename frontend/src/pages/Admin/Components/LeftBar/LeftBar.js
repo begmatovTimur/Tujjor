@@ -4,7 +4,7 @@ import {icons} from "../../../../Config/icons";
 import "../../Index.css"
 import {useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
-import {dashboardDataModel} from "../../../../Redux/reducers/dashboardDataReducer";
+import {dashboardDataModel} from "../../Redux/Reducers/dashboardDataReducer";
 
 function LeftBar(props) {
     const {dashboardDataReducer}=props

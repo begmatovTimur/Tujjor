@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Outlet, useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
-import {settingsActions} from "../../Redux/reducers/settingsReducer";
+import {settingsActions} from "./Redux/Reducers/settingsReducer";
 import "./Settings.css";
 import LeftBar from "./LeftBar/LeftBar";
 

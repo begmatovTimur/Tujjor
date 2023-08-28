@@ -1,5 +1,6 @@
 package com.example.backend.Services.AuthService;
 
+
 import com.example.backend.DTO.UserDTO;
 import com.example.backend.Entity.Role;
 import com.example.backend.Entity.User;
@@ -81,7 +82,7 @@ class AuthServiceImplTest {
                 userData.getPassword(),
                 List.of(roleUser) // User has the ROLE_USER role
         );
-w
+
         // Save the User to the database
         userRepository.save(user);
 

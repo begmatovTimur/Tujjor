@@ -36,7 +36,7 @@ public class ClientServiceImpl implements ClientService {
         List<Boolean> active = new ArrayList<>();
         active.add(true);
         active.add(false);
-        return ResponseEntity.ok(clientRepository.getAllFilteredFields(new ArrayList<>(), new ArrayList<>(),active,"","", Pageable.unpaged()));
+        return ResponseEntity.ok(clientRepository.getAllFilteredFields(new ArrayList<>(), new ArrayList<>(),active,"","", Pageable.unpaged()).getContent());
     }
 
 

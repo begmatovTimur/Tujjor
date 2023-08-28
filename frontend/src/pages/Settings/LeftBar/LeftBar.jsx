@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
-import {settingsActions} from "../../../Redux/reducers/settingsReducer";
+import {settingsActions} from "../Redux/Reducers/settingsReducer";
 
 function LeftBar({data, getData, activeButtonIndex, setCurrentIndex}) {
     const navigate = useNavigate();

@@ -71,7 +71,7 @@ public class TerritoryServiceImpl implements TerritoryService {
         active.add(true);
         active.add(false);
         Page<TerritoryProjection> filteredData = territoryRepository.getFilteredData("", active, Pageable.unpaged());
-        return ResponseEntity.ok(filteredData);
+        return ResponseEntity.ok(filteredData.getContent());
     }
 
 
