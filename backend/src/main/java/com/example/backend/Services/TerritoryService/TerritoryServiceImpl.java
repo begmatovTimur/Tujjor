@@ -6,11 +6,13 @@ import com.example.backend.Projection.TerritoryRegionProjection;
 import com.example.backend.Repository.TerritoryRepository;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -63,8 +65,10 @@ public class TerritoryServiceImpl implements TerritoryService {
 
     @Override
     public HttpEntity<?> getTerritories() {
-        List<Territory> territories = territoryRepository.findAll();
-        return ResponseEntity.ok(territories);
+        List<Boolean> active= new ArrayList<>();
+        active.add(true);
+        active.add(false);
+        return ResponseEntity.ok(territoryRepository.getFilteredData("",active, Pageable.unpaged()));
     }
 
 

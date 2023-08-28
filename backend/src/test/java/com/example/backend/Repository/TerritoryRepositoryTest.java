@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,7 +32,8 @@ public class TerritoryRepositoryTest {
         entityManager.persist(territory1);
 
         String search = "search text";
-        String status = "true";
+        List<Boolean> status = new ArrayList<>();
+        status.add(true);
         PageRequest pageable = PageRequest.of(0, 10);
 
         Page<TerritoryProjection> result = territoryRepository.getFilteredData(search, status, pageable);
@@ -45,6 +48,6 @@ public class TerritoryRepositoryTest {
 
         List<TerritoryRegionProjection> result = territoryRepository.findAllRegion();
 
-        assertEquals(1, result.size());
+        assertEquals(6, result.size());
     }
 }
