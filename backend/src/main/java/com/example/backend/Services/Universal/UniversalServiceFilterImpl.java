@@ -71,6 +71,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
         }
         JsonNode jsonNodeTin = jsonNode.get("tin");
         JsonNode jsonNodeQuickSearch = jsonNode.get("quickSearch");
+
         return FilterData.builder()
                 .tin(jsonNodeTin.asText())
                 .active(active)

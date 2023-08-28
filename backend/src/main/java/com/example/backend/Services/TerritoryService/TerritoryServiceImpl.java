@@ -2,11 +2,9 @@ package com.example.backend.Services.TerritoryService;
 
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
-import com.example.backend.Payload.Reaquest.FilterData;
-import com.example.backend.Projection.TerritoryProjection;
+import com.example.backend.Projection.TerritoryRegionProjection;
 import com.example.backend.Repository.TerritoryRepository;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TerritoryServiceImpl implements TerritoryService {
     private final TerritoryRepository territoryRepository;
-    private final UniversalServiceFilter serviceFilter;
+
 
 
 
@@ -74,11 +72,7 @@ public class TerritoryServiceImpl implements TerritoryService {
 
     @Override
     public HttpEntity<?> getTerritoryRegion() {
-        try {
-            return ResponseEntity.ok(territoryRepository.findAllRegion());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("An error has occurred");
-        }
+        List<TerritoryRegionProjection> allRegion = territoryRepository.findAllRegion();
+        return ResponseEntity.ok(allRegion);
     }
 }
