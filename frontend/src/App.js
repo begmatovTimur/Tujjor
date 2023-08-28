@@ -5,15 +5,15 @@ import {useEffect, useState} from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
 import Settings from "./pages/Settings/Settings";
-import Teritory from "./pages/Teritory/Territory";
-import Company from "./pages/Settings/ChildComponents/Company";
-import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory";
+import Teritory from "./pages/Settings/ChildComponents/Teritory/Territory";
+import Company from "./pages/Settings/ChildComponents/Company/Company";
+import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory/CustomerCategory";
 import NotFound from "./pages/404/NotFound";
 import {ToastContainer} from "react-toastify";
 import Clients from "./pages/Clients/clients";
-import ClientsOnTheMap from "./pages/Clients/clientsOnTheMap";
+import ClientsOnTheMap from "./pages/Clients/Components/ClientOnTheMap/clientsOnTheMap";
 import {domen} from "./Config/apiCall";
-import {tableActions} from "./Redux/reducers/tableReducer";
+import {tableActions} from "./pages/universal/Table/Redux/Reducers/tableReducer";
 import {useDispatch} from "react-redux";
 
 function App() {

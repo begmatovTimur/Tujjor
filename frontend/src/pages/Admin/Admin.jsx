@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {dashboardDataModel} from "../../Redux/reducers/dashboardDataReducer";
+import {dashboardDataModel} from "./Redux/Reducers/dashboardDataReducer";
 import {Outlet} from "react-router-dom";
 import "./Index.css";
 import Navbar from "./Components/Navbar";

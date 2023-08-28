@@ -1,15 +1,15 @@
 import {configureStore} from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga';
-import {rootSaga} from "../sagas/rootSaga";
-import loginReducer from "../reducers/loginReducer";
-import dashboardDataReducer from "../reducers/dashboardDataReducer";
-import tableReducer from '../reducers/tableReducer';
-import settingsReducer from '../reducers/settingsReducer';
-import teritoryReducer from "../reducers/teritoryReducer";
-import dropdownReducer from '../reducers/dropdownReducer';
-import customerCategory from "../reducers/customerCategoryReducer";
-import companyProfileReducer from "../reducers/companyProfile";
-import clientsReducer from "../reducers/clientsReducer";
+import {rootSaga} from "../ConnectionSagas/rootSaga";
+import loginReducer from "../../pages/Login/Redux/Reducers/loginReducer";
+import dashboardDataReducer from "../../pages/Admin/Redux/Reducers/dashboardDataReducer";
+import tableReducer from '../../pages/universal/Table/Redux/Reducers/tableReducer';
+import settingsReducer from '../../pages/Settings/Redux/Reducers/settingsReducer';
+import teritoryReducer from "../../pages/Settings/ChildComponents/Teritory/Redux/Reducers/teritoryReducer";
+import dropdownReducer from '../../pages/Admin/Redux/Reducers/dropdownReducer';
+import customerCategory from "../../pages/Settings/ChildComponents/CustomerCategory/Redux/Reducers/customerCategoryReducer";
+import companyProfileReducer from "../../pages/Settings/ChildComponents/Company/Redux/Reducers/companyProfileReducer";
+import clientsReducer from "../../pages/Clients/Redux/Reducers/clientsReducer";
 
 const sagaMiddleware = createSagaMiddleware();
 

@@ -1,9 +1,9 @@
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import React from "react";
-import {tableActions} from "../../../Redux/reducers/tableReducer";
+import {tableActions} from "../Table/Redux/Reducers/tableReducer";
 import {connect, useDispatch} from "react-redux";
-import {clientsAction} from "../../../Redux/reducers/clientsReducer";
+import {clientsAction} from "../../Clients/Redux/Reducers/clientsReducer";
 
 
 function LoadingBackdrop(props) {

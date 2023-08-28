@@ -5,11 +5,67 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b91e63e-6051-46c4-82b2-c897e3b01be7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/HeaderForMap/HeaderForMap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/MapForClientOnTheMap/MapForMap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/clientsOnTheMap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Components/FilterForCustomerCategory/FilterForCustomerCategory.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Components/HeaderForCustomerCategory/HeaderForCustomerCategory.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Components/ModalForCustomerCategory/ModalForCustomerCategory.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Components/TableForCustomerCategory/TableForCustomerCategory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/AuthService/AuthServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/AuthService/AuthServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/constants/dashboardDataConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Redux/constants/dashboardDataConstants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/clientsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Redux/Reducers/clientsReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/companyProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company/Redux/Reducers/companyProfileReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/customerCategoryReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Redux/Reducers/customerCategoryReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/dashboardDataReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Redux/Reducers/dashboardDataReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/dropdownReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Redux/Reducers/dropdownReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/loginReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/Redux/Reducers/loginReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/settingsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/Redux/Reducers/settingsReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/tableReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Redux/Reducers/tableReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reducers/teritoryReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Redux/Reducers/teritoryReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/clientsSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Redux/Sagas/clientsSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/companyProfileSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company/Redux/Sagas/companyProfileSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/customerCategorySaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Redux/Sagas/customerCategorySaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/dashboardDataSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Redux/Sagas/dashboardDataSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/loginSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/Redux/Sagas/loginSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/rootSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/ConnectionSagas/rootSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/settingsSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/Redux/Sagas/settingsSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/tableSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Redux/Sagas/tableSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/sagas/teritorySaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Redux/Sagas/teritorySaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/store/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/LeftBar/LeftBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/LeftBar/LeftBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/NavbarDropDown/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/NavbarDropDown/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/FilterForClient/FilterForClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/FilterForClient/FilterForClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/HeaderForClient/HeaderForClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/HeaderForClient/HeaderForClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/ModalForClient/JsxContentForClientModal/JsxContentForAddClientModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ModalForClient/JsxContentForClientModal/JsxContentForAddClientModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/ModalForClient/ModalForClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ModalForClient/ModalForClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/TableForClient/TableForClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/TableForClient/TableForClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clientsOnTheMap.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company/Company.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company/Company.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/CustomerCategory.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/CustomerCategory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/Settings.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/Settings.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/Settings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/Settings.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/FilterForTerritory/TerritoryFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Components/FilterForTerritory/TerritoryFilter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/HeaderForTerritory/TerritoryHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Components/HeaderForTerritory/TerritoryHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/ModalForTerritory/ModalForTerritory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Components/ModalForTerritory/ModalForTerritory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/TableForTerritory/TableForTerritory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Components/TableForTerritory/TableForTerritory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/Teritory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Teritory.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Teritory/Territory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Territory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/universal/Dropdown/Dropdown.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Dropdown/Dropdown.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/universal/Filter/Filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Filter/Filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/universal/Loading/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Loading/loading.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +94,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Acer/Desktop/Tujjor_app/Tujjor/frontend",
+    "last_opened_file_path": "C:/Users/Acer/Desktop/Tujjor_app/Tujjor/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -59,11 +115,19 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Login" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\universal\Table" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\Teritory" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\CustomerCategory" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients" />
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients\Componets" />
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Clients\ModalForClient\JsxContentForClientModal" />
-      <recent name="$PROJECT_DIR$/src/pages/Admin/Components/Navbar" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\CustomerCategory\Components" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Admin\Redux" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\Company\Redux" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Login\Redux\Reducers" />
+      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Login\Redux\Sagas" />
     </key>
   </component>
   <component name="RunManager">
@@ -102,7 +166,8 @@
       <workItem from="1693121932328" duration="2404000" />
       <workItem from="1693129375206" duration="1319000" />
       <workItem from="1693141707516" duration="15284000" />
-      <workItem from="1693204874559" duration="1084000" />
+      <workItem from="1693204874559" duration="12830000" />
+      <workItem from="1693224321999" duration="3359000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {icons} from "../../../../../Config/icons";
 import {connect} from "react-redux";
-import {dashboardDataModel} from "../../../../../Redux/reducers/dashboardDataReducer";
+import {dashboardDataModel} from "../../../Redux/Reducers/dashboardDataReducer";
 import NavbarDropDown from "./NavbarDropDown";
 
 function Index(props) {
