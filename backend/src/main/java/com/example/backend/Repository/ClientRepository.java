@@ -53,4 +53,5 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
             "    c.insertion_time DESC")
     Page<ClientProjection> getAllFilteredFields(List<UUID> city, List<Integer> category, List<Boolean> active, String tin, String search, Pageable pageable);
 
+
 }
