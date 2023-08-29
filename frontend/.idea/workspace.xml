@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="869e80c4-9379-44b6-aa9d-d0474b5e5205" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/AuthService/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/AuthService/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ExcelService/ExcelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ExcelService/ExcelService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ExcelService/ExcelServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ExcelService/ExcelServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/AuthService/AuthServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/AuthService/AuthServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/ExcelService/ExcelServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/ExcelService/ExcelServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="869e80c4-9379-44b6-aa9d-d0474b5e5205" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
