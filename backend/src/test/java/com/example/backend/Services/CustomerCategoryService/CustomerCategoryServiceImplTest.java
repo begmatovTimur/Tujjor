@@ -4,20 +4,18 @@ import com.example.backend.DTO.CustomerCategoryDTO;
 import com.example.backend.Entity.CustomerCategory;
 import com.example.backend.Projection.CustomerCategoryProjection;
 import com.example.backend.Repository.CustomerCategoryRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,6 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 ;
 
@@ -63,23 +62,28 @@ class CustomerCategoryServiceImplTest {
 
 
     @Test
-    void itShouldUpdateCategory() {
-        Integer categoryId = 1; // Your category ID here
-        CustomerCategoryDTO categoryDTO = new CustomerCategoryDTO(); // Create a DTO as needed
+    void testUpdateCategory() {
+        Integer categoryId = 1;
+        CustomerCategoryDTO categoryDTO = new CustomerCategoryDTO();
+        // Set DTO properties as needed
 
-        CustomerCategory territoryData = new CustomerCategory(); // Create a CustomerCategory object
-        // Set properties of territoryData based on categoryDTO
+        CustomerCategory generatedCategory = new CustomerCategory();
+        // Set properties of generatedCategory based on categoryDTO
         // ...
 
-        when(customerCategoryRepository.save(any(CustomerCategory.class))).thenReturn(territoryData);
+        // Set the id for the generated category
+        generatedCategory.setId(categoryId);
+
+        when(customerCategoryRepository.save(any(CustomerCategory.class))).thenReturn(generatedCategory);
 
         CustomerCategory updatedCategory = underTest.updateCategory(categoryId, categoryDTO);
 
-        // Assertions
         assertNotNull(updatedCategory);
         assertEquals(categoryId, updatedCategory.getId());
         // You can add more assertions based on your actual implementation
     }
+
+
 
     @Test
     void itShouldGetCategories() {

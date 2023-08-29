@@ -54,8 +54,7 @@ class AuthServiceImplTest {
 
     @Mock
     AuthenticationManager authenticationManager;
-    @Mock
-    AuthServiceImpl authService;
+    AuthService underTest;
 
     @BeforeEach
     void setUp() {
@@ -123,8 +122,7 @@ class AuthServiceImplTest {
         String mockRefreshToken = "mock_refresh_token";
         when(jwtService.generateJWTToken(mockUser)).thenReturn(mockAccessToken);
         when(jwtService.generateJWTRefreshToken(mockUser)).thenReturn(mockRefreshToken);
-
-        // Perform the login
+// Perform the login
         HttpEntity<?> responseEntity = loginController.login(mockLoginReq);
 
         // Assertions
@@ -139,7 +137,7 @@ class AuthServiceImplTest {
 
     @Test
     void refreshToken() {
-        String refreshToken = "eyJhbGciOiJIUzM4NCJ9.eyJleHAiOjE2OTM4MzA1MTAsImlhdCI6MTY5MzIyNTcxMCwic3ViIjoiNTlmMDcxN2YtOTNiMi00YTFhLTg2M2ItMjljMDRhZjRlYzgxIn0.LMDnC0nDqDA7f-EerzzV6VJgxtK07rm_YavrjyKuiS0FTeZmRhBPNNS425bz8ubJ";
+        String refreshToken = "eyJhbGciOiJIUzM4NCJ9.eyJleHAiOjE2OTM4MzA1MTAsImlhdCI6MTY5MzIyNTcxMCwic3ViIjoiNTlmMDcxN2YtOTNiMi00YTFhLTg2M2ItMjljMDRhZjRlYzgxIn0.LMDnC0nDqDA7f-EerzzV6VJgxtK07";
         String userId = "59f0717f-93b2-4a1a-863b-29c04af4ec81";
         User mockUser = new User();
         mockUser.setId(UUID.fromString(userId));
@@ -150,9 +148,8 @@ class AuthServiceImplTest {
 
         UsersRepository mockUserRepository = Mockito.mock(UsersRepository.class);
         Mockito.when(mockUserRepository.findById(Mockito.any(UUID.class))).thenReturn(Optional.of(mockUser));
-
-        //ASS
-        authService.refreshToken(refreshToken);
+        //Assertions
+        underTest.refreshToken(refreshToken);
         // Assert
         assertEquals(mockUser.getId(), UUID.fromString(userId));
     }

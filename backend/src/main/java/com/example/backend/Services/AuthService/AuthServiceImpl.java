@@ -35,64 +35,12 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final AuthenticationManager authenticationManager;
 
-    @SneakyThrows
-    @Override
-    public HttpEntity<?> register(UserDTO userData) {
-        UUID roleId = UUID.randomUUID();
-        List<Role> roles = new ArrayList<>();
-        Role roleUser = roleRepo.findByRoleName(RoleEnum.ROLE_USER.name());
-
-        checkIfExistRole(roleId, roles, roleUser);
-        UUID userId = UUID.randomUUID();
-        User user = new User(
-                userId,
-                userData.getUsername(),
-                userData.getPhone(),
-                passwordEncoder.encode(userData.getPassword()),
-                roles
-        );
-        userRepository.save(user);
-        String token = authenticate(userData);
-        return ResponseEntity.ok(token);
-    }
 
     @Override
     public HttpEntity<?> login(LoginReq dto) {
         String phone = validatePhoneNumber(dto);
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
         return generateTokenForUser(dto, phone);
-    }
-
-    private void checkIfExistRole(UUID roleId, List<Role> roles, Role roleUser) {
-        if (roleUser == null) {
-            roles.add(roleRepo.save(new Role(
-                    roleId,
-                    RoleEnum.ROLE_SUPER_VISOR.name(),
-                    null,
-                    null
-            )));
-        } else {
-            roles.add(roleUser);
-        }
-    }
-
-    private String authenticate(UserDTO userData) throws Exception {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userData.getPhone());
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                userDetails,
-                userData.getPassword(),
-                userDetails.getAuthorities()
-        );
-
-        authenticationConfiguration.getAuthenticationManager().authenticate(authenticationToken);
-        String token = Jwts
-                .builder()
-                .setIssuer(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
-                .signWith(jwtService.getSigningKey())
-                .compact();
-        return token;
     }
 
     private static String validatePhoneNumber(LoginReq dto) {

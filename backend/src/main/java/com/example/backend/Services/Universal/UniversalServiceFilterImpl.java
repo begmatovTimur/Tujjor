@@ -49,7 +49,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
         JsonNode cityArrayNode = jsonNode.get("city");
         JsonNode jsonNodeLimit = jsonNode.get("limit");
         JsonNode jsonNodeCurrentPage = jsonNode.get("page");
-        int currentPageValue = (jsonNodeCurrentPage != null && !jsonNodeCurrentPage.isNull()) ? jsonNodeCurrentPage.asInt()-1 : 0;
+            int currentPageValue = (jsonNodeCurrentPage != null && !jsonNodeCurrentPage.isNull()) ? jsonNodeCurrentPage.asInt()-1 : 0;
         List<UUID> cities = new ArrayList<>();
         for (JsonNode cityNode : cityArrayNode) {
             UUID cityId = UUID.fromString(cityNode.asText());
@@ -109,7 +109,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
         return ResponseEntity.ok(paginationConfig.getPagination());
     }
 
-    private void generateComponentData(PaginationConfig config) {
+    public void generateComponentData(PaginationConfig config) {
         FilterData params = config.getFilterData();
         Pageable pageable = config.getPageable();
 
@@ -120,7 +120,6 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
             config.setPagination(filteredData);
         } else if (config.getComponent().equals("customer_category")) {
             config.setPagination(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(params.getQuickSearch(), params.getActive(), pageable));
-
         }
     }
 

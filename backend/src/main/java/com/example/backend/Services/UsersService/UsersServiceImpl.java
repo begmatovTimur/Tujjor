@@ -49,7 +49,7 @@ public class UsersServiceImpl implements UsersService {
         return ResponseEntity.ok(repository.findAllByUsernameContainingIgnoreCase(title));
     }
 
-    private Role addUserRoleIfAbsent() {
+    public Role addUserRoleIfAbsent() {
         Role userRole = roleRepository.findByRoleName("ROLE_USER");
         if (userRole == null) {
             return roleRepository.save(new Role(
