@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static jakarta.persistence.FetchType.EAGER;
@@ -30,4 +32,6 @@ public class TelegramUser {
     private String INN;
     private double longitude;
     private double latitude;
+    @OneToMany(cascade = {CascadeType.ALL},fetch = EAGER)
+    private List<Bots> bot;
 }

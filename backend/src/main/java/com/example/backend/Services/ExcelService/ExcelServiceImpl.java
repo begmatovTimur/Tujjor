@@ -91,7 +91,7 @@ public class ExcelServiceImpl implements ExcelService {
                 .body(resource);
     }
 
-    private void getFilteredContentData(String component, List<ExcelExportable> dataOfExcel, FilterData filters, Pageable pageable) {
+    public void getFilteredContentData(String component, List<ExcelExportable> dataOfExcel, FilterData filters, Pageable pageable) {
         if (component.equals("territory")) {
             if (filters.getLimit().equals("All")) {
                 filters.setLimit(String.valueOf(territoryRepository.count()));
@@ -156,7 +156,7 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
 
-    private void generateHeaders(Row headerRow, String[] headers, Workbook workbook,Sheet sheet) {
+    public void generateHeaders(Row headerRow, String[] headers, Workbook workbook, Sheet sheet) {
         for (int i = 0; i < headers.length; i++) {
             Cell cell = headerRow.createCell(i);
             CellStyle cellStyle = workbook.createCellStyle();

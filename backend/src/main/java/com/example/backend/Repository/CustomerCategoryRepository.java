@@ -24,8 +24,8 @@ public interface CustomerCategoryRepository extends JpaRepository<CustomerCatego
             "FROM\n" +
             "    customer_category c\n" +
             "WHERE\n" +
-            "        c.active IN :status OR :status IS NULL\n" +
-            "    AND LOWER(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '') || ' ' || COALESCE(c.description, '')) LIKE LOWER(CONCAT('%', :search, '%'))\n" +
+            "        (c.active IN :status OR :status IS NULL)\n" +
+            "    AND LOWER(COALESCE(c.region, '') || ' ' || COALESCE(c.name, '') || ' ' || COALESCE(c.description, '')) LIKE LOWER(concat('%', :search, '%'))\n" +
             "ORDER BY\n" +
             "    id DESC", nativeQuery = true)
     Page<CustomerCategoryProjection> findCustomerCategoryByActiveAndRegionName(String search, List<Boolean> status, Pageable pageable);

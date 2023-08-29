@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 import {dashboardDataModel} from "./Redux/Reducers/dashboardDataReducer";
 import {Outlet} from "react-router-dom";
 import "./Index.css";
-import Navbar from "./Components/Navbar";
 import LeftBar from "./Components/LeftBar/LeftBar";
+import Navbar from "./Components/Navbar";
 
 function Admin(props) {
     useEffect(() => {
