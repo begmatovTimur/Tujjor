@@ -33,7 +33,8 @@ public class ClientRepositoryTest {
 
         List<UUID> cities = new ArrayList<>();
         List<Integer> categories = new ArrayList<>();
-        String active = "true";
+        List<Boolean> active = new ArrayList<>();
+        active.add(true);
         String tin = "true";
         String search = "search text";
         PageRequest pageable = PageRequest.of(0, 10);
