@@ -12,6 +12,8 @@ import Loading from "../../Loading/Loading";
 
 
 const Table = (props) => {
+
+  console.log(props.data.length)
   useEffect(() => {
     let storedColumns = JSON.parse(
       localStorage.getItem(props.localStoragePath)
@@ -256,9 +258,9 @@ const Table = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {props.columns.length === 0  ? (
+                  {props.columns.length === 0  || props.data.length===0 ? (
                     <tr>
-                      <th colSpan={5} className="text-center">
+                      <th colSpan={props.columns.length} className="text-center">
                         No Data
                       </th>
                     </tr>

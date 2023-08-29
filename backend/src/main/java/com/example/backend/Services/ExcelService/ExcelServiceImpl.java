@@ -90,6 +90,7 @@ public class ExcelServiceImpl implements ExcelService {
                 .headers(responseHeaders)
                 .body(resource);
     }
+    @Override
 
     public void getFilteredContentData(String component, List<ExcelExportable> dataOfExcel, FilterData filters, Pageable pageable) {
         if (component.equals("territory")) {
@@ -121,7 +122,9 @@ public class ExcelServiceImpl implements ExcelService {
         }
     }
 
-    public void generateBody(List<?> objects, String[] columns, int rowNum, Sheet sheet) throws NoSuchFieldException, IllegalAccessException {
+
+
+    public static void generateBody(List<?> objects, String[] columns, int rowNum, Sheet sheet) throws NoSuchFieldException, IllegalAccessException {
         for (int i = 0; i < objects.size(); i++) {
             Row row = sheet.createRow(rowNum++);
 
@@ -141,6 +144,21 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
 
+
+    public static void generateHeaders(Row headerRow, String[] headers, Workbook workbook, Sheet sheet) {
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            cellStyle.setFillBackgroundColor(IndexedColors.GREY_80_PERCENT.getIndex());
+            Font font = workbook.createFont();
+            font.setColor(IndexedColors.WHITE.getIndex());
+            cell.setCellStyle(cellStyle);
+            cellStyle.setFont(font);
+            cell.setCellValue(headers[i].replaceAll("\"", "")); // Set header value to value
+            sheet.autoSizeColumn(0);
+        }
+    }
     public static Object getFieldValue(Object obj, String fieldName) {
         try {
             Method method = obj.getClass().getMethod("get" + capitalizeFirstLetter(fieldName));
@@ -156,20 +174,7 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
 
-    public void generateHeaders(Row headerRow, String[] headers, Workbook workbook, Sheet sheet) {
-        for (int i = 0; i < headers.length; i++) {
-            Cell cell = headerRow.createCell(i);
-            CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            cellStyle.setFillBackgroundColor(IndexedColors.GREY_80_PERCENT.getIndex());
-            Font font = workbook.createFont();
-            font.setColor(IndexedColors.WHITE.getIndex());
-            cell.setCellStyle(cellStyle);
-            cellStyle.setFont(font);
-            cell.setCellValue(headers[i].replaceAll("\"", "")); // Set header value to value
-            sheet.autoSizeColumn(0);
-        }
-    }
+
 
 
 }
