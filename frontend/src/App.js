@@ -4,16 +4,16 @@ import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Admin from "./pages/Admin/Admin";
 import axios from "axios";
-import Settings from "./pages/Settings/Settings";
-import Company from "./pages/Settings/ChildComponents/Company/Company";
-import Teritory from "./pages/Settings/ChildComponents/Teritory/Territory";
-import CustomerCategory from "./pages/Settings/ChildComponents/CustomerCategory/CustomerCategory";
-import NotFound from "./pages/404/NotFound";
+import Territory from "pages/Settings/ChildComponents/Teritory/Territory";
 import {ToastContainer} from "react-toastify";
-import Clients from "./pages/Clients/clients";
-import ClientsOnTheMap from "./pages/Clients/Components/ClientOnTheMap/clientsOnTheMap";
-import {domen} from "./Config/apiCall";
-import {tableActions} from "./pages/universal/Table/Redux/Reducers/tableReducer";
+import Settings from "pages/Settings/Settings";
+import {domen} from "Config/apiCall";
+import {tableActions} from "pages/universal/Table/Redux/Reducers/tableReducer";
+import Company from "pages/Settings/ChildComponents/Company/Company";
+import CustomerCategory from "pages/Settings/ChildComponents/CustomerCategory/CustomerCategory";
+import Clients from "pages/Clients/clients";
+import ClientsOnTheMap from "pages/Clients/Components/ClientOnTheMap/clientsOnTheMap";
+import NotFound from "pages/404/NotFound";
 import {useDispatch} from "react-redux";
 
 function App() {
@@ -152,7 +152,7 @@ function App() {
                             path="/admin/settings/customer-category"
                             element={<CustomerCategory/>}
                         />
-                        <Route path="/admin/settings/territory" element={<Teritory/>}/>
+                        <Route path="/admin/settings/territory" element={<Territory/>}/>
                     </Route>
                     <Route path="/admin/clients" element={<Clients/>}></Route>
                     <Route

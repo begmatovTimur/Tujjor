@@ -109,7 +109,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
         return ResponseEntity.ok(paginationConfig.getPagination());
     }
 
-    private void generateComponentData(PaginationConfig config) {
+    public void generateComponentData(PaginationConfig config) {
         FilterData params = config.getFilterData();
         Pageable pageable = config.getPageable();
 

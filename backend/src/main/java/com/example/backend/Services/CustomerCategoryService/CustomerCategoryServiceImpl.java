@@ -45,9 +45,9 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
 
     @Override
     public CustomerCategory updateCategory(Integer id, CustomerCategoryDTO categoryDTO) {
-        CustomerCategory territoryData = generateNewCustomerCategory(categoryDTO);
-        territoryData.setId(id);
-        return customerCategoryRepository.save(territoryData);
+        CustomerCategory customerCategory = generateNewCustomerCategory(categoryDTO);
+        customerCategory.setId(id);
+        return customerCategoryRepository.save(customerCategory);
     }
 
 

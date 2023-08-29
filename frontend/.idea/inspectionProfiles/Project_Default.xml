@@ -1,23 +1,6 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
-<<<<<<< HEAD
     <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
-=======
-    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="myValues">
-        <value>
-          <list size="1">
-            <item index="0" class="java.lang.String" itemvalue="download" />
-          </list>
-        </value>
-      </option>
-      <option name="myCustomValuesEnabled" value="true" />
-    </inspection_tool>
-<<<<<<< HEAD
->>>>>>> e909c7de9757b35f11fd05bb0109dd5f4bf58fd9
-=======
-    <inspection_tool class="JSValidateTypes" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
->>>>>>> 501cc787c343782f10c963028b1f2b41a91a34ba
   </profile>
 </component>

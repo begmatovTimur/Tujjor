@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {loginModel} from "./Redux/Reducers/loginReducer";
 import {Button} from "reactstrap";
 import {ToastContainer} from "react-toastify";
-import logo from "../../images/logo.png";
+import logo from "images/logo.png";
 import PhoneInput from "react-phone-input-2";
 import gif from "../../images/loading.gif";
 import "react-phone-input-2/lib/style.css";

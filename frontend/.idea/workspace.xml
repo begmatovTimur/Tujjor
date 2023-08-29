@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="869e80c4-9379-44b6-aa9d-d0474b5e5205" name="Changes" comment="" />
+    <list default="true" id="869e80c4-9379-44b6-aa9d-d0474b5e5205" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/Universal/UniversalServiceFilterImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/UniversalServiceFilterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/UniversalServiceFilterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Repository/ClientRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Repository/ClientRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/ClientService/ClientServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/ClientService/ClientServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/SettingsService/SettingsServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/SettingsService/SettingsServiceImplTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,6 +176,7 @@
       <workItem from="1693204874559" duration="12830000" />
       <workItem from="1693224321999" duration="3359000" />
       <workItem from="1693239503497" duration="176000" />
+      <workItem from="1693239685918" duration="3330000" />
     </task>
     <servers />
   </component>
