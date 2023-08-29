@@ -8,6 +8,7 @@ import "../../../clients.css"
 function MapForMap(props) {
     const {clients} = props;
     const {teritory} = props;
+    console.log(clients?.clients)
     return (<YMaps
             query={{
                 apikey: "e24090ad-351e-4321-8071-40c04c55f144\n",
@@ -34,7 +35,7 @@ function MapForMap(props) {
                                     // balloonContent: address.name,
                                     // hintContent: 'Bu yerda markaziy nuqta',
                                     // iconContent: "Salom",
-                                    iconCaption: address.name,
+                                    iconCaption: address.clientName,
                                 }}
                                 options={{
                                     iconColor: "green",
@@ -49,7 +50,7 @@ function MapForMap(props) {
                                 properties={{
                                     // balloonContent: address.name,
                                     // hintContent: 'Bu yerda markaziy nuqta',
-                                    iconCaption: address.name,
+                                    iconCaption: address.clientName,
                                 }}
                                 options={{
                                     iconColor: "red",

@@ -36,44 +36,11 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
 
 
-    private void checkIfExistRole(UUID roleId, List<Role> roles, Role roleUser) {
-        if (roleUser == null) {
-            roles.add(roleRepo.save(new Role(
-                    roleId,
-                    RoleEnum.ROLE_SUPER_VISOR.name(),
-                    null,
-                    null
-            )));
-        } else {
-            roles.add(roleUser);
-        }
-    }
-
-    private String authenticate(UserDTO userData) throws Exception {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userData.getPhone());
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                userDetails,
-                userData.getPassword(),
-                userDetails.getAuthorities()
-        );
-
-        authenticationConfiguration.getAuthenticationManager().authenticate(authenticationToken);
-        String token = Jwts
-                .builder()
-                .setIssuer(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
-                .signWith(jwtService.getSigningKey())
-                .compact();
-        return token;
-    }
-
     @Override
     public HttpEntity<?> login(LoginReq dto) {
         String phone = validatePhoneNumber(dto);
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
         return generateTokenForUser(dto, phone);
-
     }
 
     private static String validatePhoneNumber(LoginReq dto) {
@@ -95,7 +62,6 @@ public class AuthServiceImpl implements AuthService {
         map.put("roles", roles);
         return ResponseEntity.ok(map);
     }
-
 
     @Override
     public HttpEntity<?> refreshToken(String refreshToken) {

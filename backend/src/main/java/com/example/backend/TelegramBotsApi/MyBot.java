@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//@Component
 public class MyBot extends TelegramLongPollingBot {
     private final TelegramUserRepository repository;
     private final TerritoryRepository territoryRepository;
