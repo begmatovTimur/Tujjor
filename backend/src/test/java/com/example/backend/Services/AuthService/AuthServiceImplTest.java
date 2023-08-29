@@ -123,9 +123,8 @@ class AuthServiceImplTest {
         String mockRefreshToken = "mock_refresh_token";
         when(jwtService.generateJWTToken(mockUser)).thenReturn(mockAccessToken);
         when(jwtService.generateJWTRefreshToken(mockUser)).thenReturn(mockRefreshToken);
-
-        // Perform the login
-        HttpEntity<?> responseEntity = underTest.login(mockLoginReq);
+// Perform the login
+        HttpEntity<?> responseEntity = loginController.login(mockLoginReq);
 
         // Assertions
         Map<String, Object> responseBody = (Map<String, Object>) responseEntity.getBody();
@@ -137,7 +136,7 @@ class AuthServiceImplTest {
         // Verify that authenticationManager.authenticate() was called with the correct arguments
     }
 
-    @Test
+        @Test
     void refreshToken() {
         String refreshToken = "eyJhbGciOiJIUzM4NCJ9.eyJleHAiOjE2OTM4MzA1MTAsImlhdCI6MTY5MzIyNTcxMCwic3ViIjoiNTlmMDcxN2YtOTNiMi00YTFhLTg2M2ItMjljMDRhZjRlYzgxIn0.LMDnC0nDqDA7f-EerzzV6VJgxtK07rm_YavrjyKuiS0FTeZmRhBPNNS425bz8ubJ";
         String userId = "59f0717f-93b2-4a1a-863b-29c04af4ec81";

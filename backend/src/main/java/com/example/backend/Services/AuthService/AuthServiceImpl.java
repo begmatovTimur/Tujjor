@@ -35,26 +35,6 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final AuthenticationManager authenticationManager;
 
-    @SneakyThrows
-    @Override
-    public HttpEntity<?> register(UserDTO userData) {
-        UUID roleId = UUID.randomUUID();
-        List<Role> roles = new ArrayList<>();
-        Role roleUser = roleRepo.findByRoleName(RoleEnum.ROLE_USER.name());
-
-        checkIfExistRole(roleId, roles, roleUser);
-        UUID userId = UUID.randomUUID();
-        User user = new User(
-                userId,
-                userData.getUsername(),
-                userData.getPhone(),
-                passwordEncoder.encode(userData.getPassword()),
-                roles
-        );
-        userRepository.save(user);
-        String token = authenticate(userData);
-        return ResponseEntity.ok(token);
-    }
 
     private void checkIfExistRole(UUID roleId, List<Role> roles, Role roleUser) {
         if (roleUser == null) {

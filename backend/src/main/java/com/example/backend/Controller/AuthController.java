@@ -21,10 +21,7 @@ public class AuthController {
             return service.login(loginReq);
     }
 
-    @PostMapping("/register")
-    public HttpEntity<?> register(@RequestBody UserDTO userData) {
-        return service.register(userData);
-    }
+
 
     @PostMapping("/refresh")
     public HttpEntity<?> refreshToken(@RequestParam String refreshToken) {

@@ -5,7 +5,6 @@ import com.example.backend.Payload.Reaquest.LoginReq;
 import org.springframework.http.HttpEntity;
 
 public interface AuthService {
-    HttpEntity<?> register(UserDTO dto);
     HttpEntity<?> login(LoginReq dto);
     HttpEntity<?> refreshToken(String refreshToken);
 }
