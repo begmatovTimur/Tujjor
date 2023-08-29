@@ -56,6 +56,13 @@ public class AuthServiceImpl implements AuthService {
         return ResponseEntity.ok(token);
     }
 
+    @Override
+    public HttpEntity<?> login(LoginReq dto) {
+        String phone = validatePhoneNumber(dto);
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
+        return generateTokenForUser(dto, phone);
+    }
+
     private void checkIfExistRole(UUID roleId, List<Role> roles, Role roleUser) {
         if (roleUser == null) {
             roles.add(roleRepo.save(new Role(
@@ -88,14 +95,6 @@ public class AuthServiceImpl implements AuthService {
         return token;
     }
 
-    @Override
-    public HttpEntity<?> login(LoginReq dto) {
-        String phone = validatePhoneNumber(dto);
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
-        return generateTokenForUser(dto, phone);
-
-    }
-
     private static String validatePhoneNumber(LoginReq dto) {
         String phone  = dto.getPhone().startsWith("+")? dto.getPhone():"+" + dto.getPhone();
         return phone;
@@ -115,7 +114,6 @@ public class AuthServiceImpl implements AuthService {
         map.put("roles", roles);
         return ResponseEntity.ok(map);
     }
-
 
     @Override
     public HttpEntity<?> refreshToken(String refreshToken) {
