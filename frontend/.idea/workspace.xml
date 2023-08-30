@@ -4,121 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="869e80c4-9379-44b6-aa9d-d0474b5e5205" name="Changes" comment="" />
-=======
-    <list default="true" id="869e80c4-9379-44b6-aa9d-d0474b5e5205" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/Bots.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/BotsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/Config/Registration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/Services/TelegramBotService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/ExcelService/ExcelServiceImplTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/Universal/UniversalServiceFilterImplTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/UsersService/UsersServiceImplTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/BackendApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/DTO/CustomerCategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/DTO/CustomerCategoryDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/TelegramUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/TelegramUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/ClientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/CustomerCategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Repository/CustomerCategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/AuthService/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/AuthService/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/AuthService/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/AuthService/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ExcelService/ExcelServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ExcelService/ExcelServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/UniversalServiceFilterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/Universal/UniversalServiceFilterImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/UsersService/UsersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/UsersService/UsersServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/MyBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/MyBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/config/BotConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/config/RegisterBot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/contants/STEP.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/contants/STEP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/controller/BotController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/response/Chat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/response/ChatMember.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/response/From.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/response/Member.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/response/Message.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/response/Result.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/response/ResultMember.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/services/Execute/Execute.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/services/Execute/ExecuteImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/services/Pagination/Pagination.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/services/Pagination/PaginationConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/TelegramBotsApi/services/TelegramBot/TelegramWebhookBot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Repository/ClientRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Repository/ClientRepositoryTest.java" afterDir="false" />
+    <list default="true" id="3e18759e-bba1-411a-8c95-a36ed51afa5e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/ClientService/ClientServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/AuthService/AuthServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/AuthService/AuthServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/ClientService/ClientServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/ClientService/ClientServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/CompanyService/CompanyServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/CompanyService/CompanyServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/CustomerCategoryService/CustomerCategoryServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/SettingsService/SettingsServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/SettingsService/SettingsServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Admin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/Logo/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/Logo/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/MapForClientOnTheMap/MapForMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/MapForClientOnTheMap/MapForMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/Components/FilterForClient/FilterForClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/FilterForClient/FilterForClient.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clientsOnTheMap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/Login.jsx" afterDir="false" />
     </list>
->>>>>>> e49488736d8cb5eac39d16171436e361e766ccda
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/package.json" />
-  </component>
-  <component name="ProjectId" id="2UZm07XYO6UzcKKRK79Naz6d2Fk" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
-  </component>
-<<<<<<< HEAD
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.JavaScript&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-=======
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Acer/Desktop/tujjor_app/Tujjor/frontend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
->>>>>>> e49488736d8cb5eac39d16171436e361e766ccda
-  }
-}]]></component>
-  <component name="ReactBuddySettings">
-    <option name="extensionsIgnore" value="true" />
   </component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
@@ -128,34 +27,7 @@
       </map>
     </option>
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Login" />
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\universal\Table" />
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings" />
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\Teritory" />
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\CustomerCategory" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\CustomerCategory\Components" />
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Admin\Redux" />
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Settings\ChildComponents\Company\Redux" />
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Login\Redux\Reducers" />
-      <recent name="C:\Users\Acer\Desktop\Tujjor_app\Tujjor\frontend\src\pages\Login\Redux\Sagas" />
-    </key>
-    }
-  </component>
-  <component name="RunManager" selected="npm.start (1)">
-    <configuration name="start (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -168,7 +40,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start (1)" />
         <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
@@ -176,103 +47,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="869e80c4-9379-44b6-aa9d-d0474b5e5205" name="Changes" comment="" />
-      <created>1693155262586</created>
+      <changelist id="3e18759e-bba1-411a-8c95-a36ed51afa5e" name="Changes" comment="" />
+      <created>1693370480376</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1693155262586</updated>
-      <workItem from="1690613835620" duration="81000" />
-      <workItem from="1690613926855" duration="1317000" />
-      <workItem from="1690618902653" duration="437000" />
-      <workItem from="1690699820484" duration="810000" />
-      <workItem from="1690724709699" duration="54000" />
-      <workItem from="1690724860502" duration="439000" />
-      <workItem from="1690892630857" duration="1889000" />
-      <workItem from="1690931527077" duration="6146000" />
-      <workItem from="1690954887120" duration="6535000" />
-      <workItem from="1690962299876" duration="167000" />
-      <workItem from="1690966764294" duration="9184000" />
-      <workItem from="1690976570986" duration="513000" />
-      <workItem from="1690992796091" duration="5241000" />
-      <workItem from="1691037899104" duration="22904000" />
-      <workItem from="1691075506944" duration="13008000" />
-      <workItem from="1691121950090" duration="2752000" />
-      <workItem from="1691124820075" duration="4849000" />
-      <workItem from="1691210310640" duration="4621000" />
-      <workItem from="1691218250573" duration="1831000" />
-      <workItem from="1691226088588" duration="380000" />
-      <workItem from="1691305782630" duration="2861000" />
-      <workItem from="1691315807003" duration="1445000" />
-      <workItem from="1691339453086" duration="6000" />
-      <workItem from="1691381034847" duration="12395000" />
-      <workItem from="1691422077584" duration="8617000" />
-      <workItem from="1691467445623" duration="7724000" />
-      <workItem from="1691482567382" duration="8516000" />
-      <workItem from="1691506250340" duration="13818000" />
-      <workItem from="1691526161354" duration="107000" />
-      <workItem from="1691556324631" duration="3930000" />
-      <workItem from="1691746152714" duration="4627000" />
-      <workItem from="1691773055244" duration="4289000" />
-      <workItem from="1691860066029" duration="8000" />
-      <workItem from="1692078515656" duration="3854000" />
-      <workItem from="1692088893881" duration="24800000" />
-      <workItem from="1692160249536" duration="4606000" />
-      <workItem from="1692169056956" duration="481000" />
-      <workItem from="1692179003894" duration="1804000" />
-      <workItem from="1692261546341" duration="4554000" />
-      <workItem from="1692332398441" duration="3155000" />
-      <workItem from="1692340818179" duration="78000" />
-      <workItem from="1692341147774" duration="33000" />
-      <workItem from="1692607553930" duration="16000" />
-      <workItem from="1692607642200" duration="4879000" />
-      <workItem from="1692715834031" duration="632000" />
-      <workItem from="1692927491078" duration="15000" />
-      <workItem from="1692945001957" duration="1013000" />
-      <workItem from="1693025910095" duration="317000" />
-      <workItem from="1692853730463" duration="8001000" />
-      <workItem from="1692945649418" duration="1733000" />
-      <workItem from="1692874476306" duration="1042000" />
-      <workItem from="1692964464341" duration="778000" />
-      <workItem from="1693012972361" duration="748000" />
-      <workItem from="1693019124720" duration="4126000" />
-      <workItem from="1693025883334" duration="6487000" />
-      <workItem from="1693040100172" duration="1399000" />
-      <workItem from="1693041535956" duration="6828000" />
-      <workItem from="1693041535956" duration="4678000" />
-      <workItem from="1692889404520" duration="1137000" />
-      <workItem from="1692944910505" duration="1783000" />
-      <workItem from="1693030264828" duration="10900000" />
-      <workItem from="1693025883334" duration="6487000" />
-      <workItem from="1693040100172" duration="1399000" />
-      <workItem from="1693041535956" duration="4678000" />
-      <workItem from="1693116573841" duration="1157000" />
-      <workItem from="1693116573841" duration="2277000" />
-      <workItem from="1693121932328" duration="2404000" />
-      <workItem from="1693129375206" duration="1319000" />
-      <workItem from="1693141707516" duration="13729000" />
-      <workItem from="1693155264011" duration="670000" />
-      <workItem from="1693141707516" duration="15284000" />
-      <workItem from="1693204874559" duration="12830000" />
-      <workItem from="1693224321999" duration="3359000" />
-      <workItem from="1693239503497" duration="176000" />
-<<<<<<< HEAD
-      <workItem from="1693239685918" duration="3330000" />
-      <workItem from="1693281287018" duration="3740000" />
-      <workItem from="1693315636920" duration="2368000" />
-=======
-      <workItem from="1693248215158" duration="1989000" />
-      <workItem from="1693280835186" duration="607000" />
-      <workItem from="1693285574856" duration="3195000" />
-      <workItem from="1693329503561" duration="1653000" />
->>>>>>> e49488736d8cb5eac39d16171436e361e766ccda
+      <updated>1693370480376</updated>
+      <workItem from="1693370485974" duration="3005000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>
