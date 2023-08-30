@@ -17,7 +17,6 @@ import java.util.UUID;
 @Builder
 public class ClientDTO {
     @NotNull(message = "TerritoryId Not Should Be Null!")
-    @NotBlank(message = "TerritoryId Should Not Be Empty!")
     private UUID territoryId;
     private Integer categoryId;
     private String name;

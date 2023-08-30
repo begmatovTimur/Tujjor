@@ -43,14 +43,6 @@ class AuthServiceImplTest {
     @Mock
     RoleRepository roleRepository;
 
-    @Mock
-    UserDetailsService userDetailsService;
-
-    @Mock
-    PasswordEncoder passwordEncoder;
-
-    @Mock
-    AuthenticationConfiguration authenticationConfiguration;
 
     @Mock
     AuthenticationManager authenticationManager;
@@ -59,47 +51,7 @@ class AuthServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        loginController = new AuthServiceImpl(userRepository,roleRepository,jwtService,userDetailsService,passwordEncoder,authenticationConfiguration,authenticationManager);
-    }
-
-    @Test
-    void itShouldRegister() {
-        // Create a new Role (ROLE_USER) and save it to the database
-        Role roleUser = new Role(
-                UUID.randomUUID(),
-                "ROLE_USER",
-                new Timestamp(2023- 7 -29),
-                new Timestamp(2023- 7 -29)
-        );
-        roleRepository.save(roleUser);
-
-        // Create a new User with the corresponding Role
-        UserDTO userData = new UserDTO();
-        userData.setUsername("testuser");
-        userData.setPhone("123456789");
-        userData.setPassword("password123");
-
-        UUID userId = UUID.randomUUID();
-        User user = new User(
-                userId,
-                "testuser",
-                userData.getPhone(),
-                userData.getPassword(),
-                List.of(roleUser) // User has the ROLE_USER role
-        );
-
-        // Save the User to the database
-        userRepository.save(user);
-
-        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
-        User savedUser = userRepository.findById(userId).orElse(null);
-        assertNotNull(savedUser);
-
-        // Verify that the User fields match the input data
-        assertEquals(userData.getPhone(), savedUser.getPhone());
-        assertEquals(userData.getPassword(), savedUser.getPassword());
-        assertEquals(1, savedUser.getRoles().size()); // User has only one role (ROLE_USER)
-        assertEquals(roleUser.getRoleName(), savedUser.getRoles().get(0).getRoleName());
+        loginController = new AuthServiceImpl(userRepository,roleRepository,jwtService,authenticationManager);
     }
 
 

@@ -44,7 +44,7 @@ function Login(props) {
                       {!loginReducer.showPassword ? (
                           <button
                               type={"button"}
-                              style={{border:"none", marginTop: "26px", marginLeft: "16px", position:"absolute", right:"1.5%", background:"none"}}
+                              className={"eyes_button"}
                               onClick={() => props.setShowPassword()}
                           >
                 <i className="fa-solid fa-eye fa-xl"></i>
@@ -52,7 +52,7 @@ function Login(props) {
                       ) : (
                           <button
                               type={"button"}
-                              style={{border:"none", marginTop: "26px", marginLeft: "16px", position:"absolute", right:"1.3%", background:"none"}}
+                              className={"eyes_button"}
                               onClick={() => props.setShowPassword()}
                           >
                 <i className="fa-solid fa-eye-slash fa-xl"></i>

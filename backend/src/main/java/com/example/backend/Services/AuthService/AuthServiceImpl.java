@@ -1,24 +1,16 @@
 package com.example.backend.Services.AuthService;
 
-import com.example.backend.DTO.UserDTO;
 import com.example.backend.Entity.Role;
 import com.example.backend.Entity.User;
-import com.example.backend.Enums.RoleEnum;
 import com.example.backend.Payload.Reaquest.LoginReq;
 import com.example.backend.Repository.RoleRepository;
 import com.example.backend.Repository.UsersRepository;
 import com.example.backend.Services.JwtService.JwtServiceImpl;
-import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -30,10 +22,8 @@ public class AuthServiceImpl implements AuthService {
     private final UsersRepository userRepository;
     private final RoleRepository roleRepo;
     private final JwtServiceImpl jwtService;
-    private final UserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
-    private final AuthenticationConfiguration authenticationConfiguration;
     private final AuthenticationManager authenticationManager;
+
 
 
     @Override
