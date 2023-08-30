@@ -38,6 +38,7 @@ function MapForMap(props) {
                                     iconCaption: address.clientName,
                                 }}
                                 options={{
+                                    // iconLayout: 'default#image',
                                     iconColor: "green",
                                     iconImageHref: logo,
                                 }}
@@ -53,6 +54,7 @@ function MapForMap(props) {
                                     iconCaption: address.clientName,
                                 }}
                                 options={{
+                                    // iconLayout: 'default#image',
                                     iconColor: "red",
                                     iconImageHref: logo,
                                 }}
