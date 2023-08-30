@@ -27,7 +27,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public HttpEntity<?> saveClient(ClientDTO clientDTO) {
-        Client save = clientRepository.save(generateClient(UUID.randomUUID(), clientDTO));
+        Client save = clientRepository.save(generateClient(null, clientDTO));
         return ResponseEntity.ok(save);
     }
 
