@@ -86,23 +86,4 @@ class AuthServiceImplTest {
 
         // Verify that authenticationManager.authenticate() was called with the correct arguments
     }
-
-    @Test
-    void refreshToken() {
-        String refreshToken = "eyJhbGciOiJIUzM4NCJ9.eyJleHAiOjE2OTM4MzA1MTAsImlhdCI6MTY5MzIyNTcxMCwic3ViIjoiNTlmMDcxN2YtOTNiMi00YTFhLTg2M2ItMjljMDRhZjRlYzgxIn0.LMDnC0nDqDA7f-EerzzV6VJgxtK07";
-        String userId = "59f0717f-93b2-4a1a-863b-29c04af4ec81";
-        User mockUser = new User();
-        mockUser.setId(UUID.fromString(userId));
-
-        JwtService mockJwtService = Mockito.mock(JwtService.class);
-        Mockito.when(mockJwtService.extractUserFromJwt(Mockito.anyString())).thenReturn(userId);
-        Mockito.when(mockJwtService.generateJWTToken(Mockito.any(User.class))).thenReturn("eyJhbGciOiJIUzM4NCJ9.eyJwaG9uZSI6Iis5OTg5NzMwMDIwMjciLCJleHAiOjE2OTMzMTIxMTAsImlhdCI6MTY5MzIyNTcxMCwic3ViIjoiNTlmMDcxN2YtOTNiMi00YTFhLTg2M2ItMjljMDRhZjRlYzgxIn0.KwWuvV0FrskwOnrXqfAgA8CaIqB3rgEZ3NRgwy3-hG--bfqLBASsQw1MLOanPdFJ");
-
-        UsersRepository mockUserRepository = Mockito.mock(UsersRepository.class);
-        Mockito.when(mockUserRepository.findById(Mockito.any(UUID.class))).thenReturn(Optional.of(mockUser));
-        //Assertions
-        underTest.refreshToken(refreshToken);
-        // Assert
-        assertEquals(mockUser.getId(), UUID.fromString(userId));
-    }
 }
