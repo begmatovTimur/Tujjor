@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 
 import java.util.List;
 
-@Component
+//@Component
 @RequiredArgsConstructor
 public class Registration implements CommandLineRunner {
     private final BotsRepository botsRepository;

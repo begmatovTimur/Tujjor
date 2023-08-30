@@ -26,13 +26,11 @@ public class AuthServiceImpl implements AuthService {
 
 
 
-
     @Override
     public HttpEntity<?> login(LoginReq dto) {
         String phone = validatePhoneNumber(dto);
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, dto.getPassword()));
         return generateTokenForUser(dto, phone);
-
     }
 
     private static String validatePhoneNumber(LoginReq dto) {
@@ -54,7 +52,6 @@ public class AuthServiceImpl implements AuthService {
         map.put("roles", roles);
         return ResponseEntity.ok(map);
     }
-
 
     @Override
     public HttpEntity<?> refreshToken(String refreshToken) {

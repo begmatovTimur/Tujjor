@@ -31,6 +31,5 @@ public class Territory {
     private double longitude;
     @Column(nullable = false)
     private double latitude;
-    @Column(nullable = false)
     private LocalDateTime insertionTime;
 }
