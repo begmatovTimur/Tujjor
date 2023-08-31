@@ -3,13 +3,17 @@ import {icons} from "Config/icons";
 import {connect} from "react-redux";
 import {dashboardDataModel} from "pages/Admin/Redux/Reducers/dashboardDataReducer";
 import NavbarDropDown from "./NavbarDropDown";
+import EngFlag from "../../../../../Languages/flags/USA.png"
+import UzbFlag from "../../../../../Languages/flags/UZB.jpg"
+import RusFlag from "../../../../../Languages/flags/RUS.jpg"
 import LanguageContext from "../../../../../Languages/Contex/Language";
-// import USA from "../../../../../Language/countryFlags/USA.png"
-// import UZB from "../../../../../Language/countryFlags/UZB.png"
-// import RUS from "../../../../../Language/countryFlags/RUS.png"
+import "../../../Index.css"
 
 function Index(props) {
     const {dashboardData} = props.dashboardDataReducer
+    const {dashboardDataReducer} = props
+    const langIndex = localStorage.getItem("langIndex");
+
     const {changeLanguageIndex} = useContext(LanguageContext)
     return (
         <div style={{width: "46%", marginLeft: "10%", backgroundColor: "#405058"}}
@@ -23,11 +27,27 @@ function Index(props) {
             </h3>
             <button className="btn text-white">{icons.notificationIcon}</button>
 
-            <select style={{width:"17%", backgroundColor:"#4b5d67", color:"white", border:"2px solid white"}} onChange={(e)=>changeLanguageIndex(e.target.value)} value={localStorage.getItem("langIndex")} className={"form-select"}>
-                <option value="0">ENG</option>
-                <option value="1">UZB ️</option>
-                <option value="2">RUS ️</option>
-            </select>
+            <div onMouseEnter={()=>props.changeLangCard(true)} onMouseLeave={()=>props.changeLangCard(false)} id={'selectLangBox'}>
+                <b>{langIndex === "0" ?
+                        <div>ENG  <img width={20} src={EngFlag} alt="#"/></div> :
+                    langIndex === "1" ?
+                        <div>UZB  <img width={20} src={UzbFlag} alt="#"/></div> :
+                    langIndex === "2" ?
+                        <div>RUS  <img width={20} src={RusFlag} alt="#"/></div> :
+                        <div>ENG  <img width={20} src={EngFlag} alt="#"/></div>}</b>
+                {
+                    dashboardDataReducer.langCard ?
+                        <div
+                            onMouseEnter={()=>props.changeLangCard(true)}
+                            onMouseLeave={()=>props.changeLangCard(false)}
+                            id={'flagFather'}
+                            style={{}}>
+                            <span onClick={()=>changeLanguageIndex(0) & props.changeLangCard(false)} id={'langBtns'}>ENG  <img width={20} src={EngFlag} alt="#"/></span>
+                            <span onClick={()=>changeLanguageIndex(1) & props.changeLangCard(false)} id={'langBtns'}>UZB  <img width={20} src={UzbFlag} alt="#"/></span>
+                            <span onClick={()=>changeLanguageIndex(2) & props.changeLangCard(false)} id={'langBtns'}>RUS  <img width={20} src={RusFlag} alt="#"/></span>
+                        </div>:""
+                }
+            </div>
             <NavbarDropDown/>
         </div>
     );

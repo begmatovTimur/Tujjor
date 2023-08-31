@@ -112,7 +112,7 @@ function App() {
                 navigate("/admin/clients")
                 break
             case "6":
-                navigate("/admin")
+                navigate("/admin/agents")
                 break
             case "7":
                 navigate("/admin")

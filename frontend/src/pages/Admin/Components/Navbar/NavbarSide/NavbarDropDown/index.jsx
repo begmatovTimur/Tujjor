@@ -24,7 +24,7 @@ function Index(props) {
                 {icons.downTriangleIcon}
             </button>
 
-            {props.dropDownBox ? (
+            {props.dropDownBox &&
                 <div
                     onMouseEnter={()=>props.changeUserDropDown(true)}
                     onMouseLeave={()=>props.changeUserDropDown(false)}
@@ -42,9 +42,7 @@ function Index(props) {
                         {icons.exitIcon} Exit
                     </button>
                 </div>
-            ) : (
-                ""
-            )}
+            }
         </div>
     );
 }

@@ -84,6 +84,17 @@
       "note": "Do you agree to delete the data?",
       "no": "No",
       "yes": "Yes"
+    },
+    "agentsPage": {
+      "title": "Agents",
+      "addBtn": "Add agent",
+      "modal": {
+        "addTitle": "Add agent",
+        "editeTitle": "Edite agent",
+        "userName": "Username",
+        "phone": "Phone",
+        "password": "Password"
+      }
     }
   },
 
@@ -174,6 +185,17 @@
       "note": "Ma'lumotlar o'chib ketishiga rozimisiz?",
       "no": "Yo'q",
       "yes": "Ha"
+    },
+    "agentsPage": {
+      "title": "Agentlar",
+      "addBtn": "Agent qo'shish",
+      "modal": {
+        "addTitle": "Agent qo'shish",
+        "editeTitle": "Agentni tahrirlash",
+        "userName": "Foydalanuvchi nomi",
+        "phone": "Telefon",
+        "password": "Parol"
+      }
     }
   },
 
@@ -266,6 +288,17 @@
       "note": "Вы согласны удалить данные?",
       "no": "Нет",
       "yes": "Да"
+    },
+    "agentsPage": {
+      "title": "Агенты",
+      "addBtn": "Добавить агента",
+      "modal": {
+        "addTitle": "Добавить агента",
+        "editeTitle": "Редактировать агента",
+        "userName": "Имя пользователя",
+        "phone": "телефон",
+        "password": "Пароль"
+      }
     }
   }
 ]
