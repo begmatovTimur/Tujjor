@@ -5,6 +5,7 @@ import "./modal.css";
 import Loading from "../../Loading/Loading";
 import LanguageContext from "../../../Languages/Contex/Language";
 import LangData from "../../../Languages/Language.json"
+import PhoneInput from "react-phone-input-2";
 
 // ishlatish uchun namuna👇
 
@@ -235,13 +236,21 @@ const UniversalModal = ({
                                                             : "70%",
                                                   }}
                                               >
-                                                <input
-                                                    className={"form-control"}
-                                                    type={item?.type}
-                                                    value={item?.value}
-                                                    onChange={item?.onChange}
-                                                    placeholder={item?.placeholder}
-                                                />
+                                                {(item.phone === true && item.type === "number")?
+                                                    <PhoneInput
+                                                        inputStyle={{ width: "100%" }}
+                                                        value={item?.value}
+                                                        onChange={item?.onChange}
+                                                    />
+                                                      :
+                                                    <input
+                                                        className={"form-control"}
+                                                        type={item?.type}
+                                                        value={item?.value}
+                                                        onChange={item?.onChange}
+                                                        placeholder={item?.placeholder}
+                                                    />
+                                                }
                                               </div>
                                             </div>
                                         )}
@@ -302,7 +311,7 @@ const UniversalModal = ({
                                                 checked={item?.value}
                                                 style={{ width: "25px" }}
                                                 onChange={item?.onChange}
-                                            />{" "}
+                                            /> {" "}
                                             <span
                                                 style={{
                                                   position: "absolute",
@@ -338,13 +347,22 @@ const UniversalModal = ({
                                                         : "70%",
                                               }}
                                           >
-                                            <input
-                                                className={"form-control"}
-                                                type={item?.type}
-                                                value={item?.value}
-                                                onChange={item?.onChange}
-                                                placeholder={item?.placeholder}
-                                            />
+                                            {(item.phone === true && item.type === "number")?
+                                                <PhoneInput
+                                                    inputStyle={{ width: "100%" }}
+                                                    value={item?.value}
+                                                    onChange={item?.onChange}
+                                                    placeholder={item?.placeholder}
+                                                />
+                                                :
+                                                <input
+                                                    className={"form-control"}
+                                                    type={item?.type}
+                                                    value={item?.value}
+                                                    onChange={item?.onChange}
+                                                    placeholder={item?.placeholder}
+                                                />
+                                            }
                                           </div>
                                         </div>
                                     )}
