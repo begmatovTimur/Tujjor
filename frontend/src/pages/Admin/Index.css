@@ -125,8 +125,8 @@
     position: absolute;
     background-color: #465860;
     color: white;
-    top: 0px;
-    left: 88px;
+    top: 0;
+    left: 93px;
     overflow: hidden;
     z-index: 100;
     font-size: 16px;
@@ -209,11 +209,11 @@
     background-color: #EEEEEE;
 }
 #bottomDiv{
-    height: 92vh;
+    height: 92.3vh;
     display: flex;
 }
 #lefBar{
-    width: 90px;
+    width: 100px;
     background-color: #4b5d67;
     display: flex;
     flex-direction: column;

@@ -1,9 +1,12 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {connect} from "react-redux";
 import Table from "../../../universal/Table/Table";
 import {companyProfileActions} from "./Redux/Reducers/companyProfileReducer";
 import "./Company.css"
+import langData from "../../../../Languages/Language.json"
+import LanguageContext from "../../../../Languages/Contex/Language";
 function Company(props) {
+    const {langIndex} = useContext(LanguageContext)
     const {companyProfile} = props
     useEffect(() => {
         props.getCompanies();
@@ -49,7 +52,7 @@ function Company(props) {
     return (
         <div style={{width: "100%"}}>
             <div className="d-flex flex-column align-items-start">
-                <div className="title mb-3">Company Profile</div>
+                <div className="title mb-3">{langData[langIndex]?.companyProfile?.title}</div>
             </div>
             <Table
                 excelWithoutSearch={true}

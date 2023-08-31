@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {connect} from "react-redux";
 import {clientsAction} from "../../Redux/Reducers/clientsReducer";
 import "../../clients.css"
+import LanguageContext from "../../../../Languages/Contex/Language";
+import langData from "../../../../Languages/Language.json"
 
 function HeaderForClient(props) {
+    const {langIndex} = useContext(LanguageContext)
     return (
         <div id={"headerForClient"}>
-            <p id={'titleForClient'}>Clients</p>
+            <p id={'titleForClient'}>{langData[langIndex]?.clientPage?.title}</p>
             <button id={"saveBtnForClient"} onClick={() => props.openModal()}>
-                + Add Client
+                {langData[langIndex]?.clientPage?.addBtn}
             </button>
         </div>
     );

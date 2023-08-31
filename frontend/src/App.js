@@ -15,11 +15,13 @@ import Clients from "pages/Clients/clients";
 import ClientsOnTheMap from "pages/Clients/Components/ClientOnTheMap/clientsOnTheMap";
 import NotFound from "pages/404/NotFound";
 import {useDispatch} from "react-redux";
+import LanguageContext from "./Languages/Contex/Language";
 import Agents from "../src/pages/Agents/Agents"
 
 function App() {
     const navigate = useNavigate();
     const location = useLocation();
+    const [langIndex, setLangIndex] = useState(0)
 
     const permissions = [
         {url: "/admin", roles: ["ROLE_SUPER_VISOR"]},
@@ -121,13 +123,23 @@ function App() {
         }
     }
 
+    function checkLanguageIndex(){
+        const indexLang = localStorage.getItem("langIndex");
+        if (indexLang === null || indexLang < 0 || indexLang > 2){
+            return;
+        }
+        setLangIndex(JSON.parse(localStorage.getItem("langIndex")))
+    }
+    function changeLanguageIndex(index){
+        setLangIndex(index);
+        localStorage.setItem("langIndex", index);
+    }
 
     useEffect(() => {
         hasPermissions();
-        // navigateByButtonId()
+        navigateByButtonId()
+        checkLanguageIndex()
     }, []);
-
-
 
     const dispatch = useDispatch();
 
@@ -139,22 +151,32 @@ function App() {
 
     return (
         <div className="App">
-            <ToastContainer/>
-            <Routes>
-                <Route path="/" element={<Login k/>}></Route>
-                <Route path={"/login"} element={<Login/>}/>
-                <Route path="/admin" element={<Admin/>}>
-                    <Route path="/admin/settings" element={<Settings/>}>
+            <LanguageContext.Provider value={{langIndex, setLangIndex, changeLanguageIndex}}>
+                <ToastContainer/>
+                <Routes>
+                    <Route path="/" element={<Login/>}></Route>
+                    <Route path={"/login"} element={<Login/>}/>
+                    <Route path="/admin" element={<Admin/>}>
+                        <Route path="/admin/settings" element={<Settings/>}>
+                            <Route
+                                path="/admin/settings/company-profile"
+                                element={<Company/>}
+                            />
+                            <Route
+                                path="/admin/settings/customer-category"
+                                element={<CustomerCategory/>}
+                            />
+                            <Route path="/admin/settings/territory" element={<Territory/>}/>
+                        </Route>
+                        <Route path="/admin/clients" element={<Clients/>}></Route>
                         <Route
-                            path="/admin/settings/company-profile"
-                            element={<Company/>}
-                        />
-                        <Route
-                            path="/admin/settings/customer-category"
-                            element={<CustomerCategory/>}
-                        />
-                        <Route path="/admin/settings/territory" element={<Territory/>}/>
+                            path="/admin/clients_on_the_map"
+                            element={<ClientsOnTheMap/>}
+                        ></Route>
                     </Route>
+
+                    <Route path="*" element={<NotFound/>}/>
+                </Routes>
                     <Route path="/admin/clients" element={<Clients/>}></Route>
                     <Route
                         path="/admin/clients_on_the_map"
@@ -164,6 +186,7 @@ function App() {
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
+          </LanguageContext.Provider>
         </div>
     );
 }

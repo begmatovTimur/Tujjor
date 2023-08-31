@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PhoneInput from "react-phone-input-2";
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
 import {connect} from "react-redux";
 import {clientsAction} from "../../../Redux/Reducers/clientsReducer";
 import "../../../clients.css";
+import langData from "../../../../../Languages/Language.json"
+import LanguageContext from "../../../../../Languages/Contex/Language";
 
 function JsxContentForAddClientModal(props) {
+    const {langIndex} = useContext(LanguageContext)
     const { clients } = props;
     function handleMapClick(event) {
         const coords = event.get("coords");
@@ -27,7 +30,7 @@ function JsxContentForAddClientModal(props) {
                         }}
                     >
                         <label>
-                            <span className={"d-block"}>clients*</span>
+                            <span className={"d-block"}>{langData[langIndex]?.clientPage?.modal?.inp1}</span>
                             <select
                                 defaultValue={""}
                                 onChange={(e) => props.changeTeritoryId(e.target.value)}
@@ -43,7 +46,7 @@ function JsxContentForAddClientModal(props) {
                             </select>
                         </label>
                         <label>
-                            <span className={"d-block"}>Name*</span>
+                            <span className={"d-block"}>{langData[langIndex]?.clientPage?.modal?.inp2}</span>
                             <input
                                 onChange={(e) => props.changeName(e.target.value)}
                                 value={clients.name}
@@ -54,7 +57,7 @@ function JsxContentForAddClientModal(props) {
                             />
                         </label>
                         <label>
-                            <span className={"d-block"}>Address*</span>
+                            <span className={"d-block"}>{langData[langIndex]?.clientPage?.modal?.inp3}</span>
                             <input
                                 onChange={(e) => props.changeAddress(e.target.value)}
                                 value={clients.address}
@@ -65,7 +68,7 @@ function JsxContentForAddClientModal(props) {
                             />
                         </label>
                         <label>
-                            <span className={"d-block"}>Telephone*</span>
+                            <span className={"d-block"}>{langData[langIndex]?.clientPage?.modal?.inp4}</span>
                             <PhoneInput
                                 inputStyle={{ width: "100%" }}
                                 value={clients.telephone}
@@ -84,7 +87,7 @@ function JsxContentForAddClientModal(props) {
                             />
                         </label>
                         <label className={"d-flex"}>
-                            <span>Active:</span>
+                            <span>{langData[langIndex]?.clientPage?.modal?.inp5}</span>
                             <input
                                 onChange={(e) => props.changeActive(e.target.checked)}
                                 checked={clients.active}
@@ -105,7 +108,7 @@ function JsxContentForAddClientModal(props) {
                         }}
                     >
                         <label>
-                            <span className={"d-block"}>Category*</span>
+                            <span className={"d-block"}>{langData[langIndex]?.clientPage?.modal?.inp6}</span>
                             <select
                                 defaultValue={""}
                                 onChange={(e) => props.changeCategoryId(e.target.value)}
@@ -121,7 +124,7 @@ function JsxContentForAddClientModal(props) {
                             </select>
                         </label>
                         <label>
-                            <span className={"d-block"}>Company name</span>
+                            <span className={"d-block"}>{langData[langIndex]?.clientPage?.modal?.inp7}</span>
                             <input
                                 onChange={(e) => props.changeCompanyName(e.target.value)}
                                 value={clients.companyName}
@@ -189,7 +192,7 @@ function JsxContentForAddClientModal(props) {
                     className={"btn btn-danger my-2"}
                     onClick={() => props.clearAllclients()}
                 >
-                    Clear
+                    {langData[langIndex]?.universalModal?.clear}
                 </button>
             </div>
         </div>

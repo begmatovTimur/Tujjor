@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
 import UniversalModal from "../../../../../universal/Modal/UniverModal";
 import {connect} from "react-redux";
 import {teritoryAction} from "../../Redux/Reducers/teritoryReducer";
 import "../../Teritory.css"
+import LanguageContext from "../../../../../../Languages/Contex/Language";
+import langData from "../../../../../../Languages/Language.json"
 function ModalForTerritory(props) {
+    const {langIndex} = useContext(LanguageContext)
     const { teritory } = props;
     function handleMapClick(event) {
         console.log(event);
@@ -25,8 +28,8 @@ function ModalForTerritory(props) {
         <UniversalModal
             modalTitle={
                 teritory.itemForTeritoryEdite === ""
-                    ? "Add teritory"
-                    : "Edite teritory"
+                    ? `${langData[langIndex]?.territoryPage?.modal?.addTitle}`
+                    : `${langData[langIndex]?.territoryPage?.modal?.editeTitle}`
             }
             checkPage={checkInpValue()}
             isOpen={teritory.openModal}
@@ -80,35 +83,35 @@ function ModalForTerritory(props) {
                         className={"btn btn-danger"}
                         onClick={() => props.clearAllTeritory()}
                     >
-                        Clear
+                        {langData[langIndex]?.universalModal?.clear}
                     </button>
                 </div>
             }
             inpData={[
                 {
                     id: 1,
-                    title: "Title* ",
+                    title: `${langData[langIndex]?.territoryPage?.modal?.inp1}`,
                     value: teritory.title,
                     onChange: (e) => props.handleTitle(e.target.value),
                     type: "text",
                 },
                 {
                     id: 2,
-                    title: "Region ",
+                    title: `${langData[langIndex]?.territoryPage?.modal?.inp2}`,
                     value: teritory.region,
                     onChange: (e) => props.handleRegion(e.target.value),
                     type: "text",
                 },
                 {
                     id: 3,
-                    title: "Code ",
+                    title: `${langData[langIndex]?.territoryPage?.modal?.inp3}`,
                     value: teritory.code,
                     onChange: (e) => props.handleCode(e.target.value),
                     type: "text",
                 },
                 {
                     id: 4,
-                    title: "Active ",
+                    title: `${langData[langIndex]?.territoryPage?.modal?.inp4}`,
                     value: teritory.active,
                     onChange: (e) => props.handleActive(e.target.checked),
                     type: "checkbox",

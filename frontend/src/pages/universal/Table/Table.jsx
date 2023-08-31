@@ -13,7 +13,6 @@ import Loading from "../../Loading/Loading";
 
 const Table = (props) => {
 
-  console.log(props.data.length)
   useEffect(() => {
     let storedColumns = JSON.parse(
       localStorage.getItem(props.localStoragePath)
