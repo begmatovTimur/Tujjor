@@ -20,16 +20,6 @@ public class UsersController {
         return service.addUser(dto);
     }
 
-    @GetMapping
-     public HttpEntity<?> getStudents(@RequestParam String role) {
-      return service.getStudents(role);
-    };
-
-    @GetMapping("/search")
-    public HttpEntity<?> getStudentByTitle(@RequestParam String username) {
-        return service.getStudentByTitle(username);
-    }
-
     @GetMapping("/me")
     public HttpEntity<?> getMe(@CurrentUser User user){
         return service.getMe(user);

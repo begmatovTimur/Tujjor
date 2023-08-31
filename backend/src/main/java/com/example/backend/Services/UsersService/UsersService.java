@@ -6,9 +6,7 @@ import org.springframework.http.HttpEntity;
 
 public interface UsersService {
     HttpEntity<?> addUser(UserDTO dto);
-    HttpEntity<?> getStudents(String role);
 
-    HttpEntity<?> getStudentByTitle(String title);
 
     HttpEntity<?> getMe(User user);
 }

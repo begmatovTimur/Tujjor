@@ -159,7 +159,11 @@ class UsersServiceImplTest {
         assertEquals(user, entityResponse.getBody());
     }
     @Test
+<<<<<<< HEAD
     public void itShouldAddUserRoleIfAbsentWhenRoleDoesNotExist() {
+=======
+    public void testAddUserRoleIfAbsentWhenRoleDoesNotExist() {
+>>>>>>> 024b48a888cd8b265891f612bb03beb0a08283d9
         // Create a mocked Role object representing the case where the role does not exist
         Role roleNotExists = null;
 
@@ -186,7 +190,11 @@ class UsersServiceImplTest {
     }
 
     @Test
+<<<<<<< HEAD
     public void itShouldAddUserRoleIfAbsentWhenRoleExists() {
+=======
+    public void testAddUserRoleIfAbsentWhenRoleExists() {
+>>>>>>> 024b48a888cd8b265891f612bb03beb0a08283d9
         // Create a mocked Role object representing the case where the role already exists
         Role roleExists = new Role(UUID.randomUUID(), "ROLE_USER", null, null);
 
