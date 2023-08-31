@@ -16,6 +16,7 @@ import ClientsOnTheMap from "pages/Clients/Components/ClientOnTheMap/clientsOnTh
 import NotFound from "pages/404/NotFound";
 import {useDispatch} from "react-redux";
 import LanguageContext from "./Languages/Contex/Language";
+import Agents from "../src/pages/Agents/Agents"
 
 function App() {
     const navigate = useNavigate();
@@ -176,7 +177,16 @@ function App() {
 
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>
-            </LanguageContext.Provider>
+                    <Route path="/admin/clients" element={<Clients/>}></Route>
+                    <Route
+                        path="/admin/clients_on_the_map"
+                        element={<ClientsOnTheMap/>}
+                    ></Route>
+                   <Route path="/admin/agents" element={<Agents/>}></Route>
+                </Route>
+                <Route path="*" element={<NotFound/>}/>
+            </Routes>
+          </LanguageContext.Provider>
         </div>
     );
 }

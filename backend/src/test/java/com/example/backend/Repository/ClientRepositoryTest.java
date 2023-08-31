@@ -67,11 +67,21 @@ class ClientRepositoryTest {
         List<UUID> city = new ArrayList<>();
         // Add city UUID to the list
 
+<<<<<<< HEAD
         List<Integer> categoryIds = Collections.singletonList(customerCategory.getId());
         List<Boolean> active = Collections.singletonList(true);
         String tin = "12345";
         String search = "Test";
         Pageable pageable = Pageable.unpaged();
+=======
+        List<UUID> cities = new ArrayList<>();
+        List<Integer> categories = new ArrayList<>();
+        List<Boolean> active = new ArrayList<>();
+        active.add(true);
+        String tin = "true";
+        String search = "search text";
+        PageRequest pageable = PageRequest.of(0, 10);
+>>>>>>> 024b48a888cd8b265891f612bb03beb0a08283d9
 
         Page<ClientProjection> result = clientRepository.getAllFilteredFields(city, categoryIds, active, tin, search, pageable);
 
