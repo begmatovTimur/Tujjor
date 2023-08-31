@@ -5,34 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e18759e-bba1-411a-8c95-a36ed51afa5e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Languages/Contex/Language.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Languages/Language.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/BackendApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/UsersService/UsersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Services/UsersService/UsersServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Repository/ClientRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Repository/ClientRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Repository/CustomerCategoryRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Repository/CustomerCategoryRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Repository/TerritoryRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Repository/TerritoryRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/ClientService/ClientServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/ClientService/ClientServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/UsersService/UsersServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/example/backend/Services/UsersService/UsersServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/LeftBar/LeftBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/LeftBar/LeftBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/Menus/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/Menus/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Admin/Index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/HeaderForMap/HeaderForMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/HeaderForMap/HeaderForMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/MapForClientOnTheMap/MapForMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ClientOnTheMap/MapForClientOnTheMap/MapForMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/Components/HeaderForClient/HeaderForClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/HeaderForClient/HeaderForClient.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/Components/ModalForClient/JsxContentForClientModal/JsxContentForAddClientModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ModalForClient/JsxContentForClientModal/JsxContentForAddClientModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/Components/ModalForClient/ModalForClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ModalForClient/ModalForClient.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/clients.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company/Company.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Company/Company.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Components/ModalForCustomerCategory/ModalForCustomerCategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Components/ModalForCustomerCategory/ModalForCustomerCategory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/CustomerCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/CustomerCategory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Header/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Components/HeaderForTerritory/TerritoryHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Components/HeaderForTerritory/TerritoryHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Components/ModalForTerritory/ModalForTerritory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Components/ModalForTerritory/ModalForTerritory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Territory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Territory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Settings/LeftBar/LeftBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/LeftBar/LeftBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Settings/Settings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/Settings.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/universal/Modal/UniverModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Modal/UniverModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +87,7 @@
       <workItem from="1693370485974" duration="3005000" />
       <workItem from="1693399272159" duration="10720000" />
       <workItem from="1693461893287" duration="2434000" />
-      <workItem from="1693465026768" duration="20395000" />
+      <workItem from="1693465026768" duration="21799000" />
     </task>
     <servers />
   </component>

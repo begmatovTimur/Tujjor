@@ -173,18 +173,10 @@ function App() {
                             path="/admin/clients_on_the_map"
                             element={<ClientsOnTheMap/>}
                         ></Route>
+                        <Route path="/admin/agents" element={<Agents/>}></Route>
                     </Route>
 
                     <Route path="*" element={<NotFound/>}/>
-                </Routes>
-                    <Route path="/admin/clients" element={<Clients/>}></Route>
-                    <Route
-                        path="/admin/clients_on_the_map"
-                        element={<ClientsOnTheMap/>}
-                    ></Route>
-                   <Route path="/admin/agents" element={<Agents/>}></Route>
-                </Route>
-                <Route path="*" element={<NotFound/>}/>
             </Routes>
           </LanguageContext.Provider>
         </div>
