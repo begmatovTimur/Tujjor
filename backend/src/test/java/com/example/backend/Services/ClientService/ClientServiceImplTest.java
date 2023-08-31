@@ -7,7 +7,11 @@ import com.example.backend.Entity.Territory;
 import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Repository.CustomerCategoryRepository;
 import com.example.backend.Repository.TerritoryRepository;
+<<<<<<< HEAD
 import org.junit.jupiter.api.Assertions;
+=======
+import com.example.backend.Services.ClientService.ClientServiceImpl;
+>>>>>>> 024b48a888cd8b265891f612bb03beb0a08283d9
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -19,8 +23,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
+=======
+>>>>>>> 024b48a888cd8b265891f612bb03beb0a08283d9
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,17 +45,40 @@ class ClientServiceImplTest {
 
     @Mock
     private TerritoryRepository territoryRepository;
-    @Mock
-    private ClientService underTest;
+
+    private ClientServiceImpl clientService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        underTest = new ClientServiceImpl(clientRepository, categoryRepository, territoryRepository);
+        clientService = new ClientServiceImpl(clientRepository, categoryRepository, territoryRepository);
     }
 
+    @Test
+    void itShouldSaveClient() {
+//        // Arrange
+//        ClientDTO clientDTO = new ClientDTO();
+//        System.out.println(territoryRepository.count());
+//        clientDTO.setTerritoryId(U);
+//        clientDTO.setCategoryId(categoryRepository.findAll().get(0).getId());
+//        // Set properties of clientDTO
+//
+//        UUID clientId = UUID.randomUUID();
+//        Client client = new Client();
+//        // Set properties of client
+//
+//        when(clientRepository.save(any(Client.class))).thenReturn(client);
+//
+//        // Act
+//        HttpEntity<?> result = clientService.saveClient(clientDTO);
+//
+//        // Assert
+//        assertEquals(ResponseEntity.ok(client), result);
+//        verify(clientRepository, times(1)).save(any(Client.class));
+    }
 
     @Test
+<<<<<<< HEAD
     void testUpdateClient() {
         UUID clientId = UUID.randomUUID();
         ClientDTO clientDTO = new ClientDTO();
@@ -140,3 +170,35 @@ class ClientServiceImplTest {
 
 
 }
+=======
+    void itShouldGetClient() {
+        //GIVEN
+        //WHEN
+        //THEN
+    }
+
+    @Test
+    void itShouldUpdateClient() {
+        UUID clientId = UUID.randomUUID();
+        ClientDTO clientDTO = new ClientDTO();
+      clientDTO.setCategoryId(categoryRepository.findAll().get(0).getId()); // Set a valid category ID here
+        clientDTO.setTerritoryId(territoryRepository.findAll().get(0).getId()); // Set a valid territory ID here
+
+        // Mock the behavior of categoryRepository.findById
+//        when(categoryRepository.findById(categoryRepository.findAll().get(0).getId())
+//                .thenReturn(Optional.of(new CustomerCategory()));
+
+        // Mock the behavior of territoryRepository.findById
+        when(territoryRepository.findById(territoryRepository.findAll().get(0).getId()))
+                .thenReturn(Optional.of(new Territory()));
+
+        // Mock the save method of clientRepository
+        when(clientRepository.save(any(Client.class))).thenReturn(new Client());
+
+        // Call the method you want to test
+        ResponseEntity<?> response = clientService.updateClient(clientId, clientDTO);
+
+        // Add your assertions here to verify the response or other aspects of the test
+    }
+}
+>>>>>>> 024b48a888cd8b265891f612bb03beb0a08283d9
