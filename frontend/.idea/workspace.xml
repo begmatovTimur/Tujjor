@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e18759e-bba1-411a-8c95-a36ed51afa5e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/Agents/agents.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Languages/Language.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Languages/Language.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/NavbarDropDown/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/NavbarDropDown/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Redux/Reducers/dashboardDataReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Redux/Reducers/dashboardDataReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Agents/Agents.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Agents/Agents.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Modal/UniverModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Modal/UniverModal.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +80,8 @@
       <workItem from="1693399272159" duration="10720000" />
       <workItem from="1693461893287" duration="2434000" />
       <workItem from="1693465026768" duration="24469000" />
-      <workItem from="1693500178325" duration="8028000" />
+      <workItem from="1693500178325" duration="8837000" />
+      <workItem from="1693550270341" duration="2162000" />
     </task>
     <servers />
   </component>
