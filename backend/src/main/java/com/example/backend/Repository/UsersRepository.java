@@ -20,6 +20,7 @@ public interface UsersRepository extends JpaRepository<User, UUID> {
             """,nativeQuery = true)
     List<UsersProjection> findAllByRoles(String role);
 
+
     List<User> findAllByUsernameContainingIgnoreCase(String username);
 
 }

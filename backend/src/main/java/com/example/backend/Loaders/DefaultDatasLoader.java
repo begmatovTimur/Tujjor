@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,11 +84,11 @@ public class DefaultDatasLoader implements CommandLineRunner {
         if(territoryRepository.findAll().size()==0) {
             List<Territory> territories = new ArrayList<>();
 
-            territories.add(new Territory(null,"Bukhara","Buxoro","MA0DP",true,64.39096772460934,39.737524678460645,null));
-            territories.add(new Territory(null,"Tashkent","Toshkent","DLA01",false,69.29798027332778,41.29861152419623,null));
-            territories.add(new Territory(null,"Farg'ona","Farg'ona","SODK05",true,71.74943286619715,40.350720394603776,null));
-            territories.add(new Territory(null,"Qo'qon","Qo'qon","AD01A",true,70.94743091307214,40.52700099193099,null));
-            territories.add(new Territory(null,"Namangan","Namangan","MLDM8",true,71.66154224119714,40.99480317106396,null));
+            territories.add(new Territory(null,"Bukhara","Buxoro","MA0DP",true,64.39096772460934,39.737524678460645, LocalDateTime.now()));
+            territories.add(new Territory(null,"Tashkent","Toshkent","DLA01",false,69.29798027332778,41.29861152419623,LocalDateTime.now()));
+            territories.add(new Territory(null,"Farg'ona","Farg'ona","SODK05",true,71.74943286619715,40.350720394603776,LocalDateTime.now()));
+            territories.add(new Territory(null,"Qo'qon","Qo'qon","AD01A",true,70.94743091307214,40.52700099193099,LocalDateTime.now()));
+            territories.add(new Territory(null,"Namangan","Namangan","MLDM8",true,71.66154224119714,40.99480317106396,LocalDateTime.now()));
 
             territoryRepository.saveAll(territories);
         }

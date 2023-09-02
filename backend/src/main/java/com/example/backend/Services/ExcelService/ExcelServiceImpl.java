@@ -1,14 +1,12 @@
 package com.example.backend.Services.ExcelService;
 
+import com.example.backend.Entity.Agent;
 import com.example.backend.Payload.Reaquest.FilterData;
 import com.example.backend.Projection.ClientProjection;
 import com.example.backend.Projection.CustomerCategoryProjection;
 import com.example.backend.Projection.ExcelExportable;
 import com.example.backend.Projection.TerritoryProjection;
-import com.example.backend.Repository.ClientRepository;
-import com.example.backend.Repository.CompanyRepository;
-import com.example.backend.Repository.CustomerCategoryRepository;
-import com.example.backend.Repository.TerritoryRepository;
+import com.example.backend.Repository.*;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,6 +38,7 @@ public class ExcelServiceImpl implements ExcelService {
     private final CustomerCategoryRepository categoryRepository;
     private final CompanyRepository companyRepository;
     private final ClientRepository clientRepository;
+    private final AgentRepository agentRepository;
 
 
     @SneakyThrows
@@ -119,7 +118,10 @@ public class ExcelServiceImpl implements ExcelService {
         } else if (component.equals("clients")) {
             Page<ClientProjection> filteredData = clientRepository.getAllFilteredFields(filters.getCities(), filters.getCustomerCategories(), filters.getActive(), filters.getTin(), filters.getQuickSearch(), pageable);
             dataOfExcel.addAll(filteredData.getContent());
-        }
+        }else if(component.equals("agent")) {
+            Page<Agent> allByPagination = agentRepository.findAllByPagination(filters.getQuickSearch(), pageable);
+            dataOfExcel.addAll(allByPagination.getContent());
+        };
     }
 
 

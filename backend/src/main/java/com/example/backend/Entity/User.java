@@ -18,6 +18,7 @@ import java.util.UUID;
 @Table(name = "users")
 @Entity
 @Builder
+
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -26,6 +27,14 @@ public class User implements UserDetails {
     private String username;
     @Column(unique = true, nullable = false)
     private String phone;
+
+    public User(String username, String phone, String password, List<Role> roles) {
+        this.username = username;
+        this.phone = phone;
+        this.password = password;
+        this.roles = roles;
+    }
+
     @Column(nullable = false)
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
