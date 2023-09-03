@@ -9,7 +9,8 @@ function MapForMap(props) {
     const {clients} = props;
     const {teritory} = props;
     console.log(clients?.clients)
-    return (<YMaps
+    return (
+        <YMaps
             query={{
                 apikey: "e24090ad-351e-4321-8071-40c04c55f144\n",
                 lang: "en_US",

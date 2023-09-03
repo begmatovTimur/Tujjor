@@ -45,7 +45,6 @@ public class MyFilter extends OncePerRequestFilter {
                 try {
                     String subject = jwtService.extractUserFromJwt(token);
                     UserDetails userDetails = userRepo.findById(UUID.fromString(subject)).orElseThrow();
-//                System.out.println(userDetails.getUsername());
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(
                                     userDetails,

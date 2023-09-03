@@ -28,6 +28,7 @@ public class ClientController {
     @GetMapping
     @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
     public HttpEntity<?> getClient(){
+        System.out.println("salom");
         return clientService.getClient();
     }
 

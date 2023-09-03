@@ -11,11 +11,15 @@ import {domen} from "Config/apiCall";
 import {tableActions} from "pages/universal/Table/Redux/Reducers/tableReducer";
 import Company from "pages/Settings/ChildComponents/Company/Company";
 import CustomerCategory from "pages/Settings/ChildComponents/CustomerCategory/CustomerCategory";
-import Clients from "pages/Clients/clients";
+import Clients from "./pages/Clients/clients";
 import ClientsOnTheMap from "pages/Clients/Components/ClientOnTheMap/clientsOnTheMap";
 import NotFound from "pages/404/NotFound";
 import {useDispatch} from "react-redux";
 import Agents from "../src/pages/Agents/Agents"
+import TelegramAddClients from "./pages/WebApp/AddClients/TelegramAddClients";
+import ModalForClient from "./pages/Clients/Components/ModalForClient/ModalForClient";
+import TelegramClients from "./pages/WebApp/Clients/TelegramClients";
+import TelegramClientsOnTheMap from "./pages/WebApp/ClientsOnTheMap/TelegramClientsOnTheMap";
 
 function App() {
     const navigate = useNavigate();
@@ -141,7 +145,7 @@ function App() {
         <div className="App">
             <ToastContainer/>
             <Routes>
-                <Route path="/" element={<Login k/>}></Route>
+                <Route path="/" element={<Login/>}></Route>
                 <Route path={"/login"} element={<Login/>}/>
                 <Route path="/admin" element={<Admin/>}>
                     <Route path="/admin/settings" element={<Settings/>}>
@@ -162,6 +166,9 @@ function App() {
                     ></Route>
                    <Route path="/admin/agents" element={<Agents/>}></Route>
                 </Route>
+                   <Route path="/web-bot-client" element={<TelegramClients/>}/>
+                   <Route path="/web-bot-client-add" element={<TelegramAddClients/>}/>
+                   <Route path="/web-bot-clients-on-the-map" element={<TelegramClientsOnTheMap/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </div>
