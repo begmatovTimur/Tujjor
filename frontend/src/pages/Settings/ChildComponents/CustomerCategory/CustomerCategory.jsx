@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {connect, useDispatch} from "react-redux";
+import {connect} from "react-redux";
 import Table from "../../../universal/Table/Table";
 import UniversalModal from "../../../universal/Modal/UniverModal";
-import {customerCategoryActions} from "../../../../Redux/reducers/customerCategoryReducer";
+import {customerCategoryActions} from "./Redux/Reducers/customerCategoryReducer";
 import "./CustomerCategory.css";
 import Filter from "../../../universal/Filter/Filter";
 import Header from "./Header/Header";
+import FilterForCustomerCategory from "./Components/FilterForCustomerCategory/FilterForCustomerCategory";
+import TableForCustomerCategory from "./Components/TableForCustomerCategory/TableForCustomerCategory";
+import ModalForCustomerCategory from "./Components/ModalForCustomerCategory/ModalForCustomerCategory";
 
 function CustomerCategory(props) {
     const {customerCategory} = props;
@@ -76,78 +79,9 @@ function CustomerCategory(props) {
     return (
         <div style={{width: "100%"}}>
            <Header/>
-            <Filter
-                search={[
-                    {
-                        name: "active",
-                        multi: false,
-                        options: optionsActive,
-                        defaultValue: {value: "", label: "All"},
-                        placeholder: "Active",
-                        selfEmployer: true,
-                    },
-                ]}
-            />
-            <Table
-                localStoragePath="customer_category"
-                filterActive={true}
-                columnOrderMode={true}
-                dataProps={customerCategory.categories}
-                changeSizeModeOptions={["All", 1, 20, 50, 100, 200]}
-                pagination={true}
-                paginationApi={
-                    "/customer-category/pagination?page={page}&limit={limit}"
-                }
-                changeSizeMode={true}
-                fileName={"categories"}
-                excelPath={"/excel?component=customer-category&"}
-                columnsProps={columns}
-            />
-            <UniversalModal
-                modalTitle={"Add Category"}
-                isOpen={customerCategory.openModal}
-                closeFunction={() => props.handleClose()}
-                width={40}
-                checkPage={getCheckPage()}
-                functionforSaveBtn={() => props.saveCategory()}
-                inpData={[
-                    {
-                        id: 1,
-                        title: "Region",
-                        value: customerCategory.region,
-                        onChange: (e) => props.handleRegion(e.target.value),
-                        type: "text",
-                    },
-                    {
-                        id: 2,
-                        title: "Code ",
-                        value: customerCategory.code,
-                        onChange: (e) => props.handleCode(e.target.value),
-                        type: "number",
-                    },
-                    {
-                        id: 3,
-                        title: "Name ",
-                        value: customerCategory.name,
-                        onChange: (e) => props.handleName(e.target.value),
-                        type: "text",
-                    },
-                    {
-                        id: 4,
-                        title: "Description ",
-                        value: customerCategory.description,
-                        onChange: (e) => props.handleDescription(e.target.value),
-                        type: "text",
-                    },
-                    {
-                        id: 5,
-                        title: "Active ",
-                        value: customerCategory.active,
-                        onChange: (e) => props.handleActive(e.target.checked),
-                        type: "checkbox",
-                    },
-                ]}
-            />
+            <FilterForCustomerCategory/>
+            <TableForCustomerCategory/>
+            <ModalForCustomerCategory/>
         </div>
     );
 }

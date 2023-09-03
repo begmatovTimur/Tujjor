@@ -1,9 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
-import {settingsActions} from "../../../Redux/reducers/settingsReducer";
+import {settingsActions} from "../Redux/Reducers/settingsReducer";
+import LanguageContext from "../../../Languages/Contex/Language";
+import langData from "../../../Languages/Language.json"
 
 function LeftBar({data, getData, activeButtonIndex, setCurrentIndex}) {
+    const {langIndex} = useContext(LanguageContext)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,7 +27,7 @@ function LeftBar({data, getData, activeButtonIndex, setCurrentIndex}) {
 
     return (
         <div className="left  pt-3">
-            <button className="btn_panel">Settings Panel</button>
+            <button className="btn_panel">{langData[langIndex].settingsPage.title}</button>
             {data.map((item, index) => (
                 <button
                     key={item.id}

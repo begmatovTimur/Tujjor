@@ -40,24 +40,19 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
 
     @Override
     public CustomerCategory addCategory(CustomerCategoryDTO categoryDTO) {
-        return customerCategoryRepository.save(generateNewTerritory(categoryDTO));
+        return customerCategoryRepository.save(generateNewCustomerCategory(categoryDTO));
     }
 
     @Override
     public CustomerCategory updateCategory(Integer id, CustomerCategoryDTO categoryDTO) {
-        CustomerCategory territoryData = generateNewTerritory(categoryDTO);
-        territoryData.setId(id);
-        return customerCategoryRepository.save(territoryData);
-    }
-
-    private static JsonNode WrapFromStringToObject(HttpServletRequest request) throws JsonProcessingException {
-        String value = request.getHeader("searchParam");
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readTree(value);
+        CustomerCategory customerCategory = generateNewCustomerCategory(categoryDTO);
+        customerCategory.setId(id);
+        return customerCategoryRepository.save(customerCategory);
     }
 
 
-    private CustomerCategory generateNewTerritory(CustomerCategoryDTO categoryDTO) {
+
+    private CustomerCategory generateNewCustomerCategory(CustomerCategoryDTO categoryDTO) {
         return CustomerCategory.builder()
                 .id(null)
                 .code(categoryDTO.getCode())
@@ -74,7 +69,7 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
         List<Boolean> active = new ArrayList<>();
         active.add(true);
         active.add(false);
-        return ResponseEntity.ok(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName("",active,Pageable.unpaged()));
+        return ResponseEntity.ok(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName("",active,Pageable.unpaged()).getContent());
     }
 
 

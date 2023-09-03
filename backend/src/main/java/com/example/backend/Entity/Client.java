@@ -33,7 +33,6 @@ public class Client {
     private String tin;
     @Column(nullable = false)
     private String companyName;
-    @Column(nullable = false)
     private String referencePoint;
     @Column(nullable = false)
     private double longitude;

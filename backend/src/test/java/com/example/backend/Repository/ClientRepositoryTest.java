@@ -55,9 +55,7 @@ class ClientRepositoryTest {
         client.setName("Test Client");
         client.setActive(true);
         client.setTin("12345");
-        // Set other client properties as needed
-        // ...
-
+        client.setPhone("+139139");
         clientRepository.save(client);
     }
 
@@ -65,16 +63,17 @@ class ClientRepositoryTest {
     void testGetAllFilteredFields() {
         List<UUID> city = new ArrayList<>();
         // Add city UUID to the list
-
-        List<Integer> categoryIds = Collections.singletonList(customerCategory.getId());
-        List<Boolean> active = Collections.singletonList(true);
-        String tin = "12345";
-        String search = "Test";
-        Pageable pageable = Pageable.unpaged();
+        List<UUID> cities = new ArrayList<>();
+        List<Integer> categories = new ArrayList<>();
+        List<Boolean> active = new ArrayList<>();
+        active.add(true);
+        String tin = "true";
+        String search = "search text";
+        PageRequest pageable = PageRequest.of(0, 10);
 
         Page<ClientProjection> result = clientRepository.getAllFilteredFields(city, categoryIds, active, tin, search, pageable);
 
-        assertEquals(0, result.getTotalElements());
+        assertEquals(1, result.getTotalElements());
         if (result.getTotalElements() > 0) {
 
             ClientProjection projection = result.getContent().get(0);
@@ -86,7 +85,6 @@ class ClientRepositoryTest {
     void testGetAllFilteredFieldsWithEmptyResults() {
         List<UUID> city = new ArrayList<>();
         // Add non-existing city UUID to the list
-
         List<Integer> categoryIds = Collections.singletonList(2); // Non-existing Category ID
         List<Boolean> active = Collections.singletonList(false);
         String tin = "12345";

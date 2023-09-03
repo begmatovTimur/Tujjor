@@ -2,10 +2,12 @@ package com.example.backend.Services.TerritoryService;
 
 import com.example.backend.DTO.TerritoryDTO;
 import com.example.backend.Entity.Territory;
+import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Projection.TerritoryRegionProjection;
 import com.example.backend.Repository.TerritoryRepository;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -68,7 +70,8 @@ public class TerritoryServiceImpl implements TerritoryService {
         List<Boolean> active= new ArrayList<>();
         active.add(true);
         active.add(false);
-        return ResponseEntity.ok(territoryRepository.getFilteredData("",active, Pageable.unpaged()));
+        Page<TerritoryProjection> filteredData = territoryRepository.getFilteredData("", active, Pageable.unpaged());
+        return ResponseEntity.ok(filteredData.getContent());
     }
 
 

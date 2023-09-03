@@ -23,3 +23,12 @@
     border: none;
     width: 22px;
 }
+.eyes_button {
+    position: absolute;
+    right:0;
+    height:38px;
+    bottom:0;
+    background-color: transparent;
+    border: 1px solid gray;
+    border-radius: 3px;
+}

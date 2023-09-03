@@ -2,6 +2,7 @@ package com.example.backend.Services.Universal;
 
 import com.example.backend.Payload.Reaquest.FilterData;
 import com.example.backend.Projection.TerritoryProjection;
+import com.example.backend.Repository.AgentRepository;
 import com.example.backend.Repository.ClientRepository;
 import com.example.backend.Repository.CustomerCategoryRepository;
 import com.example.backend.Repository.TerritoryRepository;
@@ -28,6 +29,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
     private final ClientRepository clientRepository;
     private final TerritoryRepository territoryRepository;
     private final CustomerCategoryRepository customerCategoryRepository;
+    private final AgentRepository agentRepository;
 
     @SneakyThrows
     @Override
@@ -49,7 +51,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
         JsonNode cityArrayNode = jsonNode.get("city");
         JsonNode jsonNodeLimit = jsonNode.get("limit");
         JsonNode jsonNodeCurrentPage = jsonNode.get("page");
-        int currentPageValue = (jsonNodeCurrentPage != null && !jsonNodeCurrentPage.isNull()) ? jsonNodeCurrentPage.asInt() : 0;
+            int currentPageValue = (jsonNodeCurrentPage != null && !jsonNodeCurrentPage.isNull()) ? jsonNodeCurrentPage.asInt()-1 : 0;
         List<UUID> cities = new ArrayList<>();
         for (JsonNode cityNode : cityArrayNode) {
             UUID cityId = UUID.fromString(cityNode.asText());
@@ -79,7 +81,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
                 .quickSearch(jsonNodeQuickSearch.asText())
                 .page(currentPageValue)
                 .customerCategories(customerCategoriesParam)
-                .limit(jsonNodeLimit==null?"q":jsonNodeLimit.asText())
+                .limit(jsonNodeLimit==null?"All":jsonNodeLimit.asText())
                 .build();
     }
 
@@ -109,7 +111,7 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
         return ResponseEntity.ok(paginationConfig.getPagination());
     }
 
-    private void generateComponentData(PaginationConfig config) {
+    public void generateComponentData(PaginationConfig config) {
         FilterData params = config.getFilterData();
         Pageable pageable = config.getPageable();
 
@@ -120,7 +122,8 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
             config.setPagination(filteredData);
         } else if (config.getComponent().equals("customer_category")) {
             config.setPagination(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(params.getQuickSearch(), params.getActive(), pageable));
-
+        }else if(config.getComponent().equals("agents")) {
+            config.setPagination(agentRepository.findAllByPagination(params.getQuickSearch(),pageable));
         }
     }
 

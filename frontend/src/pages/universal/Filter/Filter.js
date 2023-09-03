@@ -6,7 +6,7 @@ import {MultiSelect} from "react-multi-select-component";
 
 import tableReducer, {
     tableActions,
-} from "../../../Redux/reducers/tableReducer";
+} from "../Table/Redux/Reducers/tableReducer";
 import './Filter.css'
 
 function Filter(props) {

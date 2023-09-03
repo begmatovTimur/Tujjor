@@ -27,7 +27,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public HttpEntity<?> saveClient(ClientDTO clientDTO) {
-        Client save = clientRepository.save(generateClient(UUID.randomUUID(), clientDTO));
+        Client save = clientRepository.save(generateClient(null, clientDTO));
         return ResponseEntity.ok(save);
     }
 
@@ -36,12 +36,11 @@ public class ClientServiceImpl implements ClientService {
         List<Boolean> active = new ArrayList<>();
         active.add(true);
         active.add(false);
-        return ResponseEntity.ok(clientRepository.getAllFilteredFields(new ArrayList<>(), new ArrayList<>(),active,"","", Pageable.unpaged()));
+        return ResponseEntity.ok(clientRepository.getAllFilteredFields(new ArrayList<>(), new ArrayList<>(),active,"","", Pageable.unpaged()).getContent());
     }
 
 
     @Override
-    @Transactional
     public ResponseEntity<?> updateClient(UUID clientId, ClientDTO clientDTO) {
         Client generatedClient = generateClient(clientId, clientDTO);
         clientRepository.save(generatedClient);

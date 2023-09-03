@@ -125,10 +125,11 @@
     position: absolute;
     background-color: #465860;
     color: white;
-    top: 0px;
-    left: 88px;
+    top: 0;
+    left: 100%;
     overflow: hidden;
     z-index: 100;
+    font-size: 16px;
 }
 #clientDataBox p{
     width: 100%;
@@ -158,6 +159,11 @@
     max-height: 109px;
     display: flex;
     flex-direction: column;
+    position: absolute;
+    top: 34px;
+    right: 5px;
+    width: 300px;
+    height: 200px;
 }
 .custom_userbox_button button{
     border: 3px solid blue;
@@ -203,12 +209,43 @@
     background-color: #EEEEEE;
 }
 #bottomDiv{
-    height: 92vh;
+    height: 92.3vh;
     display: flex;
 }
 #lefBar{
-    width: 90px;
+    width: 100px;
     background-color: #4b5d67;
     display: flex;
     flex-direction: column;
+}
+#selectLangBox{
+    position: relative;
+    border: 1px solid white;
+    padding: 5px 15px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 10px;
+}
+#flagFather{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #465860;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 13px 10px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+#langBtns{
+    width: 51px;
+    cursor: pointer;
+    border-bottom: 1px solid white;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }

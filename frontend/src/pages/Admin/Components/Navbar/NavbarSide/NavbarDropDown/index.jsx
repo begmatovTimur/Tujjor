@@ -1,17 +1,13 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import {icons} from "../../../../../../Config/icons";
 import {useNavigate} from "react-router-dom";
-import {dashboardDataModel} from "../../../../../../Redux/reducers/dashboardDataReducer";
+import {dashboardDataModel} from "../../../../Redux/Reducers/dashboardDataReducer";
 import {connect} from "react-redux";
+import "../../../../Index.css"
 
 function Index(props) {
-    const {userBox,setUserBox} = props;
     const navigate = useNavigate()
-    // const userBoxRef = useRef(null);
 
-    const handleUserDropDown = (status) => {
-        setUserBox(status);
-    };
     function logOut() {
         localStorage.clear();
         navigate("/login");
@@ -19,8 +15,8 @@ function Index(props) {
     return (
         <div style={{position: "relative"}}>
             <button
-                onMouseLeave={() => handleUserDropDown(false)}
-                onMouseOverCapture={() => handleUserDropDown(true)}
+                onMouseEnter={()=>props.changeUserDropDown(true)}
+                onMouseLeave={()=>props.changeUserDropDown(false)}
                 className="btn text-white"
                 // ref={userBoxRef}
             >
@@ -28,17 +24,11 @@ function Index(props) {
                 {icons.downTriangleIcon}
             </button>
 
-            {userBox ? (
+            {props.dropDownBox &&
                 <div
-                    onMouseLeave={() => handleUserDropDown(false)}
-                    onMouseOverCapture={() => handleUserDropDown(true)}
-                    style={{
-                        position: "absolute",
-                        top: 34,
-                        right: 10,
-                        width: 300,
-                        height: 200,
-                    }}
+                    onMouseEnter={()=>props.changeUserDropDown(true)}
+                    onMouseLeave={()=>props.changeUserDropDown(false)}
+
                     className={"user_box_admin"}
                 >
                     <button className="custom_userbox_button">
@@ -52,9 +42,7 @@ function Index(props) {
                         {icons.exitIcon} Exit
                     </button>
                 </div>
-            ) : (
-                ""
-            )}
+            }
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { dropdownActions } from "../../../Redux/reducers/dropdownReducer";
+import {dropdownActions} from "pages/Admin/Redux/Reducers/dropdownReducer";
 import "./Dropdown.css";
 import { connect } from "react-redux";
 

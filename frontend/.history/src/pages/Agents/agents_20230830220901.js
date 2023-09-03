@@ -1,0 +1,28 @@
+import {connect} from 'react-redux';
+import { agentActions } from './Redux/Reducers/agentReducer';
+import { useEffect } from 'react';
+
+function Agents(props) {
+    useEffect(()=>{
+        props.getAgents()
+    },[])
+    console.log(props);
+    return (
+        <div>
+        <Table
+    localStoragePath="clients"
+    pagination={true}
+    changeSizeMode={true}
+    paginationApi={"/client/pagination?page={page}&limit={limit}"}
+    dataProps={clients.clients}
+    columnOrderMode={true}
+    changeSizeModeOptions={["All", 5, 20, 50, 100, 200]}
+    columnsProps={columns}
+    fileName={"clients"}
+    excelPath={"/excel?component=clients&"} 
+/>
+        </div>
+    );
+}
+
+export default connect((state=>state.agents),agentActions)(Agents);

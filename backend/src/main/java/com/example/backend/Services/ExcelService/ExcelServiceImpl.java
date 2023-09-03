@@ -1,14 +1,12 @@
 package com.example.backend.Services.ExcelService;
 
+import com.example.backend.Entity.Agent;
 import com.example.backend.Payload.Reaquest.FilterData;
 import com.example.backend.Projection.ClientProjection;
 import com.example.backend.Projection.CustomerCategoryProjection;
 import com.example.backend.Projection.ExcelExportable;
 import com.example.backend.Projection.TerritoryProjection;
-import com.example.backend.Repository.ClientRepository;
-import com.example.backend.Repository.CompanyRepository;
-import com.example.backend.Repository.CustomerCategoryRepository;
-import com.example.backend.Repository.TerritoryRepository;
+import com.example.backend.Repository.*;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,6 +38,8 @@ public class ExcelServiceImpl implements ExcelService {
     private final CustomerCategoryRepository categoryRepository;
     private final CompanyRepository companyRepository;
     private final ClientRepository clientRepository;
+    private final AgentRepository agentRepository;
+
 
     @SneakyThrows
     @Override
@@ -49,7 +49,7 @@ public class ExcelServiceImpl implements ExcelService {
 
         FilterData filters = universalServiceFilter.generateFilterDataFromRequest(request);
 
-        Pageable pageable = filters.getLimit().equals("All") ? Pageable.unpaged() :
+        Pageable pageable = filters.getLimit().equals("All") || filters.getLimit().equals("") ? Pageable.unpaged() :
                 PageRequest.of(filters.getPage(), Integer.parseInt(filters.getLimit()));
 
         getFilteredContentData(component, dataOfExcel, filters, pageable);
@@ -61,7 +61,7 @@ public class ExcelServiceImpl implements ExcelService {
         int rowNum = 0;
         Row headerRow = sheet.createRow(rowNum);
 
-        generateHeaders(headerRow, headers, workbook); // generating headers
+        generateHeaders(headerRow, headers, workbook,sheet); // generating headers
 
         generateBody(dataOfExcel, headers, ++rowNum, sheet);
 
@@ -89,8 +89,9 @@ public class ExcelServiceImpl implements ExcelService {
                 .headers(responseHeaders)
                 .body(resource);
     }
+    @Override
 
-    private void getFilteredContentData(String component, List<ExcelExportable> dataOfExcel, FilterData filters, Pageable pageable) {
+    public void getFilteredContentData(String component, List<ExcelExportable> dataOfExcel, FilterData filters, Pageable pageable) {
         if (component.equals("territory")) {
             if (filters.getLimit().equals("All")) {
                 filters.setLimit(String.valueOf(territoryRepository.count()));
@@ -117,12 +118,20 @@ public class ExcelServiceImpl implements ExcelService {
         } else if (component.equals("clients")) {
             Page<ClientProjection> filteredData = clientRepository.getAllFilteredFields(filters.getCities(), filters.getCustomerCategories(), filters.getActive(), filters.getTin(), filters.getQuickSearch(), pageable);
             dataOfExcel.addAll(filteredData.getContent());
-        }
+        }else if(component.equals("agent")) {
+            Page<Agent> allByPagination = agentRepository.findAllByPagination(filters.getQuickSearch(), pageable);
+            dataOfExcel.addAll(allByPagination.getContent());
+        };
     }
 
-    public void generateBody(List<?> objects, String[] columns, int rowNum, Sheet sheet) throws NoSuchFieldException, IllegalAccessException {
+
+
+    public static void generateBody(List<?> objects, String[] columns, int rowNum, Sheet sheet) throws NoSuchFieldException, IllegalAccessException {
         for (int i = 0; i < objects.size(); i++) {
             Row row = sheet.createRow(rowNum++);
+
+
+            sheet.autoSizeColumn(rowNum);
 
             Object item = objects.get(i);
 
@@ -131,12 +140,27 @@ public class ExcelServiceImpl implements ExcelService {
 
                 Cell cell = row.createCell(l); // Create cell at the current column index
                 Object o = getFieldValue(item, capitalizeFirstLetter(col));
-                cell.setCellValue(o.toString());
+                    cell.setCellValue(o.toString());
             }
         }
     }
 
 
+
+    public static void generateHeaders(Row headerRow, String[] headers, Workbook workbook, Sheet sheet) {
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            cellStyle.setFillBackgroundColor(IndexedColors.GREY_80_PERCENT.getIndex());
+            Font font = workbook.createFont();
+            font.setColor(IndexedColors.WHITE.getIndex());
+            cell.setCellStyle(cellStyle);
+            cellStyle.setFont(font);
+            cell.setCellValue(headers[i].replaceAll("\"", "")); // Set header value to value
+            sheet.autoSizeColumn(0);
+        }
+    }
     public static Object getFieldValue(Object obj, String fieldName) {
         try {
             Method method = obj.getClass().getMethod("get" + capitalizeFirstLetter(fieldName));
@@ -152,19 +176,7 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
 
-    private void generateHeaders(Row headerRow, String[] headers, Workbook workbook) {
-        for (int i = 0; i < headers.length; i++) {
-            Cell cell = headerRow.createCell(i);
-            CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            cellStyle.setFillBackgroundColor(IndexedColors.GREY_80_PERCENT.getIndex());
-            Font font = workbook.createFont();
-            font.setColor(IndexedColors.WHITE.getIndex());
-            cell.setCellStyle(cellStyle);
-            cellStyle.setFont(font);
-            cell.setCellValue(headers[i].replaceAll("\"", "")); // Set header value to "a"
-        }
-    }
+
 
 
 }
