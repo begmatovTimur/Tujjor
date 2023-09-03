@@ -39,6 +39,18 @@ public class UsersServiceImpl implements UsersService {
         return ResponseEntity.ok(savedUser);
     }
 
+<<<<<<< HEAD
+=======
+//    @Override
+//    public HttpEntity<?> getStudents(String role) {
+//        return ResponseEntity.ok(repository.findAllByRoles(role));
+//    }
+//
+//    @Override
+//    public HttpEntity<?> getStudentByTitle(String title) {
+//        return ResponseEntity.ok(repository.findAllByUsernameContainingIgnoreCase(title));
+//    }
+>>>>>>> 98e32872569085bb69c44ca1925dd7e2e44c0e0b
 
     public Role addUserRoleIfAbsent() {
         Role userRole = roleRepository.findByRoleName("ROLE_USER");

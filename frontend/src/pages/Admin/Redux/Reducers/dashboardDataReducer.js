@@ -6,6 +6,7 @@ const initialState = {
     error: null,
     isHovered: false,
     dropDownBox: false,
+    langCard: false,
 }
 
 const dashboardDataSlice = createSlice({
@@ -45,6 +46,9 @@ const dashboardDataSlice = createSlice({
             ) {
                 window.location = "/login"
             }
+        },
+        changeLangCard: (state, action) => {
+            state.langCard = action.payload
         }
     }
 })

@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import "./modal.css";
 import Loading from "../../Loading/Loading";
+import LanguageContext from "../../../Languages/Contex/Language";
+import LangData from "../../../Languages/Language.json"
+import PhoneInput from "react-phone-input-2";
 
 // ishlatish uchun namuna👇
 
@@ -50,6 +53,7 @@ const UniversalModal = ({
   JsxData = "",
   checkPage = true
 }) => {
+  const {langIndex} = useContext(LanguageContext)
   const [miniModal, setMiniModal] = useState(false);
   const [loading, setLoading] = useState();
   const style = {
@@ -74,7 +78,7 @@ const UniversalModal = ({
     border: "none",
     boxShadow: 24,
     borderRadius: "10px",
-    width: "27%",
+    width: "30%",
     overflow: "auto",
   };
   useEffect(() => {
@@ -105,11 +109,7 @@ const UniversalModal = ({
       >
         <Box sx={style}>
           {loading ? (
-   <div className="bg-white d-flex justify-content-center align-items-center gap-2 p-2" style={{height:"50vh"}}>
-   <Loading />
-
- </div>
-           
+             <Loading />
           ) : (
             <>
               <div
@@ -232,13 +232,21 @@ const UniversalModal = ({
                                                             : "70%",
                                                   }}
                                               >
-                                                <input
-                                                    className={"form-control"}
-                                                    type={item?.type}
-                                                    value={item?.value}
-                                                    onChange={item?.onChange}
-                                                    placeholder={item?.placeholder}
-                                                />
+                                                {(item.phone === true && item.type === "number")?
+                                                    <PhoneInput
+                                                        inputStyle={{ width: "100%" }}
+                                                        value={item?.value}
+                                                        onChange={item?.onChange}
+                                                    />
+                                                      :
+                                                    <input
+                                                        className={"form-control"}
+                                                        type={item?.type}
+                                                        value={item?.value}
+                                                        onChange={item?.onChange}
+                                                        placeholder={item?.placeholder}
+                                                    />
+                                                }
                                               </div>
                                             </div>
                                         )}
@@ -299,7 +307,7 @@ const UniversalModal = ({
                                                 checked={item?.value}
                                                 style={{ width: "25px" }}
                                                 onChange={item?.onChange}
-                                            />{" "}
+                                            /> {" "}
                                             <span
                                                 style={{
                                                   position: "absolute",
@@ -335,13 +343,22 @@ const UniversalModal = ({
                                                         : "70%",
                                               }}
                                           >
-                                            <input
-                                                className={"form-control"}
-                                                type={item?.type}
-                                                value={item?.value}
-                                                onChange={item?.onChange}
-                                                placeholder={item?.placeholder}
-                                            />
+                                            {(item.phone === true && item.type === "number")?
+                                                <PhoneInput
+                                                    inputStyle={{ width: "100%" }}
+                                                    value={item?.value}
+                                                    onChange={item?.onChange}
+                                                    placeholder={item?.placeholder}
+                                                />
+                                                :
+                                                <input
+                                                    className={"form-control"}
+                                                    type={item?.type}
+                                                    value={item?.value}
+                                                    onChange={item?.onChange}
+                                                    placeholder={item?.placeholder}
+                                                />
+                                            }
                                           </div>
                                         </div>
                                     )}
@@ -354,10 +371,10 @@ const UniversalModal = ({
                           ""
                       )}
                       <button
-                          style={{ margin: "15px 0px 5px 0px" }}
-                          className={"btn w-25 btn-success"}
+                          style={{ margin: "15px 0px 5px 0px", width:"auto"}}
+                          className={"btn btn-success"}
                       >
-                        Save
+                        {LangData[langIndex]?.universalModal?.saveBtn}
                       </button>
                 </div>
               </form>
@@ -385,7 +402,7 @@ const UniversalModal = ({
               borderTopRightRadius: "10px",
             }}
           >
-            <b>Are you sure you want to leave?</b>
+            <b>{LangData[langIndex]?.universalModal?.note}</b>
           </div>
             <div
               className={"d-flex justify-content-between"}
@@ -395,7 +412,7 @@ const UniversalModal = ({
                 onClick={() => setMiniModal(false)}
                 className={"btn btn-danger"}
               >
-                No
+                {LangData[langIndex]?.universalModal?.no}
               </button>
               <button
                 onClick={() =>
@@ -403,7 +420,7 @@ const UniversalModal = ({
                 }
                 className={"btn btn-success"}
               >
-                Yes
+                {LangData[langIndex]?.universalModal?.yes}
               </button>
             </div>
         </Box>

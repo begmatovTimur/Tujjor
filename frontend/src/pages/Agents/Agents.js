@@ -1,11 +1,14 @@
 import {connect} from 'react-redux';
 import { agentActions } from './Redux/Reducers/agentReducer';
-import { useEffect } from 'react';
+import {useContext, useEffect} from 'react';
 import Table from 'pages/universal/Table/Table';
 import UniversalModal from 'pages/universal/Modal/UniverModal';
-import "../Clients/clients.css"
+import "./agents.css"
 import "bootstrap/dist/css/bootstrap.min.css"
+import langData from "../../Languages/Language.json"
+import LanguageContext from "../../Languages/Contex/Language";
 function Agents(props) {
+    const {langIndex} = useContext(LanguageContext)
     useEffect(()=>{
         props.getAgents()
     },[])
@@ -54,10 +57,13 @@ function Agents(props) {
             return false;
         }
     return (
-        <div id={"bigFatherForMap"}>
-        <button onClick={props.openModal} className='btn btn-info'>Add</button>
+        <div id={"bigFatherForAgents"}>
+            <div id={"header"}>
+                <span>{langData[langIndex]?.agentsPage?.title}</span>
+                <button onClick={props.openModal}> + {langData[langIndex]?.agentsPage?.addBtn}</button>
+            </div>
         <UniversalModal
-            modalTitle={"Add Category"}
+            modalTitle={props.editingItem === "" ? `${langData[langIndex]?.agentsPage?.modal?.addTitle}` : `${langData[langIndex]?.agentsPage?.modal?.editeTitle}`}
             isOpen={props.modalVisibility}
             closeFunction={() => props.resetModal()}
             width={40}
@@ -66,21 +72,22 @@ function Agents(props) {
             inpData={[
                 {
                     id: 1,
-                    title: "Username",
+                    title: `${langData[langIndex]?.agentsPage?.modal?.userName}`,
                     value: props.username,
                     onChange: (e) => props.setUserName(e.target.value),
                     type: "text",
                 },
                 {
                     id: 2,
-                    title: "Phone",
+                    title: `${langData[langIndex]?.agentsPage?.modal?.phone}`,
                     value: props.phone,
-                    onChange: (e) => props.setPhone(e.target.value),
+                    onChange: (e) => props.setPhone(e),
                     type: "number",
+                    phone: true
                 },
                 {
                     id: 3,
-                    title: "Password ",
+                    title: `${langData[langIndex]?.agentsPage?.modal?.password}`,
                     value: props.password,
                     onChange: (e) => props.setPassword(e.target.value),
                     type: "text",

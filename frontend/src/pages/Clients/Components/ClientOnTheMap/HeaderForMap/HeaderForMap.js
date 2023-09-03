@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Filter from "../../../../universal/Filter/Filter";
 import {connect} from "react-redux";
 import {clientsAction} from "../../../Redux/Reducers/clientsReducer";
 import "../../../clients.css"
+import LanguageContext from "../../../../../Languages/Contex/Language";
+import langData from "../../../../../Languages/Language.json"
 
 function HeaderForMap(props) {
+    const {langIndex} = useContext(LanguageContext)
     const {clients} = props;
     const {teritory} = props;
-    console.log(teritory.teritories)
     function generateOptionsOfCity() {
         const optionsCity = [];
         teritory?.teritories?.map((item) => {
@@ -22,13 +24,13 @@ function HeaderForMap(props) {
     return (
         <div>
             <p id={'titleForMap'}>
-                Clients On The Map
+                {langData[langIndex]?.clientPage?.clientOnTheMap?.title}
             </p>
             <hr/>
             <div className="d-flex pb-2 justify-content-between">
                 <label className={'notificationForMap'} onClick={()=>props.changeAllLocation()}>
                     <span className="whitelight"></span>
-                    <span>All Data:</span>
+                    <span>{langData[langIndex]?.clientPage?.clientOnTheMap?.allDataBtn}</span>
                     {
                         clients.clients.filter(item => item.active === true).length +
                         clients.clients.filter(item => item.active === false).length +
@@ -38,17 +40,17 @@ function HeaderForMap(props) {
                 <div style={{display:"flex", gap:"40px"}}>
                     <label className={'notificationForMap'} onClick={()=>props.changeShowActiveClient()}>
                         <span className="greenlight"></span>
-                        <span>Active Clients:</span>
+                        <span>{langData[langIndex]?.clientPage?.clientOnTheMap?.activeClientsBtn}</span>
                         {clients.clients.filter(item => item.active === true).length}
                     </label>
                     <label className={'notificationForMap'} onClick={()=>props.changeShowUnActiveClient()}>
                         <span className="redlight"></span>
-                        <span>No Active Clients:</span>
+                        <span>{langData[langIndex]?.clientPage?.clientOnTheMap?.unActiveClientsBtn}</span>
                         {clients.clients.filter(item => item.active === false).length}
                     </label>
                     <label className={'notificationForMap'} onClick={()=>props.changeShowTerritory()}>
                         <span className="bluelight"></span>
-                        <span>Territory:</span>
+                        <span>{langData[langIndex]?.clientPage?.clientOnTheMap?.territoriesBtn}</span>
                         {teritory.teritories.length}
                     </label>
                 </div>
