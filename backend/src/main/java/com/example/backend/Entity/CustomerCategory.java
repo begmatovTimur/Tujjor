@@ -41,6 +41,7 @@ public class CustomerCategory {
     private String description;
     @Column(nullable = false)
     private Boolean active;
+    private UUID photoId;
     @CreationTimestamp
     private LocalDateTime insertion_time;
 }

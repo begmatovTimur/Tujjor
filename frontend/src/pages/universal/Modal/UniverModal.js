@@ -109,11 +109,7 @@ const UniversalModal = ({
       >
         <Box sx={style}>
           {loading ? (
-   <div className="bg-white d-flex justify-content-center align-items-center gap-2 p-2" style={{height:"50vh"}}>
-   <Loading />
-
- </div>
-           
+             <Loading />
           ) : (
             <>
               <div

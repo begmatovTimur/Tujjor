@@ -27,6 +27,7 @@ const tableReducer = createSlice({
       quickSearch: "",
       offset: "",
     },
+    filterApi: "",
     totalPages: -1,
     selectedForms: {
       customerCategories: [],
@@ -201,6 +202,9 @@ const tableReducer = createSlice({
       state.formInputs.quickSearch = "";
       state.formInputs.offset = "";
 
+    },
+    changeFilterApi: (state, action) => {
+      state.filterApi = action.payload;
     },
   },
 });
