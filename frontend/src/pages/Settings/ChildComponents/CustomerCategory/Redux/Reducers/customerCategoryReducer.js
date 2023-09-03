@@ -11,6 +11,8 @@ const customerCategoryReducer = createSlice({
         error: "",
         description:"",
         itemForCustomerCategoryEdite: "",
+        image:"",
+        fileVal:""
     },
     name: "customerCategory",
     reducers: {
@@ -28,6 +30,9 @@ const customerCategoryReducer = createSlice({
             state.code = ""
             state.region = ""
             state.name = "";
+            state.fileVal = "";
+            state.image = "";
+            state.hasImage = "";
             state.description = "";
             state.active = false
             state.itemForCustomerCategoryEdite = ""
@@ -62,17 +67,19 @@ const customerCategoryReducer = createSlice({
             state.region = ""
             state.name = "";
             state.description = "";
+            state.image = "";
+            state.fileVal = "";
             state.active = false
             state.itemForCustomerCategoryEdite = ""
         },
         saveCategory: (state, action) => {
-
             action.payload = {
                 name: state.name,
                 description:state.description,
                 region: state.region,
                 code: state.code,
                 active: state.active,
+                photoId: state.image
             }
         },
         editeCategory: (state, action) => {
@@ -83,6 +90,22 @@ const customerCategoryReducer = createSlice({
             state.description = action.payload.description;
             state.region = action.payload.region
             state.active = action.payload.active
+            state.image = action.payload.photoId
+        },
+        handlePhoto:(state, action)=>{
+            state.fileVal = action.payload
+        },
+        saveOptionPhoto:(state, action)=>{
+            state.selectedOption = action.payload
+        },
+        changeImage:(state, action)=>{
+            state.image = action.payload
+        },
+        changeSelectedOption:(state, action)=>{
+            state.selectedOption = action.payload
+        },
+        getPhoto:(state, action)=>{
+
         }
     },
 });

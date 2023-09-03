@@ -5,21 +5,26 @@ import {customerCategoryActions} from "../../Redux/Reducers/customerCategoryRedu
 import "../../CustomerCategory.css"
 import langData from "../../../../../../Languages/Language.json"
 import LanguageContext from "../../../../../../Languages/Contex/Language";
+import JsxContentForAddClientModal
+    from "../../../../../Clients/Components/ModalForClient/JsxContentForClientModal/JsxContentForAddClientModal";
+import JsxContentForCategory from "./ModalJsx/JsxContentForCategory";
 
 function ModalForCustomerCategory(props) {
     const {langIndex} = useContext(LanguageContext)
     const {customerCategory} = props;
+
     function getCheckPage() {
         if (customerCategory.region !== "" || customerCategory.code !== "" || customerCategory.name !== "" || customerCategory.active !== false
             || customerCategory.description !== "") return true;
         return false;
     }
+
     return (
         <UniversalModal
-            modalTitle={customerCategory.itemForCustomerCategoryEdite === ""? `${langData[langIndex]?.customerCategory?.modal?.addTitle}` : `${langData[langIndex]?.customerCategory?.modal?.editeTitle}`}
+            modalTitle={customerCategory.itemForCustomerCategoryEdite === "" ? `${langData[langIndex]?.customerCategory?.modal?.addTitle}` : `${langData[langIndex]?.customerCategory?.modal?.editeTitle}`}
             isOpen={customerCategory.openModal}
             closeFunction={() => props.handleClose()}
-            width={40}
+            width={60}
             checkPage={getCheckPage()}
             functionforSaveBtn={() => props.saveCategory()}
             inpData={[
@@ -58,10 +63,15 @@ function ModalForCustomerCategory(props) {
                     onChange: (e) => props.handleActive(e.target.checked),
                     type: "checkbox",
                 },
+
             ]}
+            JsxData={
+                <JsxContentForCategory/>
+            }
         />
     );
 }
+
 export default connect(
     (state) => state,
     customerCategoryActions

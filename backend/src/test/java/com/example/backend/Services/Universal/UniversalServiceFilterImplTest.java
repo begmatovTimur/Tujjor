@@ -46,7 +46,7 @@ class UniversalServiceFilterImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        underTest =     new UniversalServiceFilterImpl(clientRepository, territoryRepository, customerCategoryRepository);
+        underTest = new UniversalServiceFilterImpl(clientRepository, territoryRepository, customerCategoryRepository);
     }
 
 
