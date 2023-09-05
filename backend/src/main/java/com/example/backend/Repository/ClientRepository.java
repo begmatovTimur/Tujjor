@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, UUID> {
-    @Query(nativeQuery = true, value = "SELECT\n" +
+    @Query(nativeQuery = true, value = "SELECT " +
             " c.insertion_time, \n" +
             "    c.id," +
             " t.id as territoryId,  \n" +

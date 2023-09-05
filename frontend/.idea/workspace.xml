@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e18759e-bba1-411a-8c95-a36ed51afa5e" name="Changes" comment="">
-<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Controller/AgentController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/DTO/AgentDTO.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/example/backend/Entity/Agent.java" afterDir="false" />
@@ -683,9 +682,6 @@
       <change beforePath="$PROJECT_DIR$/src/pages/Settings/LeftBar/LeftBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/LeftBar/LeftBar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Settings/Settings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/Settings.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Dropdown/Dropdown.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Dropdown/Dropdown.jsx" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
->>>>>>> 98e32872569085bb69c44ca1925dd7e2e44c0e0b
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Modal/UniverModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Modal/UniverModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
     </list>
@@ -710,13 +706,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+
     "last_opened_file_path": "C:/Users/Acer/Desktop/tujjor_app/Tujjor/frontend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -762,13 +759,13 @@
       <workItem from="1693399272159" duration="10720000" />
       <workItem from="1693461893287" duration="2434000" />
       <workItem from="1693465026768" duration="24469000" />
-<<<<<<< HEAD
-      <workItem from="1693500178325" duration="8028000" />
-      <workItem from="1693540714464" duration="446000" />
-=======
       <workItem from="1693500178325" duration="8837000" />
-      <workItem from="1693550270341" duration="2162000" />
->>>>>>> 98e32872569085bb69c44ca1925dd7e2e44c0e0b
+      <workItem from="1693550270341" duration="4715000" />
+      <workItem from="1693634939974" duration="2573000" />
+      <workItem from="1693730096865" duration="1367000" />
+      <workItem from="1693807430278" duration="11864000" />
+      <workItem from="1693827819000" duration="6628000" />
+      <workItem from="1693840496357" duration="10654000" />
     </task>
     <servers />
   </component>
