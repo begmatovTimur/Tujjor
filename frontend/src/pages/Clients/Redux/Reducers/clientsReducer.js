@@ -31,12 +31,18 @@ const clientsReducer = createSlice({
         showActiveClient: true,
         showUnActiveClient:true,
         showTerritory: true,
+        modalForAddPlan: false,
+        datePlane: "",
+        amountPlane: "",
+        currentClientId: "",
+        plans: [],
+        currentPlane: "",
     },
     reducers: {
-        openModal: (state, action) => {
+        openModal: (state) => {
             state.openModal = true
         },
-        closeModal: (state, action) => {
+        closeModal: (state) => {
             state.openModal = false
             state.teritoryId = "";
             state.name = "";
@@ -63,12 +69,12 @@ const clientsReducer = createSlice({
         handleMapState: (state, action) => {
             state.mapState = action.payload
         },
-        clearAllclients: (state, action) => {
+        clearAllclients: (state) => {
             state.longitute = "";
             state.latitute = "";
             state.mapState = { center: ["",""], zoom: 10 };
         },
-        getClients: (state, action) => {
+        getClients: () => {
 
         },
         getClientsSuccess:(state,action)=>{
@@ -107,7 +113,7 @@ const clientsReducer = createSlice({
         changeReferencePoint:(state, action)=>{
             state.referencePoint = action.payload;
         },
-        getCustomCategory:(state, action)=>{
+        getCustomCategory:()=>{
 
         },
         getCustomCategorySuccess:(state, action)=>{
@@ -116,7 +122,7 @@ const clientsReducer = createSlice({
         yourActionFailureCustomCategory:(state, action)=>{
             state.error = action.payload;
         },
-        resetAllClientsData:(state, action)=>{
+        resetAllClientsData:(state)=>{
             state.teritoryId = "";
             state.name = "";
             state.address = "";
@@ -186,6 +192,50 @@ const clientsReducer = createSlice({
             state.showUnActiveClient = true;
             state.showTerritory = true;
         },
+        openModalForPlan:(state, action) => {
+            state.modalForAddPlan = true
+            state.currentClientId = action.payload.id;
+            action.payload = state.currentClientId;
+        },
+        closeModalForPlan:(state) => {
+            state.modalForAddPlan = false
+            state.datePlane = "";
+            state.amountPlane = "";
+            state.currentPlane = "";
+        },
+        changeDatePlane:(state, action) => {
+            state.datePlane = action.payload
+        },
+        changeAmountPlane:(state, action) => {
+            state.amountPlane = action.payload
+        },
+        savePlane:(state, action) => {
+            action.payload = {
+                clientId: state.currentClientId,
+                date: state.datePlane,
+                amount: state.amountPlane
+            }
+        },
+        getPlans:(state, action) => {
+            state.currentClientId = action.payload
+            action.payload = state.currentClientId;
+        },
+        getSuccessPlans:(state, action) => {
+            state.plans = action.payload
+        },
+        getFailurePlans:(state, action) => {
+            state.errMessage = action.payload
+        },
+        editPlan:(state, action) => {
+            state.currentPlane = action.payload;
+            state.amountPlane = action.payload.amount;
+            state.datePlane = action.payload.date;
+        },
+        resetDataForPlansMap:(state) => {
+            state.datePlane = "";
+            state.amountPlane = "";
+            state.currentPlane = "";
+        }
     }
 })
 export const clientsAction = {...clientsReducer.actions};

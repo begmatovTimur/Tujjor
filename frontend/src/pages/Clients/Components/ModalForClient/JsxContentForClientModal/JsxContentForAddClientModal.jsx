@@ -18,7 +18,7 @@ function JsxContentForAddClientModal(props) {
         props.handleMapState({ center: [latitude, longitude], zoom: 10 });
     }
     return (
-        <div style={{ display: "flex", gap: "4%" }}>
+        <div style={{ display: "flex", gap: "4%"}}>
             <div className={"w-50"}>
                 <div className={"d-flex"}>
                     <div
@@ -152,7 +152,6 @@ function JsxContentForAddClientModal(props) {
                         </label>
                     </div>
                 </div>
-                <div></div>
             </div>
 
             <div className={"w-50"}>

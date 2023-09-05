@@ -33,7 +33,7 @@ function* saveClients(action) {
   } else {
     yield put(clientsAction.closeModal());
     if (currentState.editeClient !== "") {
-      const res = yield apiCall(
+      yield apiCall(
         "/client?clientId=" + currentState.editeClient.id,
         "PUT",
         action.payload
@@ -50,8 +50,41 @@ function* saveClients(action) {
     yield call(getClients);
   }
 }
+function* getClientsPlans(action) {
+  try {
+    const res = yield apiCall("/plane?clientId="+action.payload, "GET", null);
+    yield put(clientsAction.getSuccessPlans(res.data));
+  } catch (err) {
+    yield put(clientsAction.getFailurePlans(err.message));
+  }
+}
+function* addNewClientPlane(action) {
+  const currentState = yield select((state) => state.clients);
+  yield put(clientsAction.resetDataForPlansMap());
+  if (action.payload.date === "" || action.payload.amount === ""){
+    ErrorNotify("Enter the details completely")
+  } else {
+    yield put(clientsAction.resetDataForPlansMap());
+    if (currentState.currentPlane === ""){
+      yield apiCall("/plane", "POST", action.payload);
+      SuccessNotify("New Plane added Successfully!");
+    }else {
+      yield apiCall("/plane?planeId="+currentState.currentPlane.id, "PUT", action.payload);
+      SuccessNotify("Plane Updated Successfully!");
+    }
+    const res = yield apiCall("/plane?clientId="+currentState.currentClientId, "GET", null);
+    yield put(clientsAction.getSuccessPlans(res.data));
+  }
+}
+function* editePlane(action) {
+
+}
 
 export function* clientsSaga() {
   yield takeLatest("clients/saveClients", saveClients);
   yield takeEvery("clients/getClients", getClients);
+  yield takeEvery("clients/savePlane", addNewClientPlane);
+  yield takeEvery("clients/getPlans", getClientsPlans);
+  yield takeEvery("clients/openModalForPlan", getClientsPlans);
+  yield takeEvery("clients/editePlane", editePlane);
 }
