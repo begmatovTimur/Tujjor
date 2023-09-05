@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,4 +26,5 @@ public class CustomerCategoryDTO {
     private String description;
     @NotNull(message = "active cannot be null")
     private boolean active;
+    private UUID photoId;
 }

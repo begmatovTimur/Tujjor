@@ -20,7 +20,8 @@ function* watchGetFilteredData(action) {
     yield delay(400);
     yield put(tableActions.setLoading(false));
     let api = currentState.paginationApiState;
-    api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
+    console.log(api)
+    api = api.replace("{page}", 0).replace("{limit}", currentState.limit===""? "All":currentState.limit);
     console.log(api)
     const res = yield apiCall(api, "get", null, JSON.stringify(obj));
     yield put(tableActions.changeCurrentPage(1));
@@ -58,7 +59,7 @@ function* watchQuickSearchData(action) {
         customerCategories: x.customerCategories,
     };
     let api = currentState.paginationApiState;
-    api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
+    api = api.replace("{page}", 0).replace("{limit}", currentState.limit===""? "All":currentState.limit);
     const res = yield apiCall(api, "get", null, JSON.stringify(obj));
     yield put(
         tableActions.changeTotalPages(
@@ -186,7 +187,7 @@ function* watchGetActiveData(action) {
     yield delay(400);
     yield put(tableActions.setLoading(false));
     let api = currentState.paginationApiState;
-    api = api.replace("{page}", 0).replace("{limit}", currentState.limit);
+    api = api.replace("{page}", 0).replace("{limit}", currentState.limit===""? "All":currentState.limit);
     const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));
     yield put(tableActions.changeCurrentPage(1));
     yield put(

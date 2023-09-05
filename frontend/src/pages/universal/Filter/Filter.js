@@ -54,6 +54,9 @@ function Filter(props) {
     function handleChangeActive(obj) {
         const {name, value} = obj;
         props.changeInputForms({...formInputsProps, [name]: value.value});
+        if(!props.paginationApi){
+            props.changePaginationApi(obj.api)
+        }
         props.getActiveData(props.paginationApi);
     }
 
@@ -66,6 +69,9 @@ function Filter(props) {
     function handleFilter(obj) {
         const {name, value} = obj;
         const myArr = []
+        if(!props.paginationApi){
+            props.changePaginationApi(obj.api)
+        }
         if (Array.isArray(value)) {
             obj.value.map((item, index) => {
                 myArr.push(item.value)
@@ -82,6 +88,9 @@ function Filter(props) {
         obj.value.map((item, index) => {
             myArr.push(item.value)
         })
+        if(!props.paginationApi){
+            props.changePaginationApi(obj.api)
+        }
         props.changeInputForms({...formInputsProps, [obj.name]: myArr});
     }
     return (
@@ -107,7 +116,7 @@ function Filter(props) {
                                             styles={customStyles}
                                             isMulti={item.multi}
                                             onChange={(e) =>
-                                                handleChangeActive({name: item.name, value: e})
+                                                handleChangeActive({name: item.name, value: e,api: item.filterApi})
                                             }
                                             placeholder={item.placeholder}
                                         />
@@ -121,7 +130,7 @@ function Filter(props) {
                                                 options={item.options}
                                                 value={props.table.selectedForms[item.name]}
                                                 styles={customStyles}
-                                                onChange={(e) => handleMultiSelect({name: item.name, value: e})}
+                                                onChange={(e) => handleMultiSelect({name: item.name, value: e,api: item.filterApi})}
                                                 optionLabel="name"
                                                 valueRenderer={(selected) => {
                                                     return selected.length
@@ -141,7 +150,7 @@ function Filter(props) {
                                                 styles={customStyles}
                                                 isMulti={item.multi}
                                                 onChange={(e) =>
-                                                    handleFilter({name: item.name, value: e})}
+                                                    handleFilter({name: item.name, value: e,api: item.filterApi})}
                                                 placeholder={item.placeholder}
                                             />
                                         </div>

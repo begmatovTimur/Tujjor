@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import Filter from "../../../../universal/Filter/Filter";
 import {connect} from "react-redux";
 import {clientsAction} from "../../../Redux/Reducers/clientsReducer";
@@ -62,10 +62,9 @@ function HeaderForMap(props) {
                             options: generateOptionsOfCity(),
                             defaultValue: { value: "", label: "All" },
                             placeholder: "search by territory",
-                            selfEmployer: false,
+                            filterApi: "/client/pagination?page={page}&limit={limit}"
                         }
                     ]}
-                    paginationApi={"/client/pagination"}
                     filterButton={true}
                 />
             </div>

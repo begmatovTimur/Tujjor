@@ -90,8 +90,6 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
         if (validateParams(page, limit)) {
             return ResponseEntity.badRequest().body("Invalid page or limit value");
         }
-
-
         Pageable pageable = limit.equals("All") ? Pageable.unpaged() :
                 PageRequest.of(page, Integer.parseInt(limit));
 
@@ -104,7 +102,6 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
                 .filterData(params)
                 .pagination(Page.empty())
                 .build();
-
         generateComponentData(paginationConfig);
 
 

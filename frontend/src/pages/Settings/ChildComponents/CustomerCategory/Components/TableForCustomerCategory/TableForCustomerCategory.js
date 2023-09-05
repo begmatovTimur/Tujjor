@@ -49,7 +49,7 @@ function TableForCustomerCategory(props) {
                         props.editeCategory(item);
                     }}
                 >
-                    <i class="fa fa-edit"></i>
+                    <i className="fa fa-edit"></i>
                 </button>
             ),
         },

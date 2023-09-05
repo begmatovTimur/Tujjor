@@ -19,6 +19,7 @@ public interface CustomerCategoryRepository extends JpaRepository<CustomerCatego
             "    c.id,\n" +
             "    c.region,\n" +
             "    c.code,\n" +
+            "    c.photo_id,\n" +
             "    c.name,\n" +
             "    c.description,\n" +
             "    c.active\n" +
