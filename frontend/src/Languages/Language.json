@@ -13,7 +13,16 @@
       "toClients": "Clients",
       "toAgents": "Agents",
       "toReports": "Reports",
-      "toSettings": "Settings"
+      "toSettings": "Settings",
+      "clientPages": {
+        "page1": "Clients",
+        "page2": "Clients on the map"
+      },
+      "dropDown": {
+        "function1": "Change login & Password",
+        "function2": "Billing",
+        "function3": "Exit"
+      }
     },
     "clientPage": {
       "title": "Clients",
@@ -45,6 +54,14 @@
         "inp5": "Active: ",
         "inp6": "Category*",
         "inp7": "Company name*"
+      },
+      "plan": {
+        "title": "Plans",
+        "inp1": "Enter the time:",
+        "inp2": "Enter the amount:",
+        "saveBtn": "Save",
+        "clearBtn": "Clear",
+        "noPlans": "No Plans..."
       }
     },
     "settingsPage": {
@@ -114,7 +131,16 @@
       "toClients": "Mijozlar",
       "toAgents": "Agentlar",
       "toReports": "Hisobotlar",
-      "toSettings": "Sozlamalar"
+      "toSettings": "Sozlamalar",
+      "clientPages": {
+        "page1": "Mijozlar",
+        "page2": "Xaritadagi mijozlar"
+      },
+      "dropDown": {
+        "function1": "Kirish va Parolni O'zgartirish",
+        "function2": "Hisob-kitob",
+        "function3": "Chiqish"
+      }
     },
     "clientPage": {
       "title": "Mijozlar",
@@ -146,6 +172,14 @@
         "inp5": "Faol: ",
         "inp6": "Kategoriya*",
         "inp7": "Kompaniya nomi*"
+      },
+      "plan": {
+        "title": "Rejalar",
+        "inp1": "Vaqt kiriting:",
+        "inp2": "Miqdorni kiriting:",
+        "saveBtn": "Saqlash",
+        "clearBtn": "Tozalash",
+        "noPlans": "Rejalar yo'q..."
       }
     },
     "settingsPage": {
@@ -217,7 +251,16 @@
       "toClients": "Клиенты",
       "toAgents": "Агенты",
       "toReports": "Отчеты",
-      "toSettings": "Настройки"
+      "toSettings": "Настройки",
+      "clientPages": {
+        "page1": "Клиенты",
+        "page2": "Клиенты на карте"
+      },
+      "dropDown": {
+        "function1": "Изменить логин и пароль",
+        "function2": "Биллинг",
+        "function3": "Выход"
+      }
     },
     "clientPage": {
       "title": "Клиенты",
@@ -249,6 +292,14 @@
         "inp5": "Активный: ",
         "inp6": "Категория*",
         "inp7": "Название компании*"
+      },
+      "plan": {
+        "title": "Планы",
+        "inp1": "Введите время:",
+        "inp2": "Введите сумму:",
+        "saveBtn": "Сохранить",
+        "clearBtn": "Очистить",
+        "noPlans": "Нет планов..."
       }
     },
     "settingsPage": {

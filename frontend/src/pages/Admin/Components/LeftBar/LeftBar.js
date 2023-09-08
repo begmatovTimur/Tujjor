@@ -67,9 +67,8 @@ function LeftBar(props) {
                 {/*for hovered div 👇👇👇*/}
                 {dashboardDataReducer.isHovered &&
                     <div onMouseEnter={()=>props.changeIsHovered(true)} onMouseLeave={()=>props.changeIsHovered(false)} id={"clientDataBox"}>
-                        <p onClick={toClientPage}>Clients</p>
-                        <p onClick={toClientOnTheMap}>Clients on the
-                            map</p>
+                        <p onClick={toClientPage}>{langData[langIndex]?.adminPage?.clientPages?.page1}</p>
+                        <p onClick={toClientOnTheMap}>{langData[langIndex]?.adminPage?.clientPages?.page2}</p>
                         <p style={{padding: "0px"}}></p>
                     </div>
                 }

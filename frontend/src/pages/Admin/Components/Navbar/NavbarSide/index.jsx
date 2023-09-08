@@ -12,7 +12,7 @@ import "../../../Index.css"
 function Index(props) {
     const {dashboardData} = props.dashboardDataReducer
     const {dashboardDataReducer} = props
-    const langIndex = localStorage.getItem("langIndex");
+    const langIndexForLanguages = localStorage.getItem("langIndex")
 
     const {changeLanguageIndex} = useContext(LanguageContext)
     return (
@@ -28,11 +28,11 @@ function Index(props) {
             <button className="btn text-white">{icons.notificationIcon}</button>
 
             <div onMouseEnter={()=>props.changeLangCard(true)} onMouseLeave={()=>props.changeLangCard(false)} id={'selectLangBox'}>
-                <b>{langIndex === "0" ?
+                <b>{langIndexForLanguages === "0" ?
                         <div>ENG  <img width={20} src={EngFlag} alt="#"/></div> :
-                    langIndex === "1" ?
+                    langIndexForLanguages === "1" ?
                         <div>UZB  <img width={20} src={UzbFlag} alt="#"/></div> :
-                    langIndex === "2" ?
+                    langIndexForLanguages === "2" ?
                         <div>RUS  <img width={20} src={RusFlag} alt="#"/></div> :
                         <div>ENG  <img width={20} src={EngFlag} alt="#"/></div>}</b>
                 {
@@ -42,9 +42,9 @@ function Index(props) {
                             onMouseLeave={()=>props.changeLangCard(false)}
                             id={'flagFather'}
                             style={{}}>
-                            <span onClick={()=>changeLanguageIndex(0) & props.changeLangCard(false)} id={'langBtns'}>ENG  <img width={20} src={EngFlag} alt="#"/></span>
-                            <span onClick={()=>changeLanguageIndex(1) & props.changeLangCard(false)} id={'langBtns'}>UZB  <img width={20} src={UzbFlag} alt="#"/></span>
-                            <span onClick={()=>changeLanguageIndex(2) & props.changeLangCard(false)} id={'langBtns'}>RUS  <img width={20} src={RusFlag} alt="#"/></span>
+                            <span className={'custom_dashboard_button'} onClick={()=>changeLanguageIndex(0) & props.changeLangCard(false)} id={'langBtns'}>ENG  <img width={20} src={EngFlag} alt="#"/></span>
+                            <span className={'custom_dashboard_button'} onClick={()=>changeLanguageIndex(1) & props.changeLangCard(false)} id={'langBtns'}>UZB  <img width={20} src={UzbFlag} alt="#"/></span>
+                            <span className={'custom_dashboard_button'} onClick={()=>changeLanguageIndex(2) & props.changeLangCard(false)} id={'langBtns'}>RUS  <img width={20} src={RusFlag} alt="#"/></span>
                         </div>:""
                 }
             </div>
