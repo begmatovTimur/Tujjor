@@ -45,43 +45,49 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
     }
 
     @SneakyThrows
-    public FilterData generateFilterDataFromRequest(HttpServletRequest request)  {
+    public FilterData generateFilterDataFromRequest(HttpServletRequest request) {
         FilterData filterData = new FilterData();
         JsonNode jsonNode = wrapToObject(request);
         JsonNode cityArrayNode = jsonNode.get("city");
         JsonNode jsonNodeLimit = jsonNode.get("limit");
         JsonNode jsonNodeCurrentPage = jsonNode.get("page");
-            int currentPageValue = (jsonNodeCurrentPage != null && !jsonNodeCurrentPage.isNull()) ? jsonNodeCurrentPage.asInt()-1 : 0;
+        int currentPageValue = (jsonNodeCurrentPage != null && !jsonNodeCurrentPage.isNull()) ? jsonNodeCurrentPage.asInt() - 1 : 0;
         List<UUID> cities = new ArrayList<>();
-        for (JsonNode cityNode : cityArrayNode) {
-            UUID cityId = UUID.fromString(cityNode.asText());
-            cities.add(cityId);
+        if (cityArrayNode != null) {
+            for (JsonNode cityNode : cityArrayNode) {
+                UUID cityId = UUID.fromString(cityNode.asText());
+                cities.add(cityId);
+            }
+            filterData.setCities(cities);
         }
-        filterData.setCities(cities);
 
         List<Boolean> active = new ArrayList<>();
         JsonNode activeNode = jsonNode.get("active");
-        for (JsonNode activeNodeArr : activeNode) {
-            Boolean x = activeNodeArr.asBoolean();
-            active.add(x);
+        if (activeNode != null) {
+
+            for (JsonNode activeNodeArr : activeNode) {
+                Boolean x = activeNodeArr.asBoolean();
+                active.add(x);
+            }
         }
-        filterData.setCities(cities);
         JsonNode categoryArray = jsonNode.get("customerCategories");
-        List<Integer> customerCategoriesParam = new ArrayList<>();
-        for (JsonNode cityNode : categoryArray) {
-            customerCategoriesParam.add(cityNode.asInt());
+            List<Integer> customerCategoriesParam = new ArrayList<>();
+        if (categoryArray != null) {
+            for (JsonNode cityNode : categoryArray) {
+                customerCategoriesParam.add(cityNode.asInt());
+            }
         }
         JsonNode jsonNodeTin = jsonNode.get("tin");
         JsonNode jsonNodeQuickSearch = jsonNode.get("quickSearch");
 
         return FilterData.builder()
-                .tin(jsonNodeTin.asText())
+                .tin(jsonNodeTin==null?"":jsonNodeTin.asText())
                 .active(active)
                 .cities(cities)
-                .quickSearch(jsonNodeQuickSearch.asText())
+                .quickSearch(jsonNodeQuickSearch==null?"":jsonNodeQuickSearch.asText())
                 .page(currentPageValue)
                 .customerCategories(customerCategoriesParam)
-                .limit(jsonNodeLimit==null?"All":jsonNodeLimit.asText())
+                .limit(jsonNodeLimit == null ? "All" : jsonNodeLimit.asText())
                 .build();
     }
 
@@ -119,8 +125,8 @@ public class UniversalServiceFilterImpl implements UniversalServiceFilter {
             config.setPagination(filteredData);
         } else if (config.getComponent().equals("customer_category")) {
             config.setPagination(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName(params.getQuickSearch(), params.getActive(), pageable));
-        }else if(config.getComponent().equals("agents")) {
-            config.setPagination(agentRepository.findAllByPagination(params.getQuickSearch(),pageable));
+        } else if (config.getComponent().equals("agents")) {
+            config.setPagination(agentRepository.findAllByPagination(params.getQuickSearch(), pageable));
         }
     }
 
