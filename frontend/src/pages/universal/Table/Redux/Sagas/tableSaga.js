@@ -186,6 +186,7 @@ function* watchGetActiveData(action) {
     yield put(tableActions.setLoading(true));
     yield delay(400);
     yield put(tableActions.setLoading(false));
+    console.log(currentState);
     let api = currentState.paginationApiState;
     api = api.replace("{page}", 0).replace("{limit}", currentState.limit===""? "All":currentState.limit);
     const res = yield call(apiCall, api, "get", null, JSON.stringify(obj));

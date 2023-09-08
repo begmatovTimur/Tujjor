@@ -2,10 +2,7 @@ package com.example.backend.Services.ExcelService;
 
 import com.example.backend.Entity.Agent;
 import com.example.backend.Payload.Reaquest.FilterData;
-import com.example.backend.Projection.ClientProjection;
-import com.example.backend.Projection.CustomerCategoryProjection;
-import com.example.backend.Projection.ExcelExportable;
-import com.example.backend.Projection.TerritoryProjection;
+import com.example.backend.Projection.*;
 import com.example.backend.Repository.*;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -111,7 +108,7 @@ public class ExcelServiceImpl implements ExcelService {
             Page<ClientProjection> filteredData = clientRepository.getAllFilteredFields(filters.getCities(), filters.getCustomerCategories(), filters.getActive(), filters.getTin(), filters.getQuickSearch(), pageable);
             dataOfExcel.addAll(filteredData.getContent());
         }else if(component.equals("agent")) {
-            Page<Agent> allByPagination = agentRepository.findAllByPagination(filters.getQuickSearch(), pageable);
+            Page<AgentProjection> allByPagination = agentRepository.findAllByPagination(filters.getQuickSearch(), pageable);
             dataOfExcel.addAll(allByPagination.getContent());
         };
     }

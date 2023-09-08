@@ -8,9 +8,11 @@ import com.example.backend.Enums.RoleEnum;
 import com.example.backend.Repository.AgentRepository;
 import com.example.backend.Repository.RoleRepository;
 import com.example.backend.Repository.UsersRepository;
+import com.example.backend.Services.Universal.UniversalServiceFilterImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,11 +26,8 @@ public class AgentsServiceImpl implements AgentsService {
     private final AgentRepository agentRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-private final UsersRepository usersRepository;
-    @Override
-    public HttpEntity<?> getAgents() {
-        return ResponseEntity.ok(agentRepository.findAllByPagination("" ,Pageable.unpaged()));
-    }
+    private final UsersRepository usersRepository;
+
 
     @Override
     public HttpEntity<?> postAgent(AgentDTO agentDto) {

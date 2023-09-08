@@ -1,10 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import Table from "../../../universal/Table/Table";
-import UniversalModal from "../../../universal/Modal/UniverModal";
 import {customerCategoryActions} from "./Redux/Reducers/customerCategoryReducer";
 import "./CustomerCategory.css";
-import Filter from "../../../universal/Filter/Filter";
 import Header from "./Header/Header";
 import FilterForCustomerCategory from "./Components/FilterForCustomerCategory/FilterForCustomerCategory";
 import TableForCustomerCategory from "./Components/TableForCustomerCategory/TableForCustomerCategory";
@@ -78,7 +75,7 @@ function CustomerCategory(props) {
 
     return (
         <div style={{width: "100%"}}>
-           <Header/>
+            <Header/>
             <FilterForCustomerCategory/>
             <TableForCustomerCategory/>
             <ModalForCustomerCategory/>

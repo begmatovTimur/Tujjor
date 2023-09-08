@@ -82,6 +82,8 @@ function Filter(props) {
         }
     }
 
+
+
     function handleMultiSelect(obj) {
         const myArr = []
         props.changeSelectedForms({...props.table.selectedForms, [obj.name]: obj.value})
@@ -93,6 +95,7 @@ function Filter(props) {
         }
         props.changeInputForms({...formInputsProps, [obj.name]: myArr});
     }
+
     return (
         <div>
             <div className="row">

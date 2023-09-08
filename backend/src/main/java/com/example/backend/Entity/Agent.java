@@ -22,6 +22,6 @@ public class Agent implements ExcelExportable {
     private UUID id;
     private String username;
     private UUID telegramId;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private User user;
 }

@@ -6,7 +6,6 @@ import org.springframework.http.HttpEntity;
 import java.util.UUID;
 
 public interface AgentsService {
-    HttpEntity<?> getAgents();
 
     HttpEntity<?> postAgent(AgentDTO agentDto);
 

@@ -62,7 +62,7 @@ function HeaderForMap(props) {
                             options: generateOptionsOfCity(),
                             defaultValue: { value: "", label: "All" },
                             placeholder: "search by territory",
-                            filterApi: "/client/pagination?page={page}&limit={limit}"
+                            filterApi: "/client/pagination?page={page}&limit=All"
                         }
                     ]}
                     filterButton={true}

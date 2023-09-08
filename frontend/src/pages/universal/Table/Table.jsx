@@ -17,7 +17,9 @@ const Table = (props) => {
     let storedColumns = JSON.parse(
       localStorage.getItem(props.localStoragePath)
     );
-    props.changePaginationApi(props.paginationApi);
+    if(props.paginationApi) {
+      props.changePaginationApi(props.paginationApi);
+    }
 
     if (storedColumns === null) storedColumns = props.columnsProps;
     else {
@@ -68,6 +70,8 @@ const Table = (props) => {
       }
     }
   }, [props.dataProps]);
+
+
 
   const getValueByKeys = (obj, keys) => {
     const keysArray = keys.split("+").map((key) => key.trim());
