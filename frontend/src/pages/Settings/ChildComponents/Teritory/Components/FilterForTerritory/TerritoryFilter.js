@@ -14,6 +14,7 @@ function TerritoryFilter(props) {
                 defaultValue: { value: "", label: "All" },
                 placeholder: "Active",
                 selfEmployer: true,
+                filterApi: "/territory/pagination?page={page}&limit={limit}"
             },
         ]}/>
     );

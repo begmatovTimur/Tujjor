@@ -5,16 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e18759e-bba1-411a-8c95-a36ed51afa5e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/Clients/Components/ClientPlan/ClientPlan.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Languages/Language.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Languages/Language.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/LeftBar/LeftBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/LeftBar/LeftBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/NavbarDropDown/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/NavbarDropDown/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Components/Navbar/NavbarSide/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Admin/Index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Admin/Index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/Components/TableForClient/TableForClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/TableForClient/TableForClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Clients/Components/FilterForClient/FilterForClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/Components/FilterForClient/FilterForClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Components/FilterForCustomerCategory/FilterForCustomerCategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/Components/FilterForCustomerCategory/FilterForCustomerCategory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/CustomerCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/CustomerCategory/CustomerCategory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Components/FilterForTerritory/TerritoryFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Settings/ChildComponents/Teritory/Components/FilterForTerritory/TerritoryFilter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/universal/Filter/Filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Filter/Filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Redux/Sagas/tableSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Redux/Sagas/tableSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/universal/Table/Table.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,20 +31,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Acer/Desktop/tujjor_app/Tujjor/frontend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/muhammadsodiq/Desktop/Tujjor/Tujjor/frontend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -97,6 +96,7 @@
       <workItem from="1693840496357" duration="10654000" />
       <workItem from="1693919917888" duration="58000" />
       <workItem from="1693920104867" duration="3244000" />
+      <workItem from="1694187009747" duration="2980000" />
     </task>
     <servers />
   </component>

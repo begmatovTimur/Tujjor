@@ -18,6 +18,7 @@ function FilterForCustomerCategory(props) {
                     defaultValue: {value: "", label: "All"},
                     placeholder: "Active",
                     selfEmployer: true,
+                    filterApi: "/customer-category/pagination?page={page}&limit={limit}"
                 },
             ]}
         />
