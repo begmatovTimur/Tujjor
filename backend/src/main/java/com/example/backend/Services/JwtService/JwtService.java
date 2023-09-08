@@ -8,6 +8,7 @@ public interface JwtService {
     String generateJWTToken(User users);
 
     String generateJWTRefreshToken(User users);
+    String generateTelegramToken(User users);
 
     Key getSigningKey();
 

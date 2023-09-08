@@ -1,7 +1,6 @@
 package com.example.backend.Controller;
 
 import com.example.backend.DTO.AgentDTO;
-import com.example.backend.DTO.UserDTO;
 import com.example.backend.Services.AgentsService.AgentsService;
 import com.example.backend.Services.Universal.UniversalServiceFilterImpl;
 import jakarta.servlet.http.HttpServletRequest;

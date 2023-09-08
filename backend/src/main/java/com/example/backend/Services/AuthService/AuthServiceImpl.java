@@ -34,8 +34,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private static String validatePhoneNumber(LoginReq dto) {
-        String phone  = dto.getPhone().startsWith("+")? dto.getPhone():"+" + dto.getPhone();
-        return phone;
+        return dto.getPhone().startsWith("+")? dto.getPhone(): "+" + dto.getPhone();
     }
 
     private ResponseEntity<Map<String, Object>> generateTokenForUser(LoginReq dto, String phone) {

@@ -96,22 +96,14 @@ public class ExcelServiceImpl implements ExcelService {
             if (filters.getLimit().equals("All")) {
                 filters.setLimit(String.valueOf(territoryRepository.count()));
             }
-
-
             pageable = PageRequest.of(filters.getPage(), Integer.parseInt(filters.getLimit()));
             Page<TerritoryProjection> territories = territoryRepository.getFilteredData(filters.getQuickSearch(),
                     filters.getActive(), pageable);
-
-
-
             dataOfExcel.addAll(territories.getContent());
         } else if (component.equals("customer-category")) {
-
             Page<CustomerCategoryProjection> categories;
-
                 categories = categoryRepository.findCustomerCategoryByActiveAndRegionName(filters.getQuickSearch(),
                         filters.getActive(), pageable);
-
             dataOfExcel.addAll(categories.getContent());
         } else if (component.equals("company-profile")) {
             dataOfExcel.addAll(companyRepository.findAll());

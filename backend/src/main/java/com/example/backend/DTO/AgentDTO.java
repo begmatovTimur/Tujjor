@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AgentDTO extends UserDTO {
+public class AgentDTO  {
     private String username;
     private String phone;
     private String password;
