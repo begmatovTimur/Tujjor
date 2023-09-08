@@ -4,10 +4,10 @@ package com.example.backend.Entity;
 import com.example.backend.Projection.ExcelExportable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,13 +15,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@Builder
 public class Agent implements ExcelExportable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String username;
-    @Column(nullable = false)
-    private String phone;
-    @Column(nullable = false)
-    private String password;
+    private UUID telegramId;
+    @OneToOne
+    private User user;
 }

@@ -6,13 +6,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface AgentRepository extends JpaRepository<Agent, UUID> {
-    @Query(nativeQuery = true, value = "SELECT * FROM agents a\n" +
-            "WHERE\n" +
-            "    (a.username LIKE '%' || :search || '%')\n" +
-            "   OR (a.phone LIKE '%' || :search || '%')\n")
+    @Query(value = """
+        SELECT a.id as agent_id, u.id as user_id, a.username, u.phone
+        FROM agents a
+                 JOIN public.users u ON u.id = a.user_id
+        WHERE (a.username LIKE '%' || :search || '%')
+           OR (u.phone LIKE '%' || :search || '%')""", nativeQuery = true)
     Page<Agent> findAllByPagination(String search, Pageable pageable);
+    Agent findByTelegramId(UUID telegramId);
+    Agent findByUserPhone(String user_phone);
 }
