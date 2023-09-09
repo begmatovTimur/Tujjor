@@ -24,5 +24,5 @@ public interface CustomerCategoryService {
     HttpEntity<?> getCategories();
 
 
-
+    HttpEntity<?> getCategoriesForTelegram();
 }

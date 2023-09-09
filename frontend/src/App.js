@@ -17,6 +17,7 @@ import NotFound from "pages/404/NotFound";
 import {useDispatch} from "react-redux";
 import LanguageContext from "./Languages/Contex/Language";
 import Agents from "../src/pages/Agents/Agents"
+import AddClient from "./pages/Telegram/AddClient";
 
 function App() {
     const navigate = useNavigate();
@@ -123,14 +124,15 @@ function App() {
         }
     }
 
-    function checkLanguageIndex(){
+    function checkLanguageIndex() {
         const indexLang = localStorage.getItem("langIndex");
-        if (indexLang === null || indexLang < 0 || indexLang > 2){
+        if (indexLang === null || indexLang < 0 || indexLang > 2) {
             return;
         }
         setLangIndex(JSON.parse(localStorage.getItem("langIndex")))
     }
-    function changeLanguageIndex(index){
+
+    function changeLanguageIndex(index) {
         setLangIndex(index);
         localStorage.setItem("langIndex", index);
     }
@@ -175,10 +177,10 @@ function App() {
                         ></Route>
                         <Route path="/admin/agents" element={<Agents/>}></Route>
                     </Route>
-
+                    <Route path={"telegram/add-client/:token"} element={<AddClient/>}/>
                     <Route path="*" element={<NotFound/>}/>
-            </Routes>
-          </LanguageContext.Provider>
+                </Routes>
+            </LanguageContext.Provider>
         </div>
     );
 }

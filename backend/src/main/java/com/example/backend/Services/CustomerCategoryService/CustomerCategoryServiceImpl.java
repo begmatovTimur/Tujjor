@@ -52,5 +52,12 @@ public class CustomerCategoryServiceImpl implements CustomerCategoryService {
         return ResponseEntity.ok(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName("",active,Pageable.unpaged()).getContent());
     }
 
+    @Override
+    public HttpEntity<?> getCategoriesForTelegram() {
+        List<Boolean> active = new ArrayList<>();
+        active.add(true);
+        return ResponseEntity.ok(customerCategoryRepository.findCustomerCategoryByActiveAndRegionName("",active,Pageable.unpaged()).getContent());
+    }
+
 
 }

@@ -44,7 +44,7 @@ public class MerchantBot extends TelegramLongPollingBot {
     private final AuthenticationManager authenticationManager;
     private final CustomerCategoryRepository customerCategoryRepository;
     private final ClientRepository clientRepository;
-    private String webAppUrl = "https://c3a5-213-230-92-156.ngrok-free.app";
+    private final String webAppUrl = "https://2aaa-213-230-86-181.ngrok-free.app";
 
     @SneakyThrows
     @Autowired
@@ -66,7 +66,7 @@ public class MerchantBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "6612611510:AAEsHCZ4cbkmtAwAod4jNQsMADR9Bl1RD-A";
+        return "6612611510:AAG1ANVLwr866zN2hlA6JCsgFj21sJHncso";
     }
 
     private TelegramUser getUserByChatId(Long chatId) {
@@ -139,6 +139,7 @@ public class MerchantBot extends TelegramLongPollingBot {
             } else {
                 WebAppData webAppData = message.getWebAppData();
                 String data = webAppData.getData();
+                System.out.println(data);
                 Gson gson = new Gson();
                 ClientDTO clientDTO = gson.fromJson(data, ClientDTO.class);
                 clientRepository.save(Client.
