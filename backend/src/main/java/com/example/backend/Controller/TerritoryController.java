@@ -6,6 +6,7 @@ import com.example.backend.Services.TerritoryService.TerritoryService;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import jakarta.ws.rs.GET;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
@@ -53,4 +54,10 @@ public class TerritoryController {
     public HttpEntity<?> updateTerritory(@PathVariable UUID id, @RequestBody TerritoryDTO territoryDTO){
         return ResponseEntity.ok(territoryService.updateTerritory(id, territoryDTO));
     }
+
+    @PreAuthorize("hasRole('ROLE_AGENT')")
+    @GetMapping("/telegram")
+    public HttpEntity<?> getTerritoryForTelegram() {
+        return territoryService.getTerritoryForTelegram();
+    };
 }

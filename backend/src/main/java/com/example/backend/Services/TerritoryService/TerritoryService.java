@@ -17,4 +17,5 @@ public interface TerritoryService {
 
     HttpEntity<?> getTerritoryRegion();
 
+    HttpEntity<?> getTerritoryForTelegram();
 }

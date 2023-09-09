@@ -8,6 +8,7 @@ import companyProfileSaga from "../../pages/Settings/ChildComponents/Company/Red
 import {clientsSaga} from "../../pages/Clients/Redux/Sagas/clientsSaga";
 import {loginSaga} from "../../pages/Login/Redux/Sagas/loginSaga";
 import { agentSaga } from "pages/Agents/Redux/Sagas/agentSaga";
+import {telegramClientsSaga} from "../../pages/Telegram/Redux/Sagas/telegramClientSaga";
 
 
 export function* rootSaga(){
@@ -21,7 +22,8 @@ export function* rootSaga(){
             fork(companyProfileSaga),
             fork(clientsSaga),
             fork(loginSaga),
-            fork(agentSaga)
+            fork(agentSaga),
+            fork(telegramClientsSaga)
         ])
     }catch (error) {
         console.log(error)
