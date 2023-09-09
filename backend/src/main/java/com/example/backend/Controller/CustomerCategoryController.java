@@ -6,6 +6,7 @@ import com.example.backend.Services.CustomerCategoryService.CustomerCategoryServ
 import com.example.backend.Services.Universal.UniversalServiceFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import jakarta.ws.rs.GET;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
@@ -44,4 +45,9 @@ public class CustomerCategoryController {
     public HttpEntity<?> updateCategory(@PathVariable Integer id, @RequestBody CustomerCategoryDTO categoryDTO) {
         return ResponseEntity.ok(categoryService.updateCategory(id, categoryDTO));
     }
+    @GetMapping("/telegram")
+    @PreAuthorize("hasRole('ROLE_AGENT')")
+    public HttpEntity<?> getCategoriesForTelegram() {
+      return categoryService.getCategoriesForTelegram();
+    };
 }

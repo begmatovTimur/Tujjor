@@ -6,6 +6,7 @@ import com.example.backend.Projection.TerritoryProjection;
 import com.example.backend.Projection.TerritoryRegionProjection;
 import com.example.backend.Repository.TerritoryRepository;
 import com.example.backend.Services.Universal.UniversalServiceFilter;
+import com.example.backend.Services.Universal.UniversalServiceFilterImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TerritoryServiceImpl implements TerritoryService {
     private final TerritoryRepository territoryRepository;
+    private final UniversalServiceFilter universalServiceFilter;
 
 
 
@@ -81,5 +83,13 @@ public class TerritoryServiceImpl implements TerritoryService {
     public HttpEntity<?> getTerritoryRegion() {
         List<TerritoryRegionProjection> allRegion = territoryRepository.findAllRegion();
         return ResponseEntity.ok(allRegion);
+    }
+
+    @Override
+    public HttpEntity<?> getTerritoryForTelegram() {
+        List<Boolean> active= new ArrayList<>();
+        active.add(true);
+        Page<TerritoryProjection> filteredData = territoryRepository.getFilteredData("", active, Pageable.unpaged());
+        return ResponseEntity.ok(filteredData.getContent());
     }
 }

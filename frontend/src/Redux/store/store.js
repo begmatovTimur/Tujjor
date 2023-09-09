@@ -9,22 +9,26 @@ import dashboardDataReducer from 'pages/Admin/Redux/Reducers/dashboardDataReduce
 import tableReducer from 'pages/universal/Table/Redux/Reducers/tableReducer';
 import settingsReducer from 'pages/Settings/Redux/Reducers/settingsReducer';
 import dropdownReducer from 'pages/Admin/Redux/Reducers/dropdownReducer';
-import customerCategoryReducer from 'pages/Settings/ChildComponents/CustomerCategory/Redux/Reducers/customerCategoryReducer';
+import customerCategoryReducer
+    from 'pages/Settings/ChildComponents/CustomerCategory/Redux/Reducers/customerCategoryReducer';
 import companyProfileReducer from 'pages/Settings/ChildComponents/Company/Redux/Reducers/companyProfileReducer';
+import telegramClientReducer from "../../pages/Telegram/Redux/Reducers/telegramClientReducer";
+
 const sagaMiddleware = createSagaMiddleware();
 
-const store =  configureStore({
+const store = configureStore({
     reducer: {
         loginReducer,
         dashboardDataReducer,
-        table:tableReducer,
-        settings:settingsReducer,
-        teritory:teritoryReducer,
-        dropdown:dropdownReducer,
-        customerCategory:customerCategoryReducer, 
-        companyProfile:companyProfileReducer, 
+        table: tableReducer,
+        settings: settingsReducer,
+        teritory: teritoryReducer,
+        dropdown: dropdownReducer,
+        customerCategory: customerCategoryReducer,
+        companyProfile: companyProfileReducer,
         clients: clientsReducer,
-        agents: AgentReducer
+        agents: AgentReducer,
+        telegramClients: telegramClientReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(sagaMiddleware),
