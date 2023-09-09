@@ -8,7 +8,6 @@ import "../../../clients.css"
 function MapForMap(props) {
     const {clients} = props;
     const {teritory} = props;
-    console.log(clients.clients)
 
     return (<YMaps
             query={{
@@ -57,13 +56,13 @@ function MapForMap(props) {
                     ) : (
                         clients.showUnActiveClient?
                             <Placemark
-                                onClick={()=>props.getPlans(address.id)}
+                                onClick={()=>props.getPlanForMap(address.id)}
                                 properties={{
                                     // balloonContent: address.name,
                                     // hintContent: 'Bu yerda markaziy nuqta',
                                     iconCaption: address.clientName,
-                                    balloonContent: clients.plans.length === 0? "No plane..." :
-                                        clients.plans.map((item)=>{
+                                    balloonContent: clients.planForMap.length === 0? "No plane..." :
+                                        clients?.planForMap.map((item)=>{
                                             return `${new DOMParser().parseFromString('<div style="width: 150px; display: flex; flex-direction: column; gap: 3px">' +
                                                 '<div style="color: white; background:red; border-radius: 7px; padding: 2px 5px">Amount: ' + item.amount + '</div>' +
                                                 '<div style="color: white; background:green; border-radius: 7px; padding: 2px 5px">Date: ' + item.date + '</div>' +

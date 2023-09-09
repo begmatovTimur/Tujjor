@@ -37,6 +37,9 @@ const clientsReducer = createSlice({
         currentClientId: "",
         plans: [],
         currentPlane: "",
+        addPlaneForThisMonth: "",
+        currentIdForMap: "",
+        planForMap: [],
     },
     reducers: {
         openModal: (state) => {
@@ -235,6 +238,16 @@ const clientsReducer = createSlice({
             state.datePlane = "";
             state.amountPlane = "";
             state.currentPlane = "";
+        },changeAddPlaneForThisMonth:(state, action) => {
+            state.addPlaneForThisMonth = action.payload
+        },getPlanForMap:(state, action) => {
+            state.currentIdForMap = action.payload
+            action.payload = state.currentIdForMap;
+        },getPlanForMapSuccess:(state, action) => {
+            state.planForMap = action.payload
+            console.log(state.planForMap)
+        },getPlanForMapFailure:(state, action) => {
+            state.errMessage = action.payload
         }
     }
 })

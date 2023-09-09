@@ -54,13 +54,13 @@ function* getClientsPlans(action) {
   try {
     const res = yield apiCall("/plane?clientId="+action.payload, "GET", null);
     yield put(clientsAction.getSuccessPlans(res.data));
+    yield put(clientsAction.changeAddPlaneForThisMonth(res.data.addPlaneForThisMonth));
   } catch (err) {
     yield put(clientsAction.getFailurePlans(err.message));
   }
 }
 function* addNewClientPlane(action) {
   const currentState = yield select((state) => state.clients);
-  yield put(clientsAction.resetDataForPlansMap());
   if (action.payload.date === "" || action.payload.amount === ""){
     ErrorNotify("Enter the details completely")
   } else {
@@ -76,8 +76,13 @@ function* addNewClientPlane(action) {
     yield put(clientsAction.getSuccessPlans(res.data));
   }
 }
-function* editePlane(action) {
-
+function* getPlanForMap(action) {
+  try {
+    const res = yield apiCall("/plane/forMap?clientId="+action.payload, "GET", null);
+    yield put(clientsAction.getPlanForMapSuccess(res.data));
+  } catch (err) {
+    yield put(clientsAction.getPlanForMapFailure(err.message));
+  }
 }
 
 export function* clientsSaga() {
@@ -86,5 +91,5 @@ export function* clientsSaga() {
   yield takeEvery("clients/savePlane", addNewClientPlane);
   yield takeEvery("clients/getPlans", getClientsPlans);
   yield takeEvery("clients/openModalForPlan", getClientsPlans);
-  yield takeEvery("clients/editePlane", editePlane);
+  yield takeEvery("clients/getPlanForMap", getPlanForMap);
 }
