@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Component
+//@Component
 public class MerchantBot extends TelegramLongPollingBot {
     private TelegramUser telegramUser;
     private final TelegramUserRepository telegramUserRepository;

@@ -20,11 +20,15 @@ public class ClientPlaneController {
         return clientPlaneServise.getPlansById(clientId);
     }
     @PostMapping
-    public void addPlane(@RequestBody ClientPlanDTO clientPlanDTO) {
-        clientPlaneServise.addNewPlane(clientPlanDTO);
+    public HttpEntity<?> addPlane(@RequestBody ClientPlanDTO clientPlanDTO) {
+        return clientPlaneServise.addNewPlane(clientPlanDTO);
     }
     @PutMapping
     public void editePlane(@RequestBody ClientPlanDTO clientPlanDTO, @RequestParam UUID planeId) {
         clientPlaneServise.editePlane(clientPlanDTO, planeId);
+    }
+    @GetMapping("/forMap")
+    public HttpEntity<?> getPlaneForMap(@RequestParam UUID clientId) {
+        return clientPlaneServise.getPlanForMap(clientId);
     }
 }

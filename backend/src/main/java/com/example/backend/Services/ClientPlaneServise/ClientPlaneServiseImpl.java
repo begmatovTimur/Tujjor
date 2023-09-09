@@ -3,7 +3,7 @@ package com.example.backend.Services.ClientPlaneServise;
 import com.example.backend.DTO.ClientPlanDTO;
 import com.example.backend.Entity.Client;
 import com.example.backend.Entity.ClientPlan;
-import com.example.backend.Payload.ResPlans;
+import com.example.backend.Projection.ClientPlaneProjection;
 import com.example.backend.Repository.ClientPlaneRepository;
 import com.example.backend.Repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,32 +25,22 @@ public class ClientPlaneServiseImpl implements ClientPlaneServise{
 
     @Override
     public HttpEntity<?> getPlansById(UUID clientId) {
-        List<ClientPlan> clientPlans = clientPlaneRepository.findAllByClientIdOrderByCreatedDate(clientId);
-        List<ResPlans> result = new ArrayList<>();
-        DateTimeFormatter monthFormat = DateTimeFormatter.ofPattern("MM");
-        for (ClientPlan clientPlan : clientPlans) {
-            result.add(new ResPlans(
-                    clientPlan.getId(),
-                    clientPlan.getAmount(),
-                    clientPlan.getDate(),
-                    clientPlan.getCreatedDate().format(monthFormat).equals(LocalDate.now().format(monthFormat))
-                    )
-            );
-        }
-        return ResponseEntity.ok(result);
+        List<ClientPlaneProjection> allClientPlaneByID = clientPlaneRepository.findAllByClientIdOrderByCreatedDateDesc(clientId);
+        return ResponseEntity.ok(allClientPlaneByID);
     }
 
     @Override
-    public void addNewPlane(ClientPlanDTO clientPlanDTO) {
+    public HttpEntity<?> addNewPlane(ClientPlanDTO clientPlanDTO) {
         Client client = clientRepository.findById(clientPlanDTO.getClientId()).get();
-        ClientPlan clientPlan = new ClientPlan(
+        ClientPlan newClientPlan = new ClientPlan(
                 UUID.randomUUID(),
                 client,
                 clientPlanDTO.getAmount(),
                 clientPlanDTO.getDate(),
-                LocalDate.now()
+                LocalDateTime.now()
         );
-        clientPlaneRepository.save(clientPlan);
+        clientPlaneRepository.save(newClientPlan);
+        return ResponseEntity.ok("Plan added successfully");
     }
 
     @Override
@@ -65,5 +55,11 @@ public class ClientPlaneServiseImpl implements ClientPlaneServise{
                 byId.getCreatedDate()
         );
         clientPlaneRepository.save(clientPlan);
+    }
+
+    @Override
+    public HttpEntity<?> getPlanForMap(UUID clientId) {
+        List<ClientPlaneProjection> planeForMap = clientPlaneRepository.getPlaneForMap(clientId);
+        return ResponseEntity.ok(planeForMap);
     }
 }

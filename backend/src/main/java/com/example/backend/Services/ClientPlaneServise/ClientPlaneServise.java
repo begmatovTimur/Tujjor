@@ -8,7 +8,9 @@ import java.util.UUID;
 public interface ClientPlaneServise {
     HttpEntity<?> getPlansById(UUID clientId);
 
-    void addNewPlane(ClientPlanDTO clientPlanDTO);
+    HttpEntity<?> addNewPlane(ClientPlanDTO clientPlanDTO);
 
     void editePlane(ClientPlanDTO clientPlanDTO, UUID planeId);
+
+    HttpEntity<?> getPlanForMap(UUID clientId);
 }

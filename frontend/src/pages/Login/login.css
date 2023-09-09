@@ -32,3 +32,13 @@
     border: 1px solid gray;
     border-radius: 3px;
 }
+@media (max-width: 768px) {
+    #loginForm {
+        width: 80%; /* Adjust for smaller screens */
+        font-size: 14px; /* Adjust font size */
+    }
+
+    #logoForLogin {
+        width: 20%; /* Adjust for smaller screens */
+    }
+}

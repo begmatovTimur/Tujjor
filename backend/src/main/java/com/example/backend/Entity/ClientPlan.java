@@ -24,5 +24,5 @@ public class ClientPlan {
     @Column(nullable = false)
     private LocalDate date;
     @Column(nullable = false)
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
 }
