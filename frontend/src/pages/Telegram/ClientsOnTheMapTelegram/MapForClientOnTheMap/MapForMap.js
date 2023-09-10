@@ -1,15 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
-import logo from "../../../../../images/logo.png";
+import logo from '../../../../images/logo.png'
 import {connect} from "react-redux";
-import {clientsAction} from "../../../Redux/Reducers/clientsReducer";
-import "../../../../Telegram/ClientsOnTheMapTelegram/clients.css"
+import '../clients.css'
+import {useParams} from "react-router-dom";
+import {clientsAction} from "../../../Clients/Redux/Reducers/clientsReducer";
 
 function MapForMap(props) {
     const {clients} = props;
     const {teritory} = props;
     console.log(clients.clients)
-
+    const {token} = useParams()
+    useEffect(() => {
+        localStorage.setItem("access_token", token)
+    }, [token]);
     return (<YMaps
             query={{
                 apikey: "e24090ad-351e-4321-8071-40c04c55f144\n",

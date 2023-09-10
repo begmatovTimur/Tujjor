@@ -26,7 +26,7 @@ public class ClientController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    @PreAuthorize("hasAnyRole('ROLE_SUPER_VISOR','ROLE_AGENT')")
     public HttpEntity<?> getClient(){
         return clientService.getClient();
     }

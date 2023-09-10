@@ -18,6 +18,7 @@ import {useDispatch} from "react-redux";
 import LanguageContext from "./Languages/Contex/Language";
 import Agents from "../src/pages/Agents/Agents"
 import AddClient from "./pages/Telegram/AddClient";
+import ClientsOnTheMapTelegram from "./pages/Telegram/ClientsOnTheMapTelegram/clientsOnTheMap";
 
 function App() {
     const navigate = useNavigate();
@@ -178,6 +179,7 @@ function App() {
                         <Route path="/admin/agents" element={<Agents/>}></Route>
                     </Route>
                     <Route path={"telegram/add-client/:token"} element={<AddClient/>}/>
+                    <Route path={"telegram/clients-on-the-map/:token"} element={<ClientsOnTheMapTelegram/>}/>
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>
             </LanguageContext.Provider>

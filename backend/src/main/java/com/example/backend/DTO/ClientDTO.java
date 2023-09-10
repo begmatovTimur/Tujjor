@@ -28,7 +28,6 @@ public class ClientDTO {
     @NotNull(message = "phone should not be null")
     private String phone;
     private Boolean active;
-    private LocalDate registrationDate;
     private String tin;
     private double longitude;
     private double latitude;
