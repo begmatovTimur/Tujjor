@@ -3,7 +3,7 @@ import JsxContentForAddClientModal from "./JsxContentForClientModal/JsxContentFo
 import UniversalModal from "../../../universal/Modal/UniverModal";
 import {connect} from "react-redux";
 import {clientsAction} from "../../Redux/Reducers/clientsReducer";
-import "../../clients.css";
+import "../../../Telegram/ClientsOnTheMapTelegram/clients.css";
 import langData from "../../../../Languages/Language.json"
 import LanguageContext from "../../../../Languages/Contex/Language";
 

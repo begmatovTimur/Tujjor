@@ -31,7 +31,7 @@ public class TerritoryController {
         return universalService.pagination(page,limit,request,"territory");
     };
 
-    @PreAuthorize("hasRole('ROLE_SUPER_VISOR')")
+    @PreAuthorize("hasAnyRole('ROLE_SUPER_VISOR','ROLE_AGENT')")
     @GetMapping()
     public HttpEntity<?> getTerritories() {
         return territoryService.getTerritories();

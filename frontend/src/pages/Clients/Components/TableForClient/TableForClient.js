@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Table from "../../../universal/Table/Table";
 import {connect} from "react-redux";
 import {clientsAction} from "../../Redux/Reducers/clientsReducer";
-import "../../clients.css";
+import "../../../Telegram/ClientsOnTheMapTelegram/clients.css";
 import langData from "../../../../Languages/Language.json";
 import JsxContentForAddClientModal from "../ModalForClient/JsxContentForClientModal/JsxContentForAddClientModal";
 import UniversalModal from "../../../universal/Modal/UniverModal";

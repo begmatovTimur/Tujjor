@@ -30,6 +30,7 @@ import org.telegram.telegrambots.meta.api.objects.webapp.WebAppData;
 import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -44,7 +45,7 @@ public class MerchantBot extends TelegramLongPollingBot {
     private final AuthenticationManager authenticationManager;
     private final CustomerCategoryRepository customerCategoryRepository;
     private final ClientRepository clientRepository;
-    private final String webAppUrl = "https://2aaa-213-230-86-181.ngrok-free.app";
+    private final String webAppUrl = "https://9dcd-213-230-87-183.ngrok-free.app";
 
     @SneakyThrows
     @Autowired
@@ -139,19 +140,20 @@ public class MerchantBot extends TelegramLongPollingBot {
             } else {
                 WebAppData webAppData = message.getWebAppData();
                 String data = webAppData.getData();
-                System.out.println(data);
                 Gson gson = new Gson();
                 ClientDTO clientDTO = gson.fromJson(data, ClientDTO.class);
                 clientRepository.save(Client.
                         builder()
                         .territory(territoryRepository.findById(clientDTO.getTerritoryId()).orElseThrow())
                         .category(customerCategoryRepository.findById(clientDTO.getCategoryId()).orElseThrow())
-                        .phone(clientDTO.getPhone())
+                        .phone("+" + clientDTO.getPhone())
                         .name(clientDTO.getName())
                         .companyName(clientDTO.getCompanyName())
                         .address(clientDTO.getAddress())
                         .active(true)
                         .tin(clientDTO.getTin())
+                        .referencePoint(clientDTO.getReferencePoint())
+                        .insertionTime(LocalDateTime.now())
                         .longitude(clientDTO.getLongitude())
                         .latitude(clientDTO.getLatitude())
                         .build());
@@ -171,6 +173,7 @@ public class MerchantBot extends TelegramLongPollingBot {
 
     private ReplyKeyboard generateMainMenu() {
         String token = jwtService.generateTelegramToken(agentRepository.findByTelegramId(telegramUser.getId()).getUser());
+        System.out.println(token);
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> rows = new ArrayList<>();
         KeyboardRow row = new KeyboardRow();

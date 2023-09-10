@@ -3,7 +3,7 @@ import PhoneInput from "react-phone-input-2";
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
 import {connect} from "react-redux";
 import {clientsAction} from "../../../Redux/Reducers/clientsReducer";
-import "../../../clients.css";
+import "../../../../Telegram/ClientsOnTheMapTelegram/clients.css";
 import langData from "../../../../../Languages/Language.json"
 import LanguageContext from "../../../../../Languages/Contex/Language";
 

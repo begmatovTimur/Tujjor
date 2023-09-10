@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import "./clients.css";
+import "../Telegram/ClientsOnTheMapTelegram/clients.css";
 import {connect, useDispatch} from "react-redux";
 import {clientsAction} from "./Redux/Reducers/clientsReducer";
 import {teritoryAction} from "../Settings/ChildComponents/Teritory/Redux/Reducers/teritoryReducer";

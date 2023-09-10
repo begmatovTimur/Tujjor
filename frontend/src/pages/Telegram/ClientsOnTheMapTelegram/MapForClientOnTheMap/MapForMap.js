@@ -1,14 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Map, Placemark, YMaps, ZoomControl} from "react-yandex-maps";
-import logo from "../../../../../images/logo.png";
+import logo from '../../../../images/logo.png'
 import {connect} from "react-redux";
-import {clientsAction} from "../../../Redux/Reducers/clientsReducer";
-import "../../../../Telegram/ClientsOnTheMapTelegram/clients.css"
+import '../clients.css'
+import {useParams} from "react-router-dom";
+import {clientsAction} from "../../../Clients/Redux/Reducers/clientsReducer";
 
 function MapForMap(props) {
     const {clients} = props;
     const {teritory} = props;
-
+    console.log(clients.clients)
+    const {token} = useParams()
+    useEffect(() => {
+        localStorage.setItem("access_token", token)
+    }, [token]);
     return (<YMaps
             query={{
                 apikey: "e24090ad-351e-4321-8071-40c04c55f144\n",
@@ -56,13 +61,13 @@ function MapForMap(props) {
                     ) : (
                         clients.showUnActiveClient?
                             <Placemark
-                                onClick={()=>props.getPlanForMap(address.id)}
+                                onClick={()=>props.getPlans(address.id)}
                                 properties={{
                                     // balloonContent: address.name,
                                     // hintContent: 'Bu yerda markaziy nuqta',
                                     iconCaption: address.clientName,
-                                    balloonContent: clients.planForMap.length === 0? "No plane..." :
-                                        clients?.planForMap.map((item)=>{
+                                    balloonContent: clients.plans.length === 0? "No plane..." :
+                                        clients.plans.map((item)=>{
                                             return `${new DOMParser().parseFromString('<div style="width: 150px; display: flex; flex-direction: column; gap: 3px">' +
                                                 '<div style="color: white; background:red; border-radius: 7px; padding: 2px 5px">Amount: ' + item.amount + '</div>' +
                                                 '<div style="color: white; background:green; border-radius: 7px; padding: 2px 5px">Date: ' + item.date + '</div>' +
